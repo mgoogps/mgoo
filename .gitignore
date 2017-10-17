@@ -241,4 +241,15 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /MgooGps/AjaxService/Log
-*.config
+
+/ExpiredPush/App.config
+/MgooGps/Web.Release.config
+/MgooGps/Web.Debug.config
+/MgooGps/Web.config
+/MG_GPS/Web.Release.config
+/MG_GPS/Web.Debug.config
+/MG_GPS/Web.config
+/MG_WeChat/Web.Release.config
+/MG_WeChat/Web.Debug.config
+/MG_WeChat/Web.config
+/Test/App.config
