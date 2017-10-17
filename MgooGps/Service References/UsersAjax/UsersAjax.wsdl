@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetZtree">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZtreeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZtreeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidPasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLowerUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageNo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLowerUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLowerUsersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ParentID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveUsersResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SendType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateUserInfoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserPass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserPassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateUserPassResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelUserById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelUserByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelUserByIdResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitUserPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InitUserPasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersRelationByDeviceID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersRelationByDeviceIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersRelationByDeviceIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserNameByLoginName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserNameByLoginNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserNameByLoginNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetZtreeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZtree" />
+  </wsdl:message>
+  <wsdl:message name="GetZtreeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZtreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidPassword" />
+  </wsdl:message>
+  <wsdl:message name="ValidPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLowerUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLowerUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetLowerUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLowerUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveUsers" />
+  </wsdl:message>
+  <wsdl:message name="SaveUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserPassSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUserPass" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserPassSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserPassResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsers" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelUserByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:DelUserById" />
+  </wsdl:message>
+  <wsdl:message name="DelUserByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:DelUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="InitUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:InitUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="InitUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:InitUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersRelationByDeviceIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsersRelationByDeviceID" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersRelationByDeviceIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersRelationByDeviceIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserNameByLoginNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserNameByLoginName" />
+  </wsdl:message>
+  <wsdl:message name="GetUserNameByLoginNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserNameByLoginNameResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UsersAjaxSoap">
+    <wsdl:operation name="GetZtree">
+      <wsdl:input message="tns:GetZtreeSoapIn" />
+      <wsdl:output message="tns:GetZtreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidPassword">
+      <wsdl:input message="tns:ValidPasswordSoapIn" />
+      <wsdl:output message="tns:ValidPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLowerUsers">
+      <wsdl:input message="tns:GetLowerUsersSoapIn" />
+      <wsdl:output message="tns:GetLowerUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUsers">
+      <wsdl:input message="tns:SaveUsersSoapIn" />
+      <wsdl:output message="tns:SaveUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input message="tns:UpdateUserSoapIn" />
+      <wsdl:output message="tns:UpdateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <wsdl:input message="tns:UpdateUserInfoSoapIn" />
+      <wsdl:output message="tns:UpdateUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPass">
+      <wsdl:input message="tns:UpdateUserPassSoapIn" />
+      <wsdl:output message="tns:UpdateUserPassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <wsdl:input message="tns:SearchUsersSoapIn" />
+      <wsdl:output message="tns:SearchUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelUserById">
+      <wsdl:input message="tns:DelUserByIdSoapIn" />
+      <wsdl:output message="tns:DelUserByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitUserPassword">
+      <wsdl:input message="tns:InitUserPasswordSoapIn" />
+      <wsdl:output message="tns:InitUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersRelationByDeviceID">
+      <wsdl:input message="tns:GetUsersRelationByDeviceIDSoapIn" />
+      <wsdl:output message="tns:GetUsersRelationByDeviceIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNameByLoginName">
+      <wsdl:input message="tns:GetUserNameByLoginNameSoapIn" />
+      <wsdl:output message="tns:GetUserNameByLoginNameSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UsersAjaxSoap" type="tns:UsersAjaxSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZtree">
+      <soap:operation soapAction="http://tempuri.org/GetZtree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidPassword">
+      <soap:operation soapAction="http://tempuri.org/ValidPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLowerUsers">
+      <soap:operation soapAction="http://tempuri.org/GetLowerUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUsers">
+      <soap:operation soapAction="http://tempuri.org/SaveUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPass">
+      <soap:operation soapAction="http://tempuri.org/UpdateUserPass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <soap:operation soapAction="http://tempuri.org/SearchUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelUserById">
+      <soap:operation soapAction="http://tempuri.org/DelUserById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitUserPassword">
+      <soap:operation soapAction="http://tempuri.org/InitUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersRelationByDeviceID">
+      <soap:operation soapAction="http://tempuri.org/GetUsersRelationByDeviceID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNameByLoginName">
+      <soap:operation soapAction="http://tempuri.org/GetUserNameByLoginName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UsersAjaxSoap12" type="tns:UsersAjaxSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZtree">
+      <soap12:operation soapAction="http://tempuri.org/GetZtree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidPassword">
+      <soap12:operation soapAction="http://tempuri.org/ValidPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLowerUsers">
+      <soap12:operation soapAction="http://tempuri.org/GetLowerUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUsers">
+      <soap12:operation soapAction="http://tempuri.org/SaveUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPass">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUserPass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <soap12:operation soapAction="http://tempuri.org/SearchUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelUserById">
+      <soap12:operation soapAction="http://tempuri.org/DelUserById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitUserPassword">
+      <soap12:operation soapAction="http://tempuri.org/InitUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersRelationByDeviceID">
+      <soap12:operation soapAction="http://tempuri.org/GetUsersRelationByDeviceID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNameByLoginName">
+      <soap12:operation soapAction="http://tempuri.org/GetUserNameByLoginName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UsersAjax">
+    <wsdl:port name="UsersAjaxSoap" binding="tns:UsersAjaxSoap">
+      <soap:address location="http://www.mgoogps.com/Ajax/UsersAjax.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UsersAjaxSoap12" binding="tns:UsersAjaxSoap12">
+      <soap12:address location="http://www.mgoogps.com/Ajax/UsersAjax.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

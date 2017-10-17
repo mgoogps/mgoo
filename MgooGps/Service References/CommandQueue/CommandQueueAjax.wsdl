@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SendCommand">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CommandType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrueOrFalse" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Model" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCommandResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendCommandResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCommandByPhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CommandType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Model" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCommandByPhoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendCommandByPhoneResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCommandMD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CommandType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrueOrFalse" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Model" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Port" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCommandMDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendCommandMDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommandID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResponseResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommandList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageNo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommandListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommandListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="test">
+        <s:complexType />
+      </s:element>
+      <s:element name="testResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendPhoto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendPhotoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sendPhotoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendCommandSoapIn">
+    <wsdl:part name="parameters" element="tns:SendCommand" />
+  </wsdl:message>
+  <wsdl:message name="SendCommandSoapOut">
+    <wsdl:part name="parameters" element="tns:SendCommandResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendCommandByPhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:SendCommandByPhone" />
+  </wsdl:message>
+  <wsdl:message name="SendCommandByPhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:SendCommandByPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendCommandMDSoapIn">
+    <wsdl:part name="parameters" element="tns:SendCommandMD" />
+  </wsdl:message>
+  <wsdl:message name="SendCommandMDSoapOut">
+    <wsdl:part name="parameters" element="tns:SendCommandMDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResponseSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommandListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommandList" />
+  </wsdl:message>
+  <wsdl:message name="GetCommandListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommandListResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSoapIn">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="testSoapOut">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendPhotoSoapIn">
+    <wsdl:part name="parameters" element="tns:sendPhoto" />
+  </wsdl:message>
+  <wsdl:message name="sendPhotoSoapOut">
+    <wsdl:part name="parameters" element="tns:sendPhotoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CommandQueueAjaxSoap">
+    <wsdl:operation name="SendCommand">
+      <wsdl:input message="tns:SendCommandSoapIn" />
+      <wsdl:output message="tns:SendCommandSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandByPhone">
+      <wsdl:input message="tns:SendCommandByPhoneSoapIn" />
+      <wsdl:output message="tns:SendCommandByPhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandMD">
+      <wsdl:input message="tns:SendCommandMDSoapIn" />
+      <wsdl:output message="tns:SendCommandMDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResponse">
+      <wsdl:input message="tns:GetResponseSoapIn" />
+      <wsdl:output message="tns:GetResponseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommandList">
+      <wsdl:input message="tns:GetCommandListSoapIn" />
+      <wsdl:output message="tns:GetCommandListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testSoapIn" />
+      <wsdl:output message="tns:testSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sendPhoto">
+      <wsdl:input message="tns:sendPhotoSoapIn" />
+      <wsdl:output message="tns:sendPhotoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CommandQueueAjaxSoap" type="tns:CommandQueueAjaxSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendCommand">
+      <soap:operation soapAction="http://tempuri.org/SendCommand" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandByPhone">
+      <soap:operation soapAction="http://tempuri.org/SendCommandByPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandMD">
+      <soap:operation soapAction="http://tempuri.org/SendCommandMD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponse">
+      <soap:operation soapAction="http://tempuri.org/GetResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommandList">
+      <soap:operation soapAction="http://tempuri.org/GetCommandList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendPhoto">
+      <soap:operation soapAction="http://tempuri.org/sendPhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CommandQueueAjaxSoap12" type="tns:CommandQueueAjaxSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendCommand">
+      <soap12:operation soapAction="http://tempuri.org/SendCommand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandByPhone">
+      <soap12:operation soapAction="http://tempuri.org/SendCommandByPhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCommandMD">
+      <soap12:operation soapAction="http://tempuri.org/SendCommandMD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponse">
+      <soap12:operation soapAction="http://tempuri.org/GetResponse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommandList">
+      <soap12:operation soapAction="http://tempuri.org/GetCommandList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap12:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendPhoto">
+      <soap12:operation soapAction="http://tempuri.org/sendPhoto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CommandQueueAjax">
+    <wsdl:port name="CommandQueueAjaxSoap" binding="tns:CommandQueueAjaxSoap">
+      <soap:address location="http://www.mgoogps.com/Ajax/CommandQueueAjax.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CommandQueueAjaxSoap12" binding="tns:CommandQueueAjaxSoap12">
+      <soap12:address location="http://www.mgoogps.com/Ajax/CommandQueueAjax.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

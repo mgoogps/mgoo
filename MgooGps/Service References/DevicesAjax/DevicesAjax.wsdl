@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SaveDevices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CategoryID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="IMEIs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OverSpeed" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsImeis" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveDevicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageNo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExpDays" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDevicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevicesByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isFirst" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevicesByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDevicesByUserIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeofenceDevicesByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isFirst" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeofenceDevicesByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeofenceDevicesByUserIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeviceCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeviceCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeviceCountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExpireDevices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExpireDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExpireDevicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaleDevices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaleUserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceIDs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExpireDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNum" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isMany" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaleDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaleDevicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDevices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SNName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SNTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OfflineType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TimeTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZones" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchDevicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevicesHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Start" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="End" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShowLBS" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDevicesHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDevicesHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeviceHistoryByRoadOffset">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShowLBS" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeviceHistoryByRoadOffsetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeviceHistoryByRoadOffsetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTracking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrackingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTrackingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateHireExpriDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceIDs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateHireExpriDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateHireExpriDateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateHireExpriDateDays">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceIDs" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddHireDays" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateHireExpriDateDaysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateHireExpriDateDaysResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeDevicesUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceIDs" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OldUserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="NewUserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeDevicesUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeDevicesUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelDeviceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeDevicePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeDevicePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeDevicePasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitDevicePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitDevicePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InitDevicePasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDeviceGroupID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GroupID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDeviceGroupIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateDeviceGroupIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveDevices" />
+  </wsdl:message>
+  <wsdl:message name="SaveDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDevices" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDevicesByUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDevicesByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeofenceDevicesByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeofenceDevicesByUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetGeofenceDevicesByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeofenceDevicesByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeviceCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeviceCount" />
+  </wsdl:message>
+  <wsdl:message name="GetDeviceCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeviceCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExpireDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExpireDevices" />
+  </wsdl:message>
+  <wsdl:message name="GetExpireDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExpireDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaleDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:SaleDevices" />
+  </wsdl:message>
+  <wsdl:message name="SaleDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:SaleDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchDevices" />
+  </wsdl:message>
+  <wsdl:message name="SearchDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDevicesHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetDevicesHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetDevicesHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeviceHistoryByRoadOffsetSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeviceHistoryByRoadOffset" />
+  </wsdl:message>
+  <wsdl:message name="GetDeviceHistoryByRoadOffsetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeviceHistoryByRoadOffsetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTrackingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTracking" />
+  </wsdl:message>
+  <wsdl:message name="GetTrackingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTrackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateHireExpriDateSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateHireExpriDate" />
+  </wsdl:message>
+  <wsdl:message name="UpdateHireExpriDateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateHireExpriDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateHireExpriDateDaysSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateHireExpriDateDays" />
+  </wsdl:message>
+  <wsdl:message name="UpdateHireExpriDateDaysSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateHireExpriDateDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeDevicesUserSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeDevicesUser" />
+  </wsdl:message>
+  <wsdl:message name="ChangeDevicesUserSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeDevicesUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:DelDevice" />
+  </wsdl:message>
+  <wsdl:message name="DelDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:DelDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeDevicePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeDevicePassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangeDevicePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeDevicePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="InitDevicePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:InitDevicePassword" />
+  </wsdl:message>
+  <wsdl:message name="InitDevicePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:InitDevicePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceGroupIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceGroupID" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceGroupIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceGroupIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DevicesAjaxSoap">
+    <wsdl:operation name="SaveDevices">
+      <wsdl:input message="tns:SaveDevicesSoapIn" />
+      <wsdl:output message="tns:SaveDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDevices">
+      <wsdl:input message="tns:GetDevicesSoapIn" />
+      <wsdl:output message="tns:GetDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesByUserID">
+      <wsdl:input message="tns:GetDevicesByUserIDSoapIn" />
+      <wsdl:output message="tns:GetDevicesByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofenceDevicesByUserID">
+      <wsdl:input message="tns:GetGeofenceDevicesByUserIDSoapIn" />
+      <wsdl:output message="tns:GetGeofenceDevicesByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceCount">
+      <wsdl:input message="tns:GetDeviceCountSoapIn" />
+      <wsdl:output message="tns:GetDeviceCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExpireDevices">
+      <wsdl:input message="tns:GetExpireDevicesSoapIn" />
+      <wsdl:output message="tns:GetExpireDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaleDevices">
+      <wsdl:input message="tns:SaleDevicesSoapIn" />
+      <wsdl:output message="tns:SaleDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDevices">
+      <wsdl:input message="tns:SearchDevicesSoapIn" />
+      <wsdl:output message="tns:SearchDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesHistory">
+      <wsdl:input message="tns:GetDevicesHistorySoapIn" />
+      <wsdl:output message="tns:GetDevicesHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceHistoryByRoadOffset">
+      <wsdl:input message="tns:GetDeviceHistoryByRoadOffsetSoapIn" />
+      <wsdl:output message="tns:GetDeviceHistoryByRoadOffsetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTracking">
+      <wsdl:input message="tns:GetTrackingSoapIn" />
+      <wsdl:output message="tns:GetTrackingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDate">
+      <wsdl:input message="tns:UpdateHireExpriDateSoapIn" />
+      <wsdl:output message="tns:UpdateHireExpriDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDateDays">
+      <wsdl:input message="tns:UpdateHireExpriDateDaysSoapIn" />
+      <wsdl:output message="tns:UpdateHireExpriDateDaysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicesUser">
+      <wsdl:input message="tns:ChangeDevicesUserSoapIn" />
+      <wsdl:output message="tns:ChangeDevicesUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDevice">
+      <wsdl:input message="tns:DelDeviceSoapIn" />
+      <wsdl:output message="tns:DelDeviceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicePassword">
+      <wsdl:input message="tns:ChangeDevicePasswordSoapIn" />
+      <wsdl:output message="tns:ChangeDevicePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitDevicePassword">
+      <wsdl:input message="tns:InitDevicePasswordSoapIn" />
+      <wsdl:output message="tns:InitDevicePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceGroupID">
+      <wsdl:input message="tns:UpdateDeviceGroupIDSoapIn" />
+      <wsdl:output message="tns:UpdateDeviceGroupIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DevicesAjaxSoap" type="tns:DevicesAjaxSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveDevices">
+      <soap:operation soapAction="http://tempuri.org/SaveDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevices">
+      <soap:operation soapAction="http://tempuri.org/GetDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesByUserID">
+      <soap:operation soapAction="http://tempuri.org/GetDevicesByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofenceDevicesByUserID">
+      <soap:operation soapAction="http://tempuri.org/GetGeofenceDevicesByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceCount">
+      <soap:operation soapAction="http://tempuri.org/GetDeviceCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExpireDevices">
+      <soap:operation soapAction="http://tempuri.org/GetExpireDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaleDevices">
+      <soap:operation soapAction="http://tempuri.org/SaleDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDevices">
+      <soap:operation soapAction="http://tempuri.org/SearchDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesHistory">
+      <soap:operation soapAction="http://tempuri.org/GetDevicesHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceHistoryByRoadOffset">
+      <soap:operation soapAction="http://tempuri.org/GetDeviceHistoryByRoadOffset" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTracking">
+      <soap:operation soapAction="http://tempuri.org/GetTracking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDate">
+      <soap:operation soapAction="http://tempuri.org/UpdateHireExpriDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDateDays">
+      <soap:operation soapAction="http://tempuri.org/UpdateHireExpriDateDays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicesUser">
+      <soap:operation soapAction="http://tempuri.org/ChangeDevicesUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDevice">
+      <soap:operation soapAction="http://tempuri.org/DelDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicePassword">
+      <soap:operation soapAction="http://tempuri.org/ChangeDevicePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitDevicePassword">
+      <soap:operation soapAction="http://tempuri.org/InitDevicePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceGroupID">
+      <soap:operation soapAction="http://tempuri.org/UpdateDeviceGroupID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DevicesAjaxSoap12" type="tns:DevicesAjaxSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveDevices">
+      <soap12:operation soapAction="http://tempuri.org/SaveDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevices">
+      <soap12:operation soapAction="http://tempuri.org/GetDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesByUserID">
+      <soap12:operation soapAction="http://tempuri.org/GetDevicesByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofenceDevicesByUserID">
+      <soap12:operation soapAction="http://tempuri.org/GetGeofenceDevicesByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceCount">
+      <soap12:operation soapAction="http://tempuri.org/GetDeviceCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExpireDevices">
+      <soap12:operation soapAction="http://tempuri.org/GetExpireDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaleDevices">
+      <soap12:operation soapAction="http://tempuri.org/SaleDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDevices">
+      <soap12:operation soapAction="http://tempuri.org/SearchDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevicesHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetDevicesHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceHistoryByRoadOffset">
+      <soap12:operation soapAction="http://tempuri.org/GetDeviceHistoryByRoadOffset" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTracking">
+      <soap12:operation soapAction="http://tempuri.org/GetTracking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDate">
+      <soap12:operation soapAction="http://tempuri.org/UpdateHireExpriDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateHireExpriDateDays">
+      <soap12:operation soapAction="http://tempuri.org/UpdateHireExpriDateDays" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicesUser">
+      <soap12:operation soapAction="http://tempuri.org/ChangeDevicesUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDevice">
+      <soap12:operation soapAction="http://tempuri.org/DelDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeDevicePassword">
+      <soap12:operation soapAction="http://tempuri.org/ChangeDevicePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitDevicePassword">
+      <soap12:operation soapAction="http://tempuri.org/InitDevicePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceGroupID">
+      <soap12:operation soapAction="http://tempuri.org/UpdateDeviceGroupID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DevicesAjax">
+    <wsdl:port name="DevicesAjaxSoap" binding="tns:DevicesAjaxSoap">
+      <soap:address location="http://www.mgoogps.com/Ajax/DevicesAjax.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DevicesAjaxSoap12" binding="tns:DevicesAjaxSoap12">
+      <soap12:address location="http://www.mgoogps.com/Ajax/DevicesAjax.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

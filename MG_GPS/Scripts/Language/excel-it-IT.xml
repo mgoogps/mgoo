@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">Data inizio</resource>
+  <resource name="allPageEndTime">Data fine</resource>
+  <resource name="allPageNum">N.</resource>
+  <resource name="allPageDeviceName">Nome Dispositivo</resource>
+  <resource name="allPageTime">Time</resource>
+  <resource name="allPageLat">Latitudine</resource>
+  <resource name="allPageLng">Longitudine</resource>
+  <resource name="allPageAddress">Indirizzo</resource>
+  <resource name="allPageSpeedKM">km/h</resource>
+  <resource name="allPageDay">Day</resource>
+  <resource name="allPageHour">Hour</resource>
+  <resource name="allPageMinute">Minute</resource>
+  <resource name="allPagepositionTime">Data Posizione</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Total Moving Statistics</resource>
+  <resource name="allPageDistance">Mileage (km)</resource>
+  <resource name="reportPageWarnCount">Allarmi</resource>
+  <resource name="allPageOverspeed">Supero velocità</resource>
+  <resource name="reportPageStopCount">Soste</resource>
+
+  <resource name="alarmSumPageTitle">Total Alarm Statistics</resource>
+
+  <resource name="alarmSumPageLowCount">Low Battery alarm</resource>
+  <resource name="alarmSumPageCutPowerCount">Cut-off alarm</resource>
+  <resource name="alarmSumPageVibCount">Vibration alarm</resource>
+  <resource name="alarmSumPageSosCount">SOS alarm</resource>
+  <resource name="alarmIndexPageGeofenceIn">Geo-fence In</resource>
+  <resource name="alarmIndexPageGeofenceOut">Geo-fence Out</resource>
+  <resource name="alarmIndexPageMoved">Displacement</resource>
+  <resource name="alarmIndexPageOverSpeed">OverSpeed</resource>
+
+  <resource name="overSpeedPageDistancePage">Mileage Report</resource>
+  <resource name="runindexPageOil">Fuel Consumption</resource>
+  <resource name="runindexPageL">L</resource>
+  <resource name="runindexPageOilCoefficient">Fuel Consumption Coefficient/100 Kilometers</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Overspeed Details</resource>
+  <resource name="overSpeedPageSpeedlimit">Speed Limit</resource>
+  <resource name="overSpeedPageContinueTime">Continue Time</resource>
+
+  <resource name="overSpeedPageStopDetail">Stop Details</resource>
+
+  <resource name="alarmDetailPageAlarmCount">Alarm Statistics</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Alarm Details</resource>
+  <resource name="alarmDetailPageAlarmType">Alarm Type</resource>
+  <resource name="alarmDetailPageAlarmTime">Alarm Time</resource>
+
+  <resource name="geofencesPageGeofence">Geo-recinto</resource>
+  <resource name="allPageName">Nome Cliente</resource>
+</root>

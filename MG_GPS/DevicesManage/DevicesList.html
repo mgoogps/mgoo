@@ -1,0 +1,91 @@
+<script src="/Scripts/DevicesManage/DevicesList.js"></script>
+<script src="../Scripts/tableExport-master/dist/tableExport.js"></script>
+<div class="bjui-pageHeader"> 
+    <form id="pagerForm" data-toggle="ajaxsearch" action="table-fixed.html" method="post">
+        <input type="hidden" name="pageSize" value="${model.pageSize}">
+        <input type="hidden" name="pageCurrent" value="${model.pageCurrent}">
+        <input type="hidden" name="orderField" value="${param.orderField}">
+        <input type="hidden" name="orderDirection" value="${param.orderDirection}">
+        <div class="bjui-searchBar">
+            <label>设备名称：</label><input type="text" id="txtDeviceName" value="" name="code" class="form-control" size="20" placeholder="IMEI/设备名称...">&nbsp;
+            <!--<label>客户姓名：</label><input type="text" value="" name="name" class="form-control" size="8">&nbsp;
+            <label>所属业务:</label>
+            <select name="type" data-toggle="selectpicker">
+                <option value="">全部</option>
+                <option value="1">联络</option>
+                <option value="2">住宿</option>
+                <option value="3">餐饮</option>
+                <option value="4">交通</option>
+            </select>&nbsp;-->
+            <!--<input type="checkbox" id="j_table_chk" value="true" data-toggle="icheck" data-label="我的客户">&nbsp;
+            <button type="button" class="showMoreSearch" data-toggle="moresearch" data-name="custom2"><i class="fa fa-angle-double-down"></i></button>-->
+            <button type="submit" class="btn-default" data-icon="search" onclick="GetDeviceList()">查询</button>&nbsp;
+            <!--<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>-->
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">复选框-批量操作<span class="caret"></span></button>
+                    <ul class="dropdown-menu right" role="menu">
+                        <li><a href="book1.xlsx" data-toggle="doexport"  onclick="tableExport('tbDeviceManagement', '设备管理', 'xls')">导出<span style="color: green;">&nbsp;Execl</span></a></li>
+                     
+                        <li class="divider"></li>
+                        <!--<li><a href="ajaxDone2.html" data-toggle="doajaxchecked" data-confirm-msg="确定要删除选中项吗？" data-idname="delids" data-group="ids" onclick="SelDel()">删除选中</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bjui-moreSearch">
+            <label>职业：</label><input type="text" value="" name="profession" size="15" />
+            <label>&nbsp;性别:</label>
+            <select name="sex" data-toggle="selectpicker">
+                <option value="">全部</option>
+                <option value="true">男</option>
+                <option value="false">女</option>
+            </select>
+            <label>&nbsp;手机:</label>
+            <input type="text" value="" name="mobile" size="10">
+        </div>
+    </form>
+</div>
+<div class="bjui-pageContent tableContent">
+    <table  class="table table-bordered table-hover table-striped table-top" data-width="100%" data-nowrap="true" id="tbDeviceManagement">
+        <thead>
+            <tr id="clear">
+                <th width="40">序号</th>
+                <th>设备名称</th>
+                <th>设备型号</th>
+                <th>SIM号码</th>
+                <th>车牌号</th>
+                <th>联系人</th>
+                <th>联系人电话</th>
+                <th >出厂时间</th>
+                <th >激活时间</th>
+                <th >过期时间</th>
+                <th>所属用户</th>
+                <th width="60">网络定位</th>
+                <!--<th data-order-field="profession">职业</th> 
+                <th data-order-field="createtime">登记时间</th>-->
+                <th ><input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck"></th>
+                <th >操作</th>
+            </tr>
+        </thead>
+        <tbody id="tBodyDeviceList">
+          
+        </tbody>
+    </table>
+</div>
+ <!--<div class="bjui-pageFooter">
+   <div class="pages">
+        <span>每页&nbsp;</span>
+        <div class="selectPagesize">
+            <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option value="120">120</option>
+                <option value="150">150</option>
+            </select>
+        </div>
+        <span>&nbsp;条，共 600 条</span>
+    </div>
+    <div class="pagination-box" data-toggle="pagination" data-total="600" data-page-size="30" data-page-current="1">
+    </div>
+    </div>-->

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">Von</resource>
+  <resource name="allPageEndTime">Zu</resource>
+  <resource name="allPageNum">Nr.</resource>
+  <resource name="allPageDeviceName">Gerätebezeichnung</resource>
+  <resource name="allPageTime">Zeit</resource>
+  <resource name="allPageLat">Breitengrad</resource>
+  <resource name="allPageLng">Längengrad</resource>
+  <resource name="allPageAddress">Adresse</resource>
+  <resource name="allPageSpeedKM">km/h</resource>
+  <resource name="allPageDay">Tag</resource>
+  <resource name="allPageHour">Stunde</resource>
+  <resource name="allPageMinute">Minute</resource>
+  <resource name="allPagepositionTime">Stellzeit</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Gesamtstatistik</resource>
+  <resource name="allPageDistance">Kilometerstand (km)</resource>
+  <resource name="reportPageWarnCount">Alarm</resource>
+  <resource name="allPageOverspeed">Drehzahlbegrenzung</resource>
+  <resource name="reportPageStopCount">Stopp</resource>
+
+  <resource name="alarmSumPageTitle">Überblick der Alarmstatistik</resource>
+
+  <resource name="alarmSumPageLowCount">Alarm, der Akku ist schwach</resource>
+  <resource name="alarmSumPageCutPowerCount">Alarm, die Stromversorgung ist unterbrochen</resource>
+  <resource name="alarmSumPageVibCount">Vibrationsalarm</resource>
+  <resource name="alarmSumPageSosCount">SOS Alarm</resource>
+  <resource name="alarmIndexPageGeofenceIn">Virtueller Zaun An</resource>
+  <resource name="alarmIndexPageGeofenceOut">Virtueller Zaun Aus</resource>
+  <resource name="alarmIndexPageMoved">Verschieben</resource>
+  <resource name="alarmIndexPageOverSpeed">Drehzahlbegrenzung</resource>
+
+  <resource name="overSpeedPageDistancePage">Meilenzahlstatistiken</resource>
+  <resource name="runindexPageOil">Kraftstoffverbrauch</resource>
+  <resource name="runindexPageL">Liter</resource>
+  <resource name="runindexPageOilCoefficient">Kraftstoffverbrauch / 100 km</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Speeding Details eines einzelnen</resource>
+  <resource name="overSpeedPageSpeedlimit">Geschwindigkeits - Werte</resource>
+  <resource name="overSpeedPageContinueTime">Dauer</resource>
+
+  <resource name="overSpeedPageStopDetail">Einzelheiten</resource>
+
+  <resource name="alarmDetailPageAlarmCount">Alarmstatistik</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Alarm Detail</resource>
+  <resource name="alarmDetailPageAlarmType">Alarmtyp</resource>
+  <resource name="alarmDetailPageAlarmTime">Alarmzeit</resource>
+
+  <resource name="geofencesPageGeofence">Virtueller Zaun An</resource>
+  <resource name="allPageName">Name</resource>
+</root>

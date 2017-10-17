@@ -1,0 +1,139 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport"  content="width=device-width, initial-scale=1">
+    <title>设备信息</title>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+    </script>
+
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" class="" onclick="javascript:history.back();">
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div>
+
+        <h1 class="am-header-title">
+            <a href="javascript:;" class="">
+                设备信息
+            </a>
+        </h1>
+    </header>
+    
+    <div class="am-container">
+        <form class="am-form ">
+            <div class="am-form-group">
+                <label for="txtSerialNumber" class="am-u-sm-4 am-form-label">设备编号:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtSerialNumber" />
+                </div>
+            </div>
+            <br /> <br />  
+            <div class="am-form-group">
+                <label for="txtDeviceName" class="am-u-sm-4 am-form-label">设备名称:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtDeviceName" />
+                </div>
+            </div>
+            <br />  
+            <div class="am-form-group">
+                <label for="txtDeviceModel" class="am-u-sm-4 am-form-label">设备型号:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtDeviceModel" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="group-selected" class="am-u-sm-4 am-form-label">设备分组:</label>
+                <div class="am-u-sm-8">
+                    <select data-am-selected="{maxHeight: 210}" id="group-selected">
+                        
+                    </select>
+                </div>
+            </div>
+            <br /> 
+            <div class="am-form-group">
+                <label for="txtActiveDate" class="am-u-sm-4 am-form-label">启用时间:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtActiveDate" />
+                </div>
+            </div> 
+            <br /> 
+            <div class="am-form-group">
+                <label for="txtHireExpireDate" class="am-u-sm-4 am-form-label">到期时间:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtHireExpireDate" />
+                </div>
+            </div> 
+            <br /> 
+            <div class="am-form-group">
+                <label for="txtCarNum" class="am-u-sm-4 am-form-label">车 牌 号:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtCarNum" />
+                </div>
+            </div> 
+            <br /> 
+            <div class="am-form-group">
+                <label for="txtUserName" class="am-u-sm-4 am-form-label">流量卡号:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtPhoneNum" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="txtUserName" class="am-u-sm-4 am-form-label">联 系 人:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtUserName" />
+                </div>
+            </div>
+            <br />  
+            <div class="am-form-group">
+                <label for="txtUserName" class="am-u-sm-4 am-form-label">联系电话:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtCallPhone" />
+                </div>
+            </div>  
+            <br /> <br />
+            <div class="am-form-group">
+                <div class="am-u-sm-12">
+                    <button type="button" class="am-btn am-btn-primary am-btn-block" onclick="frmsubmit()">保存</button>
+                </div> 
+            </div>
+
+            
+        </form>       
+    </div>
+
+    <script src="/bootstrap/js/jquery-2.1.3.min.js"></script>
+    <script src="/bootstrap/js/amazeui-2.7.2.min.js"></script> 
+    <script src="/bootstrap/js/utils.js"></script>
+    <script src="/bootstrap/js/public.js"></script>
+    <script src="/bootstrap/js/Ajax.js"></script>
+    <script type="text/javascript">
+        /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+        var urlinfo = window.location.href;
+        var len = urlinfo.length;
+        var offset = urlinfo.indexOf("?");
+        var info = urlinfo.substr(offset, len)
+        var ids = info.split("=");
+        var deviceid = ids[1];
+     
+       
+    </script>
+    <script src="/bootstrap/js/device/info.js"></script>
+</body>
+</html>

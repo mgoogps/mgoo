@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图标菜单</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+</head>
+
+<body>
+
+<div style="height:1000px;"></div>
+
+<div class="wrap">
+	<div class="menu"><img class="icon_menu" src="img/menu.png" /><span></span></div>
+	<div class="btn btn1" data-num="1"><span>照相</span></div>
+	<div class="btn btn2" data-num="2"><span>位置</span></div>
+	<div class="btn btn3" data-num="3"><span>音乐</span></div>
+	<div class="btn btn4" data-num="4"><span>聊天</span></div>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".menu").click(function(){
+		var span = $(this).find("span");
+		if(span.hasClass("open")){
+			span.removeClass("open").addClass("close");
+			$(".btn").removeClass("open").addClass("close");
+		}else{
+			span.removeClass("close").addClass("open");
+			$(".btn").removeClass("close").addClass("open");
+		}
+	});
+});
+</script>
+	
+</body>
+</html>

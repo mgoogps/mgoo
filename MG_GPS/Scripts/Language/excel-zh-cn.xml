@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">开始时间</resource>
+  <resource name="allPageEndTime">结束时间</resource>
+  <resource name="allPageNum">序号</resource>
+  <resource name="allPageDeviceName">设备名</resource>
+  <resource name="allPageTime">时间</resource>
+  <resource name="allPageLat">纬度</resource>
+  <resource name="allPageLng">经度</resource>
+  <resource name="allPageAddress">地址</resource>
+  <resource name="allPageSpeedKM">公里/小时</resource>
+  <resource name="allPageDay">天</resource>
+  <resource name="allPageHour">小时</resource>
+  <resource name="allPageMinute">分钟</resource>
+  <resource name="allPagepositionTime">定位时间</resource>
+  <resource name="allPageInTime">进入时间</resource>
+  <resource name="allPageOutTime">离开时间</resource>
+  
+  <resource name="reportPagetitle">运行统计总览</resource>
+  <resource name="allPageDistance">里程(公里)</resource>
+  <resource name="reportPageWarnCount">报警</resource>
+  <resource name="allPageOverspeed">超速</resource>
+  <resource name="reportPageStopCount">停留</resource>
+
+  <resource name="alarmSumPageTitle">报警统计总览</resource>
+  
+  <resource name="alarmSumPageLowCount">低电报警</resource>
+  <resource name="alarmSumPageCutPowerCount">断电报警</resource>
+  <resource name="alarmSumPageVibCount">震动报警</resource>
+  <resource name="alarmSumPageSosCount">求救报警</resource>
+  <resource name="alarmIndexPageGeofenceIn">进电子栅栏</resource>
+  <resource name="alarmIndexPageGeofenceOut">出电子栅栏</resource>
+  <resource name="alarmIndexPageMoved">位移报警</resource>
+  <resource name="alarmIndexPageOverSpeed">超速报警</resource>
+  
+  <resource name="overSpeedPageDistancePage">里程统计</resource>
+  <resource name="runindexPageOil">油耗</resource>
+  <resource name="runindexPageL">升</resource>
+  <resource name="runindexPageOilCoefficient">百公里油耗系数</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">超速详单</resource>
+  <resource name="overSpeedPageSpeedlimit">超速值</resource>
+  <resource name="overSpeedPageContinueTime">持续时间</resource>
+
+  <resource name="overSpeedPageStopDetail">停留详单</resource>
+  
+  <resource name="alarmDetailPageAlarmCount">报警统计</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">报警详单</resource>
+  <resource name="alarmDetailPageAlarmType">报警类型</resource>
+  <resource name="alarmDetailPageAlarmTime">报警时间</resource>
+
+  <resource name="geofencesPageGeofence">电子栅栏</resource>
+  <resource name="allPageName">名称</resource>
+</root>  

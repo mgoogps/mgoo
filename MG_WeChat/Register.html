@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>注册帐号</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="images/main.css" rel="stylesheet" />
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="bootstrap/dist/css/bootstrapValidator.css" rel="stylesheet" />
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="bootstrap/js/jquery-2.1.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="bootstrap/dist/js/bootstrapValidator.js"></script>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+    </script>
+
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" class="" onclick="javascript:history.back();">
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div> 
+        <h1 class="am-header-title">
+            <a href="#title-link" class="">
+               <label style="margin-top:10px;"> 注册</label>
+            </a>
+        </h1>
+    </header>
+    <div class="container">
+        <label></label>
+        <form id="registerForm" method="post" class="form-horizontal" action="">
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user fa-fw"></i></span>
+                    <input type="text" id="inputName" class="form-control" name="inputName" placeholder="请输入昵称" required data-bv-notempty-message="昵称不能为空." oninput="if(value.length>15)value=value.slice(0,15)">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user fa-fw"></i></span>
+                    <input type="number" id="inputAccount" class="form-control" name="inputAccount" placeholder="请输入您的手机号" oninput="if(value.length>11)value=value.slice(0,11)">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-4">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-flickr fa-fw"></i></span>
+                    <input type="number" id="verification" name="verification" class="form-control" placeholder="请输入验证码" oninput="if(value.length>6)value=value.slice(0,6)">
+                    <span class="input-group-btn"><button class="btn btn-primary" id="getcode" onclick="getCode('inputAccount','register', this)" type="button">获取</button></span>
+                </div> 
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="请设置您的登陆密码"
+                           required data-bv-notempty-message="密码不能为空."
+                         
+                           data-bv-different="true" data-bv-different-field="inputAccount" data-bv-different-message="密码不能跟账号一样.">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
+                    <input type="password" id="password2" name="password2" class="form-control" placeholder="请再次输入登陆密码"
+                           required data-bv-notempty-message="密码不能为空."
+                           data-bv-identical="true" data-bv-identical-field="password" data-bv-identical-message="两次输入的密码不一样."
+                           data-bv-different="true" data-bv-different-field="inputAccount" data-bv-different-message="密码不能跟账号一样.">
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">确认注册</button>
+        </form>
+
+
+
+    </div>
+    <script src="bootstrap/js/amazeui-2.7.2.min.js"></script>
+    <script src="bootstrap/js/public.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#registerForm').bootstrapValidator();
+        });
+        $('#registerForm').bootstrapValidator({
+            message: '值不能为空.',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                inputName: {
+                    
+                },
+                inputAccount: {
+                    message: '手机号无效.',
+                    validators: {
+                        notEmpty: {
+                            message: '手机号码不能为空.'
+                        },
+                        stringLength: {
+                            min: 11,
+                            max: 11,
+                            message: '手机号码必须是11位数字.'
+                        },
+                        /*remote: {
+                            url: 'remote.php',
+                            message: 'The username is not available'
+                        },*/
+                        /*regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: 'The username can only consist of alphabetical, number, dot and underscore'
+                        }*/
+                    }
+                },
+                 verification: {
+                    validators: {
+                        notEmpty: {
+                            message: ' '
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 6,
+                            message: ' '
+                        },
+                    }
+                }, 
+                password: {
+                    validators: {
+                        notEmpty: { message: '密码不能为空.' },
+                        identical: {
+                            field: 'confirmPassword',
+                            message: 'The password and its confirm are not the same'
+                        },
+                        different: {
+                            field: 'username',
+                            message: 'The password cannot be the same as username'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function (e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            frmSubmit();
+
+            return false;
+            // Use Ajax to submit form data
+            //  $.post($form.attr('action'), $form.serialize(), function (result) {
+            //   console.log(result);
+            // }, 'json');
+        });
+
+        function frmSubmit() {
+            var data = { phone: $("#inputAccount").val(), password: $("#password").val(), code: $("#verification").val(), username: $("#inputName").val() };
+            $.ajax({
+                url: "ajax/Login.asmx/MgRegister",
+                data: JSON.stringify(data),
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (r) {
+                    var result = JSON.parse(r.d);
+                    var m = new amModal({ msg: result.Message })
+                    m.open(); 
+                    if (result.StatusCode === 200) {
+                        m.onConfirm(function () {
+                            window.location.href = "Login.aspx";
+                        }); 
+                    }  
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+
+
+    </script>
+</body>
+</html>

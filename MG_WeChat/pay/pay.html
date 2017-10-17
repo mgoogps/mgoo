@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线充值</title>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" class="" onclick="javascript:history.back();">
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div>
+
+        <h1 class="am-header-title">
+            <a href="#title-link" class="">
+                在线充值
+            </a>
+        </h1>
+    </header>
+
+    <div class="am-container">
+         <ul class="am-list am-list-static am-list-border">
+            <li>
+                 <span class="am-badge am-badge-success">¥1</span>
+                 半年
+            </li>
+            <li>
+                <span class="am-badge am-badge-success">¥2</span> 
+              一年
+            </li>
+            <li>
+                 <span class="am-badge am-badge-success">¥3</span>
+                两年
+            </li>
+        </ul>
+        <br />
+        
+    </div> 
+    <script src="../bootstrap/js/jquery-2.1.3.min.js"></script>
+    <script src="../bootstrap/js/public.js"></script>
+    <script src="../bootstrap/js/Ajax.js"></script>
+    <script type="text/javascript">
+        var deviceid = GetQueryString("deviceid");
+        var type = GetQueryString("type");
+        var openid = GetQueryString("openid");
+        
+        //var loginInfo = mg.GetUserInfo();
+         
+       // loginInfo = JSON.parse(loginInfo);
+        //loginInfo = loginInfo || {};
+      //  loginInfo.UserID  = loginInfo.UserID || "";
+        //loginInfo.Token = loginInfo.Token || ""; 
+        $(function() {
+            $(".am-list li").on("click", function () {
+                var price = $(this).find("span").text().replace("¥","");
+                if (openid.length < 5) {
+                    openid = loginInfo.Token.split('@')[0];
+                } 
+                window.location.href = "http://m.mgoogps.com/Pay/wxPay.aspx?deviceid=" + deviceid + "&userid=" + loginInfo.UserID + "&total_fee=" + price + "&openid=" + openid + "&type="+type;
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>设备列表</title>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"> 
+    <style type="text/css">
+        .am-list-item-text {
+             margin-top:-10px;
+             margin-left:12px;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default"> 
+        <h1 class="am-header-title">
+            <a href="#title-link" class="">
+                设备列表
+            </a>
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <a href="/myinfo/adddevice.html" class="">
+                <i class="am-header-icon am-icon-plus"></i>
+            </a>
+        </div>
+    </header>
+
+    <div data-am-widget="tabs"
+         class="am-tabs am-tabs-default">
+        <ul class="am-tabs-nav am-cf" data-am-sticky="{animation: 'slide-top'}" id="tab-status">
+            <li onclick="tabClick(this)" class="am-active" value="1"><a href="javascript:;">在线(0)</a></li>
+            <li onclick="tabClick(this)" class="" value="2"><a href="javascript:;">离线(0)</a></li>
+            <li onclick="tabClick(this)" class="" value="3"><a href="javascript:;">未激活(0)</a></li>
+            <li onclick="tabClick(this)" class="" value="4"><a href="javascript:;">全部(0)</a></li>
+        </ul>
+        <div class="am-input-group am-input-group-sm"data-am-sticky="{top:34,animation: 'slide-top'}">
+            <input type="text" class="am-form-field" placeholder="输入搜索..." id="txtSearch" oninput="search(400)" />
+            <span class="am-input-group-label"><i class="am-icon-search am-icon-fw"></i></span>
+        </div>
+        <div class="am-tabs-bd"> 
+            <div data-tab-panel-0 class="am-tab-panel am-active">
+                <ul class="am-list" id="DivDeviceList">
+                   <!--<li class="am-panel">
+                        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}">
+                            <i class="am-icon-plus-square am-margin-left-sm"></i> 未分组 <i class="am-icon-angle-down am-fr am-margin-right"></i>
+                        </a>
+                        <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav" name="devicesList">
+                            <li class="am-g">
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <div class="am-list-item-text">主电连接 撤防</div>
+                                <span class="am-list-date">静止</span>
+                                <span class="am-list-date" style="top:40px;">10天10时10分</span>
+                            </li>
+                            <li class="am-g">
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <div class="am-list-item-text">主电连接 撤防</div>
+                                <span class="am-list-date">行驶</span>
+                                <span class="am-list-date"style="top:40px;">107km/h</span>
+                            </li>
+                        </ul>
+                    </li>-->
+                   <!--  <li class="am-panel">
+                        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#dd-nav'}">
+                            <i class="am-icon-minus-square am-margin-left-sm"></i> 东莞市 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+                        </a>
+                        <ul class="am-list am-collapse admin-sidebar-sub" id="dd-nav" name="devicesList">
+                            <li>
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <span class="am-list-date">静止</span>
+                            </li>
+                            <li>
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <span class="am-list-date">107km/h</span>
+                            </li>
+                            <li>
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <span class="am-list-date">静止</span>
+                            </li>
+                            <li>
+                                <a href="../device/Tracking.html"> 粤SK8888 </a>
+                                <span class="am-list-date">107km/h</span>
+                            </li>
+                        </ul>
+                    </li>-->
+                </ul>
+            </div>
+
+            <div data-tab-panel-1 class="am-tab-panel ">
+                离线列表
+            </div>
+
+            <div data-tab-panel-2 class="am-tab-panel ">
+                未使用列表
+            </div>
+            <div data-tab-panel-3 class="am-tab-panel ">
+                未使用列表
+            </div>
+        </div>
+    </div>
+
+
+
+    <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
+        <ul class="am-navbar-nav am-cf am-avg-sm-4">    
+            <li>
+                <a href="javascript:;" class="am-active">
+                    <span class="am-icon-th-list"></span>
+                    <span class="am-navbar-label">设备</span>
+                </a>
+            </li>
+            <li>
+                <a href="/message/msg.html" class="">
+                    <span class="am-icon-comment"></span>
+                    <span class="am-navbar-label">消息</span>
+                </a>
+            </li>
+            <li>
+                <a href="/myinfo/myinfo.html" class="">
+                    <span class="am-icon-user"></span>
+                    <span class="am-navbar-label">我</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <script src="/bootstrap/js/jquery-2.1.3.min.js"></script> 
+    <script src="/bootstrap/js/amazeui-2.7.2.min.js"></script>
+    <script src="/bootstrap/js/utils.js"></script>
+    <script src="/bootstrap/js/public.js"></script>
+    <script src="/bootstrap/js/Ajax.js"></script>
+    <script src="/bootstrap/js/device/DeviceList.js"></script> 
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<resource name="allPageStartTime">من</resource>
+	<resource name="allPageEndTime">إلى</resource>
+	<resource name="allPageNum">رقم</resource>
+	<resource name="allPageDeviceName">اسم الجهاز</resource>
+	<resource name="allPageTime">الوقت</resource>
+	<resource name="allPageLat">خطوط الطول</resource>
+	<resource name="allPageLng">خطوط العرض</resource>
+	<resource name="allPageAddress">العنوان</resource>
+	<resource name="allPageSpeedKM">كم/الساعة</resource>
+	<resource name="allPageDay">اليوم</resource>
+	<resource name="allPageHour">الساعة</resource>
+	<resource name="allPageMinute">الدقائق</resource>
+	<resource name="allPagepositionTime">وقت تحديد الموقع</resource>
+	<resource name="allPageInTime">وقت الدخول</resource>
+	<resource name="allPageOutTime">وقت الخروج</resource>
+
+	<resource name="reportPagetitle">إحصائيات إجمالي التحركات</resource>
+	<resource name="allPageDistance">ميل (كم)</resource>
+	<resource name="reportPageWarnCount">تعداد التنبيه</resource>
+	<resource name="allPageOverspeed">سرعة زائدة</resource>
+	<resource name="reportPageStopCount">تعداد التوقف</resource>
+
+	<resource name="alarmSumPageTitle">إحصائيات إجمالي التنبيه</resource>
+
+	<resource name="alarmSumPageLowCount">تنبيه انخفاض شحن البطارية</resource>
+	<resource name="alarmSumPageCutPowerCount">تنبيه تعطيل المحرك</resource>
+	<resource name="alarmSumPageVibCount">تنبيه اهتزاز</resource>
+	<resource name="alarmSumPageSosCount">تنبيه استغاثة</resource>
+	<resource name="alarmIndexPageGeofenceIn">داخل الحدود الجغرافية</resource>
+	<resource name="alarmIndexPageGeofenceOut">خارج الحدود الجغرافية</resource>
+	<resource name="alarmIndexPageMoved">الإزاحة</resource>
+	<resource name="alarmIndexPageOverSpeed">السرعة الزائدة</resource>
+
+	<resource name="overSpeedPageDistancePage">تقرير الأميال</resource>
+	<resource name="runindexPageOil">استهلاك الوقود</resource>
+	<resource name="runindexPageL">لتر</resource>
+	<resource name="runindexPageOilCoefficient">معدل استهلاك الوقود /100 كم</resource>
+
+	<resource name="overSpeedPageOverspeedDetail">تفاصيل السرعة الزائدة</resource>
+	<resource name="overSpeedPageSpeedlimit">حدود السرعة</resource>
+	<resource name="overSpeedPageContinueTime">وقت الاستمرار</resource>
+
+	<resource name="overSpeedPageStopDetail">تفاصيل التوقف</resource>
+
+	<resource name="alarmDetailPageAlarmCount">إحصائيات التنبيه</resource>
+
+	<resource name="alarmDetailPageAlarmDetail">تفاصيل التنبيه</resource>
+	<resource name="alarmDetailPageAlarmType">نوع التنبيه</resource>
+	<resource name="alarmDetailPageAlarmTime">وقت التنبيه</resource>
+
+	<resource name="geofencesPageGeofence">المنطقة الجغرافية</resource>
+	<resource name="allPageName">الاسم</resource>
+</root>

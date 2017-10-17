@@ -1,0 +1,99 @@
+﻿ <!-- 模仿Mac 菜单 -->
+<link href="/Scripts/Monitor/memu/css/all-examples.css" rel="stylesheet" />
+<noscript>
+    <style type="text/css">
+     	#dock { top: 0; left: 100px; }
+			a.dock-item { position: relative; float: left; margin-right: 10px; }
+			.dock-item span { display: block; }
+
+			.stack { top: 0; }
+			.stack ul li { position: relative; }
+        a:hover {
+        color:red;
+        }
+    </style>
+</noscript>
+<!--<script type="text/javascript" src="/Scripts/Monitor/memu/js/jquery.min.js"></script>-->
+<!-- 模仿Mac 菜单 -->
+<script src="/Scripts/Monitor/memu/js/fisheye-iutil.min.js"></script> 
+<script src="/Scripts/Monitor/memu/js/jquery.jqDock.min.js"></script>
+<script src="/Scripts/Monitor/memu/js/dock-example1.js"></script> 
+<script src="/Scripts/Monitor/memu/js/stack-1.js"></script>
+ <script src="/Scripts/Monitor/memu/js/stack-2.js"></script> 
+
+
+<script type="text/javascript">
+    $(function () { 
+        var jqDockOpts = { align: 'left', duration: 200, labels: 'tc', size: 48, distance: 85 };
+        $('#jqDock').jqDock(jqDockOpts);
+	 });
+</script>
+ 
+	<!-- BEGIN DOCK 2 ============================================================ 左边-->
+ <div id="dockContainer" style="visibility:hidden;z-index:2000;background:#C1DCB9">
+    <ul id="jqDock">
+        <li><a class="dockItem" target="_blank" href="/Monitor/deviceinfo.html" data-toggle="dialog" data-id="DeviceInfo" data-title="设备信息" data-width="600" data-height="440"
+                data-on-load="editDeviceInfo"  data-reload-warn="本页已有打开的内容，确定将刷新本页内容，是否继续？" data-before-close="deviceinfo_navtab_beforeClose" data="{'Imei':'123'}" id="aDeviceInfo">
+             <img src="Scripts/Monitor/memu/images/dock/edit-sm.png" alt="设备信息" title="设备信息 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" /></a></li>
+        <li><a class="dockItem" target="_blank" href="/Monitor/Tracking.aspx" id="aTracking"><img src="Scripts/Monitor/memu/images/dock/home-sm.png" alt="实时跟踪" title="实时跟踪 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " /></a></li>
+        <li><a class="dockItem" target="_blank" href="/Monitor/History.aspx" id="aHistory"><img src="Scripts/Monitor/memu/images/dock/history-sm.png" alt="历史轨迹" title="历史轨迹 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" /></a></li>
+        <!--<li><a class="dockItem" target="_blank" href="/Monitor/History.aspx" id="aGeofences"><img src="Scripts/Monitor/memu/images/dock/link-sm.png" alt="电子围栏" title="电子围栏 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" /></a></li>-->
+        <li><a class="dockItem" target="_blank" href="/Monitor/sendcommand.html" data-toggle="dialog" data-id="SendCommand" data-title="发送指令" data-width="600" data-height="440" data-on-load="sendCommand_on_load" id="aSendCommand"><img src="Scripts/Monitor/memu/images/dock/email-sm.png" alt="发送指令" 
+                                                                                                      title="发送指令 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" /></a></li> 
+   </ul>
+</div>
+ <!-- end div #dockContainer -->
+
+<!-- END DOCK 2 ============================================================ --> 
+  
+
+<!-- BEGIN DOCK 1 ============================================================ 中间 横向 -->
+
+<!--   <div id="dock" style="z-index:2000;left:400px; top:60px; position:absolute;height:50px; border:0px solid red;visibility:hidden;">
+   <div class="dock-container" style="border:0px solid pink">
+        <a class="dock-item" target="_blank" href="/Monitor/deviceinfo.html" data-toggle="dialog" data-id="DeviceInfo" data-title="设备信息"  data-width="600" data-height="440"
+            data-reload-warn="本页已有打开的内容，确定将刷新本页内容，是否继续？" data-on-load="editDeviceInfo" data-before-close="deviceinfo_navtab_beforeClose" data="{'Imei':'123'}" id="aDeviceInfo">
+            <span style="margin-top:80px;">设备信息</span> <img src="Scripts/Monitor/memu/images/dock/edit-sm.png" alt="设备信息" /></a>
+
+        <a class="dock-item" target="_blank" href="/Monitor/Tracking.aspx" id="aTracking"><span>实时跟踪</span><img src="Scripts/Monitor/memu/images/dock/home-sm.png" alt="实时跟踪" /></a>
+        <a class="dock-item" target="_blank" href="/Monitor/History.aspx" id="aHistory"><span>历史轨迹</span><img src="Scripts/Monitor/memu/images/dock/history-sm.png" alt="历史轨迹" /></a>
+        <!--<a class="dock-item" target="_blank" href="../Index.aspx"><span>电子围栏</span><img src="Scripts/Monitor/memu/images/dock/link-sm.png" alt="电子围栏" /></a>-->
+        <!--<a class="dock-item" target="_blank" href="#"><span>指令记录</span><img src="Scripts/Monitor/memu/images/dock/calendar-sm.png" alt="指令记录" /></a>-->
+        <!--<a class="dock-item" target="_blank" href="/Monitor/sendcommand.html" data-toggle="dialog"  data-id="SendCommand" data-title="发送指令" data="{'Imei':'123'}" data-width="600" data-height="440" data-on-load="sendCommand_on_load">
+                                       <span>发送指令</span><img src="Scripts/Monitor/memu/images/dock/email-sm.png" alt="发送指令" /></a> 
+    </div>
+</div>-->  
+ <!-- end div .dock #dock --><!-- end div .dock-container -->
+<!-- END DOCK 1 ============================================================ -->
+ 
+    <!--<div class="PathInner" id="PathMenu" style="position:absolute;bottom:340px;visibility:hidden">
+        <div class="PathMain">
+            <div class="Tmain" onclick="PathRun();">
+                <div class="rotate"><span class="cover"></span></div>
+            </div>
+        </div>
+      
+        <div class="PathItem">
+            <a class="link" href="#" title="更多图片">
+                <span class="item" style="background-image:url(Scripts/Monitor/memu/images/moment/moment_icn_pic.png);"></span>
+            </a>
+        </div>
+        <div class="PathItem">
+            <a class="link" href="#" title="详细参数">
+                <span class="item" style="background-image:url(Scripts/Monitor/memu/images/moment/moment_icn_info.png);"></span>
+            </a>
+        </div>
+        <div class="PathItem">
+            <a class="link" href="#" title="玛百莉官方专卖店地址">
+                <span class="item" style="background-image: url(Scripts/Monitor/memu/images/moment/moment_icn_address.png);"></span>
+            </a>
+        </div>
+        <div class="PathItem">
+            <a class="link" href="#">
+                <span class="item" style="background-image: url(Scripts/Monitor/memu/images/moment/moment_icn_price.png);"></span>
+            </a>
+        </div>
+    </div>-->
+   
+    <div id="allmap" style="border: 0px solid red"></div>
+ 

@@ -1,0 +1,1876 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F7DA8DD-F3AD-457D-8426-A2361C6FA79F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MG_GPS</RootNamespace>
+    <AssemblyName>MG_GPS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="download.html" />
+    <Content Include="Images\icons\box.png" />
+    <Content Include="Images\icons\Box2.png" />
+    <Content Include="Images\icons\lockv4.png" />
+    <Content Include="Images\icons\menu.png" />
+    <Content Include="Images\icons\unlock.png" />
+    <Content Include="packages.config" />
+    <Content Include="Pay\OrderQueryPage.aspx" />
+    <Content Include="Pay\ResultNotifyPage.aspx" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\B-JUI\font\LICENCE.md" />
+    <Content Include="Scripts\B-JUI\font\typicons.eot" />
+    <Content Include="Scripts\B-JUI\font\typicons.ttf" />
+    <Content Include="Scripts\B-JUI\font\typicons.woff" />
+    <Content Include="Scripts\plugin\datepicker\css\mobiscroll.css" />
+    <Content Include="Scripts\plugin\datepicker\css\mobiscroll_date.css" />
+    <Content Include="Scripts\plugin\datepicker\css\normalize3.0.2.min.css" />
+    <Content Include="Scripts\plugin\datepicker\css\style.css" />
+    <Content Include="Scripts\plugin\datepicker\demo.html" />
+    <Content Include="Scripts\plugin\datepicker\js\detection.js" />
+    <Content Include="Scripts\plugin\datepicker\js\jquery.min.js" />
+    <Content Include="Scripts\plugin\datepicker\js\laytpl.js" />
+    <Content Include="Scripts\plugin\datepicker\js\listener.js" />
+    <Content Include="Scripts\plugin\datepicker\js\mobiscroll.js" />
+    <Content Include="Scripts\plugin\datepicker\js\mobiscroll_date.js" />
+    <Content Include="Scripts\plugin\datepicker\js\public.js" />
+    <Content Include="Scripts\plugin\datepicker\js\TouchSlide.1.1.js" />
+    <Content Include="Scripts\plugin\datepicker\js\zepto.min.js" />
+    <Content Include="Scripts\daterangepicker\fonts\icomoon.eot" />
+    <Content Include="Scripts\daterangepicker\fonts\icomoon.ttf" />
+    <Content Include="Scripts\daterangepicker\fonts\icomoon.woff" />
+    <Content Include="Scripts\datetimepicker\css\amazeui.datetimepicker.css" />
+    <Content Include="Scripts\datetimepicker\js\amazeui.datetimepicker.js" />
+    <Content Include="Scripts\datetimepicker\js\amazeui.datetimepicker.min.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ar.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.az.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.bg.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.bn.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ca.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.cs.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.da.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.de.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ee.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.el.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.es.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.fi.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.fr.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.he.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.hr.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.hu.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.hy.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.id.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.is.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.it.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ja.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ka.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ko.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.lt.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.lv.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ms.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.nb.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.nl.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.no.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.pl.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.pt-BR.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.pt.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ro.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.rs-latin.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.rs.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ru.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.sk.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.sl.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.sv.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.sw.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.th.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.tr.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.ua.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.uk.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.zh-CN.js" />
+    <Content Include="Scripts\datetimepicker\js\locales\amazeui.datetimepicker.zh-TW.js" />
+    <Content Include="Scripts\download\ad.png" />
+    <Content Include="Scripts\download\android.png" />
+    <Content Include="Scripts\download\ap.png" />
+    <Content Include="Scripts\download\appale.png" />
+    <Content Include="Scripts\download\click.png" />
+    <Content Include="Scripts\download\download.css" />
+    <Content Include="Scripts\download\live_weixin.png" />
+    <Content Include="Scripts\download\top.png" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\an_hui_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\ao_men_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\bei_jing_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\china_city.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\china_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\chong_qing_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\fu_jian_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\gan_su_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\guang_dong_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\guang_xi_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\gui_zhou_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\hai_nan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\hei_long_jiang_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\he_bei_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\he_nan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\hu_bei_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\hu_nan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\jiang_su_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\jiang_xi_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\ji_lin_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\liao_ning_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\nei_meng_gu_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\ning_xia_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\qing_hai_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\shang_hai_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\shan_dong_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\shan_xi_1_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\shan_xi_2_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\si_chuan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\tai_wan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\tian_jin_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\world_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\xiang_gang_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\xin_jiang_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\xi_zang_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\yun_nan_geo.json" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\geoJson\zhe_jiang_geo.json" />
+    <Content Include="Scripts\map.js" />
+    <Content Include="Scripts\Monitor\memu\images\dock\Thumbs.db" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\Thumbs.db" />
+    <Content Include="Scripts\plugin\Slider\dist\jquery.nstSlider.css" />
+    <Content Include="Scripts\plugin\Slider\dist\jquery.nstSlider.js" />
+    <Content Include="Scripts\plugin\Slider\dist\jquery.nstSlider.min.css" />
+    <Content Include="Scripts\plugin\Slider\dist\jquery.nstSlider.min.js" />
+    <Content Include="Scripts\plugin\Slider\libs\jquery-loader.js" />
+    <Content Include="Scripts\plugin\Slider\libs\jquery\jquery.js" />
+    <Content Include="Scripts\plugin\Slider\libs\qunit\qunit.css" />
+    <Content Include="Scripts\plugin\Slider\libs\qunit\qunit.js" />
+    <Content Include="Scripts\plugin\Slider\src\jquery.nstSlider.js" />
+    <Content Include="Scripts\Slider\src\.jshintrc" />
+    <Content Include="Scripts\Slider\src\jquery.nstSlider.less" />
+    <Content Include="AjaxService\DeviceMonitor.ashx" />
+    <Content Include="AjaxService\WeixinInterface.ashx" />
+    <Content Include="AjaxService\UnlockAction.ashx" />
+    <Content Include="Scripts\datetimepicker\docs\demo.md" />
+    <Content Include="Scripts\datetimepicker\less\amazeui.datetimepicker.less" />
+    <Content Include="Scripts\plugin\Slider\src\.jshintrc" />
+    <Content Include="Scripts\plugin\Slider\src\jquery.nstSlider.less" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="404.html" />
+    <Content Include="AjaxService\DeviceManager.asmx" />
+    <Content Include="AjaxService\DeviceMonitor.asmx" />
+    <Content Include="AjaxService\LoginAjax.asmx" />
+    <Content Include="AjaxService\MgooPublic.asmx" />
+    <Content Include="AjaxService\Statistics.asmx" />
+    <Content Include="DevicesManage\AlarmPreview - 复制.html" />
+    <Content Include="DevicesManage\AllDevices.aspx" />
+    <Content Include="DevicesManage\DevicesList.html" />
+    <Content Include="DevicesManage\DevicesList111.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\icons\1280.png" />
+    <Content Include="Images\icons\2.png" />
+    <Content Include="Images\icons\21.png" />
+    <Content Include="Images\icons\22.png" />
+    <Content Include="Images\icons\23.png" />
+    <Content Include="Images\icons\24.png" />
+    <Content Include="Images\icons\25.png" />
+    <Content Include="Images\icons\26.gif" />
+    <Content Include="Images\icons\26.png" />
+    <Content Include="Images\icons\back.png" />
+    <Content Include="Images\icons\blank.gif" />
+    <Content Include="Images\icons\cancel.png" />
+    <Content Include="Images\icons\carIcon\2.png" />
+    <Content Include="Images\icons\carIcon\21.png" />
+    <Content Include="Images\icons\carIcon\21_0.png" />
+    <Content Include="Images\icons\carIcon\21_135.png" />
+    <Content Include="Images\icons\carIcon\21_180.png" />
+    <Content Include="Images\icons\carIcon\21_225.png" />
+    <Content Include="Images\icons\carIcon\21_270.png" />
+    <Content Include="Images\icons\carIcon\21_315.png" />
+    <Content Include="Images\icons\carIcon\21_45.png" />
+    <Content Include="Images\icons\carIcon\21_90.png" />
+    <Content Include="Images\icons\carIcon\22.png" />
+    <Content Include="Images\icons\carIcon\22_0.png" />
+    <Content Include="Images\icons\carIcon\22_135.png" />
+    <Content Include="Images\icons\carIcon\22_180.png" />
+    <Content Include="Images\icons\carIcon\22_225.png" />
+    <Content Include="Images\icons\carIcon\22_270.png" />
+    <Content Include="Images\icons\carIcon\22_315.png" />
+    <Content Include="Images\icons\carIcon\22_45.png" />
+    <Content Include="Images\icons\carIcon\22_90.png" />
+    <Content Include="Images\icons\carIcon\23.png" />
+    <Content Include="Images\icons\carIcon\23_0.png" />
+    <Content Include="Images\icons\carIcon\23_135.png" />
+    <Content Include="Images\icons\carIcon\23_180.png" />
+    <Content Include="Images\icons\carIcon\23_225.png" />
+    <Content Include="Images\icons\carIcon\23_270.png" />
+    <Content Include="Images\icons\carIcon\23_315.png" />
+    <Content Include="Images\icons\carIcon\23_45.png" />
+    <Content Include="Images\icons\carIcon\23_90.png" />
+    <Content Include="Images\icons\carIcon\24.png" />
+    <Content Include="Images\icons\carIcon\24_0.png" />
+    <Content Include="Images\icons\carIcon\24_135.png" />
+    <Content Include="Images\icons\carIcon\24_180.png" />
+    <Content Include="Images\icons\carIcon\24_225.png" />
+    <Content Include="Images\icons\carIcon\24_270.png" />
+    <Content Include="Images\icons\carIcon\24_315.png" />
+    <Content Include="Images\icons\carIcon\24_45.png" />
+    <Content Include="Images\icons\carIcon\24_90.png" />
+    <Content Include="Images\icons\carIcon\25.png" />
+    <Content Include="Images\icons\carIcon\25_0.png" />
+    <Content Include="Images\icons\carIcon\25_135.png" />
+    <Content Include="Images\icons\carIcon\25_180.png" />
+    <Content Include="Images\icons\carIcon\25_225.png" />
+    <Content Include="Images\icons\carIcon\25_270.png" />
+    <Content Include="Images\icons\carIcon\25_315.png" />
+    <Content Include="Images\icons\carIcon\25_45.png" />
+    <Content Include="Images\icons\carIcon\25_90.png" />
+    <Content Include="Images\icons\carIcon\26.gif" />
+    <Content Include="Images\icons\carIcon\26_0.png" />
+    <Content Include="Images\icons\carIcon\26_135.png" />
+    <Content Include="Images\icons\carIcon\26_180.png" />
+    <Content Include="Images\icons\carIcon\26_225.png" />
+    <Content Include="Images\icons\carIcon\26_270.png" />
+    <Content Include="Images\icons\carIcon\26_315.png" />
+    <Content Include="Images\icons\carIcon\26_45.png" />
+    <Content Include="Images\icons\carIcon\26_90.png" />
+    <Content Include="Images\icons\carIcon\27.gif" />
+    <Content Include="Images\icons\carIcon\27.png" />
+    <Content Include="Images\icons\carIcon\27_0.png" />
+    <Content Include="Images\icons\carIcon\27_135.png" />
+    <Content Include="Images\icons\carIcon\27_180.png" />
+    <Content Include="Images\icons\carIcon\27_225.png" />
+    <Content Include="Images\icons\carIcon\27_270.png" />
+    <Content Include="Images\icons\carIcon\27_315.png" />
+    <Content Include="Images\icons\carIcon\27_45.png" />
+    <Content Include="Images\icons\carIcon\27_90.png" />
+    <Content Include="Images\icons\carIcon\30.png" />
+    <Content Include="Images\icons\carIcon\30A.png" />
+    <Content Include="Images\icons\carIcon\31.png" />
+    <Content Include="Images\icons\carIcon\31A.png" />
+    <Content Include="Images\icons\carIcon\offline_22_0.png" />
+    <Content Include="Images\icons\carIcon\offline_22_135.png" />
+    <Content Include="Images\icons\carIcon\offline_22_180.png" />
+    <Content Include="Images\icons\carIcon\offline_22_225.png" />
+    <Content Include="Images\icons\carIcon\offline_22_270.png" />
+    <Content Include="Images\icons\carIcon\offline_22_315.png" />
+    <Content Include="Images\icons\carIcon\offline_22_45.png" />
+    <Content Include="Images\icons\carIcon\offline_22_90.png" />
+    <Content Include="Images\icons\carIcon\offline_23_0.png" />
+    <Content Include="Images\icons\carIcon\offline_23_135.png" />
+    <Content Include="Images\icons\carIcon\offline_23_180.png" />
+    <Content Include="Images\icons\carIcon\offline_23_225.png" />
+    <Content Include="Images\icons\carIcon\offline_23_270.png" />
+    <Content Include="Images\icons\carIcon\offline_23_315.png" />
+    <Content Include="Images\icons\carIcon\offline_23_45.png" />
+    <Content Include="Images\icons\carIcon\offline_23_90.png" />
+    <Content Include="Images\icons\carIcon\offline_24_0.png" />
+    <Content Include="Images\icons\carIcon\offline_24_135.png" />
+    <Content Include="Images\icons\carIcon\offline_24_180.png" />
+    <Content Include="Images\icons\carIcon\offline_24_225.png" />
+    <Content Include="Images\icons\carIcon\offline_24_270.png" />
+    <Content Include="Images\icons\carIcon\offline_24_315.png" />
+    <Content Include="Images\icons\carIcon\offline_24_45.png" />
+    <Content Include="Images\icons\carIcon\offline_24_90.png" />
+    <Content Include="Images\icons\carIcon\offline_25_0.png" />
+    <Content Include="Images\icons\carIcon\offline_25_135.png" />
+    <Content Include="Images\icons\carIcon\offline_25_180.png" />
+    <Content Include="Images\icons\carIcon\offline_25_225.png" />
+    <Content Include="Images\icons\carIcon\offline_25_270.png" />
+    <Content Include="Images\icons\carIcon\offline_25_315.png" />
+    <Content Include="Images\icons\carIcon\offline_25_45.png" />
+    <Content Include="Images\icons\carIcon\offline_25_90.png" />
+    <Content Include="Images\icons\carIcon\offline_26_0.png" />
+    <Content Include="Images\icons\carIcon\offline_26_135.png" />
+    <Content Include="Images\icons\carIcon\offline_26_180.png" />
+    <Content Include="Images\icons\carIcon\offline_26_225.png" />
+    <Content Include="Images\icons\carIcon\offline_26_270.png" />
+    <Content Include="Images\icons\carIcon\offline_26_315.png" />
+    <Content Include="Images\icons\carIcon\offline_26_45.png" />
+    <Content Include="Images\icons\carIcon\offline_26_90.png" />
+    <Content Include="Images\icons\carIcon\offline_27_0.png" />
+    <Content Include="Images\icons\carIcon\offline_27_135.png" />
+    <Content Include="Images\icons\carIcon\offline_27_180.png" />
+    <Content Include="Images\icons\carIcon\offline_27_225.png" />
+    <Content Include="Images\icons\carIcon\offline_27_270.png" />
+    <Content Include="Images\icons\carIcon\offline_27_315.png" />
+    <Content Include="Images\icons\carIcon\offline_27_45.png" />
+    <Content Include="Images\icons\carIcon\offline_27_90.png" />
+    <Content Include="Images\icons\carIcon\offline_30.png" />
+    <Content Include="Images\icons\carIcon\offline_31.png" />
+    <Content Include="Images\icons\cut.png" />
+    <Content Include="Images\icons\edit_add.png" />
+    <Content Include="Images\icons\edit_remove.png" />
+    <Content Include="Images\icons\end.png" />
+    <Content Include="Images\icons\filesave.png" />
+    <Content Include="Images\icons\gray_south_21.gif" />
+    <Content Include="Images\icons\green.gif" />
+    <Content Include="Images\icons\greencar.png" />
+    <Content Include="Images\icons\greencar1.png" />
+    <Content Include="Images\icons\green_north_21.gif" />
+    <Content Include="Images\icons\group.png" />
+    <Content Include="Images\icons\help.png" />
+    <Content Include="Images\icons\iw_max.gif" />
+    <Content Include="Images\icons\iw_min.gif" />
+    <Content Include="Images\icons\label.png" />
+    <Content Include="Images\icons\label1.png" />
+    <Content Include="Images\icons\Language\ar.jpg" />
+    <Content Include="Images\icons\Language\de.jpg" />
+    <Content Include="Images\icons\Language\en-us.jpg" />
+    <Content Include="Images\icons\Language\es.jpg" />
+    <Content Include="Images\icons\Language\fr.jpg" />
+    <Content Include="Images\icons\Language\hk.jpg" />
+    <Content Include="Images\icons\Language\hongkong.jpg" />
+    <Content Include="Images\icons\Language\it-IT.jpg" />
+    <Content Include="Images\icons\Language\pl.jpg" />
+    <Content Include="Images\icons\Language\pt.jpg" />
+    <Content Include="Images\icons\Language\pt1.jpg" />
+    <Content Include="Images\icons\Language\ru.jpg" />
+    <Content Include="Images\icons\Language\tr.jpg" />
+    <Content Include="Images\icons\Language\vi.jpg" />
+    <Content Include="Images\icons\Language\zh-cn.jpg" />
+    <Content Include="Images\icons\Language\zh.jpg" />
+    <Content Include="Images\icons\lng\ar.jpg" />
+    <Content Include="Images\icons\lng\de.jpg" />
+    <Content Include="Images\icons\lng\es.jpg" />
+    <Content Include="Images\icons\lng\fr.jpg" />
+    <Content Include="Images\icons\lng\hongkong.jpg" />
+    <Content Include="Images\icons\lng\pl.jpg" />
+    <Content Include="Images\icons\lng\ru.jpg" />
+    <Content Include="Images\icons\lng\tr.jpg" />
+    <Content Include="Images\icons\lng\vi.jpg" />
+    <Content Include="Images\icons\loading.gif" />
+    <Content Include="Images\icons\lushu_car.png" />
+    <Content Include="Images\icons\msg.mp3" />
+    <Content Include="Images\icons\msg11.mp3" />
+    <Content Include="Images\icons\msg9.mp3" />
+    <Content Include="Images\icons\newlogo.png" />
+    <Content Include="Images\icons\no.png" />
+    <Content Include="Images\icons\ok.png" />
+    <Content Include="Images\icons\p1.png" />
+    <Content Include="Images\icons\pa1.png" />
+    <Content Include="Images\icons\PauseDisabled.png" />
+    <Content Include="Images\icons\pencil.png" />
+    <Content Include="Images\icons\people0.png" />
+    <Content Include="Images\icons\people1.png" />
+    <Content Include="Images\icons\people2.png" />
+    <Content Include="Images\icons\people3.png" />
+    <Content Include="Images\icons\play.png" />
+    <Content Include="Images\icons\Play1Disabled.png" />
+    <Content Include="Images\icons\preload.gif" />
+    <Content Include="Images\icons\print.png" />
+    <Content Include="Images\icons\redo.png" />
+    <Content Include="Images\icons\reload.png" />
+    <Content Include="Images\icons\running.png" />
+    <Content Include="Images\icons\s1.png" />
+    <Content Include="Images\icons\search.png" />
+    <Content Include="Images\icons\service.jpg" />
+    <Content Include="Images\icons\start.png" />
+    <Content Include="Images\icons\startstr.png" />
+    <Content Include="Images\icons\stop.png" />
+    <Content Include="Images\icons\stoptr.png" />
+    <Content Include="Images\icons\streetview-ani.gif" />
+    <Content Include="Images\icons\sum.png" />
+    <Content Include="Images\icons\tip.png" />
+    <Content Include="Images\icons\undo.png" />
+    <Content Include="Images\icons\untitled.png" />
+    <Content Include="Images\icons\User.png" />
+    <Content Include="Images\icons\u_offline.gif" />
+    <Content Include="Images\icons\u_online.gif" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\S-150817112008.png" />
+    <Content Include="Index.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="login_timeout.html" />
+    <Content Include="Monitor\bdmap.html" />
+    <Content Include="Monitor\changepwd.html" />
+    <Content Include="Monitor\deviceinfo.html" />
+    <Content Include="Monitor\dialog-normal.html" />
+    <Content Include="Monitor\History.aspx" />
+    <Content Include="Monitor\sendcommand.html" />
+    <Content Include="Monitor\Tracking.aspx" />
+    <Content Include="Monitor\userinfo.html" />
+    <Content Include="Pay\wxPay.aspx" />
+    <Content Include="Reports\AlarmMessage.aspx" />
+    <Content Include="Reports\ExceptionCount.aspx" />
+    <Content Include="Reports\ExceptionDetail.aspx" />
+    <Content Include="Reports\ExceptionView.aspx" />
+    <Content Include="Reports\GeoFencesView.aspx" />
+    <Content Include="Reports\Mileage.aspx" />
+    <Content Include="Reports\ParkingEcharts.aspx" />
+    <Content Include="Reports\RemainView.aspx" />
+    <Content Include="Reports\StopDetail.aspx" />
+    <Content Include="scanCode.aspx" />
+    <Content Include="Scripts\Ajax.js" />
+    <Content Include="Scripts\ajaxfileupload.js" />
+    <Content Include="Scripts\B-JUI\ajax\area_all.html" />
+    <Content Include="Scripts\B-JUI\ajax\area_bj.html" />
+    <Content Include="Scripts\B-JUI\ajax\area_sh.html" />
+    <Content Include="Scripts\B-JUI\ajax\city_all.html" />
+    <Content Include="Scripts\B-JUI\ajax\city_bj.html" />
+    <Content Include="Scripts\B-JUI\ajax\city_sh.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_area_all.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_area_bj.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_area_sh.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_city_all.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_city_bj.html" />
+    <Content Include="Scripts\B-JUI\ajax\json_city_sh.html" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-ajax.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-ajaxtab.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-alertmsg.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-all.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-basedrag.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-contextmenu.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-core.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-datagrid.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-datepicker.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-dialog.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-extends.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-frag.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-initui.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-lookup.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-navtab.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-pagination.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-plugins.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-regional.zh-CN.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-slidebar.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-spinner.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-tabledit.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-tablefixed.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-tags.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-taskbar.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-theme.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-upload.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\bjui-util.date.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\js\jquery.cookie.js" />
+    <Content Include="Scripts\B-JUI\BJUI\other\html5shiv.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\other\jquery.iframe-transport.js" />
+    <Content Include="Scripts\B-JUI\BJUI\other\respond.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrap.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrap.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\bootstrap-select.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\bootstrap-select.css.map" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\bootstrap-select.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\bootstrap-select.js.map" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\bootstrap-select.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\defaults-zh_CN.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\bootstrapSelect\defaults-zh_CN.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\css\bootstrap-colorpicker.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\colorpicker\js\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\download\jquery.fileDownload.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\dragsort\jquery.dragsort-0.5.1.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\dragsort\jquery.dragsort-0.5.1.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\bar.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\chord.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\eventRiver.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\force.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\funnel.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\gauge.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\k.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\line.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\map.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\pie.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\radar.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\chart\scatter.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\echarts.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\blue.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\dark.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\default.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\gray.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\green.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\helianthus.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\infographic.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\macarons.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\red.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\echarts\theme\shine.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\adapters\standalone-framework.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\highcharts-3d.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\highcharts-all.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\highcharts-more.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\highcharts.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\canvas-tools.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\data.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\drilldown.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\exporting.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\funnel.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\heatmap.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\no-data-to-display.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\modules\solid-gauge.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\dark-blue.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\dark-green.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\dark-unica.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\gray.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\grid-light.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\grid.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\sand-signika.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\highcharts\themes\skies.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\icheck\icheck.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\icheck\icheck.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\attached\test.txt" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\editor-content.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\kindeditor-all-min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\kindeditor-all.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\kindeditor-all.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\kindeditor-min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\kindeditor.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\lang\ar.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\lang\en.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\lang\ko.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\lang\zh_CN.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\lang\zh_TW.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\license.txt" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\php\demo.php" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\php\file_manager_json.php" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\php\JSON.php" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\php\upload_json.php" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\anchor\anchor.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\autoheight\autoheight.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\baidumap\baidumap.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\baidumap\index.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\baidumap\map.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\clearhtml\clearhtml.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\code\code.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\code\prettify.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\code\prettify.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\emoticons.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\0.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\1.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\10.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\100.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\101.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\102.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\103.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\104.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\105.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\106.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\107.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\108.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\109.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\11.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\110.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\111.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\112.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\113.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\114.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\115.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\116.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\117.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\118.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\119.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\12.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\120.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\121.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\122.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\123.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\124.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\125.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\126.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\127.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\128.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\129.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\13.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\130.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\131.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\132.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\133.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\134.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\14.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\15.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\16.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\17.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\18.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\19.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\2.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\20.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\21.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\22.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\23.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\24.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\25.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\26.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\27.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\28.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\29.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\3.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\30.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\31.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\32.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\33.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\34.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\35.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\36.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\37.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\38.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\39.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\4.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\40.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\41.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\42.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\43.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\44.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\45.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\46.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\47.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\48.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\49.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\5.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\50.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\51.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\52.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\53.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\54.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\55.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\56.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\57.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\58.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\59.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\6.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\60.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\61.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\62.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\63.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\64.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\65.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\66.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\67.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\68.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\69.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\7.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\70.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\71.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\72.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\73.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\74.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\75.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\76.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\77.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\78.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\79.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\8.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\80.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\81.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\82.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\83.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\84.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\85.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\86.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\87.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\88.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\89.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\9.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\90.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\91.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\92.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\93.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\94.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\95.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\96.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\97.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\98.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\99.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\emoticons\images\static.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\filemanager.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\images\file-16.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\images\file-64.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\filemanager\images\go-up.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\flash\flash.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\image\image.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\image\images\align_left.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\image\images\align_right.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\image\images\align_top.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\image\images\refresh.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\insertfile\insertfile.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\lineheight\lineheight.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\link\link.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\map\map.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\map\map.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\media\media.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\multiimage\images\image.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\multiimage\images\select-files-zh_CN.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\multiimage\multiimage.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\pagebreak\pagebreak.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\plainpaste\plainpaste.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\preview\preview.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\quickformat\quickformat.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\table\table.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\template\html\1.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\template\html\2.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\template\html\3.html" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\template\template.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\plugins\wordpaste\wordpaste.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\anchor.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\blank.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\flash.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\loading.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\media.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\common\rm.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\default\background.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\default\default.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\default\default.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\qq\editor.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\qq\qq.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\kindeditor_4.1.10\themes\simple\simple.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\images\loading.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\images\validator_default.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\images\validator_simple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\jquery.validator.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\jquery.validator.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\jquery.validator.themes.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\niceValidator\local\en.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\other\jquery.autosize.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\other\respond.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\2.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\3.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\4.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\5.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\6.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\7.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\8.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\diy\9.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\loading.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\styles\zTreeStyle\zTreeStyle.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\swfupload\swfupload.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\swfupload\swfupload.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\css\uploadify.css" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\img\add.jpg" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\img\cancel.jpg" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\img\delete.jpg" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\img\upload.jpg" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\img\uploadify-cancel.png" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\scripts\jquery.uploadify.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\uploadify\scripts\uploadify.swf" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.all-3.5.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.core-3.5.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.core-3.5.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.excheck-3.5.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.excheck-3.5.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.exedit-3.5.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.exedit-3.5.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.exhide-3.5.js" />
+    <Content Include="Scripts\B-JUI\BJUI\plugins\ztree\jquery.ztree.exhide-3.5.min.js" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\blue\core.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\blue\purple%402x.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\blue\purple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\blue\topbg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\blue\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\bootstrap.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\bootstrap.min.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\css\font-awesome.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\css\font-awesome.min.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\FA\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\ie7.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\changed-flag-icon.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\1_close.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\1_open.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\2.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\3.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\4.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\5.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\6.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\7.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\8.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\diy\9.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\error-bg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\line_conn.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\line_conn.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\loading.gif" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\img\logo.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\css\style.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\default\core.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\default\purple%402x.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\default\purple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\default\topbg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\default\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\green\core.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\green\purple%402x.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\green\purple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\green\topbg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\green\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\orange\core.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\orange\purple%402x.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\orange\purple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\orange\topbg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\orange\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\purple\core.css" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\purple\purple%402x.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\purple\purple.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\purple\topbg.png" />
+    <Content Include="Scripts\B-JUI\BJUI\themes\purple\zTreeStandard.png" />
+    <Content Include="Scripts\B-JUI\datagrid\datagrid-array.js" />
+    <Content Include="Scripts\B-JUI\datagrid\datagrid-convertable-json.js" />
+    <Content Include="Scripts\B-JUI\datagrid\datagrid-demo-json.js" />
+    <Content Include="Scripts\B-JUI\datagrid\datagrid-json.js" />
+    <Content Include="Scripts\B-JUI\datagrid\datagrid-xml.xml" />
+    <Content Include="Scripts\B-JUI\datagrid\demo-items-state.js" />
+    <Content Include="Scripts\B-JUI\doc\ajax\action.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\callback.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\form.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\load.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\myaction.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\myform.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\mylayout.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\myload.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\mysearch.html" />
+    <Content Include="Scripts\B-JUI\doc\ajax\search.html" />
+    <Content Include="Scripts\B-JUI\doc\alertmsg\alertmsg.html" />
+    <Content Include="Scripts\B-JUI\doc\base\api.html" />
+    <Content Include="Scripts\B-JUI\doc\base\data.html" />
+    <Content Include="Scripts\B-JUI\doc\base\dialog.html" />
+    <Content Include="Scripts\B-JUI\doc\base\event.html" />
+    <Content Include="Scripts\B-JUI\doc\base\filelist.html" />
+    <Content Include="Scripts\B-JUI\doc\base\hnav.html" />
+    <Content Include="Scripts\B-JUI\doc\base\idname.html" />
+    <Content Include="Scripts\B-JUI\doc\base\init.html" />
+    <Content Include="Scripts\B-JUI\doc\base\mydialog.html" />
+    <Content Include="Scripts\B-JUI\doc\base\myurl.html" />
+    <Content Include="Scripts\B-JUI\doc\base\navtab.html" />
+    <Content Include="Scripts\B-JUI\doc\base\structure.html" />
+    <Content Include="Scripts\B-JUI\doc\base\url.html" />
+    <Content Include="Scripts\B-JUI\doc\chart\echarts.html" />
+    <Content Include="Scripts\B-JUI\doc\chart\highcharts.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\datagrid-columns.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\datagrid-demo.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\datagrid-op.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo1.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo2.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo3.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo4.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo5-json.js" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo5.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo6-array.js" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo6.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo7-xml.xml" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo7.html" />
+    <Content Include="Scripts\B-JUI\doc\datagrid\demo8.html" />
+    <Content Include="Scripts\B-JUI\doc\dialog\dialog-op.html" />
+    <Content Include="Scripts\B-JUI\doc\dialog\dialog.html" />
+    <Content Include="Scripts\B-JUI\doc\dialog\mydialog.html" />
+    <Content Include="Scripts\B-JUI\doc\doc.css" />
+    <Content Include="Scripts\B-JUI\doc\form\checkbox.html" />
+    <Content Include="Scripts\B-JUI\doc\form\datepicker.html" />
+    <Content Include="Scripts\B-JUI\doc\form\kindeditor.html" />
+    <Content Include="Scripts\B-JUI\doc\form\lookup.html" />
+    <Content Include="Scripts\B-JUI\doc\form\myeditor.html" />
+    <Content Include="Scripts\B-JUI\doc\form\mylookup.html" />
+    <Content Include="Scripts\B-JUI\doc\form\myvalidate.html" />
+    <Content Include="Scripts\B-JUI\doc\form\select.html" />
+    <Content Include="Scripts\B-JUI\doc\form\spinner.html" />
+    <Content Include="Scripts\B-JUI\doc\form\tags.html" />
+    <Content Include="Scripts\B-JUI\doc\form\upload.html" />
+    <Content Include="Scripts\B-JUI\doc\form\validate.html" />
+    <Content Include="Scripts\B-JUI\doc\navtab\mytab.html" />
+    <Content Include="Scripts\B-JUI\doc\navtab\navtab-op.html" />
+    <Content Include="Scripts\B-JUI\doc\navtab\navtab.html" />
+    <Content Include="Scripts\B-JUI\doc\other\contextmenu.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\ajaxdownload.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\checkbox.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\kindeditor.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\myeditor.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\myvalidate.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\select.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\validate.html" />
+    <Content Include="Scripts\B-JUI\doc\plugin\ztree.html" />
+    <Content Include="Scripts\B-JUI\doc\table\edit.html" />
+    <Content Include="Scripts\B-JUI\doc\table\fixed.html" />
+    <Content Include="Scripts\B-JUI\doc\table\myedit.html" />
+    <Content Include="Scripts\B-JUI\doc\table\myfixed.html" />
+    <Content Include="Scripts\B-JUI\doc\table\myorder.html" />
+    <Content Include="Scripts\B-JUI\doc\table\mypaging.html" />
+    <Content Include="Scripts\B-JUI\doc\table\order.html" />
+    <Content Include="Scripts\B-JUI\doc\table\paging.html" />
+    <Content Include="Scripts\B-JUI\doc\table\selected.html" />
+    <Content Include="Scripts\B-JUI\doc\table\style.html" />
+    <Content Include="Scripts\B-JUI\doc\table\test.html" />
+    <Content Include="Scripts\B-JUI\doc\theme\color.html" />
+    <Content Include="Scripts\B-JUI\font\typicons.css" />
+    <Content Include="Scripts\B-JUI\font\typicons.min.css" />
+    <Content Include="Scripts\B-JUI\font\typicons.svg" />
+    <Content Include="Scripts\B-JUI\images\001.jpg" />
+    <Content Include="Scripts\B-JUI\images\002.jpg" />
+    <Content Include="Scripts\B-JUI\images\003.jpg" />
+    <Content Include="Scripts\B-JUI\images\004.jpg" />
+    <Content Include="Scripts\B-JUI\images\005.jpg" />
+    <Content Include="Scripts\B-JUI\images\bjui-b.png" />
+    <Content Include="Scripts\B-JUI\images\captcha.jpeg" />
+    <Content Include="Scripts\B-JUI\images\datagrid\AU.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\BR.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\CN.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\DE.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\FR.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\HK.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\JP.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\UK.gif" />
+    <Content Include="Scripts\B-JUI\images\datagrid\US.gif" />
+    <Content Include="Scripts\B-JUI\images\ewm.png" />
+    <Content Include="Scripts\B-JUI\images\group.png" />
+    <Content Include="Scripts\B-JUI\images\loginbg_01.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_02.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_03.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_04.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_05.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_06.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_07.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_08.jpg" />
+    <Content Include="Scripts\B-JUI\images\loginbg_09.jpg" />
+    <Content Include="Scripts\B-JUI\images\logo.jpg" />
+    <Content Include="Scripts\B-JUI\images\logo.png" />
+    <Content Include="Scripts\B-JUI\images\logo1.png" />
+    <Content Include="Scripts\B-JUI\images\logo_bootstrap.png" />
+    <Content Include="Scripts\B-JUI\js\sha256.js" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\scripts\brush.js" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\scripts\clipboard.swf" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\help.png" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\magnifier.png" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\page_white_code.png" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\page_white_copy.png" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\printer.png" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shCore.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeDefault.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeDjango.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeEclipse.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeEmacs.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeFadeToGrey.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeMidnight.css" />
+    <Content Include="Scripts\B-JUI\js\syntaxhighlighter-2.1.382\styles\shThemeRDark.css" />
+    <Content Include="Scripts\cookie.js" />
+    <Content Include="Scripts\daterangepicker\css\daterangepicker.css" />
+    <Content Include="Scripts\daterangepicker\css\default.css" />
+    <Content Include="Scripts\daterangepicker\css\normalize.css" />
+    <Content Include="Scripts\daterangepicker\fonts\icomoon.svg" />
+    <Content Include="Scripts\daterangepicker\index.html" />
+    <Content Include="Scripts\daterangepicker\js\demo.js" />
+    <Content Include="Scripts\daterangepicker\js\jquery-1.11.2.min.js" />
+    <Content Include="Scripts\daterangepicker\js\jquery.daterangepicker.js" />
+    <Content Include="Scripts\daterangepicker\js\moment.min.js" />
+    <Content Include="Scripts\DevicesManage\DevicesList.js" />
+    <Content Include="Scripts\DevicesManage\DevicesTotal.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\bar.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\chord.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\eventRiver.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\force.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\funnel.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\gauge.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\heatmap.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\k.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\line.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\map.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\pie.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\radar.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\scatter.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\tree.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\treemap.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\venn.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\chart\wordCloud.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\echarts-all.js" />
+    <Content Include="Scripts\echarts-2.2.7\dist\echarts.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\bar.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\base.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\chord.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\eventRiver.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\force.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\funnel.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\gauge.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\heatmap.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\island.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\k.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\line.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\map.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\pie.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\radar.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\scatter.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\tree.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\treemap.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\venn.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\chart\wordCloud.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\axis.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\base.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\categoryAxis.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\dataRange.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\dataView.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\dataZoom.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\grid.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\legend.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\polar.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\roamController.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\timeline.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\title.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\toolbox.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\tooltip.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\component\valueAxis.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\config.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\data\Graph.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\data\KDTree.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\data\quickSelect.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\data\Tree.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\echarts.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layer\heatmap.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\Chord.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\EdgeBundling.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\eventRiver.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\Force.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\forceLayoutWorker.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\Tree.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\TreeMap.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\WordCloud.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\layout\WordCloudRectZero.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\theme\default.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\theme\infographic.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\theme\macarons.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\accMath.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\coordinates.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\date.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\ecAnimation.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\ecData.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\ecEffect.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\ecQuery.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\kwargs.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoCoord.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\an_hui_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\ao_men_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\bei_jing_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\china_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\chong_qing_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\fu_jian_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\gan_su_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\guang_dong_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\guang_xi_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\gui_zhou_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\hai_nan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\hei_long_jiang_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\he_bei_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\he_nan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\hu_bei_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\hu_nan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\jiang_su_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\jiang_xi_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\ji_lin_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\liao_ning_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\nei_meng_gu_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\ning_xia_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\qing_hai_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\shang_hai_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\shan_dong_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\shan_xi_1_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\shan_xi_2_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\si_chuan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\tai_wan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\tian_jin_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\world_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\xiang_gang_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\xin_jiang_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\xi_zang_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\yun_nan_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\geoJson\zhe_jiang_geo.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\params.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\rawData\encode.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\mapData\textFixed.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\ndarray.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\number.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\projection\albers.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\projection\mercator.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\projection\normal.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\projection\svg.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Candle.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Chain.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Cross.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\GaugePointer.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\HalfSmoothPolygon.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\HandlePolygon.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Icon.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\MarkLine.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\normalIsCover.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Ribbon.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\shape\Symbol.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\smartLogSteps.js" />
+    <Content Include="Scripts\echarts-2.2.7\src\util\smartSteps.js" />
+    <Content Include="Scripts\icons\1280.png" />
+    <Content Include="Scripts\icons\2.png" />
+    <Content Include="Scripts\icons\21.png" />
+    <Content Include="Scripts\icons\22.png" />
+    <Content Include="Scripts\icons\23.png" />
+    <Content Include="Scripts\icons\24.png" />
+    <Content Include="Scripts\icons\25.png" />
+    <Content Include="Scripts\icons\26.gif" />
+    <Content Include="Scripts\icons\26.png" />
+    <Content Include="Scripts\icons\back.png" />
+    <Content Include="Scripts\icons\blank.gif" />
+    <Content Include="Scripts\icons\cancel.png" />
+    <Content Include="Scripts\icons\carIcon\2.png" />
+    <Content Include="Scripts\icons\carIcon\21.png" />
+    <Content Include="Scripts\icons\carIcon\21_0.png" />
+    <Content Include="Scripts\icons\carIcon\21_135.png" />
+    <Content Include="Scripts\icons\carIcon\21_180.png" />
+    <Content Include="Scripts\icons\carIcon\21_225.png" />
+    <Content Include="Scripts\icons\carIcon\21_270.png" />
+    <Content Include="Scripts\icons\carIcon\21_315.png" />
+    <Content Include="Scripts\icons\carIcon\21_45.png" />
+    <Content Include="Scripts\icons\carIcon\21_90.png" />
+    <Content Include="Scripts\icons\carIcon\22.png" />
+    <Content Include="Scripts\icons\carIcon\22_0.png" />
+    <Content Include="Scripts\icons\carIcon\22_135.png" />
+    <Content Include="Scripts\icons\carIcon\22_180.png" />
+    <Content Include="Scripts\icons\carIcon\22_225.png" />
+    <Content Include="Scripts\icons\carIcon\22_270.png" />
+    <Content Include="Scripts\icons\carIcon\22_315.png" />
+    <Content Include="Scripts\icons\carIcon\22_45.png" />
+    <Content Include="Scripts\icons\carIcon\22_90.png" />
+    <Content Include="Scripts\icons\carIcon\23.png" />
+    <Content Include="Scripts\icons\carIcon\23_0.png" />
+    <Content Include="Scripts\icons\carIcon\23_135.png" />
+    <Content Include="Scripts\icons\carIcon\23_180.png" />
+    <Content Include="Scripts\icons\carIcon\23_225.png" />
+    <Content Include="Scripts\icons\carIcon\23_270.png" />
+    <Content Include="Scripts\icons\carIcon\23_315.png" />
+    <Content Include="Scripts\icons\carIcon\23_45.png" />
+    <Content Include="Scripts\icons\carIcon\23_90.png" />
+    <Content Include="Scripts\icons\carIcon\24.png" />
+    <Content Include="Scripts\icons\carIcon\24_0.png" />
+    <Content Include="Scripts\icons\carIcon\24_135.png" />
+    <Content Include="Scripts\icons\carIcon\24_180.png" />
+    <Content Include="Scripts\icons\carIcon\24_225.png" />
+    <Content Include="Scripts\icons\carIcon\24_270.png" />
+    <Content Include="Scripts\icons\carIcon\24_315.png" />
+    <Content Include="Scripts\icons\carIcon\24_45.png" />
+    <Content Include="Scripts\icons\carIcon\24_90.png" />
+    <Content Include="Scripts\icons\carIcon\25.png" />
+    <Content Include="Scripts\icons\carIcon\25_0.png" />
+    <Content Include="Scripts\icons\carIcon\25_135.png" />
+    <Content Include="Scripts\icons\carIcon\25_180.png" />
+    <Content Include="Scripts\icons\carIcon\25_225.png" />
+    <Content Include="Scripts\icons\carIcon\25_270.png" />
+    <Content Include="Scripts\icons\carIcon\25_315.png" />
+    <Content Include="Scripts\icons\carIcon\25_45.png" />
+    <Content Include="Scripts\icons\carIcon\25_90.png" />
+    <Content Include="Scripts\icons\carIcon\26.gif" />
+    <Content Include="Scripts\icons\carIcon\26_0.png" />
+    <Content Include="Scripts\icons\carIcon\26_135.png" />
+    <Content Include="Scripts\icons\carIcon\26_180.png" />
+    <Content Include="Scripts\icons\carIcon\26_225.png" />
+    <Content Include="Scripts\icons\carIcon\26_270.png" />
+    <Content Include="Scripts\icons\carIcon\26_315.png" />
+    <Content Include="Scripts\icons\carIcon\26_45.png" />
+    <Content Include="Scripts\icons\carIcon\26_90.png" />
+    <Content Include="Scripts\icons\carIcon\27.gif" />
+    <Content Include="Scripts\icons\carIcon\27.png" />
+    <Content Include="Scripts\icons\carIcon\27_0.png" />
+    <Content Include="Scripts\icons\carIcon\27_135.png" />
+    <Content Include="Scripts\icons\carIcon\27_180.png" />
+    <Content Include="Scripts\icons\carIcon\27_225.png" />
+    <Content Include="Scripts\icons\carIcon\27_270.png" />
+    <Content Include="Scripts\icons\carIcon\27_315.png" />
+    <Content Include="Scripts\icons\carIcon\27_45.png" />
+    <Content Include="Scripts\icons\carIcon\27_90.png" />
+    <Content Include="Scripts\icons\carIcon\30.png" />
+    <Content Include="Scripts\icons\carIcon\30A.png" />
+    <Content Include="Scripts\icons\carIcon\31.png" />
+    <Content Include="Scripts\icons\carIcon\31A.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_22_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_23_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_24_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_25_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_26_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_0.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_135.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_180.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_225.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_270.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_315.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_45.png" />
+    <Content Include="Scripts\icons\carIcon\offline_27_90.png" />
+    <Content Include="Scripts\icons\carIcon\offline_30.png" />
+    <Content Include="Scripts\icons\carIcon\offline_31.png" />
+    <Content Include="Scripts\icons\cut.png" />
+    <Content Include="Scripts\icons\edit_add.png" />
+    <Content Include="Scripts\icons\edit_remove.png" />
+    <Content Include="Scripts\icons\end.png" />
+    <Content Include="Scripts\icons\filesave.png" />
+    <Content Include="Scripts\icons\gray_south_21.gif" />
+    <Content Include="Scripts\icons\green.gif" />
+    <Content Include="Scripts\icons\greencar.png" />
+    <Content Include="Scripts\icons\greencar1.png" />
+    <Content Include="Scripts\icons\green_north_21.gif" />
+    <Content Include="Scripts\icons\group.png" />
+    <Content Include="Scripts\icons\help.png" />
+    <Content Include="Scripts\icons\image\for.png" />
+    <Content Include="Scripts\icons\image\gps_1.png" />
+    <Content Include="Scripts\icons\image\gps_2.png" />
+    <Content Include="Scripts\icons\image\no.png" />
+    <Content Include="Scripts\icons\image\one.png" />
+    <Content Include="Scripts\icons\image\three.png" />
+    <Content Include="Scripts\icons\image\two.png" />
+    <Content Include="Scripts\icons\iw_max.gif" />
+    <Content Include="Scripts\icons\iw_min.gif" />
+    <Content Include="Scripts\icons\label.png" />
+    <Content Include="Scripts\icons\label1.png" />
+    <Content Include="Scripts\icons\label_bg.png" />
+    <Content Include="Scripts\icons\label_bg_d.png" />
+    <Content Include="Scripts\icons\Language\ar.jpg" />
+    <Content Include="Scripts\icons\Language\de.jpg" />
+    <Content Include="Scripts\icons\Language\en-us.jpg" />
+    <Content Include="Scripts\icons\Language\es.jpg" />
+    <Content Include="Scripts\icons\Language\fr.jpg" />
+    <Content Include="Scripts\icons\Language\hk.jpg" />
+    <Content Include="Scripts\icons\Language\hongkong.jpg" />
+    <Content Include="Scripts\icons\Language\it-IT.jpg" />
+    <Content Include="Scripts\icons\Language\pl.jpg" />
+    <Content Include="Scripts\icons\Language\pt.jpg" />
+    <Content Include="Scripts\icons\Language\pt1.jpg" />
+    <Content Include="Scripts\icons\Language\ru.jpg" />
+    <Content Include="Scripts\icons\Language\tr.jpg" />
+    <Content Include="Scripts\icons\Language\vi.jpg" />
+    <Content Include="Scripts\icons\Language\zh-cn.jpg" />
+    <Content Include="Scripts\icons\Language\zh.jpg" />
+    <Content Include="Scripts\icons\lng\ar.jpg" />
+    <Content Include="Scripts\icons\lng\de.jpg" />
+    <Content Include="Scripts\icons\lng\es.jpg" />
+    <Content Include="Scripts\icons\lng\fr.jpg" />
+    <Content Include="Scripts\icons\lng\hongkong.jpg" />
+    <Content Include="Scripts\icons\lng\pl.jpg" />
+    <Content Include="Scripts\icons\lng\ru.jpg" />
+    <Content Include="Scripts\icons\lng\tr.jpg" />
+    <Content Include="Scripts\icons\lng\vi.jpg" />
+    <Content Include="Scripts\icons\loading.gif" />
+    <Content Include="Scripts\icons\lushu_car.png" />
+    <Content Include="Scripts\icons\msg.mp3" />
+    <Content Include="Scripts\icons\msg11.mp3" />
+    <Content Include="Scripts\icons\msg9.mp3" />
+    <Content Include="Scripts\icons\newlogo.png" />
+    <Content Include="Scripts\icons\no.png" />
+    <Content Include="Scripts\icons\noimage.jpg" />
+    <Content Include="Scripts\icons\ok.png" />
+    <Content Include="Scripts\icons\p1.png" />
+    <Content Include="Scripts\icons\pa1.png" />
+    <Content Include="Scripts\icons\PauseDisabled.png" />
+    <Content Include="Scripts\icons\pencil.png" />
+    <Content Include="Scripts\icons\people0.png" />
+    <Content Include="Scripts\icons\people1.png" />
+    <Content Include="Scripts\icons\people2.png" />
+    <Content Include="Scripts\icons\people3.png" />
+    <Content Include="Scripts\icons\play.png" />
+    <Content Include="Scripts\icons\Play1Disabled.png" />
+    <Content Include="Scripts\icons\preload.gif" />
+    <Content Include="Scripts\icons\print.png" />
+    <Content Include="Scripts\icons\redo.png" />
+    <Content Include="Scripts\icons\reload.png" />
+    <Content Include="Scripts\icons\running.png" />
+    <Content Include="Scripts\icons\s1.png" />
+    <Content Include="Scripts\icons\search.png" />
+    <Content Include="Scripts\icons\service.jpg" />
+    <Content Include="Scripts\icons\start.png" />
+    <Content Include="Scripts\icons\startstr.png" />
+    <Content Include="Scripts\icons\stop.png" />
+    <Content Include="Scripts\icons\stoptr.png" />
+    <Content Include="Scripts\icons\streetview-ani.gif" />
+    <Content Include="Scripts\icons\sum.png" />
+    <Content Include="Scripts\icons\tip.png" />
+    <Content Include="Scripts\icons\undo.png" />
+    <Content Include="Scripts\icons\untitled.png" />
+    <Content Include="Scripts\icons\User.png" />
+    <Content Include="Scripts\icons\u_offline.gif" />
+    <Content Include="Scripts\icons\u_online.gif" />
+    <Content Include="Scripts\images\002.jpg" />
+    <Content Include="Scripts\images\003.jpg" />
+    <Content Include="Scripts\images\004.jpg" />
+    <Content Include="Scripts\images\005.jpg" />
+    <Content Include="Scripts\images\bjui-b.png" />
+    <Content Include="Scripts\images\captcha.jpeg" />
+    <Content Include="Scripts\images\datagrid\AU.gif" />
+    <Content Include="Scripts\images\datagrid\BR.gif" />
+    <Content Include="Scripts\images\datagrid\CN.gif" />
+    <Content Include="Scripts\images\datagrid\DE.gif" />
+    <Content Include="Scripts\images\datagrid\FR.gif" />
+    <Content Include="Scripts\images\datagrid\HK.gif" />
+    <Content Include="Scripts\images\datagrid\JP.gif" />
+    <Content Include="Scripts\images\datagrid\UK.gif" />
+    <Content Include="Scripts\images\datagrid\US.gif" />
+    <Content Include="Scripts\images\ewm.png" />
+    <Content Include="Scripts\images\group.png" />
+    <Content Include="Scripts\images\loginbg_01.jpg" />
+    <Content Include="Scripts\images\loginbg_02.jpg" />
+    <Content Include="Scripts\images\loginbg_03.jpg" />
+    <Content Include="Scripts\images\loginbg_04.jpg" />
+    <Content Include="Scripts\images\loginbg_05.jpg" />
+    <Content Include="Scripts\images\loginbg_06.jpg" />
+    <Content Include="Scripts\images\loginbg_07.jpg" />
+    <Content Include="Scripts\images\loginbg_08.jpg" />
+    <Content Include="Scripts\images\loginbg_09.jpg" />
+    <Content Include="Scripts\images\logo.jpg" />
+    <Content Include="Scripts\images\logo.png" />
+    <Content Include="Scripts\images\logo_bootstrap.png" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\Language\excel-ar.xml" />
+    <Content Include="Scripts\Language\excel-de.xml" />
+    <Content Include="Scripts\Language\excel-en-us.xml" />
+    <Content Include="Scripts\Language\excel-es.xml" />
+    <Content Include="Scripts\Language\excel-fr.xml" />
+    <Content Include="Scripts\Language\excel-hk.xml" />
+    <Content Include="Scripts\Language\excel-it-IT.xml" />
+    <Content Include="Scripts\Language\excel-pl.xml" />
+    <Content Include="Scripts\Language\excel-pt.xml" />
+    <Content Include="Scripts\Language\excel-ru.xml" />
+    <Content Include="Scripts\Language\excel-tr.xml" />
+    <Content Include="Scripts\Language\excel-vi.xml" />
+    <Content Include="Scripts\Language\excel-zh-cn.xml" />
+    <Content Include="Scripts\Language\language01-ar.js" />
+    <Content Include="Scripts\Language\language01-de.js" />
+    <Content Include="Scripts\Language\language01-en-us.js" />
+    <Content Include="Scripts\Language\language01-es.js" />
+    <Content Include="Scripts\Language\language01-fr.js" />
+    <Content Include="Scripts\Language\language01-hk.js" />
+    <Content Include="Scripts\Language\language01-it-IT.js" />
+    <Content Include="Scripts\Language\language01-pl.js" />
+    <Content Include="Scripts\Language\language01-pt.js" />
+    <Content Include="Scripts\Language\language01-ru.js" />
+    <Content Include="Scripts\Language\language01-tr.js" />
+    <Content Include="Scripts\Language\language01-vi.js" />
+    <Content Include="Scripts\Language\language01-zh-cn.js" />
+    <Content Include="Scripts\Language\language02-ar.js" />
+    <Content Include="Scripts\Language\language02-de.js" />
+    <Content Include="Scripts\Language\language02-en-us.js" />
+    <Content Include="Scripts\Language\language02-es.js" />
+    <Content Include="Scripts\Language\language02-fr.js" />
+    <Content Include="Scripts\Language\language02-hk.js" />
+    <Content Include="Scripts\Language\language02-it-IT.js" />
+    <Content Include="Scripts\Language\language02-pl.js" />
+    <Content Include="Scripts\Language\language02-pt.js" />
+    <Content Include="Scripts\Language\language02-ru.js" />
+    <Content Include="Scripts\Language\language02-tr.js" />
+    <Content Include="Scripts\Language\language02-vi.js" />
+    <Content Include="Scripts\Language\language02-zh-cn.js" />
+    <Content Include="Scripts\MD5\jQuery.md5.js" />
+    <Content Include="Scripts\mg_public.js" />
+    <Content Include="Scripts\Monitor\BDLuShu.js" />
+    <Content Include="Scripts\Monitor\History.js" />
+    <Content Include="Scripts\Monitor\map.css" />
+    <Content Include="Scripts\Monitor\map\goome.maps.js" />
+    <Content Include="Scripts\Monitor\map\map.js" />
+    <Content Include="Scripts\Monitor\map\markerIcon.js" />
+    <Content Include="Scripts\Monitor\memu\css\all-examples.css" />
+    <Content Include="Scripts\Monitor\memu\css\lanrenzhijia.css" />
+    <Content Include="Scripts\Monitor\memu\images\dock\calendar-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\calendar.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\edit-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\edit.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\edit1.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\email-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\email.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\history-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\history.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\home-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\home.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\link-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\link.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\music-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\music.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\portfolio-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\portfolio.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\rss-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\rss.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\rss2-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\rss2.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\video-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\dock\video.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\bg-2x.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\bg-hl-2x.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\bg-item-2x.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\icon-2x.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\moment_icn_address.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\moment_icn_info.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\moment_icn_pic.png" />
+    <Content Include="Scripts\Monitor\memu\images\moment\moment_icn_price.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\aperture.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\coda.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\finder.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\music-sm.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\photoshop.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\safari.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\stack-down.png" />
+    <Content Include="Scripts\Monitor\memu\images\stacks\stack.png" />
+    <Content Include="Scripts\Monitor\memu\index.html" />
+    <Content Include="Scripts\Monitor\memu\js\dock-example1.js" />
+    <Content Include="Scripts\Monitor\memu\js\fisheye-iutil.min.js" />
+    <Content Include="Scripts\Monitor\memu\js\jquery.jqDock.min.js" />
+    <Content Include="Scripts\Monitor\memu\js\jquery.min.js" />
+    <Content Include="Scripts\Monitor\memu\js\jquery.transform.js" />
+    <Content Include="Scripts\Monitor\memu\js\lanrenzhijia.js" />
+    <Content Include="Scripts\Monitor\memu\js\stack-1.js" />
+    <Content Include="Scripts\Monitor\memu\js\stack-2.js" />
+    <Content Include="Scripts\Monitor\monitorOper.js" />
+    <Content Include="Scripts\Monitor\SendCommand.js" />
+    <Content Include="Scripts\Monitor\Tracking.js" />
+    <Content Include="Scripts\runtime.js" />
+    <Content Include="Scripts\Slider\dist\jquery.nstSlider.css" />
+    <Content Include="Scripts\Slider\dist\jquery.nstSlider.js" />
+    <Content Include="Scripts\Slider\dist\jquery.nstSlider.min.css" />
+    <Content Include="Scripts\Slider\dist\jquery.nstSlider.min.js" />
+    <Content Include="Scripts\Slider\libs\jquery-loader.js" />
+    <Content Include="Scripts\Slider\libs\jquery\jquery.js" />
+    <Content Include="Scripts\Slider\libs\qunit\qunit.css" />
+    <Content Include="Scripts\Slider\libs\qunit\qunit.js" />
+    <Content Include="Scripts\Slider\src\jquery.nstSlider.js" />
+    <Content Include="Scripts\Statistics\AlarmDetail.js" />
+    <Content Include="Scripts\Statistics\AlarmPreview.js" />
+    <Content Include="Scripts\Statistics\echarts-line.js" />
+    <Content Include="Scripts\Statistics\GeoFencesView.js" />
+    <Content Include="Scripts\Statistics\Milage.js" />
+    <Content Include="Scripts\Statistics\StatisticsPublic.js" />
+    <Content Include="Scripts\Statistics\StopDetail.js" />
+    <Content Include="Scripts\tableExport-master\demo\index.html" />
+    <Content Include="Scripts\tableExport-master\dist\tableExport.js" />
+    <Content Include="Scripts\tableExport-master\package.json" />
+    <Content Include="Scripts\tableExport-master\readme.md" />
+    <Content Include="Scripts\tableExport-master\src\csv.js" />
+    <Content Include="Scripts\tableExport-master\src\dom2canvas.js" />
+    <Content Include="Scripts\tableExport-master\src\image.js" />
+    <Content Include="Scripts\tableExport-master\src\index.js" />
+    <Content Include="Scripts\tableExport-master\src\json.js" />
+    <Content Include="Scripts\tableExport-master\src\jspdf.js" />
+    <Content Include="Scripts\tableExport-master\src\office.js" />
+    <Content Include="Scripts\tableExport-master\src\pdf.js" />
+    <Content Include="Scripts\tableExport-master\src\utils.js" />
+    <Content Include="Scripts\tableExport-master\src\xml.js" />
+    <Content Include="Scripts\tableExport-master\webpack.config.js" />
+    <Content Include="Scripts\ZeroClipboard\ZeroClipboard.js" />
+    <Content Include="Scripts\ZeroClipboard\ZeroClipboard.min.js" />
+    <Content Include="Scripts\ZeroClipboard\ZeroClipboard.swf" />
+    <Content Include="Statistics\AlarmDetail.html" />
+    <Content Include="Statistics\AlarmPreview.html" />
+    <Content Include="Statistics\DeletedDevice.aspx" />
+    <Content Include="Statistics\DeviceCount.html" />
+    <Content Include="Statistics\DevicesHireExpire.aspx" />
+    <Content Include="Statistics\Echarts-line.html" />
+    <Content Include="Statistics\GeoFencesView.html" />
+    <Content Include="Statistics\Mileage.html" />
+    <Content Include="Statistics\Statistics.aspx" />
+    <Content Include="Statistics\StopDetail.html" />
+    <Content Include="Unlock.aspx" />
+    <Content Include="Unlock\DeviceInfo.html" />
+    <Content Include="Unlock\History.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AjaxService\DeviceManager.asmx.cs">
+      <DependentUpon>DeviceManager.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\DeviceMonitor.ashx.cs">
+      <DependentUpon>DeviceMonitor.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxService\DeviceMonitor.asmx.cs">
+      <DependentUpon>DeviceMonitor.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\LoginAjax.asmx.cs">
+      <DependentUpon>LoginAjax.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\MgooPublic.asmx.cs">
+      <DependentUpon>MgooPublic.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\Statistics.asmx.cs">
+      <DependentUpon>Statistics.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\UnlockAction.ashx.cs">
+      <DependentUpon>UnlockAction.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxService\WebServiceBasePage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AjaxService\WeixinInterface.ashx.cs">
+      <DependentUpon>WeixinInterface.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DevicesManage\AllDevices.aspx.cs">
+      <DependentUpon>AllDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevicesManage\AllDevices.aspx.designer.cs">
+      <DependentUpon>AllDevices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Monitor\History.aspx.cs">
+      <DependentUpon>History.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Monitor\History.aspx.designer.cs">
+      <DependentUpon>History.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Monitor\Tracking.aspx.cs">
+      <DependentUpon>Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Monitor\Tracking.aspx.designer.cs">
+      <DependentUpon>Tracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\OrderQueryPage.aspx.cs">
+      <DependentUpon>OrderQueryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay\OrderQueryPage.aspx.designer.cs">
+      <DependentUpon>OrderQueryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\ResultNotifyPage.aspx.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay\ResultNotifyPage.aspx.designer.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\wxPay.aspx.cs">
+      <DependentUpon>wxPay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay\wxPay.aspx.designer.cs">
+      <DependentUpon>wxPay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AlarmMessage.aspx.cs">
+      <DependentUpon>AlarmMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AlarmMessage.aspx.designer.cs">
+      <DependentUpon>AlarmMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ExceptionCount.aspx.cs">
+      <DependentUpon>ExceptionCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExceptionCount.aspx.designer.cs">
+      <DependentUpon>ExceptionCount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ExceptionDetail.aspx.cs">
+      <DependentUpon>ExceptionDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExceptionDetail.aspx.designer.cs">
+      <DependentUpon>ExceptionDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ExceptionView.aspx.cs">
+      <DependentUpon>ExceptionView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExceptionView.aspx.designer.cs">
+      <DependentUpon>ExceptionView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\GeoFencesView.aspx.cs">
+      <DependentUpon>GeoFencesView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\GeoFencesView.aspx.designer.cs">
+      <DependentUpon>GeoFencesView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Mileage.aspx.cs">
+      <DependentUpon>Mileage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Mileage.aspx.designer.cs">
+      <DependentUpon>Mileage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ParkingEcharts.aspx.cs">
+      <DependentUpon>ParkingEcharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ParkingEcharts.aspx.designer.cs">
+      <DependentUpon>ParkingEcharts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RemainView.aspx.cs">
+      <DependentUpon>RemainView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RemainView.aspx.designer.cs">
+      <DependentUpon>RemainView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\StopDetail.aspx.cs">
+      <DependentUpon>StopDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\StopDetail.aspx.designer.cs">
+      <DependentUpon>StopDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="scanCode.aspx.cs">
+      <DependentUpon>scanCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="scanCode.aspx.designer.cs">
+      <DependentUpon>scanCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\DeletedDevice.aspx.cs">
+      <DependentUpon>DeletedDevice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\DeletedDevice.aspx.designer.cs">
+      <DependentUpon>DeletedDevice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\DevicesHireExpire.aspx.cs">
+      <DependentUpon>DevicesHireExpire.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\DevicesHireExpire.aspx.designer.cs">
+      <DependentUpon>DevicesHireExpire.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\Statistics.aspx.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Statistics\Statistics.aspx.designer.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Unlock.aspx.cs">
+      <DependentUpon>Unlock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Unlock.aspx.designer.cs">
+      <DependentUpon>Unlock.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MG_BLL\MG_BLL.csproj">
+      <Project>{e69693cc-50bb-4249-a4dc-eb71bfa903b0}</Project>
+      <Name>MG_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MG_DAL\MG_DAL.csproj">
+      <Project>{3c1fbd88-8a30-40a1-a4a4-d409ed99462b}</Project>
+      <Name>MG_DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53679</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53679/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

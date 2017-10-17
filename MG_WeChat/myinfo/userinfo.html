@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>用户信息</title>
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+    </script>
+
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="myinfo.html" class="">
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div>
+
+        <h1 class="am-header-title">
+            <a href="#title-link" class="">
+                用户信息
+            </a>
+        </h1>
+    </header>
+
+    <div class="am-container">
+        <form class="am-form">
+            <div class="am-form-group">
+                <label for="txtUserName" class="am-u-sm-4 am-form-label">用户名称:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtUserName" />
+                </div>
+            </div>
+            <br /> <br />
+            <div class="am-form-group">
+                <label for="txtLoginName" class="am-u-sm-4 am-form-label">登录账号:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" disabled id="txtLoginName" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="txtContacts" class="am-u-sm-4 am-form-label">联 系 人:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder=""  id="txtContacts" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="txtPhone" class="am-u-sm-4 am-form-label">联系电话:</label>
+
+                <div class="am-u-sm-8">
+                    <!--<a> 绑定手机</a>-->
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtPhone" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="txtEmail" class="am-u-sm-4 am-form-label">联系邮箱:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtEmail" />
+                </div>
+            </div>
+            <br />
+            <div class="am-form-group">
+                <label for="txtAddress" class="am-u-sm-4 am-form-label">联系地址:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtAddress" />
+                </div>
+            </div>
+            
+            <br /> <br />
+            <div class="am-form-group">
+                <button type="button" class="am-btn am-btn-primary am-btn-block" onclick="frmsumbit()">保存</button>
+            </div>
+
+
+        </form>
+   
+        <form class="am-form am-hide">
+            <div class="am-form-group">
+                <label for="txtPhone" class="am-u-sm-4 am-form-label">联系电话:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtPhone" />
+                </div>
+            </div>
+            <br />
+        </form>
+     </div>
+
+    <script src="/bootstrap/js/jquery-2.1.3.min.js"></script>
+    <script src="/bootstrap/js/amazeui-2.7.2.min.js"></script>
+    <script src="/bootstrap/js/public.js"></script>
+    <script src="/bootstrap/js/utils.js"></script>
+    <script src="/bootstrap/js/Ajax.js"></script>
+
+    <script type="text/javascript">
+        /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+        var urlinfo = window.location.href;
+        var len = urlinfo.length;
+        var offset = urlinfo.indexOf("?");
+        var info = urlinfo.substr(offset, len)
+        var ids = info.split("=");
+        var info = mg.GetUserInfo();
+        var userid = ids[1] || info.UserID;
+        $(function () {
+            $.ajax({
+                url: "UsersAjax.asmx",
+                way: "GetUserInfoByID",
+                pars: { userid: userid },
+                success: function (data) {
+                   // {"UserName":"美谷销售","LoginName":"admin","FirstName":"aaa","CellPhone":"1324566875","PrimaryEmail":"123@qq.com","Address":"广东省东莞市"}
+                    var d = JSON.parse(data); 
+                    $("#txtUserName").val(d.UserName);
+                    $("#txtLoginName").val(d.LoginName);
+                    $("#txtContacts").val(d.FirstName);
+                    $("#txtPhone").val(d.CellPhone);
+                    $("#txtEmail").val(d.PrimaryEmail);
+                    $("#txtAddress").val(d.Address);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+        });
+
+        function frmsumbit() {
+            var Contacts = $("#txtContacts").val();
+            var Phone = $("#txtPhone").val();
+            var Email = $("#txtEmail").val();
+            var Address = $("#txtAddress").val();
+            if ($("#txtUserName").length < 1) {
+                var modal = new amModal({ msg: "参数错误." }).open();
+                return;
+            }
+            $.ajax({
+                url: "UsersAjax.asmx",
+                way: "UpdateUserInfoByID",
+                pars: { userid: userid, firstname: Contacts, callphone: Phone, primaryemail: Email, address: Address },
+                success: function (data) {
+                    var modal = new amModal({ msg: data.Message });
+                    modal.open();
+                    modal.onConfirm(function () {
+                        if (data.StatusCode === 200) {
+                            window.location.href = "myinfo.html";
+                        }
+                    }); 
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

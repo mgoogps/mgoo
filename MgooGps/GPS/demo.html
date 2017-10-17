@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" />
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>回放目标轨迹</title>
+    <style type="text/css">
+        * { font-size: 12px; }
+        body, html { margin: 0px; padding: 0px; overflow: hidden; }
+        #tip { position: absolute; z-index: 100000; width: auto; padding: 5px; color: #039; font-weight: bold; background: #FFF; display: none; }
+    </style>
+
+    <script type="text/javascript" src="js/api-v.js"></script>
+    <script type="text/javascript" src="js/goome.maps.js"></script>
+    <script type="text/javascript" src="js/cn.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/popupmarker.js"></script>
+    <script type="text/javascript" src="js/core.js"></script>
+    <script type="text/javascript" src="js/playback.js"></script>
+	<script type="text/javascript" src="laydate/laydate.js"></script>
+    <script type="text/javascript">
+       
+
+        function restFrame() {
+            var w = document.documentElement.clientWidth;
+            var h = document.documentElement.clientHeight;
+            var topMenuHeight = 32;//顶部菜单区域的整体高度
+            var divCanvas = document.getElementById("map");
+            divCanvas.style.height = (h - topMenuHeight) + "px";
+            divCanvas.style.width = w + "px";
+        }
+        var PlayBack = new PlayBack("map", getQueryString("deviceid"), "G1T1012", 65);
+        function init() {
+            restFrame();
+            PlayBack.createMap("cn");
+        }
+        document.onmousemove = mouseCoords;
+
+        //getMaxDate生成客户端本地时间
+        function getMaxDate() {
+            var t = new Date();
+            var maxDate = [t.getFullYear(), t.getMonth() + 1, t.getDate()].join('-');
+            maxDate += ' ' + t.toLocaleTimeString();
+            return maxDate;
+        }
+        //getMinDate生成客户端本地时间
+        function getMinDate() {
+            var t = new Date();
+            t.setMonth(t.getMonth() - 2);//最小时间少2个月
+            var maxDate = [t.getFullYear(), t.getMonth() + 1, t.getDate()].join('-');
+            maxDate += ' ' + t.toLocaleTimeString();
+            return maxDate;
+        }
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        $(function () {
+            getQueryString("deviceid");
+        });
+  
+    </script>
+</head>
+<body onresize="restFrame();" onload="init();">
+    <span id="tip" style="text-align:center;">正在加载数据,请耐心等待.......,<br /> <img src="images/preload.gif" /> </span>
+    <div style="font-size:12px;height:30px;text-align:center;background:#C5CFD6;border-bottom:1px solid #999;">
+        武汉的士 从：
+        <input type="text" name="from" value="2015-04-30 16:05:52" id="from"    class="laydate-icon" onclick="laydate()"    />
+        到：
+        <input type="text" name="to" value="2015-05-03 17:05:52" id="to"    class="laydate-icon" onclick="laydate()" />
+        频    率：
+        <select name="freq" id="freq" onchange="PlayBack.Frequency = this.value">
+            <option value="10000">正常-10</option>
+            <option value="5000">2倍正常-5</option>
+            <option value="3000">快-3</option>
+            <option value="1000">比较快-1</option>
+            <option value="500">很快-0.5</option>
+            <option value="100">非常快-0.1</option>
+            <option value="10" selected>快得不得了</option>
+        </select>
+        秒
+        <input id="PLAY" onclick="PlayBack.getDataFrist(document.getElementById('from').value,document.getElementById('to').value,document.getElementById('freq').value)"
+               type="button" value="开始回放" />
+        <input id="STOP" onclick="PlayBack.stopPlay()" type="button" value="停止播放" style="display:none;" />
+        <input id="mdTime" type="hidden" value="" />
+    </div>
+    <div id="map"></div>
+</body>
+</html>
+ 

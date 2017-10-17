@@ -1,0 +1,97 @@
+
+<script src="/Scripts/Monitor/SendCommand.js"></script>
+<div class="bjui-pageContent">
+    <div class="pageFormContent">
+        <div style="margin:15px auto 0; width:575px;" >
+            <fieldset>
+                <legend>指令</legend>
+                <table class="table table-condensed table-hover" >
+                    <thead>
+                        <tr>
+                            <th width="150">指令名称</th>
+                            <th width="150">属性</th>
+                            <th width="150">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label class="ilabel">1、	绑定手机</label>  </td>
+                            <td><input type="text" id="txtBindPhone"></td>
+                            <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'1')">发送指令</button></td> 
+                            
+                        </tr>
+                        <tr>
+                            <td><label class="ilabel">2、	手机解绑</label></td>
+                            <td><label id="txtUnbundPhone"> </label>  </td>
+                            <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'2')">发送指令</button></td> 
+                          
+                        </tr>
+                        <tr>
+                            <script type="text/javascript">
+                                function selectModeChange() {
+                                    if ($("#selectMode option:selected").text() == "关闭")
+                                        $("#selectSens").hide().prev().hide().next().next().hide();
+                                    else {
+                                        $("#selectSens").show().prev().show().next().next().show(); 
+                                    } 
+                                }
+                            </script>
+                            <td><label class="ilabel">3、	设置震动报警方式</label></td>
+                            <td> <select id="selectMode" onchange="selectModeChange()">
+                                     <option value="0">关闭</option>
+                                     <option value="1">发短信</option>
+                                     <option value="2">打电话</option>
+                                     <option value="3">短信+电话</option>
+                                </select>
+                           <strong style="display:none"> 灵敏度：</strong>
+                            <select id="selectSens" style="display:none">
+                                <option value="9">1</option>
+                                <option value="8">2</option>
+                                <option value="7">3</option>
+                                <option value="6">4</option>
+                                <option value="5">5</option>
+                                <option value="4">6</option>
+                                <option value="3">7</option>
+                                <option value="2">8</option>
+                                <option value="1">9</option>
+                            </select> <a href="#" title="数值越大，灵敏度越高" style="display:none"><i class="fa fa-warning"></i></a> </td>
+                            <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'3')">发送指令</button></td> 
+                          
+                        </tr>
+                        <tr>
+                            <td><label class="ilabel">4、	设防</label></td><td></td>
+                             <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'4')">发送指令</button></td> 
+                         
+                        </tr>
+                        <tr>
+                            <td><label class="ilabel">5、	撤防</label></td><td></td>
+                             <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'5')">发送指令</button></td> 
+                           
+                        </tr>
+                        <tr>
+                            <td><label class="ilabel">6、	断油电</label></td> <td> </td>
+                             <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'6')">发送指令</button></td> 
+                          
+                        </tr>
+                        <tr>
+                            <td><label class="ilabel">7、	通油电</label></td><td></td>
+                            <td><button type="button" class="btn-blue" name="btnSendCommand" onclick="SendCommand(this,'7')">发送指令</button></td> 
+                          
+                        </tr> 
+                        <!--<tr>
+                            <td colspan="3">
+                                <div class="alert alert-info form-inline"><i class="fa fa-warning"></i> <strong>A链接按钮：</strong>A链接的按钮需要添加<strong>Class[btn]</strong>，方可转换成按钮形态，JS会为Button按钮自动添加Class[btn]。</div>
+                                <div class="alert alert-warning form-inline"><i class="fa fa-warning"></i> <strong>图标说明：</strong>所用图标来自<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a>，使用时仅需将fa-后面的部分放入data-icon中即可。</div>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+    </ul>
+</div>

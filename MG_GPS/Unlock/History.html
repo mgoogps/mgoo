@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <title>历史轨迹</title>
+	<meta charset="utf-8" />
+   
+  
+    <script src="../Scripts/jquery-1.8.3.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+
+    <!--<link href="../Scripts/datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet" />
+    <script src="../Scripts/datetimepicker/js/amazeui.datetimepicker.min.js"></script>-->
+    <!-- datepicker -->
+   
+     <link href="../Scripts/plugin/datepicker/css/normalize3.0.2.min.css" rel="stylesheet" /> 
+    <link href="../Scripts/plugin/datepicker/css/style.css" rel="stylesheet" /> 
+    <link href="../Scripts/plugin/datepicker/css/mobiscroll.css" rel="stylesheet" /> 
+    <link href="../Scripts/plugin/datepicker/css/mobiscroll_date.css" rel="stylesheet" />  
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
+
+    <script src="http://webapi.amap.com/maps?v=1.3&key=e138c930eb6b372d830b3e8e3fbc0bb0&&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
+    <script src="../Scripts/map.js"></script>
+    <style type="text/css">
+       html,body, #amap {
+         width:100%;height:100%;
+         overflow:hidden;
+        }
+        #divContainer .am-form-group{
+            padding-top:30px;
+        }
+        #divContainer  .am-form>:first-child {
+             padding-top:10px;
+        }
+        #divContainer .am-form > :last-child {
+        
+        }
+        #divContainer .am-form-label {
+            /*padding-top:12px;*/
+        }
+        .nstSlider {
+            margin-top:8px;
+            width:100%!important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="modalDateChoose">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                请选择时间段
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <div class="am-alert am-alert-danger" id="my-alert" style="display: none">
+                    <p>开始日期应小于结束日期！</p>
+                </div>
+                <div class="am-g">
+                    <div class="am-u-sm-6">
+                        <!--<input type="text" id="txtDate" readonly placeholder="日期" value="" style="min-width:102px; ">-->
+                    </div>
+                    <div class="am-u-sm-6">
+                        <input type="text" value="2015-02-24" id="datetimepicker1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="amap" style="height:calc(100% - 210px)"></div>
+    <div style="height:160px;border :1px solid red" id="divContainer">
+        <form class="am-form ">
+            <div class="am-form-group" name="divPlayHide" id="divChooseDate">
+                <label for="txtSerialNumber" class="am-u-sm-4 am-form-label">开始时间:</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field am-input-sm" id="txtStartDate" placeholder="开始日期" style="min-width:102px; " value="">
+                </div>
+            </div>
+          
+            <div class="am-form-group"  name="divPlayHide" >
+                <label for="txtSerialNumber" class="am-u-sm-4 am-form-label">结束时间:</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field am-input-sm" id="txtEndDate" placeholder="结束日期" style="min-width:102px; " value="">
+                </div>
+            </div>
+            
+            <div class="am-form-group" name="divPlayHide"  id="divChooseFast">
+                <div class="am-u-sm-4">
+                    <button type="button" value="0" class="am-btn am-btn-default am-round am-active">今 天</button>
+                </div>
+                <div class="am-u-sm-4" >
+                    <button type="button" value="-1" class="am-btn am-btn-default am-round am-active">昨 天</button>
+                </div>
+                <div class="am-u-sm-4" >
+                    <button type="button" value="-2" class="am-btn am-btn-primary am-round am-active">前 天</button>
+                </div>
+            </div>
+          
+            
+        </form>
+    </div>
+    <div style="height:50px;width:100%;border:1px solid blue; ">
+        <div id="divSlideMoveShow" style="width:100%;text-align:center;margin-top:-27px;border:1px solid #ffd800"><i class="am-icon-angle-double-up"></i> </div>
+        <!--fa-angle-double-down-->
+         <form class="am-form ">
+             <div class="am-form-group" style="margin-top:-15px">
+                 <div class="am-u-sm-8">
+                     <div class="nstSlider" data-range_min="500" data-range_max="1500" data-cur_min="1000" data-cur_max="0">
+                         <div class="bar"></div>
+                         <div class="leftGrip"></div>
+                        <!-- <div class="rightGrip"> style="margin-top:20px;width:100px;" 3233米/秒</div>-->
+                     </div>
+                 </div>
+                 <div class="am-u-sm-4">
+                     <button type="button" class="am-btn am-btn-secondary am-round" id="btnPaly">播 放</button>
+                 </div>
+             </div>
+         </form>
+    </div>
+
+    <script src="../Scripts/plugin/datepicker/js/mobiscroll_date.js" charset="gb2312"></script>
+    <script src="../Scripts/plugin/datepicker/js/mobiscroll.js"></script>
+
+    <!-- slider --> 
+    <link href="../Scripts/plugin/Slider/dist/jquery.nstSlider.css" rel="stylesheet" /> 
+    <script src="../Scripts/plugin/Slider/dist/jquery.nstSlider.min.js"></script>
+    <!-- slider end -->
+
+    <script type="text/javascript">
+        var urlinfo = window.location.href;
+        var len = urlinfo.length;
+        var offset = urlinfo.indexOf("?");
+        var info = urlinfo.substr(offset, len)
+        var ids = info.split("=");
+        var DeviceID = ids[1].replace("#", "");
+
+        var mgoo = new mgMap("amap", "GAODE");
+        mgoo.DEFAULT_ZOOM = 12;
+        $(function () {
+            mgoo.loadMap();
+            //var opts = { closeViaDimmer:false }
+            //$("#modalDateChoose").modal(opts);
+
+            var currYear = (new Date()).getFullYear();
+            var opt = {};
+            opt.date = { preset: 'date' };
+            opt.datetime = { preset: 'datetime' };
+            opt.time = { preset: 'time' };
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yyyy-mm-dd 00:00:01',
+                lang: 'zh',
+                showNow: true,
+                nowText: "今天",
+                startYear: currYear - 1, //开始年份
+                endYear: currYear + 1 //结束年份
+            };
+            $("#txtStartDate").mobiscroll($.extend(opt['date'], opt['default']));
+            opt.default.dateFormat = "yyyy-mm-dd 23:59:59";
+            $("#txtEndDate").mobiscroll($.extend(opt['date'], opt['default']));
+            //设置默认值
+            var defaultdate = new Date(currYear + "/" + (new Date().getMonth() + 1) + "/" + new Date().getDate()).format("yyyy-MM-dd");
+
+            $("#txtStartDate").val(defaultdate).scroller('setDate', defaultdate, true);
+            $("#txtEndDate").val(defaultdate).scroller('setDate', defaultdate, true);
+
+
+            $('.nstSlider').nstSlider({
+                 "left_grip_selector": ".leftGrip",
+                "value_bar_selector": ".bar",
+                "value_changed_callback": function (cause, leftValue, rightValue) {
+                    var $container = $(this).parent(),
+                        g = 255 - 127 + leftValue,
+                        r = 255 - g,
+                        b = 0;
+                    //$container.find('.leftLabel').text("速度:" + leftValue + "米/秒");
+                    //if (lushu && lushu._opts)
+                       // lushu._opts.speed = leftValue;
+                   // playSpeed = leftValue;
+                   // $(this).find('.bar').css('background', '#5456BE');//rgb(' + [r, g, b].join(',') + ')
+
+                  //  $(this).find('.bar').parent().css('background', '#DFDFDF');
+                }
+            });
+
+            $("#divChooseFast button").on("click", function () {
+                ChooseFastClass(this);
+            });
+
+            $("#btnPaly").on("click", function () {
+                if ($(this).text() == "暂停") {
+                    mmoving.pause();
+                    $(this).text("播放");
+                } else {
+                    if (mmoving) {
+                        $(this).text("暂停")
+                        mmoving.resume();
+                    } else {
+                        getHistory();
+                        $(this).attr("disabled", "disabled");
+                    }
+                }
+
+
+                //$("#divContainer").toggle(400);
+                //if ($("#divContainer").is(":hidden")) {
+
+                //    //$("#div2").fadeToggle("slow");
+                //    $("#amap").css("height", "calc(100% - 210px)");
+                //    $("#divContainer").fadeToggle(400, function () {
+                //        console.log("hidden..."); 
+                //    } );
+                //    $("#divSlideMoveShow").hide();
+                //} else {
+
+                $("#divContainer").fadeOut(400, function () {
+                    console.log("not hidden..");
+                    $("#amap").css("height", "calc(100% - 50px)");
+                    $("#divSlideMoveShow").show();
+                });
+
+                //} 
+
+                //$("#divContainer").css("height", "100px");
+                //$("#amap").css("height", "calc(100% - 100px)");
+            });
+            document.getElementById("divSlideMoveShow").addEventListener("touchend", function (e) {
+                e.preventDefault(); 
+                hideContainer();
+            });
+            $("#divSlideMoveShow").on("click", function () {
+                hideContainer();
+            });
+        });
+        var mmoving
+        function getHistory() {
+
+            var st = $("#txtStartDate").val();
+            var et = $("#txtEndDate").val();
+            $.ajax({
+                url: "/AjaxService/UnlockAction.ashx?action=gethistory&DeviceID=" + DeviceID,
+                dataType: "JSON",
+                type: "POST",
+                data: { starttime: st, endtime: et },
+                success: function (data) {
+                    console.log(data);
+                    Play(data); 
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+        function Play(res) {
+            if (res.length > 0) {
+                $("#btnPaly").removeAttr("disabled").text("暂停");
+
+                mgoo.clearOverlays();
+                //var startPoint = mgoo.Point(res[0].OLng, res[0].OLat)
+                var marker = new Marker({ lat: res[0].OLat, lng: res[0].OLng, mapType: mgoo.mapType, map: mgoo.map, course: 90 });
+                marker.show({ icon: "/Images/icons/box2.png", showTitle: false, titleText: 'aaa' });
+                mgoo.panTo(res[0].OLng, res[0].OLat);
+                var moveendIndex = 0;
+                marker.addEventListener("moveend", function (e) {
+                    
+                    console.log(moveendIndex, res[moveendIndex]);
+                    infoWindow.InfoWindow.setContent("时间:" + res[moveendIndex].DeviceTime);
+                    moveendIndex++; 
+                });
+                marker.addEventListener("movealong", function () {
+                     $("#btnPaly").removeAttr("disabled");
+                    console.log("movealong..");
+                });
+                var lineArr = [];
+                for (var i = 0; i < res.length; i++) {
+                    lineArr.push([res[i].OLng, res[i].OLat]);
+                }
+                var infoWindow = new InfoWindow({ marker: marker, map: mgoo.map });
+                infoWindow.addInfoWindow({
+                    html:""
+                });
+              
+                mmoving = new MarkerMoving({
+                    marker: marker.marker,
+                    lineArr: lineArr,
+                    map: mgoo.map,
+                    callback: function (e) {
+                        var bounds = mgoo.map.getBounds();
+                        var point = marker.marker.getPosition();
+                        if (!bounds.contains(point))
+                        {
+                            mgoo.panTo(point.getLng(), point.getLat());
+                        }
+                        infoWindow.InfoWindow.setPosition(point);
+                      
+                    }
+                });
+                mmoving.start();
+            } else {
+                $("#btnPaly").removeAttr("disabled");
+            }
+        
+           
+            //var mmoving = new  MarkerMoving({marker});
+            
+        }
+        function hideContainer() {
+            $("#amap").css("height", "calc(100% - 210px)");
+            $("#divContainer").fadeIn(400, function () {
+                console.log("hidden...");
+            }); 
+            $("#divSlideMoveShow").hide();
+        }
+        function ChooseFastClass(btn) {
+          
+            $("#divChooseFast button").attr("class", "am-btn am-btn-default am-round am-active");
+            $(btn).attr("class", "am-btn am-btn-primary am-round am-active");
+        }
+        Date.prototype.format = function (format) {
+            var o = {
+                "M+": this.getMonth() + 1, //month
+                "d+": this.getDate(),   //day
+                "h+": this.getHours(),  //hour
+                "m+": this.getMinutes(), //minute
+                "s+": this.getSeconds(), //second
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
+            }
+            if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
+            (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o) if (new RegExp("(" + k + ")").test(format))
+                format = format.replace(RegExp.$1,
+                RegExp.$1.length == 1 ? o[k] :
+                ("00" + o[k]).substr(("" + o[k]).length));
+            return new Date(format);
+        }
+    </script>
+</body>
+
+</html>

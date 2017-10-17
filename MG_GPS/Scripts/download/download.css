@@ -1,0 +1,70 @@
+﻿/* CSS Document */
+
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin:0 auto;
+	background-color:#D3F5FD;
+
+	
+	
+     }
+#top { background-image:url(top.png); height:50px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:16px; line-height:50px; text-align:center; color:#FFFFFF; font-weight:bold;}
+#top1{border:2px dashed #55BB22; height:100%; width:90%; margin:0 auto; margin-top:10px; font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif; line-height:25px; padding:5px;}
+#top2{ width:92%; height:95px;  margin:0 auto; padding:3px; margin-top:10px; background-color:#FFFFFF;}
+#top2 .d1{ float:left; width:30%; height:95px; text-align:center; margin-top:10px;}
+#top2 .d2{ float:left; width:65%;height:95px; border-left:1px #F3F3F3 solid; padding-left:8px; padding-top:4px;}
+
+.dname{ font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif;height:30px; width:100%; line-height:30px;}
+/*.dname .l1{ float:left; height:25px; line-height:30px; color:#008BE3;} 
+.dname .l2{ float:right;line-height:30px;}  */
+
+.dno{ font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif; color:#CCCCCC; height:30px; line-height:30px;}
+.djs{ font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif; color:#CCCCCC; height:30px; line-height:30px;}
+
+.w{ font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif; color:#FF9900;}
+/* CSS Document */
+
+
+
+
+.copyright{color:#9e9e9e;text-align:center;font-size:14px;padding:10px;}
+ .copyright a{color:#9e9e9e;height:33px;}.qn_tab{background:#fff;}
+
+
+#foot{width:320px; height:20px; text-align:center; font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif; margin-top:30px; margin:0 auto;}
+
+#foot li{ list-style-type:none; float:left; width:75px; text-decoration:none; color:#00CCCC;}
+#foot li a{text-decoration:none; color:#008BE3; }
+#foot li a.hover{color:#FFCC00;}
+
+#footer_jmw{width:100%;height:5px;border-bottom:1px solid #cacaca; margin:0 auto; }
+
+.jmw_submit{width:120px; height:30px;border:0px; background-image:url(click.png); color:#fff; font-size:12px; padding-top:1px;text-align:center; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+.jmw_submits{width:140px; height:30px;border:0px; background-image:url(click.png); color:#fff; font-size:14px; padding-top:1px;text-align:center; font-family:Verdana, Arial, Helvetica, sans-serif;}
+/* CSS Document */
+
+#contents{width:100%; margin:0 auto;}
+
+.b{ font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif; color:#42C9FF; width:90%; margin:0 auto; padding-top:10px; padding-bottom:10px;}
+.b2{ font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif; color:#42C9FF; width:90%; margin:0 auto; padding-top:10px;}
+.d{ width:90%; margin:0 auto; background:#FFFFFF; height:95px;}
+.d ul{ padding-left:10px; padding-top:10px;}
+
+#contents .c1{width:90%; height:45px; margin:0 auto; background:#FFFFFF}
+
+#contents .c1 input{width:90%; height:35px;BACKGROUND:#FFFFFF; border:1px #FF9900; font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+#contents .c2{width:90%; height:140px; margin:0 auto;background:#FFFFFF}
+
+#contents .D2{width:90%; margin:0 auto;background:#FFFFFF; font-size:14px;}
+
+.D2 ul{padding-left:10px; padding-top:10px; font-size:14px;line-height:25PX}
+
+#contents .c2 textarea{ BACKGROUND:#FFFFFF; border:0px #FFFFFF solid;height:130px; width:95%;font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+#contents .sb{width:90%; margin:0 auto;text-align:center; padding-top:10px;}
+
+.da{ width:90%; margin:0 auto; background:#FFFFFF; padding-top:10px; padding-bottom:20px; font-size:16px; font-family:Verdana, Arial, Helvetica, sans-serif; line-height:30px;}
+

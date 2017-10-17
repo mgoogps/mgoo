@@ -1,0 +1,63 @@
+<!--停留详单--> 
+ 
+<script src="/Scripts/tableExport-master/dist/tableExport.js"></script>
+<script src="/Scripts/echarts-2.2.7/dist/echarts.js"></script>
+<script src="/Scripts/Statistics/StatisticsPublic.js"></script>
+<script src="/Scripts/Statistics/StopDetail.js"></script>
+<div class="bjui-pageHeader">
+    <form id="pagerForm">  
+        <div class="bjui-searchBar">
+            <label>选择用户:</label>
+             <input type="text" name="menus" id="j_ztree_menus2" data-toggle="selectztree" size="18" data-tree="#ztree-user-name" readonly=""  class="form-control" style="width: 180px;"d ata-emptytxt="--城市--"> 
+          
+             <label>设备名称:</label>
+            <select id="sDevice" data-toggle="selectpicker" data-live-search="true" data-emptytxt="--选择--">
+                <option>请选择用户</option>
+            </select>
+            &nbsp;
+            <label>时间段：</label>  
+            <input type="text" name="txtStartDate" id="txtStartDate"  data-toggle="datepicker" size="12" class="form-control ok" style="padding-right: 15px; width: 150px;"> -
+            <input type="text" name="txtEndDate" id="txtEndDate" data-toggle="datepicker" size="12" class="form-control ok" aria-required="true" style="padding-right: 15px; width: 150px;">
+            &nbsp;
+            
+            <button type="button" class="btn-default" data-icon="search" id="btnSubmit" onclick="formSubmit()">查询</button>&nbsp;
+            <!--<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>-->
+            <div class="pull-right"> 
+                <div class="btn-group">
+                    <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">复选框-批量操作<span class="caret"></span></button>
+                    <ul class="dropdown-menu right" role="menu">
+                        <li><a href="book1.xlsx" data-toggle="doexport" onclick="tableExport('tbStopDetail', '停留详单', 'xls')">导出<span style="color: green;">&nbsp;Excel</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      
+    </form>
+</div>
+<div class="bjui-pageContent tableContent">
+
+     
+            <table class="table table-bordered table-hover table-striped table-top" data-height="98%" data-selected-multi="false" id="tbStopDetail" >
+                <thead>
+                    <tr>
+                        <th width="35">序号</th>
+                        <th width="130">名称</th>
+                        <th width="130">开始时间</th>
+                        <th width="130">结束时间</th>
+                        <th width="130">纬度,经度</th>
+                        <th width="50">持续时间</th>
+                        <th width="220">地址</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyStopDetail"></tbody>
+            </table> 
+       
+
+</div>
+ 
+<div id="j_select_tree2" class="tree-box">
+    <ul id="ztree-user-name" class="ztree hide" data-toggle="ztree" data-simple-data="false" data-options="{nodes:'ztree_returnjson'}" 
+      data-check-enable="true" data-chk-style="radio" data-radio-type="all" data-on-check="S_NodeCheck" data-on-click="S_NodeClick" data-faicon="user"> 
+    </ul>
+</div>
+<!--  data-expand-all="true" <div id="j_select_tree2_select_box" class="tree-box" style="position: absolute; z-index: 2; min-width: 180px; height: auto; overflow: auto; border: 1px solid rgb(238, 238, 238); top: 224px; left: 806px; max-height: 731px; display: block; background: rgb(250, 250, 250);"><ul id="j_select_tree2" class="ztree" data-toggle="ztree" data-expand-all="true" data-check-enable="true" data-chk-style="radio" data-radio-type="all" data-on-check="S_NodeCheck" data-on-click="S_NodeClick" style="width: 100%;"><li id="j_select_tree2_1" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_1_switch" title="" class="button level0 switch roots_open" treenode_switch=""></span><span id="j_select_tree2_1_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_1_a" class="level0" treenode_a="" onclick="" target="_blank" style="" title="表单元素"><span id="j_select_tree2_1_ico" title="" treenode_ico="" class="button ico_open" style=""></span><span id="j_select_tree2_1_span">表单元素</span></a><ul id="j_select_tree2_1_ul" class="level0 line" style="overflow: hidden;"><li id="j_select_tree2_2" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_2_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_2_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_2_a" class="level1 curSelectedNode" treenode_a="" onclick="" href="form-button.html" target="_blank" style="" title="按钮"><span id="j_select_tree2_2_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_2_span">按钮</span></a></li><li id="j_select_tree2_3" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_3_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_3_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_3_a" class="level1" treenode_a="" onclick="" href="form-input.html" target="_blank" style="" title="文本框"><span id="j_select_tree2_3_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_3_span">文本框</span></a></li><li id="j_select_tree2_4" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_4_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_4_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_4_a" class="level1" treenode_a="" onclick="" href="form-select.html" target="_blank" style="" title="下拉选择框"><span id="j_select_tree2_4_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_4_span">下拉选择框</span></a></li><li id="j_select_tree2_5" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_5_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_5_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_5_a" class="level1" treenode_a="" onclick="" href="form-checkbox.html" target="_blank" style="" title="复选、单选框"><span id="j_select_tree2_5_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_5_span">复选、单选框</span></a></li><li id="j_select_tree2_6" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_6_switch" title="" class="button level1 switch bottom_docu" treenode_switch=""></span><span id="j_select_tree2_6_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_6_a" class="level1" treenode_a="" onclick="" href="form.html" target="_blank" style="" title="表单综合演示"><span id="j_select_tree2_6_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_6_span">表单综合演示</span></a></li></ul></li><li id="j_select_tree2_7" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_7_switch" title="" class="button level0 switch bottom_open" treenode_switch=""></span><span id="j_select_tree2_7_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_7_a" class="level0" treenode_a="" onclick="" target="_blank" style="" title="表格"><span id="j_select_tree2_7_ico" title="" treenode_ico="" class="button ico_open" style=""></span><span id="j_select_tree2_7_span">表格</span></a><ul id="j_select_tree2_7_ul" class="level0 " style="overflow: hidden;"><li id="j_select_tree2_8" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_8_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_8_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_8_a" class="level1" treenode_a="" onclick="" href="table.html" target="_blank" style="" title="普通表格"><span id="j_select_tree2_8_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_8_span">普通表格</span></a></li><li id="j_select_tree2_9" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_9_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><span id="j_select_tree2_9_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_9_a" class="level1" treenode_a="" onclick="" href="table-fixed.html" target="_blank" style="" title="固定表头表格"><span id="j_select_tree2_9_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_9_span">固定表头表格</span></a></li><li id="j_select_tree2_10" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="j_select_tree2_10_switch" title="" class="button level1 switch bottom_docu" treenode_switch=""></span><span id="j_select_tree2_10_check" class="button chk radio_false_full" treenode_check=""></span><a id="j_select_tree2_10_a" class="level1" treenode_a="" onclick="" href="table-edit.html" target="_blank" style="" title="可编辑表格"><span id="j_select_tree2_10_ico" title="" treenode_ico="" class="button ico_docu" style=""></span><span id="j_select_tree2_10_span">可编辑表格</span></a></li></ul></li></ul></div>-->

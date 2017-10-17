@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SaveGeofence">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="GeofenceName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Lat" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Lng" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Radius" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="GeofenceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveGeofenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveGeofenceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelGeofence">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GeofenceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelGeofenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelGeofenceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeofence">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeofenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeofenceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePOI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="POIName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Lat" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Lng" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePOIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SavePOIResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPOI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPOIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPOIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelPOI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="POIID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelPOIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelPOIResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePolygon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ZoneID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LatLngs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePolygonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SavePolygonResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolygonList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolygonListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPolygonListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolygonDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZoneID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolygonDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPolygonDetailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelPolygon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZoneID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelPolygonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelPolygonResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveGeofenceSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveGeofence" />
+  </wsdl:message>
+  <wsdl:message name="SaveGeofenceSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveGeofenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelGeofenceSoapIn">
+    <wsdl:part name="parameters" element="tns:DelGeofence" />
+  </wsdl:message>
+  <wsdl:message name="DelGeofenceSoapOut">
+    <wsdl:part name="parameters" element="tns:DelGeofenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeofenceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeofence" />
+  </wsdl:message>
+  <wsdl:message name="GetGeofenceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeofenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePOISoapIn">
+    <wsdl:part name="parameters" element="tns:SavePOI" />
+  </wsdl:message>
+  <wsdl:message name="SavePOISoapOut">
+    <wsdl:part name="parameters" element="tns:SavePOIResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPOISoapIn">
+    <wsdl:part name="parameters" element="tns:GetPOI" />
+  </wsdl:message>
+  <wsdl:message name="GetPOISoapOut">
+    <wsdl:part name="parameters" element="tns:GetPOIResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelPOISoapIn">
+    <wsdl:part name="parameters" element="tns:DelPOI" />
+  </wsdl:message>
+  <wsdl:message name="DelPOISoapOut">
+    <wsdl:part name="parameters" element="tns:DelPOIResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePolygonSoapIn">
+    <wsdl:part name="parameters" element="tns:SavePolygon" />
+  </wsdl:message>
+  <wsdl:message name="SavePolygonSoapOut">
+    <wsdl:part name="parameters" element="tns:SavePolygonResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPolygonListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPolygonList" />
+  </wsdl:message>
+  <wsdl:message name="GetPolygonListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPolygonListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPolygonDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPolygonDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetPolygonDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPolygonDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelPolygonSoapIn">
+    <wsdl:part name="parameters" element="tns:DelPolygon" />
+  </wsdl:message>
+  <wsdl:message name="DelPolygonSoapOut">
+    <wsdl:part name="parameters" element="tns:DelPolygonResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GeofenceAjaxSoap">
+    <wsdl:operation name="SaveGeofence">
+      <wsdl:input message="tns:SaveGeofenceSoapIn" />
+      <wsdl:output message="tns:SaveGeofenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelGeofence">
+      <wsdl:input message="tns:DelGeofenceSoapIn" />
+      <wsdl:output message="tns:DelGeofenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofence">
+      <wsdl:input message="tns:GetGeofenceSoapIn" />
+      <wsdl:output message="tns:GetGeofenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePOI">
+      <wsdl:input message="tns:SavePOISoapIn" />
+      <wsdl:output message="tns:SavePOISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPOI">
+      <wsdl:input message="tns:GetPOISoapIn" />
+      <wsdl:output message="tns:GetPOISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelPOI">
+      <wsdl:input message="tns:DelPOISoapIn" />
+      <wsdl:output message="tns:DelPOISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePolygon">
+      <wsdl:input message="tns:SavePolygonSoapIn" />
+      <wsdl:output message="tns:SavePolygonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonList">
+      <wsdl:input message="tns:GetPolygonListSoapIn" />
+      <wsdl:output message="tns:GetPolygonListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonDetail">
+      <wsdl:input message="tns:GetPolygonDetailSoapIn" />
+      <wsdl:output message="tns:GetPolygonDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelPolygon">
+      <wsdl:input message="tns:DelPolygonSoapIn" />
+      <wsdl:output message="tns:DelPolygonSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeofenceAjaxSoap" type="tns:GeofenceAjaxSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveGeofence">
+      <soap:operation soapAction="http://tempuri.org/SaveGeofence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelGeofence">
+      <soap:operation soapAction="http://tempuri.org/DelGeofence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofence">
+      <soap:operation soapAction="http://tempuri.org/GetGeofence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePOI">
+      <soap:operation soapAction="http://tempuri.org/SavePOI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPOI">
+      <soap:operation soapAction="http://tempuri.org/GetPOI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelPOI">
+      <soap:operation soapAction="http://tempuri.org/DelPOI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePolygon">
+      <soap:operation soapAction="http://tempuri.org/SavePolygon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonList">
+      <soap:operation soapAction="http://tempuri.org/GetPolygonList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonDetail">
+      <soap:operation soapAction="http://tempuri.org/GetPolygonDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelPolygon">
+      <soap:operation soapAction="http://tempuri.org/DelPolygon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeofenceAjaxSoap12" type="tns:GeofenceAjaxSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveGeofence">
+      <soap12:operation soapAction="http://tempuri.org/SaveGeofence" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelGeofence">
+      <soap12:operation soapAction="http://tempuri.org/DelGeofence" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeofence">
+      <soap12:operation soapAction="http://tempuri.org/GetGeofence" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePOI">
+      <soap12:operation soapAction="http://tempuri.org/SavePOI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPOI">
+      <soap12:operation soapAction="http://tempuri.org/GetPOI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelPOI">
+      <soap12:operation soapAction="http://tempuri.org/DelPOI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePolygon">
+      <soap12:operation soapAction="http://tempuri.org/SavePolygon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonList">
+      <soap12:operation soapAction="http://tempuri.org/GetPolygonList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetPolygonDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelPolygon">
+      <soap12:operation soapAction="http://tempuri.org/DelPolygon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeofenceAjax">
+    <wsdl:port name="GeofenceAjaxSoap" binding="tns:GeofenceAjaxSoap">
+      <soap:address location="http://www.mgoogps.com/Ajax/GeofenceAjax.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GeofenceAjaxSoap12" binding="tns:GeofenceAjaxSoap12">
+      <soap12:address location="http://www.mgoogps.com/Ajax/GeofenceAjax.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

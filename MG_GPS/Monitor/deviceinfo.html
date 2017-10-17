@@ -1,0 +1,64 @@
+<div class="bjui-pageContent" id="pageContent">
+    <form action="ajaxDone1.html" id="j_form_form" class="pageForm" data-toggle="validate">
+        <div style="margin:15px auto 0; width:100%;">
+            <fieldset>
+                <legend>loading...</legend>
+                <table class="table table-condensed table-hover"> 
+                        <tr>
+                            <td>设备名称:</td>
+                            <td><input type="text" value="" id="txtDeviceInfoName" onchange="window.change=true"></td>
+                            <td>型号:</td>
+                            <td><input type="text" value="" id="txtModel" disabled="disabled"></td>
+                        </tr>
+                    <tr>
+                        <td>出厂时间:</td>
+                        <td><input type="text" value="" id="txtCreatTime" disabled="disabled"></td>
+                        <td>到期时间:</td>
+                        <td><input type="text" value="" id="txtEndTime" disabled="disabled"></td>
+                    </tr>
+                    <tr>
+                        <td>联系人:</td>
+                        <td><input type="text" value="" id="txtContact" onchange="window.change=true"></td>
+                        <td>联系电话:</td>
+                        <td><input type="text" value="" id="txtCellPhone" onchange="window.change=true"></td>
+                    </tr>
+                    <tr>
+                        <td>车牌号:</td>
+                        <td><input type="text" value="" id="txtCarNumber" onchange="window.change=true"></td>
+                        <td>SIM卡号码:</td>
+                        <td><input type="text" value="" id="txtSimNumber" disabled="disabled"></td>
+                    </tr>
+                    <tr>
+                        <td>启用网络定位:</td>
+                        <td><input type="checkbox" data-toggle="icheck" value="" id="txtLbs" data-if-checked="alert(window.change);"></td>
+                        <td></td>
+                        <td></td>
+                    </tr> 
+                    <tr>
+                        <td>图片:</td>
+                        <td colspan="2"> 
+                                <div id="doc_pic_up" data-toggle="upload" data-uploader="/Index.aspx" 
+                                     data-file-size-limit="2048" 
+                                     data-file-type-exts="*.jpg;*.png;*.gif;*.mpg"
+                                     data-on-upload-success="doc_upload_success" 
+                                     data-icon="cloud-upload"></div>
+                        </td> 
+                        <td>
+                            <img src="" alt="" id="imgCarImage" /> <a class="btn btn-default" title="删除图片" data-icon="times" id="aRemoveImg" style="display:none;" href="#" onclick="removeImg()"></a>  
+                        </td>
+                    </tr>                   
+                </table>
+            </fieldset>
+        </div>
+    </form>
+</div>
+<div class="bjui-pageFooter">
+    <ul> 
+        <li> 
+            <button type="button" class="btn btn-close" id="btnDeviceInfoClose">关闭</button>
+        </li>
+        <li>
+            <button type="button" class="btn btn-default" onclick="saveDeviceInfo()">保存</button> 
+        </li>
+    </ul>
+</div>

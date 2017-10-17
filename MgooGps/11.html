@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="Scripts/jquery-1.8.3.js"></script>
+    <script src="Scripts/jQuery.md5.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#form1").submit(function () {
+
+                $.ajax({ 
+                    url: "http://www.mgoogps.com:8090/AjaxService/AjaxService.ashx?action=mgoologin&callback=callback", 
+                    data: { loginname: $("#loginname").val(), pwd: $.md5($("#pwd").val()), language: "zh-cn" },
+                    dataType: "jsonp",
+                    jsonpCallback: "callback",
+                    success: function (data) { 
+                        var json = JSON.parse(data); 
+                        if (json.success) {
+                            alert("µÇÂ¼³É¹¦");
+                            location.href = "http://www.mgoogps.com:8090/main.aspx";
+                        } else {
+                            alert("µÇÂ¼Ê§°Ü");
+                        }
+                    },
+                    error: function (error) {
+                        alert("³ö´íÁË");
+                    }
+                });
+
+                return false;
+            });
+        });
+       
+    </script>
+</head>
+<body>
+    <form id="form1" method="post" action="Login.aspx" runat="server">
+    <div>
+      µÇÂ¼Ãû£º <input type="text" id="loginname" name="loginname" value="admin" /> <br />
+        ÃÜÂë£º<input type="password" value="123456" id="pwd" name="pwd"/>
+        <input type="text" id="language" name="language" value="zh-cn"/>
+        <input type="submit" value="µÇÂ¼"/>
+    </div>
+    </form>
+</body>
+</html>

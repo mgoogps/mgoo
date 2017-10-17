@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E69693CC-50BB-4249-A4DC-EB71BFA903B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MG_BLL</RootNamespace>
+    <AssemblyName>MG_BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GetuiServerApiSDK, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App\lib\GetuiServerApiSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers, Version=2.4.1.473, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App\lib\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\AppPush.cs" />
+    <Compile Include="App\GetuiPush\Push.cs" />
+    <Compile Include="App\XiaoMiPush\Push.cs" />
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BllLogin.cs" />
+    <Compile Include="Common\BaiduAddress.cs" />
+    <Compile Include="Common\EvilTransform.cs" />
+    <Compile Include="Common\lib\AoboCache.cs" />
+    <Compile Include="Common\lib\Config.cs" />
+    <Compile Include="Common\lib\Permission.cs" />
+    <Compile Include="Common\Log.cs" />
+    <Compile Include="Common\SMSService\MiaodiYun.cs" />
+    <Compile Include="Common\SMSService\ShangTong.cs" />
+    <Compile Include="Common\toStringEmpty.cs" />
+    <Compile Include="Common\UIPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\Utils.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\AuthHeader.cs" />
+    <Compile Include="Common\XmlOperate.cs" />
+    <Compile Include="DeviceManager\BllDeviceManager.cs" />
+    <Compile Include="DeviceManager\SendCommand.cs" />
+    <Compile Include="Entity\Alarms.cs" />
+    <Compile Include="Entity\Devices.cs" />
+    <Compile Include="Entity\History.cs" />
+    <Compile Include="Entity\SMSResult.cs" />
+    <Compile Include="Entity\Users.cs" />
+    <Compile Include="Mileage\BllMileage.cs" />
+    <Compile Include="Monitor\BllMonitor.cs" />
+    <Compile Include="Pay\MgooOrders\Orders.cs" />
+    <Compile Include="Pay\WeixinPay\business\JsApiPay.cs" />
+    <Compile Include="Pay\WeixinPay\business\OrderQuery.cs" />
+    <Compile Include="Pay\WeixinPay\business\ResultNotify.cs" />
+    <Compile Include="Pay\WeixinPay\lib\HttpService.cs" />
+    <Compile Include="Pay\WeixinPay\lib\Notify.cs" />
+    <Compile Include="Pay\WeixinPay\lib\WxPayApi.cs" />
+    <Compile Include="Pay\WeixinPay\lib\WxPayConfig.cs" />
+    <Compile Include="Pay\WeixinPay\lib\Log.cs" />
+    <Compile Include="Pay\WeixinPay\lib\WxPayData.cs" />
+    <Compile Include="Pay\WeixinPay\lib\WxPayException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\POIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Weixin\Devices.cs" />
+    <Compile Include="Weixin\Feedback.cs" />
+    <Compile Include="Weixin\Groups.cs" />
+    <Compile Include="Weixin\Message.cs" />
+    <Compile Include="Weixin\Register.cs" />
+    <Compile Include="Weixin\Users.cs" />
+    <Compile Include="Weixin\WeixinOper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MG_DAL\MG_DAL.csproj">
+      <Project>{3c1fbd88-8a30-40a1-a4a4-d409ed99462b}</Project>
+      <Name>MG_DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pay\AliPay\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="App\GetuiPush\lib\GetuiServerApiSDK.dll.config" />
+    <None Include="Pay\WeixinPay\cert\apiclient_cert.p12" />
+    <None Include="Pay\WeixinPay\cert\apiclient_cert.pem" />
+    <None Include="Pay\WeixinPay\cert\apiclient_key.pem" />
+    <None Include="Pay\WeixinPay\cert\rootca.pem" />
+    <None Include="Service References\POIService\MG_BLL.POIService.GetAddressByLatlngResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\POIService\POIService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\GetuiPush\lib\GetuiServerApiSDK.dll" />
+    <Content Include="App\GetuiPush\lib\Google.ProtocolBuffers.dll" />
+    <Content Include="App\GetuiPush\lib\log4net.dll" />
+    <Content Include="Pay\WeixinPay\cert\证书使用说明.txt" />
+    <None Include="Service References\POIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\POIService\configuration.svcinfo" />
+    <None Include="Service References\POIService\configuration91.svcinfo" />
+    <None Include="Service References\POIService\POIService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\POIService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

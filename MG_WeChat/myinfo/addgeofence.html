@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>添加电子围栏</title>
+
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://webapi.amap.com/maps?v=1.3&key=e138c930eb6b372d830b3e8e3fbc0bb0&plugin=AMap.PolyEditor,AMap.CircleEditor"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .margin0 {
+          margin:0; padding:0;
+        }
+    </style>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+<body>
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:;" class="" onclick="javascript:history.back();">
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div>
+
+        <h1 class="am-header-title">
+            <a href="javascript:;" class="">
+                添加电子围栏
+            </a>
+        </h1>
+
+    </header>
+    <div class="am-container margin0" id="content">
+        <div class="am-panel-group" id="accordion">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd">
+                    <h4 class="am-panel-title" onclick="stepClick('1')" id="step1" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
+                        第一步:标记地图
+                    </h4>
+                </div>
+                <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
+                    <div class="am-panel-bd margin0">
+                        <div id="mgooMap" style="height:400px; background-color:antiquewhite;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd"  >
+                    <h4 class="am-panel-title" onclick="stepClick('2')" id="step2" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
+                        下一步
+                    </h4>
+                </div>
+                <div id="do-not-say-2" class="am-panel-collapse am-collapse">
+                    <div class="am-panel-bd">
+
+
+                        <form class="am-form ">
+                            <div class="am-form-group">
+                                <label for="txtGenFenceName" class="am-u-sm-4 am-form-label">围栏名称:</label>
+                                <div class="am-u-sm-8">
+                                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtGenFenceName" />
+                                </div>
+                            </div>
+                            <br /> <br /> 
+                            <div class="am-form-group">
+                                <label for="txtDeviceName" class="am-u-sm-4 am-form-label">关联设备:</label>
+                                <div class="am-u-sm-8">
+                                    <select data-am-selected="{searchBox: 1,maxHeight:220}" id="select-device" data-am-validator >
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <br />  
+                            <div class="am-form-group">
+                                <label for="txtLng" class="am-u-sm-4 am-form-label">经度:</label>
+                                <div class="am-u-sm-8">
+                                    <input class="am-form-field am-input-sm" type="text" disabled placeholder="" id="txtLng" />
+                                </div>
+                            </div>
+                            <br /> 
+                            <div class="am-form-group">
+                                <label for="txtLat" class="am-u-sm-4 am-form-label">纬度:</label>
+                                <div class="am-u-sm-8">
+                                    <input class="am-form-field am-input-sm" type="text" disabled placeholder="" id="txtLat" />
+                                </div>
+                            </div>
+                            <br /> 
+                            <div class="am-form-group">
+                                <label for="txtRadius" class="am-u-sm-4 am-form-label">半径:</label>
+                                <div class="am-u-sm-6">
+                                    <input class="am-form-field am-input-sm" type="text" disabled placeholder="" id="txtRadius" />
+                                </div>
+                                <label class="am-u-sm-2 am-form-label">米</label>
+                            </div>
+                            <br /> 
+                            <div class="am-form-group">
+                                <label for="txtDescription" class="am-u-sm-4 am-form-label">备注:</label>
+                                <div class="am-u-sm-8">
+                                    <input class="am-form-field am-input-sm" type="text" placeholder="" id="txtDescription" />
+                                </div>
+                            </div>
+                        
+
+                            <br /> <br />
+                            <div class="am-form-group">
+                                <div class="am-u-sm-6">
+                                    <button type="button" class="am-btn am-btn-primary am-btn-block" onclick="frmsumbit()">保存</button>
+                                </div>
+                                <div class="am-u-sm-6">
+                                    <button type="button" class="am-btn am-btn-primary am-btn-block am-btn-danger" onclick="DeletedGeoFence()">删除</button>
+                                </div>
+                            </div>
+                        </form> 
+                  
+                           <br /><br />
+                    </div>
+                </div>
+            </div>       
+        </div>
+        
+    </div>
+    <script src="/bootstrap/js/jquery-2.1.3.min.js"></script>
+    <script src="/bootstrap/js/amazeui-2.7.2.min.js"></script>
+    <script src="/bootstrap/js/utils.js"></script>
+    <script src="/bootstrap/js/public.js"></script>
+    <script src="/bootstrap/js/Ajax.js"></script>
+
+    <script src="/bootstrap/js/baidu/map.js"></script> 
+    <script src="/bootstrap/js/myinfo/geofence.js"></script> 
+    <script type="text/javascript">
+
+      
+        var deviceid = GetQueryString("deviceid");
+        var geofenceid = GetQueryString("geofenceid");
+       
+        //= localStorage.getItem("geofenceid")
+      
+        var map;
+        var editor = {};
+        $(function () {
+            mgoo = new mgMap("mgooMap", "GAODE");
+          
+            mgoo.DEFAULT_ZOOM = 15;
+            if (deviceid != 'null' && geofenceid == 'null') { 
+                mgoo.panToLocate = true;
+            }
+            mgoo.onLocateComplete = function (data) {
+                // mgoo.panTo(data.position.getLng(), data.position.getLat());
+                //  addCircle([data.position.getLng(), data.position.getLat()]);
+            }
+            mgoo.loadMap();
+            map = mgoo.map;
+
+            var height = $("body").height() - $(".am-header").height() - 95;
+
+            $("#mgooMap").height(height);
+            $("#content").height(height);
+            $(window).resize(function () {
+                $("#mgooMap").height(height);
+                $("#content").height(height);
+            }); 
+
+            GetGroupsList()
+            if (geofenceid != 'null' && geofenceid) {
+                $("#select-device").selected('disable');
+                $("title").text("修改电子围栏");
+                $(".am-header-title a").text("修改电子围栏");
+            }else if (!deviceid) {
+                addCircle(); 
+            } 
+        });
+
+    </script>
+</body>
+</html> 

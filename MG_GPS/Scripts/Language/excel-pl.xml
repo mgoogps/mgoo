@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">Od</resource>
+  <resource name="allPageEndTime">Do</resource>
+  <resource name="allPageNum">Numer</resource>
+  <resource name="allPageDeviceName">Nazwa</resource>
+  <resource name="allPageTime">Czas</resource>
+  <resource name="allPageLat">Szerokosc geogr.</resource>
+  <resource name="allPageLng">Dlugosc geogr.</resource>
+  <resource name="allPageAddress">Adres</resource>
+  <resource name="allPageSpeedKM">Km/h</resource>
+  <resource name="allPageDay">Dzien</resource>
+  <resource name="allPageHour">Godzina</resource>
+  <resource name="allPageMinute">Minuty</resource>
+  <resource name="allPagepositionTime">Czas pozycjonowania</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Szczegoly przemieszczen</resource>
+  <resource name="allPageDistance">Dystans</resource>
+  <resource name="reportPageWarnCount">Alarm</resource>
+  <resource name="allPageOverspeed">Przekroczenie predkosci</resource>
+  <resource name="reportPageStopCount">Zatrzymanie</resource>
+
+  <resource name="alarmSumPageTitle">Szczegoly alarmow</resource>
+
+  <resource name="alarmSumPageLowCount">Slaba bateria</resource>
+  <resource name="alarmSumPageCutPowerCount">Odciecie</resource>
+  <resource name="alarmSumPageVibCount">Alarm wibracyjny</resource>
+  <resource name="alarmSumPageSosCount">Alarm SOS</resource>
+  <resource name="alarmIndexPageGeofenceIn">Wjazd do strefy</resource>
+  <resource name="alarmIndexPageGeofenceOut">Wyjazd ze strefy</resource>
+  <resource name="alarmIndexPageMoved">Przemieszczenie</resource>
+  <resource name="alarmIndexPageOverSpeed">Przekroczenie predkosci</resource>
+
+  <resource name="overSpeedPageDistancePage">Dystans</resource>
+  <resource name="runindexPageOil">Zuzycie paliwa</resource>
+  <resource name="runindexPageL">l</resource>
+  <resource name="runindexPageOilCoefficient">Zuzycie paliwa/100km</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Przekroczenia predkosci</resource>
+  <resource name="overSpeedPageSpeedlimit">Ograniczenie predkosci</resource>
+  <resource name="overSpeedPageContinueTime">Czas kontynuacji</resource>
+
+  <resource name="overSpeedPageStopDetail">Szczegoly zatrzymania</resource>
+
+  <resource name="alarmDetailPageAlarmCount">Statystyki alarmow</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Szczegoly alarmu</resource>
+  <resource name="alarmDetailPageAlarmType">Typ alarmu</resource>
+  <resource name="alarmDetailPageAlarmTime">Czas alarmu</resource>
+
+  <resource name="geofencesPageGeofence">Strefa zasiegu</resource>
+  <resource name="allPageName">Nazwa</resource>
+</root>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">itibaren</resource>
+  <resource name="allPageEndTime">için</resource>
+  <resource name="allPageNum">Hayır.</resource>
+  <resource name="allPageDeviceName">hedef Adı</resource>
+  <resource name="allPageTime">zaman</resource>
+  <resource name="allPageLat">enlem</resource>
+  <resource name="allPageLng">longtitude</resource>
+  <resource name="allPageAddress">adres</resource>
+  <resource name="allPageSpeedKM">km / saat</resource>
+  <resource name="allPageDay">gün</resource>
+  <resource name="allPageHour">saat</resource>
+  <resource name="allPageMinute">dakika</resource>
+  <resource name="allPagepositionTime">Pozisyon zaman</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Toplam Hareket İstatistikleri</resource>
+  <resource name="allPageDistance">Kilometre (km)</resource>
+  <resource name="reportPageWarnCount">alarm</resource>
+  <resource name="allPageOverspeed">aşırı hız</resource>
+  <resource name="reportPageStopCount">kalmak</resource>
+
+  <resource name="alarmSumPageTitle">Toplam Alarm İstatistikleri</resource>
+
+  <resource name="alarmSumPageLowCount">Düşük pil alarmı</resource>
+  <resource name="alarmSumPageCutPowerCount">Cut-off alarmı</resource>
+  <resource name="alarmSumPageVibCount">Titreşim alarmı</resource>
+  <resource name="alarmSumPageSosCount">SOS alarmı</resource>
+  <resource name="alarmIndexPageGeofenceIn">Geo-çit olarak</resource>
+  <resource name="alarmIndexPageGeofenceOut">Geo-çit Out</resource>
+  <resource name="alarmIndexPageMoved">Araba taşınır</resource>
+  <resource name="alarmIndexPageOverSpeed">Aşırı Hız</resource>
+
+  <resource name="overSpeedPageDistancePage">Kilometre Raporu</resource>
+  <resource name="runindexPageOil">Yakıt Tüketimi</resource>
+  <resource name="runindexPageL">L</resource>
+  <resource name="runindexPageOilCoefficient">Yakıt Tüketimi Coefficient/100 Kilometre</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Aşırı Hız Detayları</resource>
+  <resource name="overSpeedPageSpeedlimit">hız limiti</resource>
+  <resource name="overSpeedPageContinueTime">Zaman Devam</resource>
+
+  <resource name="overSpeedPageStopDetail">Detayları Durdur</resource>
+
+  <resource name="alarmDetailPageAlarmCount">alarm İstatistikleri</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">alarm Detayları</resource>
+  <resource name="alarmDetailPageAlarmType">alarm Tipi</resource>
+  <resource name="alarmDetailPageAlarmTime">alarm Saati</resource>
+
+  <resource name="geofencesPageGeofence">Geo-çit</resource>
+  <resource name="allPageName">isim</resource>
+</root>

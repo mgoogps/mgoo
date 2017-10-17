@@ -1,0 +1,121 @@
+
+<script src="/Scripts/Statistics/StatisticsPublic.js"></script>
+<script>
+    
+    function S_NodeCheck(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj(treeId),
+            nodes = zTree.getCheckedNodes(true)       
+        var ids = '', names = ''
+        for (var i = 0; i < nodes.length; i++) {
+            ids += ',' + nodes[i].id
+            names += ',' + nodes[i].name
+        }
+        var zTree_Menu = $.fn.zTree.getZTreeObj("ztree-user-name");
+        var curNode = zTree_Menu.getNodes()[0];
+      
+        if (treeId == "ztree-user-name") {
+            GetDeviceInfo(treeNode.id);
+        }
+        ids = ids.substr(1), names = names.substr(1);
+        var $from = $('#' + treeId).data('fromObj')
+        if ($from && $from.length) $from.val(names)
+      //  getDevicesByUserId(treeNode.id);
+    }
+
+    function GetDeviceInfo(deviceid) {
+        $.ajax({
+            url: "/AjaxService/DeviceManager.asmx/GetALLUser",
+            data: "{user:'" + deviceid + "'}",
+            success: function (r) { 
+                var d = JSON.parse(r.d); 
+                $("#allDevices").text(d.count);              
+                $("#Online").text(d.onLine);
+                $("#OffLine").text(d.offLine);
+                $("#Days").text(d.days);
+                $("#endtime").text(d.overdue);
+                $("#expire").text(d.expire);
+                $("#Devices").text(d.allcount);
+                $("#OnlieDevices").text(d.allonLine);
+                $("#SevenDays").text(d.alldays);
+                $("#ExpireDevices").text(d.allexpire);
+                $("#offlineDevices").text(d.alloffLine);
+                $("#NotActive").text(d.allnotactive);
+               
+            }
+        });
+    } 
+</script>
+<script>       
+   
+
+</script>
+<div class="bjui-pageContent">
+    <div class="pageFormContent">
+        <div style="margin:15px auto 0; width:800px;" >
+            
+                <fieldset>
+                <legend>选择用户查看设备状态信息</legend><br />
+                <label>选择用户:</label>
+                <input type="text" name="menus" id="j_ztree_menus2" data-toggle="selectztree" size="18" data-tree="#ztree-user-name"  class="form-control" style="width: 180px;" d ata-emptytxt="--城市--" placeholder="—请选择用户—"> 
+                <table class="table table-condensed table-hover">                                                                                                               
+                    <thead id="thead">                   
+                        <tr>
+                            <th>类型</th>
+                            <th>设备数量</th>
+                            <th>所有设备数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>所有设备</strong></div></td>
+                          
+                            <td id="allDevices"></td>
+                            <td id="Devices">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>当前在线设备</strong></div></td>
+                            <td id="Online"></td>
+                            <td id="OnlieDevices"></td>
+                        </tr>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>超过七天设备数</strong></div></td>
+                            <td id="Days"></td>
+                            <td id="SevenDays"></td>
+                        </tr>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>离线设备数</strong></div></td>
+                            <td id="OffLine"></td>
+                            <td id="offlineDevices"></td>
+                        </tr>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>过期设备</strong></div></td>
+                            <td id="expire"></td>
+                            <td id="ExpireDevices"></td>
+                        </tr>
+                        <tr>
+                            <td><div class="alert alert-info form-inline"><strong>未激活设备</strong></div></td>
+                            <td id="endtime"></td>
+                            <td id="NotActive"> </td>
+                        </tr>
+                        <!--<tr>
+                            <td><div class="alert alert-info form-inline"><strong>未启用设备数</strong></div></td>
+                            <td>1</td>
+                            <td></td>
+                        </tr>-->                     
+                        <!--<tr>
+                            <td colspan="3">-->
+                                <!--<div class="alert alert-info form-inline"><i class="fa fa-warning"></i> <strong>A链接按钮：</strong>A链接的按钮需要添加<strong>Class[btn]</strong>，方可转换成按钮形态，JS会为Button按钮自动添加Class[btn]。</div>-->
+                                <!--<div class="alert alert-warning form-inline"><i class="fa fa-warning"></i> <strong>说明：</strong>分析统计包含自己用户和所有下级用户下的所有设备(点击设备统计数字,能显示该统计设备列表) </div>-->
+                            <!--</td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>
+  
+<div id="j_select_tree2" class="tree-box">
+    <ul id="ztree-user-name"  class="ztree hide" data-toggle="ztree" data-simple-data="true"  data-options="{nodes:'ztree_returnjson'}"  
+        data-check-enable="true" data-chk-style="radio" data-radio-type="all" data-on-check="S_NodeCheck" data-on-click="S_NodeClick" data-faicon="user"></ul>
+</div>

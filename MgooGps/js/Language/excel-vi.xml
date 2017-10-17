@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">Từ</resource>
+  <resource name="allPageEndTime">Đến</resource>
+  <resource name="allPageNum">Số.</resource>
+  <resource name="allPageDeviceName">Tên thiết bị</resource>
+  <resource name="allPageTime">Thời gian</resource>
+  <resource name="allPageLat">Kinh độ</resource>
+  <resource name="allPageLng">Vĩ độ</resource>
+  <resource name="allPageAddress">Địa chỉ</resource>
+  <resource name="allPageSpeedKM">km/ giờ</resource>
+  <resource name="allPageDay">Ngày</resource>
+  <resource name="allPageHour">Giờ</resource>
+  <resource name="allPageMinute">Phút</resource>
+  <resource name="allPagepositionTime">Position time</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Thống kê tổng quãng đường di chuyển</resource>
+  <resource name="allPageDistance">Quãng đường ( km)</resource>
+  <resource name="reportPageWarnCount">Cảnh báo</resource>
+  <resource name="allPageOverspeed">Quá tốc độ cho phép</resource>
+  <resource name="reportPageStopCount">Dừng đỗ</resource>
+
+  <resource name="alarmSumPageTitle">Thống kê tổng quãng đường di chuyển</resource>
+
+  <resource name="alarmSumPageLowCount">Cảnh báo pin yếu</resource>
+  <resource name="alarmSumPageCutPowerCount">Cảnh báo cắt nguồn ngoài</resource>
+  <resource name="alarmSumPageVibCount">Cảnh báo rung động</resource>
+  <resource name="alarmSumPageSosCount">Cánh báo khẩn cấp SOS</resource>
+  <resource name="alarmIndexPageGeofenceIn">Vào khu khoanh vùng</resource>
+  <resource name="alarmIndexPageGeofenceOut">Ra khỏi khu khoanh vùng</resource>
+  <resource name="alarmIndexPageMoved">Đã thay thế</resource>
+  <resource name="alarmIndexPageOverSpeed">Quá tốc đô cho phép</resource>
+
+  <resource name="overSpeedPageDistancePage">Báo cáo quãng đường</resource>
+  <resource name="runindexPageOil">Công suất tiêu thụ nhiên liệu</resource>
+  <resource name="runindexPageL">Lít</resource>
+  <resource name="runindexPageOilCoefficient">Nhiên liệu tiêu thụ / 100 km</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Chi tiết quá tốc độ</resource>
+  <resource name="overSpeedPageSpeedlimit">Tốc độ giới hạn</resource>
+  <resource name="overSpeedPageContinueTime">Thời gian liên tục</resource>
+
+  <resource name="overSpeedPageStopDetail">Chi tiết dừng đỗ</resource>
+
+  <resource name="alarmDetailPageAlarmCount">Thống kê cảnh báo</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Chi tiết cảnh báo</resource>
+  <resource name="alarmDetailPageAlarmType">Kiểu cảnh báo</resource>
+  <resource name="alarmDetailPageAlarmTime">Thời gian cảnh báo</resource>
+
+  <resource name="geofencesPageGeofence">Geo-fence</resource>
+  <resource name="allPageName">Tên</resource>
+</root>

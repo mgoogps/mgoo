@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">От</resource>
+  <resource name="allPageEndTime">К</resource>
+  <resource name="allPageNum">Нет.</resource>
+  <resource name="allPageDeviceName">Целевое имя</resource>
+  <resource name="allPageTime">Время</resource>
+  <resource name="allPageLat">Широта</resource>
+  <resource name="allPageLng">Longtitude</resource>
+  <resource name="allPageAddress">Адрес</resource>
+  <resource name="allPageSpeedKM">км/ч</resource>
+  <resource name="allPageDay">День</resource>
+  <resource name="allPageHour">Час</resource>
+  <resource name="allPageMinute">Минута</resource>
+  <resource name="allPagepositionTime">Время положения</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+
+  <resource name="reportPagetitle">Полная статистика движения</resource>
+  <resource name="allPageDistance">Пробег (км)</resource>
+  <resource name="reportPageWarnCount">Сигнализация</resource>
+  <resource name="allPageOverspeed">Превышение скорости</resource>
+  <resource name="reportPageStopCount">Стоянка</resource>
+
+  <resource name="alarmSumPageTitle">Полная сигнальная статистика</resource>
+
+  <resource name="alarmSumPageLowCount">Звуковой сигнал</resource>
+  <resource name="alarmSumPageCutPowerCount">Виброзвонок</resource>
+  <resource name="alarmSumPageVibCount">Дверной датчик сигнализации</resource>
+  <resource name="alarmSumPageSosCount">Тревога SOS</resource>
+  <resource name="alarmIndexPageGeofenceIn">Геозона в</resource>
+  <resource name="alarmIndexPageGeofenceOut">Геозона</resource>
+  <resource name="alarmIndexPageMoved">Автомобиль перемещен</resource>
+  <resource name="alarmIndexPageOverSpeed">Превышение скорости</resource>
+
+  <resource name="overSpeedPageDistancePage">Отчет о пробеге</resource>
+  <resource name="runindexPageOil">Потребление топлива</resource>
+  <resource name="runindexPageL">L</resource>
+  <resource name="runindexPageOilCoefficient">Содействующие/100 Километры Потребления топлива</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Детали превышения скорости</resource>
+  <resource name="overSpeedPageSpeedlimit">Ограничение скорости</resource>
+  <resource name="overSpeedPageContinueTime">Продолжите время</resource>
+
+  <resource name="overSpeedPageStopDetail">Остановите детали</resource>
+
+  <resource name="alarmDetailPageAlarmCount">Сигнальная статистика</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Сигнальные детали</resource>
+  <resource name="alarmDetailPageAlarmType">Сигнальный тип</resource>
+  <resource name="alarmDetailPageAlarmTime">Сигнальное время</resource>
+
+  <resource name="geofencesPageGeofence">Геозона</resource>
+  <resource name="allPageName">Имя</resource>
+</root>

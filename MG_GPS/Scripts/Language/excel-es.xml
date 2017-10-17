@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <resource name="allPageStartTime">De</resource>
+  <resource name="allPageEndTime">Para</resource>
+  <resource name="allPageNum">Núm.</resource>
+  <resource name="allPageDeviceName">Nombre de Objetivo</resource>
+  <resource name="allPageTime">Tiempo</resource>
+  <resource name="allPageLat">Lat</resource>
+  <resource name="allPageLng">Lon</resource>
+  <resource name="allPageAddress">Dirección</resource>
+  <resource name="allPageSpeedKM">km/h</resource>
+  <resource name="allPageDay">Día</resource>
+  <resource name="allPageHour">Hora</resource>
+  <resource name="allPageMinute">Minutos</resource>
+  <resource name="allPagepositionTime">Hora de posición</resource>
+  <resource name="allPageInTime">Enter time</resource>
+  <resource name="allPageOutTime">Departure time</resource>
+  
+  <resource name="reportPagetitle">Estadiísticas Totales de Movimiento</resource>
+  <resource name="allPageDistance">Kilometraje (km)</resource>
+  <resource name="reportPageWarnCount">Alarma</resource>
+  <resource name="allPageOverspeed">Exceso de Velocidad</resource>
+  <resource name="reportPageStopCount">Quedar</resource>
+
+  <resource name="alarmSumPageTitle">Estadísticas Totales de Alarma</resource>
+  
+  <resource name="alarmSumPageLowCount">Alarma de batería baja</resource>
+  <resource name="alarmSumPageCutPowerCount">Apagar la Alarma</resource>
+  <resource name="alarmSumPageVibCount">Alarma por Vibración</resource>
+  <resource name="alarmSumPageSosCount">alarma SOS</resource>
+  <resource name="alarmIndexPageGeofenceIn">Geo-fense Dentro</resource>
+  <resource name="alarmIndexPageGeofenceOut">Geo-fense Fuera</resource>
+  <resource name="alarmIndexPageMoved">Desplazamiento</resource>
+  <resource name="alarmIndexPageOverSpeed">Exceso de Velocidad</resource>
+  
+  <resource name="overSpeedPageDistancePage">Informe Sobre Kilometraje</resource>
+  <resource name="runindexPageOil">Consumo de Combustible</resource>
+  <resource name="runindexPageL">L</resource>
+  <resource name="runindexPageOilCoefficient">Coeficiente de Consumo de Combustible/100 Kilómetros</resource>
+
+  <resource name="overSpeedPageOverspeedDetail">Detalles de Exceso de Velocidad</resource>
+  <resource name="overSpeedPageSpeedlimit">Límite de Velocidad</resource>
+  <resource name="overSpeedPageContinueTime">Tiempo de Conducción</resource>
+
+  <resource name="overSpeedPageStopDetail">Detalles de Parada</resource>
+  
+  <resource name="alarmDetailPageAlarmCount">Estadísticas de Alarma</resource>
+
+  <resource name="alarmDetailPageAlarmDetail">Detalles de Alarma</resource>
+  <resource name="alarmDetailPageAlarmType">Tipo de Alarma</resource>
+  <resource name="alarmDetailPageAlarmTime">Hora de Alarma</resource>
+
+  <resource name="geofencesPageGeofence">Geo-fence</resource>
+  <resource name="allPageName">Nombre</resource>
+</root>  

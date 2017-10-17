@@ -1,0 +1,159 @@
+﻿ <!doctype html>
+<html class="no-js">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>设备监控</title>
+
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+          
+            margin: 0; 
+        }
+
+        #mgooMap {
+            width: 100%;
+            height:100%; 
+          
+        }  
+    </style>
+     
+    <!--<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />-->
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+
+    <script src="http://webapi.amap.com/maps?v=1.3&key=e138c930eb6b372d830b3e8e3fbc0bb0&&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>  
+    <!--<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>-->
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SAbCayX7PG5UMsqW6d1DZ9K0"></script>
+
+    <link href="/bootstrap/js/plugin/menu/css/style.css" rel="stylesheet" />
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?6c83c0718ac733f5108b0edcab16fea5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+<body>
+    
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav" id="divBack">
+            <a href="javascript:;" class="" onclick="javascript:history.back();"> 
+                <i class="am-header-icon am-icon-chevron-left"></i>
+            </a>
+        </div>
+
+        <h1 class="am-header-title">
+            <a href="javascript:;" class="">
+                设备监控
+            </a>
+        </h1>
+
+        <div class="am-header-right am-header-nav am-dropdown" data-am-dropdown>
+            <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
+                <i class="am-header-icon am-icon-bars"></i>
+            </a>
+            <ul class="am-dropdown-content">
+                <li class="active"><a id="aInfo" href="javascript:;">设备信息</a></li>
+                <li><a id="aHistory" href="javascript:;">历史轨迹</a></li>
+                <!--<li><a id="aGeoFence" href="javascript:;">添加围栏</a></li>-->
+                <!--<li><a id="aGeoFence" href="javascript:;">一键围栏</a></li>-->
+                <li><a id="aCommand" data-am-modal="{target: '#command-prompt'}" href="javascript:;">命令下发</a></li>
+                <li><a id="aPay" href="javascript:;">在线充值</a></li>
+                <!--<li><a href="#">警报消息</a></li>
+                <li class="am-divider"></li>
+                <li><a href="#">续费</a></li>-->
+
+                <!--IMEI号登录-->
+                <li><a id="aLogout" href="javascript:;" style="display:none;">退出登录</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <div class="am-text-xs" style="width:100%;height:auto;background-color:#FAFAFA;" id="showinfo">
+        
+    </div>
+    <div style="border: 0px solid red; width:100%;height:100%;padding-left:0;padding-right:0px;  margin-bottom:0px;" id="content">
+
+        <div id="mgooMap" >
+
+        </div>
+
+    </div>
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="command-prompt">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd"></div>
+            <div class="am-modal-bd am-center"> 
+                <ul class="am-avg-sm-2 boxes">
+                    <li class="box box-1"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='SF'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '设防'}" value="设防" />  </li>
+                    <li class="box box-2"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='CF'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '撤防'}" value="撤防" />  </li>
+                    <li class="box box-3"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='DY'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '断油'}" value="断油" />  </li>
+                    <li class="box box-4"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='TY'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '通油'}" value="通油" />  </li>
+                    <li class="box box-3" style="display:none;"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='KM'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '开门'}" value="开门" />  </li>
+                    <li class="box box-4" style="display:none;"><input type="button" class="am-btn am-btn-secondary am-round am-margin-top-xs btn-loading" onclick="window.selectcommand='SM'" ata-am-loading="{spinner: 'circle-o-notch', loadingText: '发送中...', resetText: '锁门'}" value="锁门" />  </li>
+                </ul> 
+             </div>
+            <!--<div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>发送</span>
+            </div>-->
+        </div>
+    </div>
+    
+    <div style="background-image:url(/images/map/navigation.png);background-size:100% 100%; z-index:2200;position:absolute;left:12px;bottom:70px;width:33px;height:30px;cursor:pointer" onclick="navigation()"></div> 
+     
+    <div style="position:absolute;right:10px;top:90px;width:33px;height:auto;z-index:1000;line-height:10px;border:0px solid blue;" id="mapPlugin">
+        <div style="background-image:url(/images/map/type1.png);background-size:100% 100%; width:33px;height:30px;cursor:pointer;border:0px solid blue"></div>
+        <div style="background-image:url(/images/map/traffic1.png);background-size:100% 100%; width:33px;margin-top:5px;height:30px;cursor:pointer;border:0px solid blue"></div>
+        <div style="background-image:url('/images/map/street.png');background-size:100% 100%; width:33px;margin-top:5px;height:30px;cursor:pointer;border:0px solid blue"></div> 
+    </div>
+   
+    <!--<div class="wrap">
+        <div class="menu"><img class="icon_menu" src="/bootstrap/js/plugin/menu/img/menu.png" /><span></span></div>
+        <div class="btn btn1" data-num="1"><span>照相</span></div>
+        <div class="btn btn2" data-num="2"><span>位置</span></div>
+        <div class="btn btn3" data-num="3"><span>音乐</span></div>
+        <div class="btn btn4" data-num="4"><span>聊天</span></div>
+    </div>-->
+
+    <script src="/bootstrap/js/jquery-2.1.3.min.js"></script> 
+    <script src="/bootstrap/js/amazeui-2.7.2.min.js"></script>
+    <script src="/bootstrap/js/utils.js"></script>
+    <script src="/bootstrap/js/public.js"></script>
+    <script src="/bootstrap/js/Ajax.js"></script>
+    <!--<script src="/bootstrap/js/plugin/menu/js/zepto.min.js"></script>-->
+    <script type="text/javascript">
+        /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+        var urlinfo = window.location.href; //获取当前页面的url
+        var len = urlinfo.length;//获取url的长度
+        var offset = urlinfo.indexOf("?");//设置参数字符串开始的位置
+        var info = urlinfo.substr(offset, len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+        var ids = info.split("=");//对获得的参数字符串按照“=”进行分割
+        var deviceid = ids[1];//得到参数值
+      
+        $("#aHistory").attr("href", "history.html?id=" + deviceid);
+        $("#aInfo").attr("href", "info.html?id=" + deviceid);
+        $("#aGeoFence").attr("href","/myinfo/addgeofence.html?deviceid="+deviceid);
+       // $("#aCommand").attr("");
+         
+        $(window).resize(function () {
+            $("#mgooMap").height($("#content").height() - $(".am-header").height());
+            $("#content").height($("#content").height() - $(".am-header").height());
+        }); 
+         
+    </script>
+    <script src="/bootstrap/js/baidu/map.js"></script>
+    <script src="/bootstrap/js/device/Tracking.js"></script>
+</body>
+</html>
