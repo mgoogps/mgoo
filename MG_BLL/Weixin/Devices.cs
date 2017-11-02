@@ -1098,7 +1098,7 @@ namespace MG_BLL.Weixin
                 string recStr;
                 if (Model == "81")//型号是X11BDY
                 {
-                    recStr = Utils.SendTcpCmd(cmd);
+                    recStr = Utils.SendTcpCmd(cmd.Replace("/", ","));
                 }
                 else
                 {
