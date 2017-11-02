@@ -1086,63 +1086,72 @@ namespace MG_BLL.Weixin
                     return Utils.GetResult("参数错误.", statusCode.Code.failure);
                 }
                 var cmd = sps[1];
-                string strSql = "select UserID from devices where serialnumber = @serialnumber and deleted = 0";
+                string strSql = "select UserID,Model from devices where serialnumber = @serialnumber and deleted = 0";
                 SQLServerOperating s = new SQLServerOperating ();
-                string UserID =s.Select(strSql,new SqlParameter[] { new SqlParameter("serialnumber", sps[0]) });
+                DataTable dt = s.Selects(strSql, new SqlParameter[] { new SqlParameter("serialnumber", sps[0]) });
+                string UserID = dt.Rows[0]["UserID"].ToString();
+                string Model = dt.Rows[0]["Model"].ToString();
                 if (UserID != myHeader.UserID)
                 {
                     return Utils.GetResult("您无权操作此设备.", statusCode.Code.failure);
                 }
-                List<string> cmds = new List<string>();
-                cmd = (cmd == "GM" ? "SM" : cmd);
-                cmds.Add("SF"); cmds.Add("CF"); cmds.Add("DY"); cmds.Add("TY"); cmds.Add("SHUT");cmds.Add("KM");cmds.Add("SM");
-                if (!cmds.Contains(cmd) && cmd.IndexOf("Rate") < 0)
+                string recStr;
+                if (Model == "81")//型号是X11BDY
                 {
-                    return Utils.GetResult("指令错误.", statusCode.Code.failure);
+                    recStr = Utils.SendTcpCmd(cmd);
                 }
-                #region  3008000000和3528888000开头的设备特殊处理 
-                if (sps[0].StartsWith("3008000000") || sps[0].StartsWith("3528888000"))
+                else
                 {
-                    string serverid2 = "";
-                    if (cmd == "SF")
+                    List<string> cmds = new List<string>();
+                    cmd = (cmd == "GM" ? "SM" : cmd);
+                    cmds.Add("SF"); cmds.Add("CF"); cmds.Add("DY"); cmds.Add("TY"); cmds.Add("SHUT"); cmds.Add("KM"); cmds.Add("SM");
+                    if (!cmds.Contains(cmd) && cmd.IndexOf("Rate") < 0)
                     {
-                        serverid2 = "1";
+                        return Utils.GetResult("指令错误.", statusCode.Code.failure);
                     }
-                    else if(cmd == "CF")
+                    #region  3008000000和3528888000开头的设备特殊处理 
+                    if (sps[0].StartsWith("3008000000") || sps[0].StartsWith("3528888000"))
                     {
-                        serverid2 = "0";
-                    }
-                    if (serverid2.Equals(""))
-                    {
-                        //return Utils.GetResult("发送失败.", statusCode.Code.failure);
-                        //cmd = "";
-                    }
-                    else
-                    {
-                        //启用数据库Devices表ServerID2列， 等于1则关闭微信推送震动报警，为0或者null则要微信推送震动报警,数据库默认为null
-                        strSql = "update Devices set ServerID2=" + serverid2 + " where SerialNumber=@SerialNumber and Deleted=0";
-                        int count = s.ExecuteSql(strSql, new SqlParameter[] { new SqlParameter("SerialNumber", sps[0]) });
-                        if (count > 0)
+                        string serverid2 = "";
+                        if (cmd == "SF")
                         {
-                            return Utils.GetResult("发送成功.", statusCode.Code.success);
+                            serverid2 = "1";
+                        }
+                        else if (cmd == "CF")
+                        {
+                            serverid2 = "0";
+                        }
+                        if (serverid2.Equals(""))
+                        {
+                            //return Utils.GetResult("发送失败.", statusCode.Code.failure);
+                            //cmd = "";
                         }
                         else
                         {
-                            return Utils.GetResult("发送失败.", statusCode.Code.failure);
+                            //启用数据库Devices表ServerID2列， 等于1则关闭微信推送震动报警，为0或者null则要微信推送震动报警,数据库默认为null
+                            strSql = "update Devices set ServerID2=" + serverid2 + " where SerialNumber=@SerialNumber and Deleted=0";
+                            int count = s.ExecuteSql(strSql, new SqlParameter[] { new SqlParameter("SerialNumber", sps[0]) });
+                            if (count > 0)
+                            {
+                                return Utils.GetResult("发送成功.", statusCode.Code.success);
+                            }
+                            else
+                            {
+                                return Utils.GetResult("发送失败.", statusCode.Code.failure);
+                            }
                         }
                     }
+                    #endregion
+
+                    if (cmd.IndexOf("Rate") > 0)
+                    {
+                        cmd = cmd.Replace("-", ",");
+                    }
+
+                    cmd = "VTR-Command-" + string.Join("-", sps);
+
+                     recStr = Utils.SendTcpCmd(cmd);
                 }
-                #endregion
-
-                if (cmd.IndexOf("Rate") > 0)
-                {
-                    cmd = cmd.Replace("-", ",");
-                }
-
-                cmd = "VTR-Command-" + string.Join("-", sps);
-
-                string recStr = Utils.SendTcpCmd(cmd);
-               
                 if (recStr == "1")
                 {
                     return Utils.GetResult("发送成功.", statusCode.Code.success); 

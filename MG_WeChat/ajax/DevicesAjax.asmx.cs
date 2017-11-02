@@ -22,7 +22,7 @@ namespace MG_WeChat.ajax
     public class DevicesAjax : System.Web.Services.WebService
     {
         public MG_BLL.Common.AuthHeader myHeader = new AuthHeader();
-
+        
         [SoapHeader("myHeader")]
         [WebMethod( Description ="根据用户id获取分组列表,然后根据分组ID获取该组下的设备列表")] 
         public string GetGroupList(string userid)
