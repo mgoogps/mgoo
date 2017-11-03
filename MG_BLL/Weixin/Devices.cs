@@ -1080,7 +1080,7 @@ namespace MG_BLL.Weixin
             {
                 //command = "4210001185,SF";
                 string[] sps = command.Split(',');
-                if (sps.Length != 2 || string.IsNullOrEmpty(sps[0]) || sps[0].Length > 20)
+                if (string.IsNullOrEmpty(sps[0]) || sps[0].Length > 30)
                 {
                     Utils.log("SendCommand 参数错误:" + (sps.Length >= 1 ? sps[0] : "") + "," + (sps.Length >= 2 ? sps[1] : ""));
                     return Utils.GetResult("参数错误.", statusCode.Code.failure);
