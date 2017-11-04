@@ -150,6 +150,17 @@ namespace MG_WeChat.ajax
             Message m = new Message(myHeader);
             return m.SetUsersConfig(config);
         }
-
+        [SoapHeader("myHeader")]
+        [WebMethod(Description = "根据设备id获取20秒内有没有产生报警消息")]
+        public string GetMessageByDeviceIDIsExist(int deviceid,int second)
+        {
+            string valid = myHeader.isValid();
+            if (!valid.Equals(string.Empty))
+            {
+                return valid;
+            }
+            Message m = new Message(myHeader);
+            return Utils.ToJson(m.GetMessageByDeviceID(deviceid, second));
+        }
     }
 }
