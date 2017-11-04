@@ -340,7 +340,7 @@ namespace MG_BLL.Weixin
         {
             try
             {
-                string strSql = $"select top 5 ExceptionID.DeviceID,Message,Created from [ExceptionMessage] where DeviceID=@DeviceID and created > dateadd(ss,@second,dateadd(HH,-8, getdate()))";
+                string strSql = $"select top 5 ExceptionID,DeviceID,Message,Created from [ExceptionMessage] where DeviceID=@DeviceID and created > dateadd(ss,@second,dateadd(HH,-8, getdate()))";
                 SQLServerOperating s = new SQLServerOperating();
                 SqlParameter[] par = new SqlParameter[] { new SqlParameter("DeviceID", DeviceID), new SqlParameter("second", second - second * 2) };
                 List<Dictionary<string, string>> list = s.Selects(strSql, par).toListDictionary();
