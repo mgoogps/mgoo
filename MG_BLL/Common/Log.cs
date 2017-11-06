@@ -92,7 +92,7 @@ namespace MG_BLL.Common
                 // }
 
                 string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
-                filename = LOG_PATH + "/" + DateTime.Now.ToString("yyyy-MM-dd-" + type) + ".log";//用日期对日志文件命名
+                filename = LOG_PATH + "/" + DateTime.Now.ToString("yyyy-MM-dd") + type + ".log";//用日期对日志文件命名
                 lock (LOG_LOCK)
                 {
                     //创建或打开日志文件，向日志文件末尾追加记录
