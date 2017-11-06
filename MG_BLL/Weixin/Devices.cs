@@ -1096,8 +1096,9 @@ namespace MG_BLL.Weixin
                     return Utils.GetResult("您无权操作此设备.", statusCode.Code.failure);
                 }
                 string recStr;
-                if (Model == "81")//型号是X11BDY
+                if (Model == "81" && (cmd.ToLower().IndexOf("off")>=0 || cmd.ToLower().IndexOf("on")>0))//型号是X11BDY
                 {
+                    Utils.log(cmd.Replace("/", ","));
                     recStr = Utils.SendTcpCmd(cmd.Replace("/", ","));
                 }
                 else
