@@ -699,7 +699,7 @@ namespace MG_BLL
                 byte[] recBytes = new byte[2];
                 int bytes = clientSocket.Receive(recBytes, recBytes.Length, 0);
                 recStr += Encoding.ASCII.GetString(recBytes, 0, bytes);
-                Common.Log.Info(new Utils(),cmd + ":" + host,recStr);
+               Utils.log( cmd + ":" + host,recStr);
                 return recStr;
             }
             catch (Exception ex)
