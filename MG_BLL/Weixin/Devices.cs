@@ -1,4 +1,5 @@
-﻿using MG_DAL;
+﻿using MG_BLL.Common;
+using MG_DAL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -1098,7 +1099,7 @@ namespace MG_BLL.Weixin
                 string recStr;
                 if (Model == "81" && (cmd.ToLower().IndexOf("off")>=0 || cmd.ToLower().IndexOf("on")>0))//型号是X11BDY
                 {
-                    Utils.log(cmd.Replace("/", ","));
+                    Log.Info(cmd.Replace("/", ",")); 
                     recStr = Utils.SendTcpCmd(cmd.Replace("/", ","));
                 }
                 else
