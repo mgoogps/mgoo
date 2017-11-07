@@ -34,6 +34,7 @@ namespace MG_WeChat
                     //相对路径
                     MG_BLL.Common.Log.LOG_PATH = System.AppDomain.CurrentDomain.BaseDirectory + path;
                 }
+                Utils.log("MG_BLL.Common.Log.LOG_PATH:" + MG_BLL.Common.Log.LOG_PATH);
                 if (!System.IO.Directory.Exists(MG_BLL.Common.Log.LOG_PATH))//如果日志目录不存在就创建
                 {
                     System.IO.Directory.CreateDirectory(MG_BLL.Common.Log.LOG_PATH);
