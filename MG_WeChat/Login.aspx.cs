@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MG_BLL.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace MG_WeChat
         protected void Page_Load(object sender, EventArgs e)
         {
             wxCode = Request.QueryString["code"];
-          
+             
             if (!string.IsNullOrWhiteSpace(Request.QueryString["backurl"]))
             {
                 backUrl = Request.QueryString["backurl"];
