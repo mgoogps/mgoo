@@ -1101,7 +1101,7 @@ namespace MG_BLL.Weixin
                 if (Model == "81" && (cmd.ToLower().IndexOf("off")>=0 || cmd.ToLower().IndexOf("on")>0))//型号是X11BDY
                 {
                     cmd = Prefix + sps[0] + "-" + cmd.Replace("/", ",");
-                    Log.Info(cmd);
+                    Log.Info(this,cmd);
                     recStr = Utils.SendTcpCmd(cmd);
                 }
                 else

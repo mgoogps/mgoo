@@ -18,6 +18,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Security.Cryptography;
+using MG_BLL.Common;
 
 namespace MG_BLL
 {
@@ -699,7 +700,7 @@ namespace MG_BLL
                 byte[] recBytes = new byte[2];
                 int bytes = clientSocket.Receive(recBytes, recBytes.Length, 0);
                 recStr += Encoding.ASCII.GetString(recBytes, 0, bytes);
-               Utils.log( cmd + ":" + host,recStr);
+                Log.Info(new Utils() , cmd + ":" + host,recStr);
                 return recStr;
             }
             catch (Exception ex)
