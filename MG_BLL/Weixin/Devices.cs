@@ -1097,10 +1097,12 @@ namespace MG_BLL.Weixin
                     return Utils.GetResult("您无权操作此设备.", statusCode.Code.failure);
                 }
                 string recStr;
+                string Prefix = "VTR-Command-";
                 if (Model == "81" && (cmd.ToLower().IndexOf("off")>=0 || cmd.ToLower().IndexOf("on")>0))//型号是X11BDY
                 {
-                    Log.Info(cmd.Replace("/", ",")); 
-                    recStr = Utils.SendTcpCmd(cmd.Replace("/", ","));
+                    cmd = Prefix + sps[0] + "-" + cmd.Replace("/", ",");
+                    Log.Info(cmd);
+                    recStr = Utils.SendTcpCmd(cmd);
                 }
                 else
                 {
@@ -1150,7 +1152,7 @@ namespace MG_BLL.Weixin
                         cmd = cmd.Replace("-", ",");
                     }
 
-                    cmd = "VTR-Command-" + string.Join("-", sps);
+                    cmd = Prefix + string.Join("-", sps);
 
                      recStr = Utils.SendTcpCmd(cmd);
                 }
