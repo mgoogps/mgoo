@@ -40,8 +40,9 @@ namespace MG_WeChat
                     System.IO.Directory.CreateDirectory(MG_BLL.Common.Log.LOG_PATH);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Utils.log("MG_BLL.Common.Log.LOG_PATH:" + MG_BLL.Common.Log.LOG_PATH + ""+ex.Message);
                 MG_BLL.Common.Log.LOG_LEVEL = 0;
             }
         }
