@@ -15,7 +15,7 @@ namespace MG_WeChat
         protected void Page_Load(object sender, EventArgs e)
         {
             wxCode = Request.QueryString["code"];
-             
+            Log.Info(this,"-------------");
             if (!string.IsNullOrWhiteSpace(Request.QueryString["backurl"]))
             {
                 backUrl = Request.QueryString["backurl"];

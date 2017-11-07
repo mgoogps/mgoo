@@ -43,7 +43,6 @@ namespace MG_WeChat
             {
                 MG_BLL.Common.Log.LOG_LEVEL = 0;
             }
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
