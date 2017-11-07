@@ -43,7 +43,6 @@ namespace MG_BLL.Common
         {
             if (LOG_LEVEL >= 2)
             {
-
                 WriteLog("Run", classObj.GetType().ToString(), string.Join(",", content));
             }
         }
@@ -85,12 +84,6 @@ namespace MG_BLL.Common
             try
             {
                 //在网站根目录下创建日志目录
-
-                // if (!Directory.Exists(LOG_PATH))//如果日志目录不存在就创建
-                //{
-                //    Directory.CreateDirectory(LOG_PATH);
-                // }
-
                 string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
                 filename = LOG_PATH + "/" + DateTime.Now.ToString("yyyy-MM-dd") +"-"+ type + ".log";//用日期对日志文件命名
                 lock (LOG_LOCK)
@@ -99,7 +92,7 @@ namespace MG_BLL.Common
                     StreamWriter mySw = File.AppendText(filename);
 
                     //向日志文件写入内容
-                    string write_content = time + " " + type + " " + className + ": " + content;
+                    string write_content = time + " " + className + ": " + content;
                     mySw.WriteLine(write_content);
 
                     //关闭日志文件
