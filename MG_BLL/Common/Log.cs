@@ -99,9 +99,9 @@ namespace MG_BLL.Common
                     mySw.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Utils.log("WriteLog Error:" + ex.Message + ",type：" + type + ",className：" + className + ",content:" + content + ",filename:" + filename + ",堆栈：" + ex.Source + "，" + ex.StackTrace);
+                 Utils.log("WriteLog Error:" + ex.Message + ",type：" + type + ",className：" + className + ",content:" + content + ",filename:" + filename + ",堆栈：" + ex.Source + "，" + ex.StackTrace);
             }
         }
     }
