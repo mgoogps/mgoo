@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-using MG_BLL.Common;
+
 namespace MG_WeChat
 {
     public class Global : System.Web.HttpApplication
@@ -17,7 +17,7 @@ namespace MG_WeChat
             //初始化写日志的等级（默认是3）
             //0.不输出日志; 1.只输出错误信息; 2.输出错误和正常信息; 3.输出错误信息、正常信息和调试信息
             MG_BLL.Common.Log.LOG_LEVEL = Convert.ToInt32(ConfigurationManager.AppSettings["LOG_Level"]);
-
+            Utils.log(" MG_BLL.Common.Log.LOG_LEVEL ：" + MG_BLL.Common.Log.LOG_LEVEL);
             try
             {
                 //写LOG的路径 
@@ -42,7 +42,7 @@ namespace MG_WeChat
             }
             catch (Exception ex)
             {
-                Utils.log("MG_BLL.Common.Log.LOG_PATH:" + MG_BLL.Common.Log.LOG_PATH + ""+ex.Message);
+                Utils.log("MG_BLL.Common.Log.LOG_PATH:" + MG_BLL.Common.Log.LOG_PATH + "" + ex.Message);
                 MG_BLL.Common.Log.LOG_LEVEL = 0;
             }
         }
@@ -72,8 +72,8 @@ namespace MG_WeChat
             }
             catch (Exception ex)
             {
-                Utils.log("Application_Error Error:"+ex.Message);
-            } 
+                Utils.log("Application_Error Error:" + ex.Message);
+            }
             Server.ClearError();
         }
 
