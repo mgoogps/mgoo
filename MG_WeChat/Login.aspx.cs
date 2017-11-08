@@ -1,6 +1,8 @@
-﻿using MG_BLL.Common;
+﻿using MG_BLL;
+using MG_BLL.Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,7 +17,18 @@ namespace MG_WeChat
         protected void Page_Load(object sender, EventArgs e)
         {
             wxCode = Request.QueryString["code"];
-            Log.Info(this,"-------------");
+            try
+            {
+                var path = ConfigurationManager.AppSettings["LOG_Path"].ToString();
+                    Log.LOG_PATH = path;
+                Log.LOG_LEVEL = 3;
+            }
+            catch (Exception ex)
+            {
+                Utils.log("Page_Load:" + ex.Message);
+            }
+         
+            Log.Info(this,"-------------"+Log.LOG_PATH);
             if (!string.IsNullOrWhiteSpace(Request.QueryString["backurl"]))
             {
                 backUrl = Request.QueryString["backurl"];

@@ -20,8 +20,10 @@ namespace MG_WeChat
 
             try
             {
+                Utils.log("----------"+MG_BLL.Common.Log.LOG_LEVEL);
                 //写LOG的路径 
                 var path = ConfigurationManager.AppSettings["LOG_Path"].ToString();
+             
                 var curDate = DateTime.Now;
                 path = path.Replace("yyyy", curDate.Year + "").Replace("mm", curDate.Month + "").Replace("dd", curDate.Day + "");
                 if (System.IO.Path.IsPathRooted(path))
