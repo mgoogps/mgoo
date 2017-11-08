@@ -1101,16 +1101,16 @@ namespace MG_BLL.Weixin
                 if (Model == "81")//型号是X11BDY
                 {
                     //VTR-Command-13350000146-DEFENSE,ON#
-                    if (cmd.IndexOf("SF") >= 0) 
-                        cmd = "VTR-Command-"+ sps[0] + "-DEFENSE,ON#";
-                    if (cmd.IndexOf("SF") >= 0) 
-                        cmd = "VTR-Command-" + sps[0] + "-DEFENSE,OFF#";
-                    if (cmd.IndexOf("DY") >= 0) 
-                        cmd = "VTR-Command-" + sps[0] + "-BRAKE,ON#";
-                    if(cmd.IndexOf("TY") >= 0)
-                        cmd = "VTR-Command-" + sps[0] + "-BRAKE,OFF#";
+                    if (cmd.IndexOf("SF") >= 0)
+                        cmd = "DEFENSE,ON#";
+                    if (cmd.IndexOf("SF") >= 0)
+                        cmd = "DEFENSE,OFF#";
+                    if (cmd.IndexOf("DY") >= 0)
+                        cmd = "BRAKE,ON#";
+                    if (cmd.IndexOf("TY") >= 0)
+                        cmd = "BRAKE,OFF#";
                     cmd = Prefix + sps[0] + "-" + cmd.Replace("/", ",");
-                    Log.Info(this,cmd);
+                    Log.Info(this, cmd);
                     recStr = Utils.SendTcpCmd(cmd);
                 }
                 else
@@ -1163,7 +1163,7 @@ namespace MG_BLL.Weixin
 
                     cmd = Prefix + string.Join("-", sps);
 
-                     recStr = Utils.SendTcpCmd(cmd);
+                    recStr = Utils.SendTcpCmd(cmd);
                 }
                 if (recStr == "1")
                 {
