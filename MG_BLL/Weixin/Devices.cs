@@ -1098,8 +1098,17 @@ namespace MG_BLL.Weixin
                 }
                 string recStr;
                 string Prefix = "VTR-Command-";
-                if (Model == "81" && (cmd.ToLower().IndexOf("off")>=0 || cmd.ToLower().IndexOf("on")>0))//型号是X11BDY
+                if (Model == "81")//型号是X11BDY
                 {
+                    //VTR-Command-13350000146-DEFENSE,ON#
+                    if (cmd.IndexOf("SF") >= 0) 
+                        cmd = "VTR-Command-"+ sps[0] + "-DEFENSE,ON#";
+                    if (cmd.IndexOf("SF") >= 0) 
+                        cmd = "VTR-Command-" + sps[0] + "-DEFENSE,OFF#";
+                    if (cmd.IndexOf("DY") >= 0) 
+                        cmd = "VTR-Command-" + sps[0] + "-BRAKE,ON#";
+                    if(cmd.IndexOf("TY") >= 0)
+                        cmd = "VTR-Command-" + sps[0] + "-BRAKE,OFF#";
                     cmd = Prefix + sps[0] + "-" + cmd.Replace("/", ",");
                     Log.Info(this,cmd);
                     recStr = Utils.SendTcpCmd(cmd);
