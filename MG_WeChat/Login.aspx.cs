@@ -20,8 +20,8 @@ namespace MG_WeChat
             try
             {
                 var path = ConfigurationManager.AppSettings["LOG_Path"].ToString();
-                    Log.LOG_PATH = path;
-                Log.LOG_LEVEL = 3;
+               // Log.LOG_PATH = path;
+              //  Log.LOG_LEVEL = 3;
             }
             catch (Exception ex)
             {

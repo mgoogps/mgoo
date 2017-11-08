@@ -83,6 +83,10 @@ namespace MG_BLL.Common
             string filename = "";
             try
             {
+                if (!System.IO.Directory.Exists(LOG_PATH))//如果日志目录不存在就创建
+                {
+                    System.IO.Directory.CreateDirectory(LOG_PATH);
+                }
                 //在网站根目录下创建日志目录
                 string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
                 filename = LOG_PATH + "/" + DateTime.Now.ToString("yyyy-MM-dd") +"-"+ type + ".log";//用日期对日志文件命名

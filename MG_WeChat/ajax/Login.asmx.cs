@@ -35,10 +35,10 @@ namespace MG_WeChat.ajax
                     WeixinOper wo = new WeixinOper();
                     result = wo.GetWeixinOpenID(code);
                     type = "Weixin";
-                    Utils.log("weixin result:" + result);
+                    //Utils.log("weixin result:" + result);
                 }
 
-                Utils.log(string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
+               
 
                 MG_BLL.BllLogin login = new MG_BLL.BllLogin();
                 LoginUserInfo loginUser = login.SystemLogin_Bll(loginname, password, identifies, type);
@@ -53,7 +53,7 @@ namespace MG_WeChat.ajax
                         {
                             login.AddOpenID(res["openid"], loginUser.UserID, loginUser.LoginName);
                             loginUser.ToKen = res["openid"] + "@" + loginUser.ToKen;
-                            Utils.log("登录账号：" + loginname + "，OpenID=" + res["openid"] + "，wxCode=" + code);
+                            //Utils.log("登录账号：" + loginname + "，OpenID=" + res["openid"] + "，wxCode=" + code);
                         }
                         else
                         {
@@ -62,6 +62,8 @@ namespace MG_WeChat.ajax
                        
                     }
                     #endregion
+
+                    Utils.log(string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
 
                     LoginResult.Add("StatusCode", statusCode.Code.success);
                     LoginResult.Add("UserID", loginUser.UserID);
