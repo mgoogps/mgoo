@@ -1,4 +1,5 @@
 ﻿using MG_BLL;
+using MG_BLL.Common;
 using MG_BLL.Weixin;
 using MG_DAL;
 using System;
@@ -63,7 +64,8 @@ namespace MG_WeChat.ajax
                     }
                     #endregion
 
-                    Utils.log(string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
+                   // Utils.log(string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
+                    Log.Info(this, string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
 
                     LoginResult.Add("StatusCode", statusCode.Code.success);
                     LoginResult.Add("UserID", loginUser.UserID);
