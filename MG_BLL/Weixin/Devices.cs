@@ -138,7 +138,6 @@ namespace MG_BLL.Weixin
         {
             try
             {
-                //myHeader.Identifies
                 int devid = 0;
                 int.TryParse(deviceid, out devid);
                 if (devid <= 0)
@@ -269,7 +268,7 @@ namespace MG_BLL.Weixin
                 {
                     return new Dictionary<string, string>();
                 }
-                string strSql = string.Format(@"select d.DeviceID, SerialNumber, DeviceName,CarUserName,PhoneNum, CarNum, CellPhone,ActiveDate,HireExpireDate,di.DataText,d.GroupID,d.Description,ISNULL(dc.ShockSens,2) Sens
+                string strSql = string.Format(@"select d.DeviceID, SerialNumber, DeviceName,CarUserName,PhoneNum, CarNum, CellPhone,ActiveDate,HireExpireDate,di.DataText,d.GroupID,d.Description,ISNULL(dc.ShockSens,2) Sens,ISNULL( horn,1) Horn,ISNULL( AutoDefense,1) AutoDefense
                                             from Devices d inner join Dictionary di on d.Model=di.DataValue inner join DevicesConfig dc on dc.deviceid=d.deviceid where d.Deleted=0 and d.DeviceID = @DeviceID and d.UserID=@UserID");
                 SQLServerOperating s = new SQLServerOperating();
                 Dictionary<string, string> dic = s.Selects(strSql, new SqlParameter[] { new SqlParameter("DeviceID", deviceid),new SqlParameter("UserID",myHeader.UserID) }).toDictionary();
@@ -285,7 +284,8 @@ namespace MG_BLL.Weixin
             }
         
         }
-        public string UpdateDeviceInfoByID(string deviceid, string deviceName, string carNum, string carusername, string cellphone,string groupid,string description,string sens=null)
+        public string UpdateDeviceInfoByID(string deviceid, string deviceName, string carNum, string carusername, string cellphone,
+            string groupid,string description,string sens=null,string horn = null,string AutoDefense =null)
         {
             try
             {
@@ -297,9 +297,6 @@ namespace MG_BLL.Weixin
                 SQLServerOperating s = new SQLServerOperating();
                 List<string> sqlList = new List<string>();
                 sqlList.Add(strSql);
-                if (string.IsNullOrEmpty(sens)) 
-                    sens = "2"; 
-              
                 List<SqlParameter[]> parsList = new List<SqlParameter[]>();
                 var par = new SqlParameter[] {
                     new SqlParameter("devicename", deviceName),
@@ -311,14 +308,39 @@ namespace MG_BLL.Weixin
                     new SqlParameter ("GroupID",groupid),
                     new SqlParameter("Description",description)
                 };
+
                 parsList.Add(par);
+                #region 操作DevicesConfig表 
+                List<SqlParameter> listPars = new List<SqlParameter>(); 
+                strSql = "update DevicesConfig set UpdateTime=GETDATE() ,";
                 if (!string.IsNullOrEmpty(sens))
-                { 
-                    strSql = "update DevicesConfig set ShockSens=@ShockSens,UpdateTime=GETDATE() where DeviceID=@DeviceID";
-                    sqlList.Add(strSql);
-                    par = new SqlParameter[] { new SqlParameter("ShockSens",sens),new SqlParameter("DeviceID",deviceid) };
-                    parsList.Add(par);
+                {
+                    strSql += "ShockSens=@ShockSens,";
+                    listPars.Add(new SqlParameter("ShockSens", sens));
                 }
+                if (!string.IsNullOrEmpty(horn))
+                {
+                    string imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID",new SqlParameter[] { new SqlParameter("DeviceID",deviceid) });
+                    if (horn.Equals("0")) 
+                        Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,ON#")); 
+                    else 
+                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,OFF#"));
+                    
+                    strSql += " horn=@horn ,";
+                    listPars.Add(new SqlParameter("horn", horn));
+                }
+                if (!string.IsNullOrEmpty(AutoDefense))
+                {
+                    strSql += " AutoDefense=@AutoDefense,";
+                    listPars.Add(new SqlParameter("AutoDefense", AutoDefense));
+                }
+                strSql = strSql.TrimEnd(',');
+                strSql += " where DeviceID=@DeviceID";
+                listPars.Add(new SqlParameter("DeviceID", deviceid));
+                parsList.Add(listPars.ToArray()); 
+                sqlList.Add(strSql);
+                #endregion
+
                 int status = s.ExecuteSql(sqlList,parsList); 
                 if (status > 0)
                 {

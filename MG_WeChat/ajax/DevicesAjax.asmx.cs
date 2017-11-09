@@ -117,7 +117,8 @@ namespace MG_WeChat.ajax
 
         [SoapHeader("myHeader")]
         [WebMethod(Description = "根据设备ID修改设备的信息.")]
-        public string UpdateDeviceInfoByID(string deviceid, string devicename, string carusername, string cellphone, string carnum,string groupid,string description,string sens)
+        public string UpdateDeviceInfoByID(string deviceid, string devicename, string carusername, string cellphone,
+            string carnum,string groupid,string description,string sens,string horn, string autodefense)
         {
             string valid = myHeader.isValid();
             if (!valid.Equals(string.Empty))
@@ -125,7 +126,7 @@ namespace MG_WeChat.ajax
                 return valid;
             }
             Devices d = new Devices(myHeader);
-            return d.UpdateDeviceInfoByID(deviceid, devicename, carnum, carusername, cellphone, groupid, description, sens);
+            return d.UpdateDeviceInfoByID(deviceid, devicename, carnum, carusername, cellphone, groupid, description, sens, horn, autodefense);
         }
 
         [SoapHeader("myHeader")]
