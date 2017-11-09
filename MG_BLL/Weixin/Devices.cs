@@ -138,21 +138,22 @@ namespace MG_BLL.Weixin
         {
             try
             {
+                //myHeader.Identifies
                 int devid = 0;
                 int.TryParse(deviceid, out devid);
                 if (devid <= 0)
                 {
                     return new Dictionary<string, string>();
                 }
-                string strSql = ""; 
-                
-                    strSql = @"select d.DeviceID,d.DeviceName,d.SerialNumber,l.LastCommunication,DATEADD(HH,8, DeviceUtcDate)DeviceDate,d.HireExpireDate ,l.DataContext,l.Speed,l.OLng,l.OLat,l.Course,l.CarStatus,
+                string strSql = "";
+
+                strSql = @"select d.DeviceID,d.DeviceName,d.SerialNumber,l.LastCommunication,DATEADD(HH,8, DeviceUtcDate)DeviceDate,d.HireExpireDate ,l.DataContext,l.Speed,l.OLng,l.OLat,l.Course,l.CarStatus,
                                (select count(em.ExceptionID) from ExceptionMessage em where em.DeviceID=d.deviceid and em.deleted = 0 ) ExceptionCount,di.DataText as Model,datediff(MI,StopStartUtcDate,serverutcdate) StopTime
                              from devices d left join lklocation l on l.DeviceID = d.DeviceID inner join Dictionary di on di.DataValue=d.Model
                              where d.deleted = 0 and d.DeviceID = @DeviceID and d.UserID=@UserID
                              group by d.DeviceID,d.DeviceName,d.SerialNumber,l.LastCommunication ,l.DataContext,l.Speed,l.OLng,l.OLat,l.Course,DeviceUtcDate,d.HireExpireDate,di.DataText,StopStartUtcDate,serverutcdate,l.CarStatus";
-           
-                 
+
+
                 SQLServerOperating s = new SQLServerOperating();
                 DataTable dt = s.Selects(strSql, new SqlParameter[] { new SqlParameter("DeviceID", deviceid), new SqlParameter("UserID", myHeader.UserID) });
 
@@ -174,9 +175,9 @@ namespace MG_BLL.Weixin
                     {
                         dic["DataContext"] = "0-0-0-0-" + dc;
                     }
-                    dic["CourseName"] = Utils.GetCoureName(dic["Course"]); 
+                    dic["CourseName"] = Utils.GetCoureName(dic["Course"]);
                     Geocoding geo = GetCurrentMapType();
-                    Gps gps = geo.Translate(dic["OLat"], dic["OLng"], true); 
+                    Gps gps = geo.Translate(dic["OLat"], dic["OLng"], true);
                     dic["OLng"] = gps.getWgLon().ToString();
                     dic["OLat"] = gps.getWgLat().ToString();
                     dic["Address"] = gps.Address;
@@ -187,28 +188,23 @@ namespace MG_BLL.Weixin
                             dic["Speed"] = "0.00";
                         IsStop = "0"; // 停止
                     }
-                    string status= GetDevicesStatus(dic["LastCommunication"], dic["HireExpireDate"]);
+                    string status = GetDevicesStatus(dic["LastCommunication"], dic["HireExpireDate"]);
                     dic["Status"] = status;
                     string statusmin = "0";
                     if (status == "2")
                     {
-                        statusmin = dic["LastCommunication"] == "" ? "" : (DateTime.Now - Convert.ToDateTime(dic["LastCommunication"])).TotalMinutes.ToString("0"); 
+                        statusmin = dic["LastCommunication"] == "" ? "" : (DateTime.Now - Convert.ToDateTime(dic["LastCommunication"])).TotalMinutes.ToString("0");
                     }
                     else if (status == "4")
                     {
-                        statusmin = (DateTime.Now - Convert.ToDateTime(dic["HireExpireDate"])).TotalMinutes.ToString("0"); 
+                        statusmin = (DateTime.Now - Convert.ToDateTime(dic["HireExpireDate"])).TotalMinutes.ToString("0");
                     }
                     else if (status == "1" && IsStop == "0")
-                    { 
+                    {
                         statusmin = dic["StopTime"];
-                    } 
+                    }
                     dic.Remove("StopTime");
-                    dic["StatusMinute"] = statusmin;
-
-                    //Thread thread = new Thread(new ThreadStart(delegate {
-                    //    Common.lib.AoboCache.CreateInstance().Action(dic["SerialNumber"], dic["Model"]);
-                    //}));
-                    //thread.Start();
+                    dic["StatusMinute"] = statusmin; 
                 }
                 return dic;
             }
@@ -1103,7 +1099,7 @@ namespace MG_BLL.Weixin
                     //VTR-Command-13350000146-DEFENSE,ON#
                     if (cmd.IndexOf("SF") >= 0)
                         cmd = "DEFENSE,ON#";
-                    if (cmd.IndexOf("SF") >= 0)
+                    if (cmd.IndexOf("CF") >= 0)
                         cmd = "DEFENSE,OFF#";
                     if (cmd.IndexOf("DY") >= 0)
                         cmd = "BRAKE,ON#";
