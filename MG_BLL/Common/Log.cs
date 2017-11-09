@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -85,7 +86,8 @@ namespace MG_BLL.Common
             {
                 if (string.IsNullOrEmpty(LOG_PATH))
                 {
-                    LOG_PATH = @"D:\MgooInterface\logs";
+                    LOG_PATH = System.AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["LOG_Path"].ToString();
+                    //LOG_PATH = @"D:\MgooInterface\logs";
                 }
                 if (!System.IO.Directory.Exists(LOG_PATH))//如果日志目录不存在就创建
                 {
