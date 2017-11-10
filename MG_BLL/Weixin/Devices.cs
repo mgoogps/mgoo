@@ -318,19 +318,28 @@ namespace MG_BLL.Weixin
                     strSql += "ShockSens=@ShockSens,";
                     listPars.Add(new SqlParameter("ShockSens", sens));
                 }
+                string imei = "";
                 if (!string.IsNullOrEmpty(horn))
                 {
-                    string imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID",new SqlParameter[] { new SqlParameter("DeviceID",deviceid) });
-                    if (horn.Equals("0")) 
+                    imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID",new SqlParameter[] { new SqlParameter("DeviceID",deviceid) });
+                    if (horn.Equals("0"))  //开启喇叭报警
                         Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,ON#")); 
-                    else 
+                    else  //关闭喇叭报警
                         Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,OFF#"));
                     
                     strSql += " horn=@horn ,";
                     listPars.Add(new SqlParameter("horn", horn));
                 }
                 if (!string.IsNullOrEmpty(AutoDefense))
-                {
+                { 
+                    if (imei=="")
+                    {
+                        imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID", new SqlParameter[] { new SqlParameter("DeviceID", deviceid) });
+                    }
+                    if (AutoDefense.Equals("0")) //打开自动设防
+                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-AUTODEFENSE,ON,300#"));
+                    else //关闭自动设防
+                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-AUTODEFENSE,OFF,300#"));
                     strSql += " AutoDefense=@AutoDefense,";
                     listPars.Add(new SqlParameter("AutoDefense", AutoDefense));
                 }

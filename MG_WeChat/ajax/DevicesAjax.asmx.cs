@@ -345,5 +345,7 @@ namespace MG_WeChat.ajax
             }
           
         }
+
+
     }
 }
