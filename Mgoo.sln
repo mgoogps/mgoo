@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpiredPush", "ExpiredPush\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{354BDE02-5935-4F02-8B49-9B685AE90D2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mgoo.Position", "Mgoo.Position\Mgoo.Position.csproj", "{7CF1266A-0674-4F74-ADBD-8A5BE4657D00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{354BDE02-5935-4F02-8B49-9B685AE90D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{354BDE02-5935-4F02-8B49-9B685AE90D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{354BDE02-5935-4F02-8B49-9B685AE90D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF1266A-0674-4F74-ADBD-8A5BE4657D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF1266A-0674-4F74-ADBD-8A5BE4657D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF1266A-0674-4F74-ADBD-8A5BE4657D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF1266A-0674-4F74-ADBD-8A5BE4657D00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -152,6 +152,7 @@ function alarmTime(uid) {
         type: 'POST',
         dataType: 'json',
         data: { "userid": uid, "lower": lower, "t": new Date().getTime() },
+        timeout: 6000,
         success: function (dataList) {
             dataList = dataList[""];
             $.each(dataList, function (k, v) {

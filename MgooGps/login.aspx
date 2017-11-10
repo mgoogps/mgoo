@@ -87,23 +87,12 @@
 	        s.parentNode.insertBefore(hm, s);
 	    })();
     </script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SAbCayX7PG5UMsqW6d1DZ9K0"></script>
+  
     <script type="text/javascript" src="js/config/<%= MG_BLL.Common.lib.Config.CurrentHost %>.js"></script>
 </head>
 <body class="page-body login-page login-light"> 
  <div style="position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:10000;" id="allmap"></div>
-       <script type="text/javascript"> 
-           var map = new BMap.Map("allmap", { enableMapClick: false });
-           map.setMapStyle({ style: 'dark' });
-           var point = new BMap.Point(116.331398, 39.897445);
-           map.centerAndZoom(point, 12); 
-           function myFun(result) {
-               var cityName = result.name;
-               map.setCenter(cityName);
-           }
-           var myCity = new BMap.LocalCity();
-           myCity.get(myFun);
-</script>
+     
 	<div class="main-content">
 	
 		<div class="row">
@@ -469,6 +458,18 @@
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="assets/js/xenon-custom.js"></script>
-
+      <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SAbCayX7PG5UMsqW6d1DZ9K0"></script>
+      <script type="text/javascript"> 
+           var map = new BMap.Map("allmap", { enableMapClick: false });
+           map.setMapStyle({ style: 'dark' });
+           var point = new BMap.Point(116.331398, 39.897445);
+           map.centerAndZoom(point, 12); 
+           function myFun(result) {
+               var cityName = result.name;
+               map.setCenter(cityName);
+           }
+           var myCity = new BMap.LocalCity();
+           myCity.get(myFun);
+</script>
 </body>
 </html>

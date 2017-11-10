@@ -3831,19 +3831,19 @@ namespace MgooGps.com
         {
             try
             {
-                
-                decimal BaiduLat = 0;
-                decimal BaiduLng = 0;
-                decimal.TryParse(lat, out BaiduLat);
-                decimal.TryParse(lng, out BaiduLng);
-                string key = "address_" + BaiduLat.ToString("0.00000") + "-" + BaiduLng.ToString("0.00000");
+                Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Amap();
+                string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
+
+                decimal cache_lat = 0;
+                decimal cache_lng = 0; 
+                string key = "address_" + cache_lat.ToString("0.00000") + "-" + cache_lng.ToString("0.00000");
                 string cache = MG_BLL.Utils.GetCache<string>(key);
                 if (!string.IsNullOrEmpty(cache))
                 {
                     return cache;
                 }
-                POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
-                string address = poi.GetAddressByLatlng(BaiduLat, BaiduLng, "BAIDU", "ZH-CN");
+               // POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
+               // string address = poi.GetAddressByLatlng(BaiduLat, BaiduLng, "BAIDU", "ZH-CN");
                 MG_BLL.Utils.SetCache(key, address);
                 return address;
             }

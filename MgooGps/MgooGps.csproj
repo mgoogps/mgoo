@@ -2853,6 +2853,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mgoo.Position\Mgoo.Position.csproj">
+      <Project>{7cf1266a-0674-4f74-adbd-8a5be4657d00}</Project>
+      <Name>Mgoo.Position</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MG_BLL\MG_BLL.csproj">
       <Project>{e69693cc-50bb-4249-a4dc-eb71bfa903b0}</Project>
       <Name>MG_BLL</Name>
