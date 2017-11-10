@@ -2427,13 +2427,10 @@
     <Content Include="assets\css\fonts\meteocons\font\meteocons.ttf" />
     <Content Include="assets\css\fonts\meteocons\font\meteocons.woff" />
     <Content Include="assets\images\news-image-widget-3" />
-    <Content Include="assets\js\ckeditor\CHANGES.md" />
-    <Content Include="assets\js\ckeditor\LICENSE.md" />
     <Content Include="assets\js\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="assets\js\ckeditor\plugins\scayt\README.md" />
     <Content Include="assets\js\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="assets\js\ckeditor\plugins\wsc\README.md" />
-    <Content Include="assets\js\ckeditor\README.md" />
     <Content Include="assets\js\ckeditor\samples\assets\posteddata.php" />
     <Content Include="assets\js\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="assets\js\ckeditor\samples\sample_posteddata.php" />
