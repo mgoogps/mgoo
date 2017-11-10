@@ -21,7 +21,7 @@ namespace MG_WeChat
             if (!string.IsNullOrWhiteSpace(Request.QueryString["backurl"]))
             {
                 backUrl = Request.QueryString["backurl"];
-            }  
+            }               
         }
     }
 }
