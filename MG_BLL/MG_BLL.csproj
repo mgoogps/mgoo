@@ -126,6 +126,10 @@
     <Compile Include="Weixin\WeixinOper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mgoo.Position\Mgoo.Position.csproj">
+      <Project>{7cf1266a-0674-4f74-adbd-8a5be4657d00}</Project>
+      <Name>Mgoo.Position</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MG_DAL\MG_DAL.csproj">
       <Project>{3c1fbd88-8a30-40a1-a4a4-d409ed99462b}</Project>
       <Name>MG_DAL</Name>
