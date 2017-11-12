@@ -28,7 +28,7 @@ namespace MG_WeChat.ajax
             string valid = myHeader.isValid();
             if (!valid.Equals(string.Empty))
             {
-                return valid;
+               // return valid;
             }
             return "";
         }

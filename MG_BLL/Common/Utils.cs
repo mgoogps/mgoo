@@ -544,9 +544,11 @@ namespace MG_BLL
             {
                 if (address)
                 {
-                    Geocoding geo = new Amap();
-                    geo.key = key;
-                    gps.Address = geo.GetAddress(gps); 
+                    Mgoo.Position.IGeocoding geocoding = new Mgoo.Position.Geocod.Amap();
+                    gps.Address = geocoding.GetAddress(new Mgoo.Position.Point(gps.getWgLat(), gps.getWgLon()));
+                   // Geocoding geo = new Amap();
+                    //geo.key = key;
+                   // gps.Address = geo.GetAddress(gps); 
                 }
                 return gps;
             }

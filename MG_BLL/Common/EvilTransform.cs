@@ -276,9 +276,10 @@ namespace MG_BLL
         {
             try
             {
-
-                POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
-                return poi.GetAddressByLatlng(Convert.ToDecimal(bdGps.getWgLat()), Convert.ToDecimal(bdGps.getWgLon()), "BAIDU", "ZH-CN");
+                Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Baidu();
+                return geo.GetAddress(new Mgoo.Position.Point (bdGps.getWgLat(),bdGps.getWgLon()));
+                //POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
+                //return poi.GetAddressByLatlng(Convert.ToDecimal(bdGps.getWgLat()), Convert.ToDecimal(bdGps.getWgLon()), "BAIDU", "ZH-CN");
 
                 #region 利用百度地址API获取地址 - 没用了
                 /*MG_DAL.MgoogpsWebClient wc = new MG_DAL.MgoogpsWebClient();
@@ -364,12 +365,14 @@ namespace MG_BLL
         {
             try
             {
-                if (string.IsNullOrEmpty( this.key))
-                { 
-                    this.key = Utils.GetAmapKey(); 
-                }
-                POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
-                return poi.GetAddressByLatlng(Convert.ToDecimal(gps.getWgLat()), Convert.ToDecimal(gps.getWgLon()), "AMAP", "ZH-CN");
+                Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Amap();
+                return geo.GetAddress(new Mgoo.Position.Point(gps.getWgLat(),gps.getWgLon()));
+                //if (string.IsNullOrEmpty( this.key))
+                //{ 
+                //    this.key = Utils.GetAmapKey(); 
+                //}
+                //POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
+                //return poi.GetAddressByLatlng(Convert.ToDecimal(gps.getWgLat()), Convert.ToDecimal(gps.getWgLon()), "AMAP", "ZH-CN");
       
                 #region 利用高德地图获取中文详细地址- 没用了 
                 /*string jsonLocation = "";
