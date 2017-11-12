@@ -84,7 +84,7 @@ namespace Mgoo.Position.Geocod
                 gps.Address = "未解析到地址.";
                 return gps;
             } 
-            gps = PositionUtil.gps84_To_Gcj02(lat, lat);
+            gps = PositionUtil.gps84_To_Gcj02(lat, lng);
             try
             {
                 if (address)

@@ -3650,11 +3650,15 @@ namespace MgooGps.com
         /// <returns></returns>
         public static String UpdatePassword(String NewPassword, String OldPassword)
         {
-            if (!string.IsNullOrEmpty(NewPassword) || NewPassword  .Length <=3 || NewPassword.Length >=15)
+            if (string.IsNullOrEmpty(NewPassword) || NewPassword  .Length <=3 || NewPassword.Length >=15)
             {
                 return "{\"success\":false,\"msg\":\"请输入3-15位数的密码!\"}"; 
             }
-            if (!string.IsNullOrEmpty(OldPassword) || OldPassword == NewPassword)
+            if (string.IsNullOrEmpty(OldPassword))
+            {
+                return "{\"success\":false,\"msg\":\"请输入旧密码!\"}";
+            }
+            if (OldPassword == NewPassword)
             {
                 return "{\"success\":false,\"msg\":\"新密码不能跟旧密码一样\"}";
             }
@@ -3824,16 +3828,26 @@ namespace MgooGps.com
         /// <summary>
         /// 根据经纬度获取详细地址
         /// </summary>
-        /// <param name="lat"></param>
-        /// <param name="lng"></param>
+        /// <param name="lat">baidu lat</param>
+        /// <param name="lng">baidu lng</param>
         /// <returns></returns>
         public static String GetAddressByLatlng(string lat, string lng)
         {
             try
             {
-                Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Amap();
-                string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
+                Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Baidu();
+                //baidu locates to wgs84
+                Mgoo.Position.Point point = geo.TranslateGps84(Convert.ToDouble(lat), Convert.ToDouble(lng));
 
+                geo = new Mgoo.Position.Geocod.Amap();
+                //wgs to gaode piont
+                point = geo.Translate(point.Lat, point.Lng);
+
+                string address = geo.GetAddress(point);
+
+                //string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
+
+                /*
                 decimal cache_lat = 0;
                 decimal cache_lng = 0; 
                 string key = "address_" + cache_lat.ToString("0.00000") + "-" + cache_lng.ToString("0.00000");
@@ -3845,6 +3859,7 @@ namespace MgooGps.com
                // POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient();
                // string address = poi.GetAddressByLatlng(BaiduLat, BaiduLng, "BAIDU", "ZH-CN");
                 MG_BLL.Utils.SetCache(key, address);
+                */
                 return address;
             }
             catch (Exception)
