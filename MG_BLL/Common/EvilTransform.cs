@@ -19,7 +19,7 @@ namespace MG_BLL
          */
         public class PositionUtil
         {
-
+             
            // private static readonly String BAIDU_LBS_TYPE = "bd09ll";
 
             private static double pi = 3.1415926535897932384626;

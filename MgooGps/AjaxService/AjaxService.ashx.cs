@@ -204,11 +204,11 @@ namespace MgooGps
                     break;
                 case "getresponse": //获取发送密令的返回结果
                     context.Response.Write(MyTeam.GetCommandResponse(request.Form["CommandID"], request.Form["TimeZones"]));
-                    break;
+                    break; 
                 case "resetpwd":
                     context.Response.Write(MyTeam.ResetDevicePassword(request.Form["deviceid"]));
                     break;
-                case "deletedevice":  //删除设备
+                case "deletedevice":  //删除设备 
                     context.Response.Write(MyTeam.DeleteDevice(request.Form["deviceid"], request.Form["Destroy"]));
                     break;
                 case "recoverydevices": //恢复已删除的设备
