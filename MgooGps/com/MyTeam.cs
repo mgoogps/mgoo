@@ -3837,13 +3837,13 @@ namespace MgooGps.com
             {
                 Mgoo.Position.IGeocoding geo = new Mgoo.Position.Geocod.Baidu();
                 //baidu locates to wgs84
-                Mgoo.Position.Point point = geo.TranslateGps84(Convert.ToDouble(lat), Convert.ToDouble(lng));
+                //Mgoo.Position.Point point = geo.TranslateGps84(Convert.ToDouble(lat), Convert.ToDouble(lng));
 
-                geo = new Mgoo.Position.Geocod.Amap();
+               // geo = new Mgoo.Position.Geocod.Amap();
                 //wgs to gaode piont
-                point = geo.Translate(point.Lat, point.Lng);
+               // var  point = geo.Translate(Convert.ToDouble(lat), Convert.ToDouble(lng));
 
-                string address = geo.GetAddress(point);
+                string address = geo.GetAddress(new Mgoo.Position.Point (Convert.ToDouble(lat), Convert.ToDouble(lng)));
 
                 //string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
 
@@ -3874,12 +3874,7 @@ namespace MgooGps.com
             {
                 return await Task.Run(() =>
                 {
-                    decimal BaiduLat = 0;
-                    decimal BaiduLng = 0;
-                    decimal.TryParse(lat, out BaiduLat);
-                    decimal.TryParse(lng, out BaiduLng);
-                    POIService.POIServiceSoapClient poi = new POIService.POIServiceSoapClient(); 
-                    return poi.GetAddressByLatlng(BaiduLat, BaiduLng, "BAIDU", "ZH-CN");
+                    return GetAddressByLatlng(lat, lng);
                 });
             }
             catch (Exception)
