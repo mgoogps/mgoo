@@ -160,6 +160,11 @@ namespace MG_BLL.Weixin
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
+                  
+                    foreach (DataColumn c in dt.Columns)
+                    {
+                        dic[c.ColumnName] = row[c.ColumnName].toStringEmpty();
+                    }
                     Geocoding geo = GetCurrentMapType();
                     Gps gps = geo.Translate(dic["OLat"], dic["OLng"], false);
                     Mgoo.Position.IGeocoding geocoding = null;
@@ -170,14 +175,10 @@ namespace MG_BLL.Weixin
                     else //if (geo.GetType().Name.ToLower() == "amap")
                     {
                         geocoding = new Mgoo.Position.Geocod.Amap();
-                    } 
+                    }
                     var task = Task.Run(() => {
                         return geocoding.GetAddress(new Mgoo.Position.Point(gps.getWgLat(), gps.getWgLon()));
                     });
-                    foreach (DataColumn c in dt.Columns)
-                    {
-                        dic[c.ColumnName] = row[c.ColumnName].toStringEmpty();
-                    }
                     if (string.IsNullOrEmpty(dic["DeviceName"]))
                     {
                         dic["DeviceName"] = dic["SerialNumber"];
