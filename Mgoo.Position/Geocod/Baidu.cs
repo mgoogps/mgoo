@@ -26,7 +26,7 @@ namespace Mgoo.Position.Geocod
             try
             {
                 MG_DAL.MgoogpsWebClient wc = new MG_DAL.MgoogpsWebClient();
-                wc.RequestUrl = "http://api.map.baidu.com/geocoder/v2/?ak="+key+"&location=" + gps.Lng + "," + gps.Lat + "&output=json&pois=1&extensions_poi=0&radius=1000";
+                wc.RequestUrl = "http://api.map.baidu.com/geocoder/v2/?ak="+key+"&location=" + gps.Lat + "," + gps.Lng + "&output=json&pois=1&extensions_poi=0&radius=1000";
                 //http://api.map.baidu.com/geocoder/v2/?location=27.148609,111.227029&output=json&pois=1&ak=PFEwxiwsyv4GjEQcZrNZS0NsIkEvU8TL&extensions_poi=0&radius=1000
                 wc.RequestMethodType = "GET";
                 string jsonLocation = wc.RequestSend();
@@ -46,6 +46,10 @@ namespace Mgoo.Position.Geocod
                         var pois_first_direction = pois_first["direction"].ToString(); //方向
                         var pois_first_distance = pois_first["distance"].ToString(); //该POI到请求坐标的距离(米)
                         formatted_address += ",离" + pois_first_name + "(" + pois_first_direction + ")约" + Convert.ToInt32(pois_first_distance)+"米";
+                    }
+                    if (string.IsNullOrEmpty(formatted_address))
+                    {
+                         
                     }
                     return formatted_address;
                 }
