@@ -325,7 +325,7 @@ namespace MG_BLL.Weixin
                 };
 
                 parsList.Add(par);
-                #region 操作DevicesConfig表 
+                #region 操作DevicesConfig表 及 发送指令
                 List<SqlParameter> listPars = new List<SqlParameter>(); 
                 strSql = "update DevicesConfig set UpdateTime=GETDATE() ,";
                 if (!string.IsNullOrEmpty(sens))
@@ -338,9 +338,9 @@ namespace MG_BLL.Weixin
                 {
                     imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID",new SqlParameter[] { new SqlParameter("DeviceID",deviceid) });
                     if (horn.Equals("0"))  //开启喇叭报警
-                        Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,ON#")); 
+                        Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,ON#")); 
                     else  //关闭喇叭报警
-                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-FINDCAR,OFF#"));
+                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,OFF#"));
                     
                     strSql += " horn=@horn ,";
                     listPars.Add(new SqlParameter("horn", horn));
