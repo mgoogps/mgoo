@@ -333,14 +333,14 @@ namespace MG_BLL.Weixin
                     strSql += "ShockSens=@ShockSens,";
                     listPars.Add(new SqlParameter("ShockSens", sens));
                 }
-                string imei = "";
+                string imei = ""; Task<string> task = null;
                 if (!string.IsNullOrEmpty(horn))
                 {
                     imei = s.Select("select SerialNumber from devices where DeviceID=@DeviceID",new SqlParameter[] { new SqlParameter("DeviceID",deviceid) });
                     if (horn.Equals("0"))  //开启喇叭报警
-                        Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,ON#")); 
+                        task = Task.Factory.StartNew(()=> Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,ON#")); 
                     else  //关闭喇叭报警
-                        Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,OFF#"));
+                        task = Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,OFF#"));
                     
                     strSql += " horn=@horn ,";
                     listPars.Add(new SqlParameter("horn", horn));
@@ -365,14 +365,23 @@ namespace MG_BLL.Weixin
                 sqlList.Add(strSql);
                 #endregion
 
-                int status = s.ExecuteSql(sqlList,parsList); 
+                int status = s.ExecuteSql(sqlList,parsList);
+                ajaxResult ar = new ajaxResult();
+                if (task != null)
+                {
+                   ar.Result =  task.Result ;
+                }
                 if (status > 0)
                 {
-                    return Utils.GetResult("修改成功", statusCode.Code.success);
+                    ar.Message = "修改成功";
+                    ar.StatusCode = statusCode.Code.success;
+                    return Utils.ToJson( ar);
                 }
                 else
                 {
-                    return Utils.GetResult("修改失败", statusCode.Code.failure);
+                    ar.Message = "修改失败";
+                    ar.StatusCode = statusCode.Code.failure;
+                    return Utils.ToJson(ar); 
                 }
             }
             catch (Exception ex)
