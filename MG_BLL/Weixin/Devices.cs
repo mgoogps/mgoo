@@ -342,8 +342,8 @@ namespace MG_BLL.Weixin
                     else  //关闭喇叭报警
                         task = Task.Factory.StartNew(() => Utils.SendTcpCmd($"VTR-Command-{imei}-ALMRMVOICE,OFF#"));
                     
-                    strSql += " horn=@horn ,";
-                    listPars.Add(new SqlParameter("horn", horn));
+                    //strSql += " horn=@horn ,";
+                   // listPars.Add(new SqlParameter("horn", horn));
                 }
                 if (!string.IsNullOrEmpty(AutoDefense))
                 { 
@@ -369,7 +369,13 @@ namespace MG_BLL.Weixin
                 ajaxResult ar = new ajaxResult();
                 if (task != null)
                 {
-                   ar.Result =  task.Result ;
+                    ar.Result =  task.Result ;
+                    if (ar.Result == "1")
+                    {
+                        //指令发送成功，更新数据库状态 
+                        strSql = "update DevicesConfig set horn=@horn where DeviceID=@DeviceID";
+                        Task.Factory.StartNew(() => s.ExecuteSql(strSql,new SqlParameter[] { new SqlParameter("horn", horn),new SqlParameter("DeviceID", deviceid) })); 
+                    } 
                 }
                 if (status > 0)
                 {
