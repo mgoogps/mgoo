@@ -277,14 +277,14 @@ function CommandButton(res) {
             $(".box-8 input").attr("onclick", "window.selectcommand='POWER/ON#'").val("开启电源");
         }
         if (context[11] == 0) {
-            $(".box-7 input").attr("onclick", "window.selectcommand='TY'").val("已刹车");
+            $(".box-7 input").attr("onclick", "window.selectcommand='TY'").val("已 刹 车");
         } else {
-            $(".box-7 input").attr("onclick", "window.selectcommand='DY'").val("未刹车");
+            $(".box-7 input").attr("onclick", "window.selectcommand='DY'").val("未 刹 车");
         }
         if (context[1] == 1) {
-            $(".box-10 input").attr("onclick", "window.selectcommand='CF'").val("撤防"); 
+            $(".box-10 input").attr("onclick", "window.selectcommand='CF'").val(" 撤  防 ");
         } else {
-            $(".box-10 input").attr("onclick", "window.selectcommand='SF'").val("设防"); 
+            $(".box-10 input").attr("onclick", "window.selectcommand='SF'").val(" 设  防 ");
         }
     }
 }

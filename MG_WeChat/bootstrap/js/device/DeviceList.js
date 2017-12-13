@@ -54,9 +54,13 @@ function GetDevicesList() {
                 //               <span class="am-list-date">静止</span>
                 //               <span class="am-list-date" style="top:40px;">10天10时10分</span>
                 //           </li>
+                var statusStr = state.zhudian + '-' + state.shefang + state.dianliang;
+                if (device.Model == "MG-X11BDY") {
+                    statusStr = state.zhudian + "-" + state.acc + '-' + state.shefang+"-"+state.shache;
+                }
                 html.push('<li class="am-g" name="GroupDeviceList' + device.GroupID + '" style="display: none;">');
                 html.push('<a href="/device/Tracking.html?deviceid=' + device.DeviceID + '" status=' + (device.Status == 2 || device.Status == 4 ? 2 : device.Status) + '>' + device.DeviceName + ' </a>');
-                html.push('<div class="am-list-item-text">' + state.zhudian + '-' + state.shefang + state.dianliang + '</div>');
+                html.push('<div class="am-list-item-text">' + statusStr + '</div>');
                 // html.push('<span class="am-list-date" style="width:70px;text-align:left">' + state + '</span>');
                 html.push(' <span class="am-list-date">' + state.status + '</span>');
                 html.push(' <span class="am-list-date" style="top:37px;">' + state.continue + '</span>');
@@ -118,9 +122,9 @@ function getStatus(status, speed, time, DataContext) {
     if (context.length >= 4) {
         if (context[0] == 0)
         {
-            res.acc = "ACC关";
+            res.acc = "电源关";
         } else {
-            res.acc = "ACC开";
+            res.acc = "电源开";
         }
         if (context[1] == 0) {
             res.shefang = "撤防";
@@ -136,6 +140,16 @@ function getStatus(status, speed, time, DataContext) {
         if (context[4]) {
             res.dianliang = "-电量:"+ context[4]+"%";
         }
+        if (context[10]) {
+            res.zhudian += context[10]+"V";
+        }
+        if (context[11]) {
+            if (context[11] == 0) {
+                res.shache = "已刹车";
+            } else if (context[11] == 1) {
+                res.shache = "未刹车"; 
+            }
+        }  
     } 
     res.continue = MinuteToHour(time);
     switch (status) {
