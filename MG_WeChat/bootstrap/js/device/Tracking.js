@@ -167,18 +167,7 @@ function getData() {
                 });
                 return;
             }
-            imei = d.SerialNumber; 
-            if (imei.indexOf('3008000000') == 0 || imei.indexOf('3528888000') == 0) {
-                $("#command-prompt div.am-modal-bd input[value=设防]").val("震动开"); //.parent().hide();
-                $("#command-prompt div.am-modal-bd input[value=撤防]").val("震动关");//.parent().hide();
-            }
-            //仓库门锁
-            if (d.Model == "MG-X30B") {
-                $("#command-prompt div.am-modal-bd input[value=设防]").val("震动开") .parent().hide();
-                $("#command-prompt div.am-modal-bd input[value=撤防]").val("震动关") .parent().hide();
-                $("#command-prompt div.am-modal-bd input[value=开门]").parent().show();
-                $("#command-prompt div.am-modal-bd input[value=锁门]").parent().show();
-            }
+            CommandButton(d);
             if (d.Status == 3) {
                 var opts = { msg: "该设备未激活." };
                 if (info.LoginType == 1) {
@@ -263,6 +252,42 @@ function line(lineArr) {
     markerList[1] = polyline;
 }
 
+function CommandButton(res) {
+   
+    imei = res.SerialNumber;
+    if (imei.indexOf('3008000000') == 0 || imei.indexOf('3528888000') == 0) {
+        $("#command-prompt div.am-modal-bd input[value=设防]").val("震动开"); //.parent().hide();
+        $("#command-prompt div.am-modal-bd input[value=撤防]").val("震动关");//.parent().hide();
+    }
+    //仓库门锁
+    if (res.Model == "MG-X30B") {
+        $("#command-prompt div.am-modal-bd input[value=设防]").val("震动开").parent().hide();
+        $("#command-prompt div.am-modal-bd input[value=撤防]").val("震动关").parent().hide();
+        $("#command-prompt div.am-modal-bd input[value=开门]").parent().show();
+        $("#command-prompt div.am-modal-bd input[value=锁门]").parent().show();
+    }
+    else if (res.Model == "MG-X11BDY") {
+        $(".box-8,.box-7,.box-9,.box-10").show();
+        $(".box-3,.box-4, .box-1, .box-2").hide();
+  
+        var context = res.DataContext.split('-');
+        if (context[0] == 1) {
+            $(".box-8 input").attr("onclick", "window.selectcommand='POWER/OFF#'").val("关闭电源");
+        } else {
+            $(".box-8 input").attr("onclick", "window.selectcommand='POWER/ON#'").val("开启电源");
+        }
+        if (context[11] == 0) {
+            $(".box-7 input").attr("onclick", "window.selectcommand='TY'").val("已刹车");
+        } else {
+            $(".box-7 input").attr("onclick", "window.selectcommand='DY'").val("未刹车");
+        }
+        if (context[1] == 1) {
+            $(".box-10 input").attr("onclick", "window.selectcommand='CF'").val("撤防"); 
+        } else {
+            $(".box-10 input").attr("onclick", "window.selectcommand='SF'").val("设防"); 
+        }
+    }
+}
 
 function navigation() {
     if (position == undefined) { 
