@@ -47,7 +47,7 @@ function GetDevicesList() {
             for (var i = 0; i < deviceList.length; i++) {
                 var device = deviceList[i];
                 var html = []; 
-                var state = getStatus(device.Status, device.Speed, device.StatusMinute, device.DataContext);
+                var state = getStatus(device.Status, device.Speed, device.StatusMinute, device.DataContext,device);
                 //<li class="am-g">
                 //               <a href="../device/Tracking.html"> 粤SK8888 </a>
                 //               <div class="am-list-item-text">主电连接 撤防</div>
@@ -115,7 +115,7 @@ function tabClick(_this) {
     search();
 }
 
-function getStatus(status, speed, time, DataContext) {
+function getStatus(status, speed, time, DataContext,d) {
     var res = {};
   
     var context = DataContext.split('-'); 
@@ -169,7 +169,10 @@ function getStatus(status, speed, time, DataContext) {
             res.continue = "";
             break;
         case "4":
-            res.status = "已过期"; 
+            var info = mg.GetUserInfo();
+            var o = info.Token.split('@')[0];
+            var url = "../pay/Recharge.aspx?deviceid=" + d.DeviceID + "&openid=" + o + "&imei=" + d.SerialNumber + "&t=" + new Date().getTime();
+            res.status = "<span style='color:red' onclick='window.location.href=\""+url+"\"'>欠费</span>"; 
             break;
     } 
     return res;
