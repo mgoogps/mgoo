@@ -63,7 +63,8 @@ $(function () {
         $btn.button('loading');
         $(this).val("发送中...")
         var modal;
-        if (selectcommand == "") {
+        var selectcommand=$(this).attr('data-cmd');
+        if (selectcommand == "" || selectcommand == undefined || selectcommand == 'undefined') {
             modal = new amModal({ msg: "请选择要发送的指令." });
             modal.open();
             return;
@@ -272,19 +273,19 @@ function CommandButton(res) {
   
         var context = res.DataContext.split('-');
         if (context[0] == 1) {
-            $(".box-8 input").attr("onclick", "window.selectcommand='POWER/OFF#'").val("关闭电源");
+            $(".box-8 input").attr("data-cmd", "POWER/OFF#").val("关闭电源");
         } else {
-            $(".box-8 input").attr("onclick", "window.selectcommand='POWER/ON#'").val("开启电源");
+            $(".box-8 input").attr("data-cmd", "POWER/ON#").val("开启电源");
         }
         if (context[11] == 0) {
-            $(".box-7 input").attr("onclick", "window.selectcommand='TY'").val("已 刹 车");
+            $(".box-7 input").attr("data-cmd", "TY").val("已 刹 车");
         } else {
-            $(".box-7 input").attr("onclick", "window.selectcommand='DY'").val("未 刹 车");
+            $(".box-7 input").attr("data-cmd", "DY").val("未 刹 车");
         }
         if (context[1] == 1) {
-            $(".box-10 input").attr("onclick", "window.selectcommand='CF'").val(" 撤  防 ");
+            $(".box-10 input").attr("data-cmd", "CF").val(" 撤  防 ");
         } else {
-            $(".box-10 input").attr("onclick", "window.selectcommand='SF'").val(" 设  防 ");
+            $(".box-10 input").attr("data-cmd", "SF").val(" 设  防 ");
         }
     }
 }
