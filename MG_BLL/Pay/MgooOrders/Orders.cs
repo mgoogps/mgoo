@@ -58,6 +58,26 @@ namespace MG_BLL.Pay.MgooOrders
             jsApiPay.InsertMgooOrder();
             // AddOrder(myHeader.UserID,deviceid,"",);
         }
+
+        public List<Dictionary<string, string>> GetOrderList(int userid)
+        {
+           var list = new List<Dictionary<string, string>>();
+            try
+            {
+                string strSql = "select OrderID, UserID, DeviceID, OpenID, OrderNo, TransactionNo, ProductBody, FeeType," +
+                          "TotalFee, Created, OrderDate, OrderExpire, PayDate, TradeType, Status, BankType, TariffID, BillCreateIP from Orders " +
+                          "where userid = @userid order by orderID";
+                SQLServerOperating s = new SQLServerOperating();
+                list = s.Selects(strSql, new SqlParameter[] { new SqlParameter("userid", userid) }).toListDictionary();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                Common.Log.Error(this,ex);
+                return list;
+            }
+        }
+
         /// <summary>
         /// 添加订单
         /// </summary>

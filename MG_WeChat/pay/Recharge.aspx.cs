@@ -58,9 +58,17 @@ namespace MG_WeChat.pay
                     {
                         return;
                     }
-                    DataRow DeviceInfo = dt.Rows[0];
-                    expire_date = Convert.ToDateTime(DeviceInfo["HireExpireDate"].ToString()).ToString("yyyy-MM-dd");
-                    use_situation = Convert.ToInt32(Convert.ToDouble(DeviceInfo["UseSituation"].ToString()) * 100);
+                    DataRow DeviceInfo = dt.Rows[0]; 
+                    var expire = Convert.ToDateTime(DeviceInfo["HireExpireDate"].ToString());
+                    expire_date = expire.ToString("yyyy-MM-dd");
+                    if (expire < DateTime.Now)
+                    {
+                        use_situation = 100;
+                    }
+                    else
+                    {
+                        use_situation = Convert.ToInt32(Convert.ToDouble(DeviceInfo["UseSituation"].ToString()) * 100);
+                    }
                     user_name = DeviceInfo["UserName"].ToString();
                     imei = DeviceInfo["SerialNumber"].ToString();
                     device_count = DeviceInfo["DeviceCount"].ToString();
@@ -69,6 +77,8 @@ namespace MG_WeChat.pay
                     user_id = Convert.ToInt32(DeviceInfo["UserID"].ToString());
                     int.TryParse(DeviceInfo["TheRest"].ToString(),out the_rest);
                     the_rest = the_rest - 1;
+                    if (the_rest < 0) 
+                        the_rest = 0; 
                     MG_BLL.Pay.MgooOrders.Orders o = new MG_BLL.Pay.MgooOrders.Orders();
                     PriceList = o.GetPriceList(DeviceInfo["DataText"].ToString());
                 }

@@ -20,6 +20,18 @@ namespace MG_WeChat.ajax
     public class Orders : System.Web.Services.WebService
     {
         public AuthHeader myHeader = new AuthHeader();
+        [SoapHeader("myHeader")]
+        [WebMethod]
+        public string GetOrderList(int userid)
+        {
+            string valid = myHeader.isValid();
+            if (!valid.Equals(string.Empty))
+            {
+                return valid;
+            }
+            MG_BLL.Pay.MgooOrders.Orders o = new MG_BLL.Pay.MgooOrders.Orders(myHeader);
+            return Utils.ToJson(o.GetOrderList(userid));
+        }
 
         [SoapHeader("myHeader")]
         [WebMethod]
