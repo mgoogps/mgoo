@@ -116,11 +116,25 @@ namespace MG_BLL.Weixin
                         dic["StatusTimeInfo"] = Utils.MinuteToHour( Convert.ToDouble(dic["StopTime"]) , true);
                         statusmin = dic["StopTime"];
                     }
-                    deviceID = dic["DeviceID"];
+                    deviceID = dic["DeviceID"]; 
                     Geocoding geo = GetCurrentMapType();
-                    Gps gps = geo.Translate(dic["OLat"],dic["OLng"],false);
-                    dic["OLat"] = gps.getWgLat().toStringEmpty();
-                    dic["OLng"] = gps.getWgLon().toStringEmpty();
+                    //Gps gps = geo.Translate(dic["OLat"], dic["OLng"], false);
+                    Mgoo.Position.IGeocoding geocoding = null;
+                    if (geo.GetType().Name.ToLower() == "baidu")
+                    {
+                        geocoding = new Mgoo.Position.Geocod.Baidu();
+                    }
+                    else if (geo.GetType().Name.ToLower() == "amap")
+                    {
+                        geocoding = new Mgoo.Position.Geocod.Amap();
+                    }
+                    else
+                    {
+                        geocoding = new Mgoo.Position.Geocod.Google();
+                    }
+                    var point = geocoding.Translate(dic["OLat"].toDouble(), dic["OLng"].toDouble());
+                    dic["OLat"] = point.Lat.ToString(); 
+                    dic["OLng"] = point.Lng.ToString();
                     dic["StatusMinute"] = statusmin;
                     dic.Remove("StopTime");
                     list.Add(dic);
@@ -166,18 +180,23 @@ namespace MG_BLL.Weixin
                         dic[c.ColumnName] = row[c.ColumnName].toStringEmpty();
                     }
                     Geocoding geo = GetCurrentMapType();
-                    Gps gps = geo.Translate(dic["OLat"], dic["OLng"], false);
+                    //Gps gps = geo.Translate(dic["OLat"], dic["OLng"], false);
                     Mgoo.Position.IGeocoding geocoding = null;
                     if (geo.GetType().Name.ToLower() == "baidu")
                     {
-                        geocoding = new Mgoo.Position.Geocod.Baidu();
+                        geocoding = new Mgoo.Position.Geocod.Baidu(); 
                     }
-                    else //if (geo.GetType().Name.ToLower() == "amap")
+                    else if (geo.GetType().Name.ToLower() == "amap")
                     {
                         geocoding = new Mgoo.Position.Geocod.Amap();
                     }
+                    else
+                    {
+                        geocoding = new Mgoo.Position.Geocod.Google();
+                    }
+                    var point = geocoding.Translate(dic["OLat"].toDouble(), dic["OLng"].toDouble());
                     var task = Task.Run(() => {
-                        return geocoding.GetAddress(new Mgoo.Position.Point(gps.getWgLat(), gps.getWgLon()));
+                        return geocoding.GetAddress(point);
                     });
                     if (string.IsNullOrEmpty(dic["DeviceName"]))
                     {
@@ -191,8 +210,8 @@ namespace MG_BLL.Weixin
                     dic["CourseName"] = Utils.GetCoureName(dic["Course"]);
                    
                    
-                    dic["OLng"] = gps.getWgLon().ToString();
-                    dic["OLat"] = gps.getWgLat().ToString();
+                    dic["OLng"] = point.Lng.ToString();
+                    dic["OLat"] = point.Lat.ToString();
                  
                     string IsStop = "1"; //运动
                     if (dic["Speed"].toDouble() < Utils.SpeedFilter) //速度 小于7.5 的过滤掉

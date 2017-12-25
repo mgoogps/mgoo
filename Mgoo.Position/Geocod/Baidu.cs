@@ -20,7 +20,11 @@ namespace Mgoo.Position.Geocod
 
          
         }
-
+        /// <summary>
+        /// 百度地图API获取中文地址
+        /// </summary>
+        /// <param name="gps"></param>
+        /// <returns></returns>
         public string GetAddress(Point gps)
         {
             try
@@ -35,8 +39,7 @@ namespace Mgoo.Position.Geocod
                 var formatted_address = "";
                 if (addressDic["status"].ToString().Equals("0"))
                 {
-                    JObject result = (JObject)addressDic["result"];
-                  //  var result = addressDic["result"] as Dictionary<string, object>;
+                    JObject result = (JObject)addressDic["result"]; 
                     formatted_address = result["formatted_address"].ToString();
                     var pois = (JArray)result["pois"];
                     if (pois.Count > 0)
@@ -72,15 +75,13 @@ namespace Mgoo.Position.Geocod
 
         public Point Translate(double lat, double lng, bool address = false)
         {
-            
             Point gps;
             if (lat == -1.0 && lng == -1.0)
             {
                 gps = new Point(-1.000, -1.000);
                 gps.Address = "未解析到地址.";
                 return gps;
-            }
-       
+            } 
             gps = PositionUtil.gps84_To_Bd09(lat, lng);
             try
             {

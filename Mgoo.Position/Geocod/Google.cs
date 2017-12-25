@@ -21,11 +21,16 @@ namespace Mgoo.Position.Geocod
              
         }
         public string language { get; set; }
-        public string GetAddress(Point gps)
-        {
-            //Google Geocoding Api
-            //https://developers.google.com/maps/documentation/geocoding/intro#start
 
+        /// <summary>
+        ///  获取中文地址
+        ///  Google Geocoding Api
+        ///  https://developers.google.com/maps/documentation/geocoding/intro#start
+        /// </summary>
+        /// <param name="gps">位置对象</param>
+        /// <returns></returns>
+        public string GetAddress(Point gps)
+        { 
             MG_DAL.MgoogpsWebClient mwc = new MG_DAL.MgoogpsWebClient();
             mwc.RequestMethodType = "get";
             mwc.RequestUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + gps.Lng + "," + gps.Lat + "&key=" + key + "&result_type=street_address&language="+language;

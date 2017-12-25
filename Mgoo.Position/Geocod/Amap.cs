@@ -18,13 +18,18 @@ namespace Mgoo.Position.Geocod
                 return "7536d5592589bd22c9788127b306b5e3";
             }
         }
-
+        /// <summary>
+        /// 高德地图API获取中文地址
+        /// 高德地图 Georegeo API
+        /// http://lbs.amap.com/api/webservice/guide/api/georegeo
+        /// </summary>
+        /// <param name="gps"></param>
+        /// <returns></returns>
         public string GetAddress(Point gps)
         {
             try
             { 
-                //高德地图 Georegeo API
-                //http://lbs.amap.com/api/webservice/guide/api/georegeo
+               
                 string jsonLocation = "";
                 MG_DAL.MgoogpsWebClient wc = new MG_DAL.MgoogpsWebClient();
                 wc.RequestMethodType = "GET";

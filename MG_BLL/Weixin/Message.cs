@@ -112,12 +112,27 @@ namespace MG_BLL.Weixin
                     {
                         dic[dc.ColumnName] = row[dc.ColumnName].toStringEmpty();
                     }
-                    //Gps gps = Utils.gps84_To_Gcj02(dic["OLat"], dic["OLng"],key);
-                    Gps gps = geo.Translate(dic["OLat"], dic["OLng"]);
-                    dic["OLat"] = gps.getWgLat().toStringEmpty();
-                    dic["OLng"] = gps.getWgLon().toStringEmpty();
-                    dic["Address"] = gps.Address.toStringEmpty();
                 }
+                Mgoo.Position.IGeocoding geocoding = null;
+                if (geo.GetType().Name.ToLower() == "baidu")
+                {
+                    geocoding = new Mgoo.Position.Geocod.Baidu();
+                }
+                else if (geo.GetType().Name.ToLower() == "amap")
+                {
+                    geocoding = new Mgoo.Position.Geocod.Amap();
+                }
+                else
+                {
+                    geocoding = new Mgoo.Position.Geocod.Google();
+                }
+                var point = geocoding.Translate(dic["OLat"].toDouble(), dic["OLng"].toDouble());
+                var task = Task.Run(() => {
+                    return geocoding.GetAddress(point);
+                });
+                dic["OLat"] = point.Lat.ToString();
+                dic["OLng"] = point.Lng.ToString();
+                dic["Address"] = task.Result;
                 return dic;
             }
             catch (Exception ex)
