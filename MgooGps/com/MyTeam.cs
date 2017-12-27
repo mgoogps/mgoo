@@ -85,17 +85,17 @@ namespace MgooGps.com
                 {
                     if (!string.IsNullOrWhiteSpace(dt.Rows[i]["BaiduLng"].ToString()) && !string.IsNullOrWhiteSpace(dt.Rows[i]["BaiduLat"].ToString()))
                     {
-                       // if (Convert.ToDouble(dt.Rows[i]["BaiduLng"].ToString()) > -1.00000000000000000000 && Convert.ToDouble(dt.Rows[i]["BaiduLat"].ToString()) > -1.00000000000000000000)
-                       // { 
-                            com.EvilTransform.bd_encrypt(Convert.ToDouble(dt.Rows[i]["BaiduLat"]), Convert.ToDouble(dt.Rows[i]["BaiduLng"]), ref bd_lat, ref bd_lng); 
-                            dt.Rows[i]["BaiduLat"] = bd_lat;
-                            dt.Rows[i]["BaiduLng"] = bd_lng;
-                            if (dt.Rows[i]["DataText"].ToString().StartsWith("MG-X83B") && dt.Rows[i]["CarStatus"]!=null && dt.Rows[i]["CarStatus"].ToString()!="")
-                            {
-                                var cs = dt.Rows[i]["CarStatus"].ToString();
-                                dt.Rows[i]["DataContext"] = "0-0-0-0-" + cs.Split(',')[2];
-                            }
-                       // }
+                        // if (Convert.ToDouble(dt.Rows[i]["BaiduLng"].ToString()) > -1.00000000000000000000 && Convert.ToDouble(dt.Rows[i]["BaiduLat"].ToString()) > -1.00000000000000000000)
+                        // { 
+                        com.EvilTransform.bd_encrypt(Convert.ToDouble(dt.Rows[i]["BaiduLat"]), Convert.ToDouble(dt.Rows[i]["BaiduLng"]), ref bd_lat, ref bd_lng);
+                        dt.Rows[i]["BaiduLat"] = bd_lat;
+                        dt.Rows[i]["BaiduLng"] = bd_lng;
+                        if (dt.Rows[i]["DataText"].ToString().StartsWith("MG-X83B") && dt.Rows[i]["CarStatus"] != null && dt.Rows[i]["CarStatus"].ToString() != "")
+                        {
+                            var cs = dt.Rows[i]["CarStatus"].ToString();
+                            dt.Rows[i]["DataContext"] = "0-0-0-0-" + cs.Split(',')[2];
+                        }
+                        // }
                     }
                 }
                 return dt;
@@ -104,10 +104,10 @@ namespace MgooGps.com
             {
                 Utils.log("getDevicesList Error:" + ex.Message);
                 return new DataTable();
-            } 
+            }
         }
 
-  
+
 
         /// <summary>
         /// 实时跟踪 数据
@@ -142,7 +142,7 @@ namespace MgooGps.com
         /// <param name="userid">用户id</param>
         /// <param name="deviceid">设备id</param>
         /// <returns></returns>
-        public static String addGeofences(String data, String name, String userid, String deviceid,string south_west,string north_east,string type)
+        public static String addGeofences(String data, String name, String userid, String deviceid, string south_west, string north_east, string type)
         {
             string fenceType = "1";
             if (type.Equals("2"))
@@ -163,9 +163,9 @@ namespace MgooGps.com
                             values(@name,'-1.00000000000000000000','-1.00000000000000000000',0,0,-1,-1,GETDATE(),0,-1.00000000000000000000,-1.00000000000000000000,@FenceType,-1,@UserID,@DeviceID, @Description,
                             @SouthWestLat,@SouthWestLng,@NorthEastLat,@NorthEastLng,@Bounds,@BoundBindIds)
                             select @@IDENTITY as gid";
-           string[] sws = south_west.Split(',');
-           string[] nes = north_east.Split(',');
-           Hashtable ht = com.Dao.Select(strSql, new SqlParameter[] {
+            string[] sws = south_west.Split(',');
+            string[] nes = north_east.Split(',');
+            Hashtable ht = com.Dao.Select(strSql, new SqlParameter[] {
                 new SqlParameter("name",name),
                 new SqlParameter("FenceType",fenceType),
                 new SqlParameter("UserID",userid),
@@ -178,16 +178,16 @@ namespace MgooGps.com
                 new SqlParameter("Bounds",data),
                 new SqlParameter("BoundBindIds",deviceid)
             });
-            if (ht !=null)
+            if (ht != null)
             {
-                return "{\"success\":\"true\",\"gid\":\""+ht["gid"]+"\",\"created\":\"\"}";
+                return "{\"success\":\"true\",\"gid\":\"" + ht["gid"] + "\",\"created\":\"\"}";
             }
             else
             {
                 return "{\"success\":\"false\"}";
-            } 
+            }
 
-           // Geofence.GeofenceAjaxSoapClient geofence = new Geofence.GeofenceAjaxSoapClient();
+            // Geofence.GeofenceAjaxSoapClient geofence = new Geofence.GeofenceAjaxSoapClient();
             //int status = geofence.SavePolygon(Convert.ToInt32(userid), 0, name, data, deviceid);
             //if (status == 0)
             //{
@@ -200,7 +200,7 @@ namespace MgooGps.com
         }
         public static DataTable GetPolygonDetail(string ZoneID)
         {
-           
+
             try
             {
                 if (string.IsNullOrEmpty(ZoneID))
@@ -210,7 +210,7 @@ namespace MgooGps.com
                 string strSql = @"  select GeofenceID, FenceName, Latitude, Longitude, Radius, Created, UserID, DeviceID, Description,SouthWestLat, SouthWestLng, NorthEastLat, NorthEastLng, Bounds, BoundBindIds
                                from GeoFence where deleted = 0 
                                and GeofenceID = @GeofenceID";
-                return com.Dao.Selects(strSql,new SqlParameter[] { new SqlParameter("GeofenceID", ZoneID)} );
+                return com.Dao.Selects(strSql, new SqlParameter[] { new SqlParameter("GeofenceID", ZoneID) });
                 //com.Dao.Selects(strSql, new SqlParameter[] { new SqlParameter("GeofenceID", ZoneID)});
                 //Geofence.GeofenceAjaxSoapClient gf = new Geofence.GeofenceAjaxSoapClient();
                 //str = gf.GetPolygonDetail(ZoneID);
@@ -220,7 +220,7 @@ namespace MgooGps.com
                 Utils.log("GetPolygonDetail方法出错啦！！！！！ ZoneID:" + ZoneID);
                 Utils.log(ex.Message);
                 return new DataTable();
-            } 
+            }
         }
         /// <summary>
         /// 根据DeviceID 查询设备信息
@@ -231,15 +231,15 @@ namespace MgooGps.com
         {
             string where = "";
             SqlParameter[] pars = new SqlParameter[1];
-            if (!string.IsNullOrEmpty( UserID))
+            if (!string.IsNullOrEmpty(UserID))
             {
                 where = " and d.UserID = @UserID";
                 pars = new SqlParameter[2];
-                pars[1] = new SqlParameter("UserID",UserID);
+                pars[1] = new SqlParameter("UserID", UserID);
             }
-            pars[0] = new SqlParameter("deviceid",deviceid);
-            String strSql = "select l.OLat BaiduLat,l.OLng BaiduLng,l.Speed,l.Course,d.Icon,d.DeviceName,d.SerialNumber,d.SpeedLimit,datediff(MI,l.LastCommunication, getdate()) status from Devices d inner join  LKLocation l on d.DeviceID=l.DeviceID where d.DeviceID= @deviceid "+where;
-            return Dao.Selects(strSql,pars);
+            pars[0] = new SqlParameter("deviceid", deviceid);
+            String strSql = "select l.OLat BaiduLat,l.OLng BaiduLng,l.Speed,l.Course,d.Icon,d.DeviceName,d.SerialNumber,d.SpeedLimit,datediff(MI,l.LastCommunication, getdate()) status from Devices d inner join  LKLocation l on d.DeviceID=l.DeviceID where d.DeviceID= @deviceid " + where;
+            return Dao.Selects(strSql, pars);
         }
         /// <summary>
         /// 根据电子围栏表ID删除电子围栏
@@ -344,14 +344,14 @@ namespace MgooGps.com
                 dt.Columns.Add("DeviceUTCTime"); dt.Columns.Add("BaiduLat"); dt.Columns.Add("BaiduLng"); dt.Columns.Add("Speed"); dt.Columns.Add("Course"); dt.Columns.Add("Type");
                 DataTable dTable = new DataTable();
                 double day = (DateTime.Parse(eDate.ToString("yyyy-MM-dd")) - DateTime.Parse(sDate.ToString("yyyy-MM-dd"))).TotalDays + 1;
-                
+
                 if (day > 33)
-                { 
+                {
                     return dt;
                 }
-                
+
                 conn = Dao.CreateConn(sDate);
-              
+
                 object[] objArray = new object[dt.Columns.Count];
                 double lat = 0, lng = 0;
                 for (int i = 0; i < day; i++)
@@ -422,7 +422,7 @@ namespace MgooGps.com
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static DataTable getAlarmList(String userid, String lower = null, String Status = null,string type = null)
+        public static DataTable getAlarmList(String userid, String lower = null, String Status = null, string type = null)
         {
 
             string strWhere = "  ";
@@ -449,8 +449,8 @@ namespace MgooGps.com
                 cols = "ROW_NUMBER() OVER( order by e.created desc) rowIndex, d.DeviceName,d.SerialNumber,u.UserName,e.Message,e.Created,DATEADD(HH,8, e.DeviceUTCTime)DeviceUTCTime,di.DataText,case when e.deleted=0 then '未处理' else '已处理' end status ";
                 strUserID = GetDeviceNumber(userid)["userids"].ToString();
             }
-             
-            strSql = string.Format(@"select "+ cols + @" from ExceptionMessage e inner join Devices d on e.DeviceID=d.DeviceID inner join Dictionary di on di.DataValue=d.Model inner join users u on d.UserID=u.UserID  
+
+            strSql = string.Format(@"select " + cols + @" from ExceptionMessage e inner join Devices d on e.DeviceID=d.DeviceID inner join Dictionary di on di.DataValue=d.Model inner join users u on d.UserID=u.UserID  
                 where d.Deleted=0 and e.Created > DATEADD(DAY,-30, DATEADD(HH,-8, GETDATE())) and u.UserID in({0}) " + strWhere + " order by e.Created desc", strUserID);
 
             return com.Dao.Selects(strSql);
@@ -459,7 +459,7 @@ namespace MgooGps.com
         public static DataTable GetMessageList(string UserID, string Model, string MsgType, string StartTime, string EndTime)
         {
             try
-            { 
+            {
                 string where = "";
                 Dictionary<string, string> parList = new Dictionary<string, string>();
                 if (string.IsNullOrEmpty(UserID))
@@ -467,7 +467,7 @@ namespace MgooGps.com
                     UserID = Utils.GetSession().UserID;
                 }
                 if (!string.IsNullOrEmpty(UserID))
-                { 
+                {
                     parList.Add("UserID", UserID);
                 }
                 if (!string.IsNullOrEmpty(Model))
@@ -491,7 +491,7 @@ namespace MgooGps.com
                 var index = 0;
                 foreach (var item in parList)
                 {
-                    if (item.Key .Equals("StartTime"))
+                    if (item.Key.Equals("StartTime"))
                     {
                         where += " and em.Created>=@StartTime";
                     }
@@ -515,7 +515,7 @@ namespace MgooGps.com
                             where 1=1 " + where + " order by em.Created desc";
                 return Dao.Selects(strSql, pars);
             }
-            catch (Exception  )
+            catch (Exception)
             {
                 return new DataTable();
             }
@@ -548,10 +548,12 @@ namespace MgooGps.com
         public static DataTable GetRemainView(String SerialNumber, String startTime, String endTime)
         {
             string where = toDic(SerialNumber, "dr.");
-            if (Utils.GetSession("UserInfo").LoginType == "0") {
+            if (Utils.GetSession("UserInfo").LoginType == "0")
+            {
                 where += "  and d.UserID=" + Utils.GetSession("UserInfo").UserID;
             }
-            else {
+            else
+            {
                 where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
             }
             String strSql = @"select case when d.DeviceName='' then dr.SerialNumber else d.DeviceName end DeviceName,convert(varchar(10),DATEADD(HH,8, dr.UpdateTime),120) date,sum([NowDistance]) nowDistance,sum([WarnCount])warn,sum([SpeedLimitCount])speedlimit,sum([StopCount])Stop from DevicesReport dr inner join Devices d on dr.DeviceID=d.DeviceID
@@ -585,12 +587,12 @@ namespace MgooGps.com
             {
                 where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
             }
-           
+
             strSql = @"select ROW_NUMBER() OVER (ORDER BY convert(varchar(10),DATEADD(HH,8,dr.CreateTime),120)) num,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName ,d.SerialNumber,convert(varchar(10),DATEADD(HH,8,dr.CreateTime),120) ct, 
                         SUM(dr.NowDistance) nd,SUM(WarnCount) wc,SUM(SpeedLimitCount) sl,SUM(StopCount)sc,cast( (" + yh + @"/100.0)*SUM(dr.NowDistance) as numeric(10,2))yh from Devices d inner join DevicesReport dr on d.DeviceID=dr.DeviceID  
                         where d.Deleted=0 " + where + " and dr.CreateTime > DATEADD(HH,-8,'" + sDate + "') and dr.CreateTime < DATEADD(HH,-8,'" + eDate + @"')
                         group by d.SerialNumber,convert(varchar(10),DATEADD(HH,8,dr.CreateTime),120),d.DeviceName order by ct";
-         
+
             dt = Dao.Selects(strSql);
             return dt;
         }
@@ -605,10 +607,12 @@ namespace MgooGps.com
         public static DataTable GetSpeedReport(String sTime, String eTime, String dName)
         {
             string where = toDic(dName, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0") {
+            if (Utils.GetSession("UserInfo").LoginType == "0")
+            {
                 where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
             }
-            else {
+            else
+            {
                 where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
             }
             String strSql = @"select ROW_NUMBER() OVER (ORDER BY  sr.startTime desc) num,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName, DATEADD(HH,8, sr.StartTime)st, DATEADD(HH,8, sr.EndTime)et,Latitude,Longitude,sr.Address,sr.TimediffMinute,sr.SerialNumber from
@@ -626,7 +630,7 @@ namespace MgooGps.com
         /// <param name="Filter">是否过滤无线</param>
         /// <param name="strWhere">条件</param>
         /// <returns></returns>
-        public static DataTable GetSpeedReport(String sTime, String eTime, String dName, ref String DeviceID,string Filter = null, string strWhere = null)
+        public static DataTable GetSpeedReport(String sTime, String eTime, String dName, ref String DeviceID, string Filter = null, string strWhere = null)
         {
 
             string where = toDic(dName, "");
@@ -641,7 +645,7 @@ namespace MgooGps.com
             //    strSql = "select DeviceID from Devices d where d.Deleted=0 " + where;
             //    DeviceID = Dao.Select(strSql)[0].ToString();
             //}
-            
+
             SqlConnection conn = null;
             if (!string.IsNullOrWhiteSpace(sTime))
             {
@@ -767,7 +771,7 @@ namespace MgooGps.com
                 {
                     #region 2015-11-04之后 
                     double day = (DateTime.Parse(eDate.ToString("yyyy-MM-dd")) - DateTime.Parse(sDate.ToString("yyyy-MM-dd"))).TotalDays + 1;
-                    if (day > 7 || day <=0)
+                    if (day > 7 || day <= 0)
                     {
                         return null;
                     }
@@ -782,7 +786,7 @@ namespace MgooGps.com
                                 inner join (select DeviceID, DeviceName from Devices d where exists(select * from subqry s where s.UserID = d.UserID)) dev on dev.DeviceID = l.DeviceID
                                 where DeviceUTCTime >= '2017-6-13 09:59:21' and DeviceUTCTime <= '2017-7-13 09:59:26' " + strWhere;
                     }
-                 
+
                     dt = new DataTable();
                     dt.Columns.Add("DeviceID"); dt.Columns.Add("Speed"); dt.Columns.Add("DeviceTime"); dt.Columns.Add("Latitude"); dt.Columns.Add("Longitude");
                     object[] objArray = new object[dt.Columns.Count];
@@ -869,7 +873,7 @@ namespace MgooGps.com
             if (string.IsNullOrEmpty(UserID))
             {
                 ar.Message = "请选择用户.";
-                return ar; 
+                return ar;
             }
             //if (string.IsNullOrEmpty(UserID) && string.IsNullOrEmpty(DeviceID))
             //{
@@ -878,7 +882,7 @@ namespace MgooGps.com
             //}
             var st = Convert.ToDateTime(StartTime);
             var et = Convert.ToDateTime(EndTime);
-            if ((et  - st).Days < 0)
+            if ((et - st).Days < 0)
             {
                 ar.Message = "结束时间不能比开始时间小.";
                 return ar;
@@ -921,7 +925,7 @@ namespace MgooGps.com
                 if (double.TryParse(FilterStopHour, out filterSecond))
                 {
                     filterSecond = filterSecond > 0 ? filterSecond * 60 * 60 : filterSecond;
-                }  
+                }
             }
             #endregion
 
@@ -947,7 +951,7 @@ namespace MgooGps.com
                    select UserName,d.DeviceID,d.DeviceName,d.SerialNumber,DATEADD(hh, 8, l.StopStartUtcDate) startTime, DATEADD(hh, 8, ServerUtcDate) endTime,s.UserID,l.OLat,l.OLng , datediff(MI, StopStartUtcDate, ServerUtcDate) time
                         , l.LastCommunication ,di.SortOrder
                        from Devices d inner join LKLocation l on l.deviceid = d.DeviceID inner join subqry s on s.UserID = d.UserID
-                    inner join Dictionary di on di.DataValue=d.Model " + where + " Order by StopStartUtcDate desc"; 
+                    inner join Dictionary di on di.DataValue=d.Model " + where + " Order by StopStartUtcDate desc";
                     DataTable dt = sqlHelper.Selects(strSql, new SqlParameter[] { new SqlParameter("UserID", UserID), new SqlParameter("filterSecond", filterSecond) });
                     //List<Dictionary<string, string>> listDic = new List<Dictionary<string, string>>();
                     foreach (DataRow row in dt.Rows)
@@ -956,16 +960,16 @@ namespace MgooGps.com
                         foreach (DataColumn col in dt.Columns)
                         {
                             dic[col.ColumnName] = row[col.ColumnName].ToString();
-                        } 
+                        }
                         var geo = new MG_BLL.Baidu();
                         MG_BLL.Gps gps = geo.Translate(dic["OLat"], dic["OLng"], false);
                         dic["OLng"] = gps.getWgLon().ToString("0.00000");
                         dic["OLat"] = gps.getWgLat().ToString("0.00000");
                         TimeSpan ts = (DateTime.Now - Convert.ToDateTime(dic["LastCommunication"]));
-                        var offlineTime  = Convert.ToInt32(dic["SortOrder"]); //该型号多长时间算离线
+                        var offlineTime = Convert.ToInt32(dic["SortOrder"]); //该型号多长时间算离线
                         if (ts.TotalMinutes > offlineTime)
-                        { 
-                            dic["Status"] = "离线-" +Utils.MinuteToHour(ts.TotalMinutes);
+                        {
+                            dic["Status"] = "离线-" + Utils.MinuteToHour(ts.TotalMinutes);
                         }
                         else
                         {
@@ -976,14 +980,14 @@ namespace MgooGps.com
                         dic["time"] = Utils.MinuteToHour(Convert.ToDouble(dic["time"]));
                         dic["address"] = "";
                         resList.Add(dic);
-                    } 
+                    }
                     #endregion
-                     
+
                 }
                 else
                 {
                     #region 通过存储过程 查询历史记录
-                     
+
                     Dictionary<string, string> dic = new Dictionary<string, string>();
                     dic["UserID"] = UserID;
                     dic["DeviceID"] = DeviceID;
@@ -1004,7 +1008,7 @@ namespace MgooGps.com
                         }
                         listDic.Add(dic);
                     }
-                 
+
                     var listByDeviceID = listDic.GroupBy((l) => l["DeviceID"]).ToList();
                     for (int i = 0; i < listByDeviceID.Count; i++)
                     {
@@ -1043,19 +1047,19 @@ namespace MgooGps.com
                             }
                         }
                     }
-                    ar.Message = ""; 
+                    ar.Message = "";
                     #endregion
                 }
 
-               
-                ar.Result = Dao.ToJson(resList); 
+
+                ar.Result = Dao.ToJson(resList);
                 ar.StatusCode = MG_BLL.statusCode.Code.success;
                 ar.Message = "";
             }
             catch (Exception ex)
             {
                 ar.Message = ex.Message;
-            } 
+            }
             return ar;
         }
 
@@ -1086,12 +1090,12 @@ namespace MgooGps.com
                 if (!string.IsNullOrEmpty(Hour))
                 {
                     var parHour = 0.0;
-                    double.TryParse(Hour,out parHour);
+                    double.TryParse(Hour, out parHour);
                     if (parHour > 0)
                     {
                         where = " and datediff(mi,l.LastCommunication,getdate()) > @Hour";
                         dicPars["Hour"] = (parHour * 60).ToString();
-                    } 
+                    }
                 }
                 if (!string.IsNullOrEmpty(StartTime) && !string.IsNullOrEmpty(EndTime))
                 {
@@ -1108,13 +1112,13 @@ namespace MgooGps.com
                             )
                             select t.UserName,d.SerialNumber,d.DeviceName,di.DataText,d.CarNum,l.OLat,l.OLng,l.LastCommunication  from temp t inner join Devices d on d.UserID = t.UserID inner join LKLocation l on l.DeviceID = d.DeviceID
                             inner join Dictionary di on di.DataValue=d.Model
-                            where 1=1   "+ where;
-                var pars = new SqlParameter[dicPars.Count]; 
+                            where 1=1   " + where;
+                var pars = new SqlParameter[dicPars.Count];
                 int index = 0;
                 foreach (KeyValuePair<string, string> item in dicPars)
                 {
                     pars[index++] = new SqlParameter(item.Key, item.Value);
-                } 
+                }
                 MG_DAL.SQLServerOperating sqlHelper = new MG_DAL.SQLServerOperating();
                 DataTable dt = sqlHelper.Selects(strSql, pars);
                 List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
@@ -1661,7 +1665,7 @@ namespace MgooGps.com
                         FileName = "报警消息(" + DateTime.Now.ToString("yyyyMMddHHmmss") + ").xls";
                         title = @" <h4>时间：一个月内的报警消息 </h4>
                         <tr style='border:1px solid #000000'><td>序号</td><td> 设备名称 </td><td> IMEI号 </td><td> 所属用户  </td><td>  报警类型 </td><td> 报警时间 </td><td> 定位时间 </td><td> 设备型号 </td><td> 状态 </td></tr>";
-                        Utils.DataSetToExcel(getAlarmList(userid,type:"excel"), path += "\\" + FileName, title);
+                        Utils.DataSetToExcel(getAlarmList(userid, type: "excel"), path += "\\" + FileName, title);
                         break;
                     case "ExceptionView":
                         FileName = "报警总览(" + DateTime.Now.ToString("yyyyMMddHHmmss") + ").xls";
@@ -1700,16 +1704,16 @@ namespace MgooGps.com
                         MG_BLL.ajaxResult ar = GetStopDetail(dicPars["userid"], dicPars["deviceid"], dicPars["starttime"], dicPars["endtime"], dicPars["stopday"], dicPars["wireless"], dicPars["laststop"]);
                         if (ar.StatusCode == MG_BLL.statusCode.Code.success)
                         {
-                            List<Dictionary<string,string>> list = MG_BLL.Utils.ToList(ar.Result);
+                            List<Dictionary<string, string>> list = MG_BLL.Utils.ToList(ar.Result);
                             FileName = "停留统计(" + DateTime.Now.ToString("yyyyMMddHHmmss") + ").xls";
                             title = @" <h4>时间：" + dicPars["starttime"] + "-" + dicPars["endtime"] + @"</h4>
                              <tr style='border:1px solid #000000'><td>序号</td><td>用户</td><td>IMEI号</td><td> 设备名称 </td><td> 开始时间  </td><td> 结束时间  </td><td>  经度 </td><td> 纬度 </td><td> 停留时间 </td> <td> 地址 </td></tr>";
                             int index = 1;
                             List<List<string>> listArray = new List<List<string>>();
-                            foreach (Dictionary<string,string> item in list)
+                            foreach (Dictionary<string, string> item in list)
                             {
                                 List<string> temp = new List<string>();
-                                temp.Add( index++.ToString());
+                                temp.Add(index++.ToString());
                                 temp.Add(item["UserName"]);
                                 temp.Add(item["SerialNumber"]);
                                 temp.Add(item["DeviceName"]);
@@ -1723,7 +1727,7 @@ namespace MgooGps.com
                             }
                             Utils.ListToExcel(listArray, path += "\\" + FileName, title);
                         }
-                       
+
                         #endregion
                         break;
                     case "OnLineList":
@@ -1750,12 +1754,12 @@ namespace MgooGps.com
                                 temp.Add(item["DataText"]);
                                 temp.Add(item["offlineTime"]);
                                 temp.Add(item["OLng"]);
-                                temp.Add(item["OLat"]); 
+                                temp.Add(item["OLat"]);
                                 temp.Add(GetAddressByLatlng(item["OLat"], item["OLng"]));
                                 listArray.Add(temp);
                             }
                             Utils.ListToExcel(listArray, path += "\\" + FileName, title);
-                        } 
+                        }
                         #endregion
                         break;
                     case "Mileage":
@@ -1792,7 +1796,8 @@ namespace MgooGps.com
                             {
                                 speedLimitCount++;
                             }
-                            if ((tempDate != "" && tempDate != currentDate.ToString("yyyy-MM-dd")) || i == len - 1) {
+                            if ((tempDate != "" && tempDate != currentDate.ToString("yyyy-MM-dd")) || i == len - 1)
+                            {
                                 DataRow newRow = excelTable.NewRow();
                                 double km = 0;
                                 if (dic.ContainsKey(tempDate.Replace("/", "").Replace("-", "")))
@@ -1815,7 +1820,8 @@ namespace MgooGps.com
                         FileName = "设备列表(" + DateTime.Now.ToString("yyyyMMddHHmmss") + ").xls";
                         int day = Convert.ToInt32(context.Request.Form["day"]);
                         strSql = "";
-                        if (day > 0) {  //多少天内过期的设备
+                        if (day > 0)
+                        {  //多少天内过期的设备
                             title = @" <h4>" + day + @"天内过期设备</h4>
                               <tr style='border:1px solid #000000'><td>序号</td><td> 设备名称 </td><td> IMEI号 </td><td> 车牌号  </td><td> 型号  </td><td>设备号码</td><td>联系号码</td><td> 所属用户 </td><td> 激活时间 </td><td> 到期时间 </td> <td> 离线时间 </td><td> 状态 </td> </tr>";
                             strSql = @"with subqry(UserID,ParentID) as (
@@ -1824,7 +1830,8 @@ namespace MgooGps.com
                                  ,case when HireExpireDate='1900-01-01 00:00:00.000' then '未激活' else convert(varchar(19),HireExpireDate,120) end HireExpireDate,l.LastCommunication,''DeviceStatus from Devices d inner join Users u on d.UserID=u.UserID inner join Dictionary di on di.DataValue=d.Model inner join lklocation l on l.deviceid=d.deviceid
                           where DATEDIFF(DAY,GETDATE(), HireExpireDate) < " + day + " and DATEDIFF(DAY,GETDATE(), HireExpireDate)>0 and d.Deleted=0 and d.userid in(select UserID from subqry) ";
                         }
-                        else if (day == 0) {
+                        else if (day == 0)
+                        {
                             title = @" <h4>全部设备</h4>
                                <tr style='border:1px solid #000000'><td>序号</td><td> 设备名称</td><td> IMEI号 </td><td> 车牌号  </td><td> 型号  </td><td>设备号码</td><td>联系号码</td><td> 所属用户 </td><td> 激活时间 </td><td> 到期时间 </td> </tr>";
                             strSql = @"with subqry(UserID,ParentID) as (
@@ -1961,7 +1968,7 @@ namespace MgooGps.com
                         #endregion
                         break;
                 }
-                var res = new { success = true ,FileName = FileName, Message = resMessage };
+                var res = new { success = true, FileName = FileName, Message = resMessage };
                 return Dao.ToJson(res);
                 //return "{\"success\":\"true\",\"FileName\":\"" + FileName + "\"}";
             }
@@ -2015,7 +2022,7 @@ namespace MgooGps.com
         /// <param name="et"></param>
         /// <returns></returns>
         public static String GetUserDeviceInfo(string model, String st, String et)
-        { 
+        {
             string where = "";
             Dictionary<string, string> dicPars = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(model))
@@ -2024,11 +2031,11 @@ namespace MgooGps.com
                 where = " and d.Model in(";
                 for (int i = 0; i < models.Length; i++)
                 {
-                    dicPars["Model"+i] = models[i];
-                    where += "@Model"+i+",";
+                    dicPars["Model" + i] = models[i];
+                    where += "@Model" + i + ",";
                 }
-                where = where.Substring(0,where.Length - 1);
-                where+=")"; 
+                where = where.Substring(0, where.Length - 1);
+                where += ")";
             }
             if (!string.IsNullOrEmpty(st) && !string.IsNullOrEmpty(et))
             {
@@ -2049,21 +2056,21 @@ namespace MgooGps.com
                            left join LKLocation l on l.DeviceID = d.DeviceID where d.Deleted = 0 " + where;
             var pars = new SqlParameter[dicPars.Count];
             var index = 0;
-            foreach (KeyValuePair<string,string> item in dicPars)
+            foreach (KeyValuePair<string, string> item in dicPars)
             {
-                pars[index++] = new SqlParameter(item.Key,item.Value);
+                pars[index++] = new SqlParameter(item.Key, item.Value);
             }
             int allCount = 0, onlineCount = 0, offlineCount = 0, useCount = 0, online7DayCount = 0, noEnableCount = 0, arrearsCount = 0;
             try
             {
                 MG_DAL.SQLServerOperating sql = new MG_DAL.SQLServerOperating();
                 DataTable dt = sql.Selects(strSql, pars);
-             
+
                 allCount = dt.Rows.Count; //所有设备
                 for (int i = 0; i < allCount; i++)
                 {
                     var row = dt.Rows[i];
-                    if (string.IsNullOrEmpty( row["LastCommunication"].ToString()))
+                    if (string.IsNullOrEmpty(row["LastCommunication"].ToString()))
                     {
                         noEnableCount++; //未激活的设备
                         continue;
@@ -2097,12 +2104,12 @@ namespace MgooGps.com
             }
             catch (Exception ex)
             {
-                 
+
             }
-           
-          
+
+
             if (Utils.GetSession().SuperAdmin == "1")
-            { 
+            {
                 var info = new
                 {
                     count = allCount + 500000,
@@ -2127,8 +2134,8 @@ namespace MgooGps.com
                     NoEnable = noEnableCount,
                     Arrears = arrearsCount
                 };
-                return MG_BLL.Utils.ToJson(info); 
-            } 
+                return MG_BLL.Utils.ToJson(info);
+            }
         }
 
 
@@ -2295,7 +2302,8 @@ namespace MgooGps.com
                     "\",\"SerialNumber\":\"" + dr["SerialNumber"] + "\",\"Created\":\"" + dr["Created"] + "\",\"ActiveDate\":\"" + dr["ActiveDate"] + "\",\"HireExpireDate\":\"" + dr["HireExpireDate"] + "\",\"UserName\":\"" + dr["UserName"] + "\",\"UserID\":\"" + dr["UserID"] +
                     "\",\"Model\":\"" + dr["DataText"] + "\",\"CellPhone\":\"" + dr["CellPhone"] + "\",\"PhoneNum\":\"" + dr["PhoneNum"] + "\",\"UserCellPhone\":\"" + dr["UserCellPhone"] + "\",\"LastCommunication\":\"" + dr["LastCommunication"] + "\"},");
             }
-            if (jsonStr.Length > 30) {
+            if (jsonStr.Length > 30)
+            {
                 jsonStr.Remove(jsonStr.Length - 1, 1);
             }
             //jsonStr.Append(jsonStr);
@@ -2520,7 +2528,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static String DelGroup(String GroupID)
         {
-            string strSql = ""; 
+            string strSql = "";
             try
             {
                 strSql = "update Devices set GroupID=-1 where GroupID=@GroupID";
@@ -2543,8 +2551,8 @@ namespace MgooGps.com
             }
             catch (Exception ex)
             {
-                return "{\"success\":false,\"msg\":\""+ ex .Message+ "\"}";
-            } 
+                return "{\"success\":false,\"msg\":\"" + ex.Message + "\"}";
+            }
         }
 
         /// <summary>
@@ -2681,7 +2689,7 @@ namespace MgooGps.com
                                     }
                                     #endregion
                                 }
-                                if (!insertData.ContainsKey("Imei")||!insertData.ContainsKey("Model")  || string.IsNullOrEmpty(insertData["Imei"].ToString()) || string.IsNullOrEmpty(insertData["Model"].ToString()))
+                                if (!insertData.ContainsKey("Imei") || !insertData.ContainsKey("Model") || string.IsNullOrEmpty(insertData["Imei"].ToString()) || string.IsNullOrEmpty(insertData["Model"].ToString()))
                                 {
                                     continue;
                                 }
@@ -2713,8 +2721,8 @@ namespace MgooGps.com
                                              new SqlParameter("@ServerID",ServerID),
                                              new SqlParameter("@CarImg","")};
 
-                               // Utils.log(string.Format("imei号:{0} \t 设备名字:{1} \t 型号:{2} \t 超速：{3}\t 车牌号:{4} \t 联系号码:{5} \t 设备号码:{6}",
-                               //                       insertData["Imei"], insertData["DeviceName"], insertData["Model"], insertData["SpeedLimit"], insertData["carNum"], insertData["userPhone"], insertData["DevicePhone"]));
+                                // Utils.log(string.Format("imei号:{0} \t 设备名字:{1} \t 型号:{2} \t 超速：{3}\t 车牌号:{4} \t 联系号码:{5} \t 设备号码:{6}",
+                                //                       insertData["Imei"], insertData["DeviceName"], insertData["Model"], insertData["SpeedLimit"], insertData["carNum"], insertData["userPhone"], insertData["DevicePhone"]));
                                 //Utils.log("SQL:" + strSql);
                                 int status = Dao.ExecutionSQL(strSql, sqlParameter);
                                 Utils.log("导入状态：" + status);
@@ -2725,7 +2733,7 @@ namespace MgooGps.com
                                 }
                             }
                             return "{\"success\":true,\"msg\":\"一共" + count + "条,成功" + sum + "条\"}";
-                          
+
                         }
                         else
                         {
@@ -2748,7 +2756,7 @@ namespace MgooGps.com
                     int count = 0;
                     int sum = 0;
                     List<string> lst = new List<string>();
-                    if (fileName.EndsWith(".xls")  || fileName.EndsWith(".xlsx"))
+                    if (fileName.EndsWith(".xls") || fileName.EndsWith(".xlsx"))
                     {
                         fileName = Utils.urlconvertorlocal("") + "/Upload/" + DateTime.Now.Ticks + "-" + fileName;
                         File.SaveAs(fileName);
@@ -2766,10 +2774,10 @@ namespace MgooGps.com
                                 string sql = "update Devices set PhoneNum='" + dr[0] + "' where SerialNumber='" + dr[1] + "' and deleted=0";
                                 lst.Add(sql);
                             }
-                            Task.Run(() => 
+                            Task.Run(() =>
                             {
                                 sum += Dao.ExecutionSQL(lst, false);
-                            }); 
+                            });
                             return "{\"success\":true,\"msg\":\"后台正在进行批量修改,请稍后自行查看数据！\"}";
                             //  return "{\"success\":true,\"msg\":\"一共" + count + "条,成功" + sum + "条\"}";
                         }
@@ -2847,17 +2855,17 @@ namespace MgooGps.com
                                              join lklocation l on l.deviceid = d.deviceid
                                              where d.Deleted = 0 and u.deleted = 0  and d." + columnName + " in( " + sb.ToString() + ") order by d.Created";
                                     DataTable dt = Dao.Selects(strSql);
-                                     
+
                                     foreach (DataRow row in dt.Rows)
                                     {
                                         tempRow = row;
                                         double bd_lat = 0, bd_lng = 0;
-                                        if (!string.IsNullOrEmpty( row["OLat"].ToString()) && !string.IsNullOrEmpty(row["OLng"].ToString()))
+                                        if (!string.IsNullOrEmpty(row["OLat"].ToString()) && !string.IsNullOrEmpty(row["OLng"].ToString()))
                                         {
                                             EvilTransform.bd_encrypt(Convert.ToDouble(row["OLat"]), Convert.ToDouble(row["OLng"]), ref bd_lat, ref bd_lng);
                                             Task<string> adr = GetAddressByLatlngAsync(bd_lat.ToString(), bd_lng.ToString());
                                             row["Address"] = adr.Result;
-                                        } 
+                                        }
                                         //row["Address"] = GetAddressByLatlng(bd_lat.ToString(), bd_lng.ToString());
                                     }
                                     sw.Stop();
@@ -2873,9 +2881,9 @@ namespace MgooGps.com
                             }
                             catch (Exception ex)
                             {
-                                Utils.log("批量查询 Error:"+ex.Message); 
-                                return "{\"success\":false,\"FileName\":\"\",\"msg\":\""+ex.Message+"\"}";
-                            } 
+                                Utils.log("批量查询 Error:" + ex.Message);
+                                return "{\"success\":false,\"FileName\":\"\",\"msg\":\"" + ex.Message + "\"}";
+                            }
                         }
                     }
                     #endregion
@@ -2915,7 +2923,7 @@ namespace MgooGps.com
             if (Utils.GetSession().SuperAdmin == "1")
             {
                 NewDic["PhoneNum"] = dic["DevicePhoneNum"];
-            } 
+            }
             NewDic["SpeedLimit"] = dic["SpeedLimit"];
             NewDic["CarNum"] = dic["DeviceCarNum"];
             NewDic["CellPhone"] = dic["DeviceCallPhone"];
@@ -2955,7 +2963,7 @@ namespace MgooGps.com
                 string imei = dic["SN"].ToString();
                 string model = dic["Model"].ToString();
                 string DeviceID = dic["DeviceID"].ToString();
-                string pwd  = dic["pwd"].ToString(); //客户端传过来的数据，不一定是密码
+                string pwd = dic["pwd"].ToString(); //客户端传过来的数据，不一定是密码
                 if (dic["CommandType"].ToString() == "S7122" || dic["CommandType"].ToString() == "S7123")
                 {
                     int temp = 0;
@@ -3002,7 +3010,7 @@ namespace MgooGps.com
                             int count = Dao.ExecutionSQL(strSql, pars);
                             if (count > 0)
                             {
-                                MG_BLL. Utils.SendTcpCmd("VTR-DZWL-" + DeviceID);
+                                MG_BLL.Utils.SendTcpCmd("VTR-DZWL-" + DeviceID);
                                 return "{\"success\":true,\"msg\":\"发送成功！\"}";
                             }
                         }
@@ -3015,7 +3023,7 @@ namespace MgooGps.com
                             if (password == p)
                             {
                                 string command = "VTR-Command-" + imei + "-" + cmd;
-                                string res = MG_BLL. Utils.SendTcpCmd(command);
+                                string res = MG_BLL.Utils.SendTcpCmd(command);
                                 if (res == "1")
                                 {
                                     return "{\"success\":true,\"msg\":\"发送成功！\"}";
@@ -3082,7 +3090,7 @@ namespace MgooGps.com
                             command = string.Format("VTR-Command-{0}-OFF,{1},{2},{3}", imei, sps[2].PadLeft(3, '0'), sps[1].PadLeft(2, '0'), sps[0].PadLeft(2, '0') + "00");
                         }
                     }
-                    string res = MG_BLL. Utils.SendTcpCmd(command);
+                    string res = MG_BLL.Utils.SendTcpCmd(command);
                     if (res == "1")
                     {
                         return "{\"success\":true,\"msg\":\"发送成功！\"}";
@@ -3114,7 +3122,7 @@ namespace MgooGps.com
                         int gpsdate = 0;
                         if (int.TryParse(pwd, out gpsdate) && gpsdate >= 0 && gpsdate < 1000)
                         {
-                            pwd = pwd.PadLeft(3,'0');
+                            pwd = pwd.PadLeft(3, '0');
                             var cmd = "VTR-Command-" + imei + "-OFF," + pwd;
                             var res = MG_BLL.Utils.SendTcpCmd(cmd);
                             if (res == "1")
@@ -3125,8 +3133,8 @@ namespace MgooGps.com
                             {
                                 return "{\"success\":false,\"msg\":\"发送失败！\"}";
                             }
-                        } 
-                   }
+                        }
+                    }
                 }
                 else
                 {
@@ -3141,7 +3149,7 @@ namespace MgooGps.com
                 }
                 return "{\"success\":false,\"msg\":\"发送失败！\"}";
             }
-            catch (Exception)                                                                                                                                                    
+            catch (Exception)
             {
                 return "{\"success\":false,\"msg\":\"参数错误！\"}";
             }
@@ -3157,7 +3165,7 @@ namespace MgooGps.com
         {
             CommandQueue.CommandQueueAjaxSoapClient cmdQueue = new CommandQueue.CommandQueueAjaxSoapClient();
             return cmdQueue.GetResponse(Convert.ToInt32(id), TimeZones);
-           
+
         }
 
         /// <summary>
@@ -3197,7 +3205,7 @@ namespace MgooGps.com
         public static String ResetDevicePassword(String DeviceID)
         {
             String strSql = string.Format("update devices set DevicePassword='123456' where deviceID=@DeviceID", DeviceID);
-            int status = Dao.ExecutionSQL(strSql,new SqlParameter[] {new SqlParameter("DeviceID", DeviceID) });
+            int status = Dao.ExecutionSQL(strSql, new SqlParameter[] { new SqlParameter("DeviceID", DeviceID) });
             if (status > 0)
             {
                 return "{\"success\":true,\"msg\":\"重置密码成功！\"}";
@@ -3222,7 +3230,7 @@ namespace MgooGps.com
             List<Dictionary<string, object>> list = Dao.ToList(DeviceIDs);
             int status = 0, count = 0;
             try
-            { 
+            {
                 String strSql = "";
                 bool des = false;
                 Boolean.TryParse(Destroy, out des);
@@ -3324,7 +3332,7 @@ namespace MgooGps.com
         /// <param name="toUserID"></param>
         /// <returns></returns>
         public static String DeviceShiftOrExpire(String devices, String day = null, String toUserID = null)
-        { 
+        {
             List<Dictionary<string, object>> list = Dao.ToList(devices);
             List<string> sqlList = new List<string>();
             string strSql = "";
@@ -3382,31 +3390,61 @@ namespace MgooGps.com
             {
                 return "{\"success\":true,\"msg\":\"参数错误！\"}";
             }
-            string strSql = "select COUNT(*) Count from Devices where deleted=0 and userid = @UserID";
+            // strSql = "select COUNT(*) Count from Devices where deleted=0 and userid = @UserID";
+
+            string strSql = "DECLARE  @DeviceCount int;  " +
+                  //     " DECLARE @UserID int; " +
+           // " set @UserID =  @UserID; " +
+           " with temp(UserID, ParentID) as  " +
+              "  (" +
+               "     select UserID, ParentID from Users where UserID = @UserID  " +
+                 "   union all   " +
+                 "   select Users.UserID, Users.ParentID from Users, temp  " +
+               "     where Users.ParentID = temp.UserID and users.Deleted = 0  " +
+               " )  " +
+           " select @DeviceCount = COUNT(1) from devices d inner join temp t on t.UserID = d.UserID where d.deleted = 0 ; " +
+                "if (@DeviceCount = 0) " +
+               " begin  " +
+                   " with temp1(UserID, ParentID) as  " +
+                    "        (" +
+                    "            select UserID, ParentID from Users where UserID = @UserID  " +
+                    "            union all  " +
+                    "            select Users.UserID, Users.ParentID from Users, temp1  " +
+                    "            where Users.ParentID = temp1.UserID and users.Deleted = 0  " +
+                    "        )  " +
+                    "        update Users set deleted = 1 where deleted = 0 and UserID in (select UserID from temp1)   " +
+                    "        select @@ROWCOUNT as Count" +
+                    "    end" +
+                    "	else " +
+                     "       select 0 as Count ";
 
             int count = Convert.ToInt32(Dao.Select(strSql, new SqlParameter[] { new SqlParameter("UserID", UserID) })["Count"].ToString());
-            if (count > 0)
+            if (count == 0)
             {
                 return "{\"success\":false,\"msg\":\"该用户下还有设备,不能删除.\"}";
             }
-
-            strSql = string.Format("update users set deleted=1 where userid={0}", UserID);
-            count = Dao.ExecutionSQL(strSql);
-            if (count > 0)
+            else
             {
                 return "{\"success\":true,\"msg\":\"删除成功！\"}";
             }
-            else
-            {
-                return "{\"success\":false,\"msg\":\"删除用户失败！\"}";
-            }
+
+          //strSql = string.Format("update users set deleted=1 where userid={0}", UserID);
+          //count = Dao.ExecutionSQL(strSql);
+          //if (count > 0)
+          //{
+          //    return "{\"success\":true,\"msg\":\"删除成功！\"}";
+          //}
+          //else
+          //{
+          //    return "{\"success\":false,\"msg\":\"删除用户失败！\"}";
+          //}
         }
 
         /// <summary>
         /// 获取设备型号
         /// </summary>
         /// <returns></returns>
-        public static DataTable GetDictionaryList(string UserID=null)
+        public static DataTable GetDictionaryList(string UserID = null)
         {
             string strSql = "";
             if (UserID == null)
@@ -3444,7 +3482,7 @@ namespace MgooGps.com
             {
                 return new DataTable();
             }
-         
+
         }
         /// <summary>
         /// 添加新设备
@@ -3504,7 +3542,7 @@ namespace MgooGps.com
             }
             for (int i = 0; i < listImei.Count; i++)
             {
-                if (string.IsNullOrEmpty( listImei[i].Trim()))
+                if (string.IsNullOrEmpty(listImei[i].Trim()))
                     continue;
                 if (listImei[i].Length > 20)
                 {
@@ -3567,37 +3605,37 @@ namespace MgooGps.com
             return "{\"success\":true,\"SumLength\":\"" + imeis.Length + "\",\"successLength\":\"" + count + "\",\"errorImei\":" + reg + "]" + "}";
         }
 
-        public static string AddDevicesList(string carnum, string carusername, string cellphone,string description, string devicelist)
+        public static string AddDevicesList(string carnum, string carusername, string cellphone, string description, string devicelist)
         {
             string msg = "";
             if (string.IsNullOrEmpty(devicelist))
-                return "{\"success\":false,\"msg\":\"请至少添加一台GPS设备.\"}"; 
+                return "{\"success\":false,\"msg\":\"请至少添加一台GPS设备.\"}";
             List<Dictionary<string, object>> list = Dao.ToList(devicelist);
             if (list.Count <= 0)
-                msg = "请至少添加一台GPS设备."; 
+                msg = "请至少添加一台GPS设备.";
             if (string.IsNullOrEmpty(carnum))
-                msg = "车牌号不能为空."; 
+                msg = "车牌号不能为空.";
             if (string.IsNullOrEmpty(carusername))
-                msg = "联系人不能为空."; 
+                msg = "联系人不能为空.";
             if (string.IsNullOrEmpty(cellphone) || !System.Text.RegularExpressions.Regex.IsMatch(cellphone, @"^[1]+[8,3,5,7]+\d{9}"))
-                msg = "号码格式错误."; 
+                msg = "号码格式错误.";
             if (!string.IsNullOrEmpty(msg))
             {
-                 return "{\"success\":false,\"msg\":\""+ msg + "\"}";
+                return "{\"success\":false,\"msg\":\"" + msg + "\"}";
             }
-           
+
             string strSql = "";
             //List<string> sqlList = new List<string>();
             //List<SqlParameter[]> parsList = new List<SqlParameter[]>();
             string GroupName = carusername + "-" + carnum;
-            string UserID= Utils.GetSession("UserInfo").UserID;
+            string UserID = Utils.GetSession("UserInfo").UserID;
             strSql = "insert into groups(GroupName, UserID, Username, Description, Created, GroupType, AccountID, Deleted)values( @groupname, @userid, '', '', GETDATE(), -1, -1, 0)  select @@IDENTITY GroupID";
-            Hashtable row = Dao.Select(strSql,new SqlParameter[] {new SqlParameter("groupname", GroupName),new SqlParameter("userid",UserID) });
+            Hashtable row = Dao.Select(strSql, new SqlParameter[] { new SqlParameter("groupname", GroupName), new SqlParameter("userid", UserID) });
             if (row != null)
             {
-                string GroupID = row["GroupID"].ToString(); 
+                string GroupID = row["GroupID"].ToString();
                 strSql = "update devices set GroupID=@GroupID,CarNum=@CarNum,CarUserName=@CarUserName,Description=@Description,CellPhone=@CellPhone,DeviceName=" +
-                    string.Format("CASE WHEN (select di.DataText from Devices d inner join Dictionary di on di.DataValue = d.Model where SerialNumber=@SerialNumber and deleted = 0) like'MG-X8%' THEN '{0}'+'-无线'ELSE '{0}'+'-有线'END", carusername); 
+                    string.Format("CASE WHEN (select di.DataText from Devices d inner join Dictionary di on di.DataValue = d.Model where SerialNumber=@SerialNumber and deleted = 0) like'MG-X8%' THEN '{0}'+'-无线'ELSE '{0}'+'-有线'END", carusername);
                 int count = 0;
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -3617,10 +3655,11 @@ namespace MgooGps.com
                 {
                     return "{\"success\":true,\"msg\":\"添加成功!\"}";
                 }
-                else {
-                       return "{\"success\":false,\"msg\":\"共"+list.Count+"台,成功" + count + "台\"}";
+                else
+                {
+                    return "{\"success\":false,\"msg\":\"共" + list.Count + "台,成功" + count + "台\"}";
                 }
-            } 
+            }
             return "";
         }
 
@@ -3650,9 +3689,9 @@ namespace MgooGps.com
         /// <returns></returns>
         public static String UpdatePassword(String NewPassword, String OldPassword)
         {
-            if (string.IsNullOrEmpty(NewPassword) || NewPassword  .Length <=3 || NewPassword.Length >=15)
+            if (string.IsNullOrEmpty(NewPassword) || NewPassword.Length <= 3 || NewPassword.Length >= 15)
             {
-                return "{\"success\":false,\"msg\":\"请输入3-15位数的密码!\"}"; 
+                return "{\"success\":false,\"msg\":\"请输入3-15位数的密码!\"}";
             }
             if (string.IsNullOrEmpty(OldPassword))
             {
@@ -3839,11 +3878,11 @@ namespace MgooGps.com
                 //baidu locates to wgs84
                 //Mgoo.Position.Point point = geo.TranslateGps84(Convert.ToDouble(lat), Convert.ToDouble(lng));
 
-               // geo = new Mgoo.Position.Geocod.Amap();
+                // geo = new Mgoo.Position.Geocod.Amap();
                 //wgs to gaode piont
-               // var  point = geo.Translate(Convert.ToDouble(lat), Convert.ToDouble(lng));
+                // var  point = geo.Translate(Convert.ToDouble(lat), Convert.ToDouble(lng));
 
-                string address = geo.GetAddress(new Mgoo.Position.Point (Convert.ToDouble(lat), Convert.ToDouble(lng)));
+                string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
 
                 //string address = geo.GetAddress(new Mgoo.Position.Point(Convert.ToDouble(lat), Convert.ToDouble(lng)));
 
@@ -4020,7 +4059,7 @@ namespace MgooGps.com
             string Phone = context.Request.Form["Phone"];
             string Address = context.Request.Form["Address"];
             string Contacts = context.Request.Form["Contacts"];
-            string strSql; 
+            string strSql;
 
             if (string.IsNullOrEmpty(ParentID) || string.IsNullOrEmpty(LoginName) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(UserType) || string.IsNullOrEmpty(UserName))
             {
@@ -4085,16 +4124,16 @@ namespace MgooGps.com
         /// <param name="UserID">要转移的用户的ID</param>
         /// <param name="toUserID">目标用户的ＩＤ</param>
         /// <returns></returns>
-        public static string ShiftUsers(String UserID,String toUserID)
+        public static string ShiftUsers(String UserID, String toUserID)
         {
             List<Dictionary<string, object>> list = Dao.ToList(UserID);
-            StringBuilder userids =  new StringBuilder ();
+            StringBuilder userids = new StringBuilder();
             for (int i = 0; i < list.Count; i++)
             {
                 Dictionary<string, object> dic = list[i];
-                userids.Append(dic["UserID"]+",");
+                userids.Append(dic["UserID"] + ",");
             }
-            string strSql = string.Format("update Users set ParentID = {0} where UserID in ({1})", toUserID, userids.ToString().Substring(0,userids.ToString().Length-1 ));
+            string strSql = string.Format("update Users set ParentID = {0} where UserID in ({1})", toUserID, userids.ToString().Substring(0, userids.ToString().Length - 1));
             int status = Dao.ExecutionSQL(strSql);
             if (status > 0)
             {
@@ -4114,21 +4153,21 @@ namespace MgooGps.com
         public static DataTable GetCommandList(string DeviceID)
         {
             string strSql = string.Format("select ROW_NUMBER() OVER (ORDER BY sendDate desc) num,CommandName,DeviceID as IMEI,dateadd(HH,8 ,SendDate)sendDate,ResponseText,dateadd(HH,8 ,ResponseDate)ResponseDate,IsResponse,isSend from  dbo.CarCommandQueue where DeviceID=( select SerialNumber from devices where DeviceID={0})  ", DeviceID);
-            return Dao.Selects(strSql); 
+            return Dao.Selects(strSql);
         }
 
-         /// <summary>
-         ///  获取已删除设备
-         /// </summary>
-         /// <param name="current">当前页</param>
-         /// <param name="rowCount">一页显示多少行</param>
-         /// <param name="sort">排序列</param>
-         /// <param name="searchPhrase">搜索内容</param>
-         /// <returns></returns>
+        /// <summary>
+        ///  获取已删除设备
+        /// </summary>
+        /// <param name="current">当前页</param>
+        /// <param name="rowCount">一页显示多少行</param>
+        /// <param name="sort">排序列</param>
+        /// <param name="searchPhrase">搜索内容</param>
+        /// <returns></returns>
         public static String GetDeletedDevices(string current, string rowCount, string sort, string searchPhrase)
         {
             //http://localhost:1619/AjaxService/AjaxService.ashx?action=test&current=10&rowCount=5&sort%5Breceived%5D=desc&searchPhrase=
-            string where = "",sortStr="";
+            string where = "", sortStr = "";
             if (searchPhrase.Trim() != "")
             {
                 where = " and ( DeviceName like '%" + searchPhrase + "%' or SerialNumber like '%" + searchPhrase + "%' or UserName like '%" + searchPhrase + "%')";
@@ -4136,20 +4175,21 @@ namespace MgooGps.com
             if (!string.IsNullOrWhiteSpace(sort))
             {
                 sortStr = " order by " + sort;
-               sortStr= sortStr.Replace("rowid", "DeviceID");
+                sortStr = sortStr.Replace("rowid", "DeviceID");
             }
             string strSql = @"select top " + rowCount + " * from (select ROW_NUMBER() over(" + sortStr + ") rowid,d.DeviceID,d.DeviceName,d.SerialNumber,u.UserID,u.UserName  from Devices d inner join Users u on d.userid=u.userid where d.deleted=1 " + where + @"
                         ) 已删除 where rowid>(" + rowCount + "*(" + current + @"-1))" + sortStr;
-            DataTable dt = Dao.Selects(strSql); 
-            StringBuilder jsonStr = new StringBuilder(); 
+            DataTable dt = Dao.Selects(strSql);
+            StringBuilder jsonStr = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
             {
-                  jsonStr.Append("{\"rowid\":\"" + dr["rowid"] + "\",\"DeviceID\":\"" + dr["DeviceID"] + "\",\"DeviceName\":\"" + (dr["DeviceName"].ToString() == "" ? dr["SerialNumber"].ToString() : dr["DeviceName"]) + "\",\"SerialNumber\":\"" + dr["SerialNumber"] + "\",\"UserID\":\"" + dr["UserID"] + "\",\"UserName\":\"" + dr["UserName"] + "\"},"); 
+                jsonStr.Append("{\"rowid\":\"" + dr["rowid"] + "\",\"DeviceID\":\"" + dr["DeviceID"] + "\",\"DeviceName\":\"" + (dr["DeviceName"].ToString() == "" ? dr["SerialNumber"].ToString() : dr["DeviceName"]) + "\",\"SerialNumber\":\"" + dr["SerialNumber"] + "\",\"UserID\":\"" + dr["UserID"] + "\",\"UserName\":\"" + dr["UserName"] + "\"},");
             }
-            if (jsonStr.Length>0) {
+            if (jsonStr.Length > 0)
+            {
                 jsonStr.Remove(jsonStr.Length - 1, 1);
             }
-           
+
             strSql = "select count(*) from Devices d inner join Users u on d.userid=u.userid where d.deleted=1 " + where;
             string Count = Dao.Select(strSql)[0].ToString();
             StringBuilder sb = new StringBuilder();
@@ -4160,7 +4200,7 @@ namespace MgooGps.com
             sb.Append(jsonStr);
             sb.Append("],");
             sb.Append(" \"total\": " + Count + "");
-            sb.Append("}"); 
+            sb.Append("}");
             return sb.ToString();
         }
 
@@ -4262,34 +4302,34 @@ namespace MgooGps.com
                 }
                 return list;
             });
-             
+
             Task<int> task2 = Task.Factory.StartNew<int>(() =>
-           { 
-                  string strSql = string.Format(@" with subqry(UserID) as (select UserID from Users where UserID = {0} union all select Users.UserID from Users,subqry
+           {
+               string strSql = string.Format(@" with subqry(UserID) as (select UserID from Users where UserID = {0} union all select Users.UserID from Users,subqry
                                      where Users.ParentID = subqry.UserID and users.Deleted = 0)   
                    select count(*) from devices d inner
                                      join users u on u.userid = d.userid inner
                                      join lklocation l  on l.deviceid = d.deviceid
                                      where d.deleted = 0 and d.ActiveDate >= '{1}' and d.ActiveDate <= '{2}' and d.userid in (select Userid from subqry) {3}", UserID, StartTime, EndTime, where);
                return Convert.ToInt32(Dao.Select(strSql)[0].ToString());
-           
-              });
-            
+
+           });
+
             List<Dictionary<string, string>> resList = task1.Result;
             int resCount = task2.Result;
             Dictionary<string, object> resDic = new Dictionary<string, object>();
             resDic["current"] = current;
             resDic["total"] = resCount;
             resDic["rows"] = resList;
-          
+
             var res = new
             {
                 current = current,
                 total = resCount,
                 rows = resList
             };
-            
-            return   Dao.ToJson(resDic);
+
+            return Dao.ToJson(resDic);
             #endregion
         }
 
@@ -4309,9 +4349,9 @@ namespace MgooGps.com
         /// </summary>
         /// <param name="DeviceID"></param>
         /// <returns></returns>
-        public static DataTable GetExceptionMessageCount(String DeviceID,string sTime,string eTime)
+        public static DataTable GetExceptionMessageCount(String DeviceID, string sTime, string eTime)
         {
-            string strSql = string.Format("select CONVERT(varchar(10), Created, 120) msgDate,COUNT(*) msgCount from ExceptionMessage where DeviceID={0} and Created >= '{1}' and Created <= '{2}' group by CONVERT(varchar(10), Created, 120) ", DeviceID,sTime,eTime);
+            string strSql = string.Format("select CONVERT(varchar(10), Created, 120) msgDate,COUNT(*) msgCount from ExceptionMessage where DeviceID={0} and Created >= '{1}' and Created <= '{2}' group by CONVERT(varchar(10), Created, 120) ", DeviceID, sTime, eTime);
             return Dao.Selects(strSql);
         }
 
@@ -4335,22 +4375,22 @@ namespace MgooGps.com
                                              delete from DevicesReport where DeviceID={1};
                                              delete from SpeedReport where DeviceID={1};
                                              if exists(select * from sysobjects where id= object_id('ZLocation_{1}')and type='U') drop table ZLocation_{1}; ", drData["SerialNumber"].ToString(), DeviceID);
-            Dao.ExecutionSQL(strSql); 
+            Dao.ExecutionSQL(strSql);
             if (activeDate >= spDate)
             {
-                double day = (DateTime.Now - activeDate).TotalDays +1 ;
+                double day = (DateTime.Now - activeDate).TotalDays + 1;
                 SqlConnection conn = Dao.CreateConn(activeDate);
                 for (int i = 0; i < day; i++)
                 {
-                    if (i > 0 && activeDate.AddDays(i).Month != activeDate.AddDays(i - 1).Month) 
-                        conn = Dao.CreateConn(activeDate.AddDays(i)); 
-                    strSql = string.Format("delete from Location{0} where DeviceID={1}",activeDate.AddDays(i).Day, DeviceID);
+                    if (i > 0 && activeDate.AddDays(i).Month != activeDate.AddDays(i - 1).Month)
+                        conn = Dao.CreateConn(activeDate.AddDays(i));
+                    strSql = string.Format("delete from Location{0} where DeviceID={1}", activeDate.AddDays(i).Day, DeviceID);
                     Dao.ExecutionSQL(strSql, conn);
                 }
-            } 
+            }
         }
 
-        public static string IsExistFence(string DeviceID  )
+        public static string IsExistFence(string DeviceID)
         {
             try
             {
@@ -4360,15 +4400,15 @@ namespace MgooGps.com
                 }
                 string strSql = "  select Radius from GeoFence where FenceName='一键围栏' and  DeviceID=@DeviceID";
                 Hashtable ht = Dao.Select(strSql, new SqlParameter[] { new SqlParameter("DeviceID", DeviceID) });
-                if (ht!= null && ht.Count >0)
+                if (ht != null && ht.Count > 0)
                 {
-                    string radius = Convert.ToDouble(ht["Radius"]).ToString("0");  
-                    return "{\"success\":true,\"msg\":\""+ radius + "\"}"; 
-                } 
+                    string radius = Convert.ToDouble(ht["Radius"]).ToString("0");
+                    return "{\"success\":true,\"msg\":\"" + radius + "\"}";
+                }
             }
             catch (Exception ex)
             {
-                Utils.log("IsExistFence Error:"+ex.Message);
+                Utils.log("IsExistFence Error:" + ex.Message);
             }
             return "{\"success\":false,\"msg\":\"\"}";
         }
@@ -4378,13 +4418,13 @@ namespace MgooGps.com
             try
             {
                 string strSql = "delete from GeoFence where GeofenceID=@GeofenceID ";
-              
-                return Dao.ExecutionSQL(strSql, new SqlParameter[] { new SqlParameter("GeofenceID", FenceID)  }) > 0;
-              
+
+                return Dao.ExecutionSQL(strSql, new SqlParameter[] { new SqlParameter("GeofenceID", FenceID) }) > 0;
+
             }
             catch (Exception ex)
             {
-                Utils.log("DeleteGeoFence Error:"+ex.Message);
+                Utils.log("DeleteGeoFence Error:" + ex.Message);
                 return false;
             }
         }
@@ -4413,7 +4453,7 @@ namespace MgooGps.com
                 })["gid"].ToString();
                 if (!gid.Equals(string.Empty))
                 {
-                    Task.Run(() => MG_BLL.Utils.SendTcpCmd("VTR-DZWL-" + Deviceid)  ); 
+                    Task.Run(() => MG_BLL.Utils.SendTcpCmd("VTR-DZWL-" + Deviceid));
                     return true;
                 }
                 return false;
@@ -4424,5 +4464,5 @@ namespace MgooGps.com
                 return false;
             }
         }
-    } 
+    }
 }
