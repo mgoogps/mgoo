@@ -73,7 +73,7 @@ namespace MG_BLL.Pay.MgooOrders
                 string strSql = "select OrderID, o.UserID,d.DeviceName,d.SerialNumber, o.DeviceID, OpenID, OrderNo, TransactionNo, ProductBody, FeeType ," +
                           "TotalFee, o.Created, OrderDate, OrderExpire, PayDate, TradeType, o.Status, BankType, TariffID, BillCreateIP  " +
                           "  from Orders o inner join devices d on o.DeviceID=d.DeviceID " +
-                          "where o.userid = @userid "+ where + " order by orderID";
+                          "where o.userid = @userid "+ where + " order by orderID desc";
                 pars.Add(new SqlParameter ("userid", userid));
                 SQLServerOperating s = new SQLServerOperating();
                 list = s.Selects(strSql, pars.ToArray()).toListDictionary();
