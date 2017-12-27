@@ -59,16 +59,24 @@ namespace MG_BLL.Pay.MgooOrders
             // AddOrder(myHeader.UserID,deviceid,"",);
         }
 
-        public List<Dictionary<string, string>> GetOrderList(int userid)
+        public List<Dictionary<string, string>> GetOrderList(int userid,string orderno = null)
         {
            var list = new List<Dictionary<string, string>>();
             try
             {
-                string strSql = "select OrderID, UserID, DeviceID, OpenID, OrderNo, TransactionNo, ProductBody, FeeType," +
-                          "TotalFee, Created, OrderDate, OrderExpire, PayDate, TradeType, Status, BankType, TariffID, BillCreateIP from Orders " +
-                          "where userid = @userid order by orderID";
+                List<SqlParameter> pars = new List<SqlParameter>();
+                string where = "";
+                if (!string.IsNullOrEmpty(orderno)) {
+                    where = " and OrderNo=@OrderNo";
+                    pars.Add(new SqlParameter("OrderNo", orderno));
+                }
+                string strSql = "select OrderID, o.UserID,d.DeviceName,d.SerialNumber, o.DeviceID, OpenID, OrderNo, TransactionNo, ProductBody, FeeType ," +
+                          "TotalFee, o.Created, OrderDate, OrderExpire, PayDate, TradeType, o.Status, BankType, TariffID, BillCreateIP  " +
+                          "  from Orders o inner join devices d on o.DeviceID=d.DeviceID " +
+                          "where o.userid = @userid "+ where + " order by orderID";
+                pars.Add(new SqlParameter ("userid", userid));
                 SQLServerOperating s = new SQLServerOperating();
-                list = s.Selects(strSql, new SqlParameter[] { new SqlParameter("userid", userid) }).toListDictionary();
+                list = s.Selects(strSql, pars.ToArray()).toListDictionary();
                 return list;
             }
             catch (Exception ex)

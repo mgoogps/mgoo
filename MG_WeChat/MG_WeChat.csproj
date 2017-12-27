@@ -346,6 +346,7 @@
     <Content Include="myinfo\geofencemanager.html" />
     <Content Include="myinfo\groupmanager.html" />
     <Content Include="myinfo\myinfo.html" />
+    <Content Include="myinfo\orders-detail.html" />
     <Content Include="myinfo\orders.html" />
     <Content Include="myinfo\report.html" />
     <Content Include="myinfo\setnodisturb.html" />

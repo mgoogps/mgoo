@@ -87,13 +87,14 @@ var _hmt = _hmt || [];
                 pars: { userid: info.UserID },
                 success: function (data) {
                     var orders = list = JSON.parse(data);
+                    console.log(orders);
                     var html = [];
                     var $selected = $(".am-list");
                     for (var i = 0; i < orders.length; i++) {
                         sessionStorage.setItem("gid_" + orders[i].GroupID, null);
                         html.push('<li> ');
                         html.push('<a onclick="detail(' + i + ')" href="javascript:;"><i class="am-icon-jpy am-icon-fw"></i>' + orders[i].ProductBody + '</a>');
-                        html.push('<div class="am-list-item-text">' +orders[i].OrderNo +' --'+ orders[i].Created + '</div>'); 
+                        html.push('<div class="am-list-item-text">' + orderStatus(orders[i].Status )+ ' -  ' + orders[i].Created + '</div>');
                         html.push('</li>');
                     }
                     $selected.empty().append(html.join('')); 
@@ -105,7 +106,29 @@ var _hmt = _hmt || [];
         }
         function detail(index) {
             var detail = list[index];
-            $('#modalDetail').modal('toggle');
+            //$('#modalDetail').modal('toggle');
+            window.location.href = 'orders-detail.html?o=' + detail.OrderNo;
+        }
+        function orderStatus(s) {
+            var str = '';
+            switch (s) {
+                case "1":
+                    str = '未付款';
+                    break;
+                case "2":
+                    str = '已完成';
+                    break;
+                case "3":
+                    str = '已关闭';
+                    break;
+                case "4":
+                    str = '申请退款';
+                    break;
+                case "5":
+                    str = '已退款';
+                    break;  
+            }
+            return str;
         }
     </script>
 </body>

@@ -22,7 +22,7 @@ namespace MG_WeChat.ajax
         public AuthHeader myHeader = new AuthHeader();
         [SoapHeader("myHeader")]
         [WebMethod]
-        public string GetOrderList(int userid)
+        public string GetOrderList(int userid,string  orderno)
         {
             string valid = myHeader.isValid();
             if (!valid.Equals(string.Empty))
@@ -30,7 +30,7 @@ namespace MG_WeChat.ajax
                 return valid;
             }
             MG_BLL.Pay.MgooOrders.Orders o = new MG_BLL.Pay.MgooOrders.Orders(myHeader);
-            return Utils.ToJson(o.GetOrderList(userid));
+            return Utils.ToJson(o.GetOrderList(userid, orderno));
         }
 
         [SoapHeader("myHeader")]
