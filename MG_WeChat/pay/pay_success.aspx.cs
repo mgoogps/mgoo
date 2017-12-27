@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MG_BLL.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
- 
+
 
 namespace MG_WeChat.pay
 {
@@ -20,6 +21,7 @@ namespace MG_WeChat.pay
             }
             deviceid = Request.QueryString["deviceid"];
             order_no = Request.QueryString["no"];
+            Log.Info("订单号："+order_no);
         }
     }
 }

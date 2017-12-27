@@ -53,7 +53,7 @@
                     } else {
                         $(".am-modal-hd").text("支付成功,正在跳转...");
                         setTimeout(function () {
-                            window.location.href = "../myinfo/orders-detail.html?o=" + <%=order_no%>;
+                            window.location.href = "../myinfo/orders-detail.html?t=pay&o=" + <%=order_no%>;
                         }, 500); 
                     }
                 },

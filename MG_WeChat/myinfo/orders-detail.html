@@ -107,8 +107,15 @@ var _hmt = _hmt || [];
     <script src="/bootstrap/js/Ajax.js"></script>
 
     <script type="text/javascript"> 
-        var o = GetQueryString('o'); 
+        var o = GetQueryString('o');
+        var t = GetQueryString('t');
+
         $(function () {
+            if (t) { 
+                $(".am-header-left a").attr("onclick", function () {
+                    window.location.href = 'orders.html?t=pay';
+                });
+            }
             var info = mg.GetUserInfo();
             $.ajax({
                 url: "Orders.asmx",
