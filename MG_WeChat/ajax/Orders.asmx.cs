@@ -72,9 +72,9 @@ namespace MG_WeChat.ajax
             var orderStatus = o.QueryOrder(orderno,transactionid);
             if (orderStatus == "2")
             {
-                return MG_BLL.Utils.GetResult("SUCCESS", MG_BLL.statusCode.Code.success);
+                return MG_BLL.Utils.GetResult("SUCCESS", MG_BLL.statusCode.Code.success, orderno);
             }
-            return MG_BLL.Utils.GetResult("FAILURE", MG_BLL.statusCode.Code.failure); 
+            return MG_BLL.Utils.GetResult("FAILURE", MG_BLL.statusCode.Code.failure, orderno); 
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MG_WeChat.pay
             }
             deviceid = Request.QueryString["deviceid"];
             order_no = Request.QueryString["no"];
-            Log.Info("订单号："+order_no);
+            //Log.Info(this,"订单号："+order_no);
         }
     }
 }

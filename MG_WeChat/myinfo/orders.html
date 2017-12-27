@@ -78,7 +78,7 @@ var _hmt = _hmt || [];
         $(function () {
             $('#modalDetail').modal('close');
             if (t) {
-                $(".am-header-left a").attr("onclick", function () {
+                $(".am-header-left a").on("click", function () {
                     window.location.href = 'myinfo.html?t=pay';
                 });
             }
