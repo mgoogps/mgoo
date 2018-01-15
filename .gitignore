@@ -252,4 +252,5 @@ ModelManifest.xml
 /MG_WeChat/Web.Release.config
 /MG_WeChat/Web.Debug.config
 /MG_WeChat/Web.config
+/MG_DAL/App.config
 /Test/App.config
