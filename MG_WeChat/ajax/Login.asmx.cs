@@ -74,7 +74,7 @@ namespace MG_WeChat.ajax
                         if (device > 0)
                         {
                             loginUser.DeviceID = device.ToString();
-                            LoginResult["Url"] = "device/Tracking.html?deviceid=" + loginUser.DeviceID;
+                            LoginResult["Url"] = "device/Tracking.html?deviceid=" + loginUser.DeviceID+"&type=reg";
                         }
                     }
                     if (identifies.IndexOf("OuBaoYun") >= 0)
