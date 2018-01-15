@@ -13,6 +13,32 @@ namespace MG_BLL.Weixin
 {
     public class Register
     {
+        private Common.AuthHeader myHeader = new Common.AuthHeader();
+        public Register() { }
+        public Register(Common.AuthHeader header) { }
+        public LoginUserInfo WeixinRegister(string phone, string password, string serialnumer,string vccode)
+        { 
+            if (MgRegister(phone, password, phone))
+            { 
+                YiwenGPSEntities db = new YiwenGPSEntities();
+                BllLogin bllLogin = new BllLogin();
+                LoginUserInfo loginUser =  bllLogin.SystemLogin_Bll(phone,Utils.GetMD5( password), "MgooWeixin@AMAP","2"); 
+                Devices d = new Weixin.Devices(new Common.AuthHeader() { UserID = loginUser.UserID.ToString() });
+                var result = d.AddDevice(serialnumer,vccode, loginUser.UserID.ToString(), "-1");
+                var ar = Utils.ToObjects<ajaxResult>(result); 
+                if (ar.StatusCode != statusCode.Code.success)
+                { 
+                     loginUser.Address = "failure";
+                }
+                else
+                {
+                    var dev = db.Devices.Where(item => item.SerialNumber == serialnumer && item.DevicePassword == vccode && item.Deleted == false).FirstOrDefault() ;
+                    loginUser.DeviceID = dev?.DeviceID.ToString();
+                }
+                return loginUser;
+            }
+            return null;
+        }
 
         public bool MgRegister(string phone, string password,string username)
         {
@@ -54,8 +80,7 @@ namespace MG_BLL.Weixin
                    values (1391,'" + ParentUserName + "','"+ ParentLoginName + "','"+ ParentPassword + @"',2,0,'China Standard Time',-1,-1,-1,getdate(),getdate(),0,0,0,0,0) select @UserID = @@identity
                 end
                 insert into Users(ParentID, UserName, LoginName, Password, UserType, Gender , TimeZone,  Country, State, Status, UpdateTime, Created, Deleted, SuperAdmin, AllDeviceCount, ActivationCount, MoneyCount) 
-	values (@UserID,@UserName,@LoginName,@Password,@UserType,@Gender,@TimeZone,-1,-1,-1,getdate(),getdate(),0,0,0,0,0) 
-                  ";
+	            values (@UserID,@UserName,@LoginName,@Password,@UserType,@Gender,@TimeZone,-1,-1,-1,getdate(),getdate(),0,0,0,0,0)";
             //strSql = "insert into Users values(@ParentID, @UserName, @LoginName, @Password, @UserType, @Gender, @FirstName, @MiddleName, @LastName, @TimeZone, @Address1, @Address2, @Country, @State, @HomePhone, @WorkPhone, @CellPhone, @SMSEmail, @PrimaryEmail, @SecondaryEmail, @Status, @UpdateTime, @Created, @Deleted, @SuperAdmin, @AllDeviceCount, @ActivationCount, @MoneyCount)";
             SQLServerOperating s = new SQLServerOperating();
             bool success = s.ExecuteSql(strSql, parms) > 0; 

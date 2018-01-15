@@ -36,7 +36,12 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
     </script>
-
+    <style>
+        .form-control{
+            font-size:x-large;
+            height:40px;
+        }
+    </style>
 </head>
 <body>
     <header data-am-widget="header" class="am-header am-header-default">
@@ -56,8 +61,14 @@ var _hmt = _hmt || [];
         <form id="registerForm" method="post" class="form-horizontal" action="">
             <div class="form-group">
                 <div class="input-group col-sm-12">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user fa-fw"></i></span>
-                    <input type="text" id="inputName" class="form-control" name="inputName" placeholder="请输入昵称" required data-bv-notempty-message="昵称不能为空." oninput="if(value.length>15)value=value.slice(0,15)">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
+                    <input type="text" id="inputImei" class="form-control" name="inputImei" placeholder="请输入设备码" required data-bv-notempty-message="设备码不能为空." oninput="if(value.length>20)value=value.slice(0,20)">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
+                    <input type="text" id="inputVc" class="form-control" name="inputVc" placeholder="请输入激活码" required data-bv-notempty-message="激活码不能为空." oninput="if(value.length>6)value=value.slice(0,6)">
                 </div>
             </div>
             <div class="form-group">
@@ -66,23 +77,23 @@ var _hmt = _hmt || [];
                     <input type="number" id="inputAccount" class="form-control" name="inputAccount" placeholder="请输入您的手机号" oninput="if(value.length>11)value=value.slice(0,11)">
                 </div>
             </div>
+          
+            <div class="form-group">
+                <div class="input-group col-sm-12">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="请输入登录密码，并牢记"
+                           required data-bv-notempty-message="密码不能为空." 
+                           data-bv-different="true" data-bv-different-field="inputAccount" data-bv-different-message="密码不能跟账号一样.">
+                </div>
+            </div>
             <div class="form-group">
                 <div class="input-group col-sm-4">
                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-flickr fa-fw"></i></span>
                     <input type="number" id="verification" name="verification" class="form-control" placeholder="请输入验证码" oninput="if(value.length>6)value=value.slice(0,6)">
                     <span class="input-group-btn"><button class="btn btn-primary" id="getcode" onclick="getCode('inputAccount','register', this)" type="button">获取</button></span>
-                </div> 
-            </div>
-            <div class="form-group">
-                <div class="input-group col-sm-12">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="请设置您的登陆密码"
-                           required data-bv-notempty-message="密码不能为空."
-                         
-                           data-bv-different="true" data-bv-different-field="inputAccount" data-bv-different-message="密码不能跟账号一样.">
                 </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <div class="input-group col-sm-12">
                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock fa-fw"></i></span>
                     <input type="password" id="password2" name="password2" class="form-control" placeholder="请再次输入登陆密码"
@@ -90,7 +101,7 @@ var _hmt = _hmt || [];
                            data-bv-identical="true" data-bv-identical-field="password" data-bv-identical-message="两次输入的密码不一样."
                            data-bv-different="true" data-bv-different-field="inputAccount" data-bv-different-message="密码不能跟账号一样.">
                 </div>
-            </div>
+            </div>-->
             <button class="btn btn-primary btn-block" type="submit">确认注册</button>
         </form>
 
@@ -182,22 +193,50 @@ var _hmt = _hmt || [];
         });
 
         function frmSubmit() {
-            var data = { phone: $("#inputAccount").val(), password: $("#password").val(), code: $("#verification").val(), username: $("#inputName").val() };
+            var data = {
+                serialnumber: $("#inputImei").val(),
+                vccode: $("#inputVc").val(),
+                phone: $("#inputAccount").val(),
+                password: $("#password").val(),
+                code: $("#verification").val() 
+            };
             $.ajax({
-                url: "ajax/Login.asmx/MgRegister",
+                url: "ajax/Login.asmx/WeixinRegister",
                 data: JSON.stringify(data),
                 type: "post",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (r) {
                     var result = JSON.parse(r.d);
-                    var m = new amModal({ msg: result.Message })
-                    m.open(); 
-                    if (result.StatusCode === 200) {
-                        m.onConfirm(function () {
-                            window.location.href = "Login.aspx";
-                        }); 
-                    }  
+                    result.password = result.password;
+                    result.loginname = data.phone;
+                    result.code = data.code;
+                    var msg = '';
+                    if (result.StatusCode == 200) {
+                        console.log("login success...");
+                        localStorage.setItem('LoginInfo', JSON.stringify(result));
+                        if (result.Message) {
+                            msg = result.Message;
+                        } else {
+                            window.location.replace(result.Url);
+                        }
+                       
+                    } else {
+                        console.log("login failure...");
+                    }
+                    if (result.StatusCode == 300 && result.Message) {
+                        msg = result.Message;
+                    }
+                    if (msg) {
+                        var m = new amModal({ msg: msg })
+                        m.open();
+                        if (result.StatusCode === 200) {
+                            m.onConfirm(function () {
+                                window.location.replace(result.Url);
+                            });
+                        }
+                        return;
+                    }
                 },
                 error: function (e) {
                     console.log(e);

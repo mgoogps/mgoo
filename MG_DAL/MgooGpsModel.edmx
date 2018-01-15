@@ -1,0 +1,2405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="YiwenGPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminCount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceCount" Type="int" />
+          <Property Name="OnlineCount" Type="int" />
+          <Property Name="DeviceUseCount" Type="int" />
+          <Property Name="DeviceDayCount" Type="int" />
+          <Property Name="AddDeviceCount" Type="int" />
+          <Property Name="AddUserDeviceCount" Type="int" />
+          <Property Name="NewDeviceDayCount" Type="int" />
+          <Property Name="NewDeviceDayOBDCount" Type="int" />
+          <Property Name="UserCount" Type="int" />
+          <Property Name="AddUserCount" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateIP" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Apps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppID" Type="varchar" MaxLength="50" />
+          <Property Name="AppKey" Type="varchar" MaxLength="50" />
+          <Property Name="AppSecret" Type="varchar" MaxLength="50" />
+          <Property Name="MasterSecret" Type="varchar" MaxLength="50" />
+          <Property Name="PackageName" Type="varchar" MaxLength="50" />
+          <Property Name="OS" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“YiwenGPS.dbo.BaiduOffset”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="BaiduOffset">
+          <Property Name="Lat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Lng" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="offsetLat" Type="float" />
+          <Property Name="offsetLng" Type="float" />
+        </EntityType>-->
+        <EntityType Name="BuyRecord">
+          <Key>
+            <PropertyRef Name="BuyID" />
+          </Key>
+          <Property Name="BuyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="25" />
+          <Property Name="OpenID" Type="varchar" MaxLength="25" />
+          <Property Name="BuyMoney" Type="money" />
+          <Property Name="BuyDay" Type="int" />
+          <Property Name="PayMethod" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="OldExpireDate" Type="datetime" />
+          <Property Name="NewExpireDate" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarCommandQueue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommandText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsSend" Type="bit" Nullable="false" />
+          <Property Name="SendDate" Type="datetime" Nullable="false" />
+          <Property Name="IsResponse" Type="bit" />
+          <Property Name="ResponseDate" Type="datetime" />
+          <Property Name="ResponseText" Type="nvarchar" MaxLength="500" />
+          <Property Name="CommandName" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsOfflineSend" Type="bit" />
+          <Property Name="Infos" Type="nvarchar" MaxLength="500" />
+          <Property Name="SendCount" Type="int" />
+        </EntityType>
+        <EntityType Name="DebugData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMEI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Data" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="DevBond">
+          <Key>
+            <PropertyRef Name="wxDevID" />
+          </Key>
+          <Property Name="wxDevID" Type="int" Nullable="false" />
+          <Property Name="wxIMEI" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="wxName" Type="nvarchar" MaxLength="50" />
+          <Property Name="yxDevID" Type="int" />
+          <Property Name="yxIMEI" Type="nvarchar" MaxLength="20" />
+          <Property Name="yxName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DevicePassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PhoneNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="ActiveDate" Type="datetime" />
+          <Property Name="HireStartDate" Type="datetime" />
+          <Property Name="HireExpireDate" Type="datetime" />
+          <Property Name="SpeedLimit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="OILCoefficient" Type="float" />
+          <Property Name="BSJIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddHireDay" Type="int" />
+          <Property Name="ServerID" Type="int" />
+          <Property Name="OilPrice" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="CreatedByUser" Type="datetime" />
+          <Property Name="ExpireByUser" Type="datetime" />
+          <Property Name="OilVolume" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="OilLow" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="OilHigh" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="CarImg" Type="nvarchar" MaxLength="500" />
+          <Property Name="ServerID2" Type="int" />
+          <Property Name="ByDistance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="LastByDistance" Type="decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.Devices_bak”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Devices_bak">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DevicePassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PhoneNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="ActiveDate" Type="datetime" />
+          <Property Name="HireStartDate" Type="datetime" />
+          <Property Name="HireExpireDate" Type="datetime" />
+          <Property Name="SpeedLimit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="OILCoefficient" Type="float" />
+          <Property Name="BSJIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddHireDay" Type="int" />
+          <Property Name="ServerID" Type="int" />
+          <Property Name="OilPrice" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="CreatedByUser" Type="datetime" />
+          <Property Name="ExpireByUser" Type="datetime" />
+          <Property Name="OilVolume" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="OilLow" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="OilHigh" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="CarImg" Type="nvarchar" MaxLength="500" />
+          <Property Name="ServerID2" Type="int" />
+          <Property Name="ByDistance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="LastByDistance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="BackupTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DevicesConfig">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="ShockSens" Type="int" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="CmdID" Type="int" />
+          <Property Name="Horn" Type="int" />
+          <Property Name="AutoDefense" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.DeviceShare”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="DeviceShare">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DevicesReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="NowDistance" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AllDistance" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="WarnCount" Type="int" />
+          <Property Name="SpeedLimitCount" Type="int" />
+          <Property Name="StopCount" Type="int" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DevTest">
+          <Key>
+            <PropertyRef Name="wxDevID" />
+          </Key>
+          <Property Name="wxDevID" Type="int" Nullable="false" />
+          <Property Name="wxIMEI" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="wxName" Type="nvarchar" MaxLength="50" />
+          <Property Name="yxDevID" Type="int" />
+          <Property Name="yxIMEI" Type="nvarchar" MaxLength="20" />
+          <Property Name="yxName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="DictionaryID" />
+          </Key>
+          <Property Name="DictionaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="DataText" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataValue" Type="int" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExceptionMessage">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="GeoFenceID" Type="int" />
+          <Property Name="NotificationType" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="int" />
+          <Property Name="ClearDate" Type="datetime" />
+          <Property Name="ClearBy" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+          <Property Name="OLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="AccON" Type="bit" />
+          <Property Name="EngineON" Type="bit" />
+          <Property Name="OtherStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSM" Type="int" />
+          <Property Name="DeviceUTCTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.ExceptionMessage_bak”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ExceptionMessage_bak">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="int" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="GeoFenceID" Type="int" />
+          <Property Name="NotificationType" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="int" />
+          <Property Name="ClearDate" Type="datetime" />
+          <Property Name="ClearBy" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+          <Property Name="OLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="AccON" Type="bit" />
+          <Property Name="EngineON" Type="bit" />
+          <Property Name="OtherStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSM" Type="int" />
+          <Property Name="DeviceUTCTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ExceptionMessage_Demo">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="GeoFenceID" Type="int" />
+          <Property Name="NotificationType" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="int" />
+          <Property Name="ClearDate" Type="datetime" />
+          <Property Name="ClearBy" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+          <Property Name="OLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="AccON" Type="bit" />
+          <Property Name="EngineON" Type="bit" />
+          <Property Name="OtherStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSM" Type="int" />
+          <Property Name="DeviceUTCTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.ExpiredPushRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ExpiredPushRecord">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="AppLastPushTime" Type="datetime" />
+          <Property Name="WeChatLastPushTime" Type="datetime" />
+          <Property Name="Days" Type="int" />
+        </EntityType>
+        <EntityType Name="GeoFence">
+          <Key>
+            <PropertyRef Name="GeofenceID" />
+          </Key>
+          <Property Name="GeofenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FenceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Entry" Type="bit" />
+          <Property Name="Exit" Type="bit" />
+          <Property Name="Radius" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IsInclusion" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="Lat1" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Lng1" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="FenceType" Type="int" />
+          <Property Name="Width" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="SouthWestLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="SouthWestLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="NorthEastLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="NorthEastLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Bounds" Type="varchar(max)" />
+          <Property Name="BoundBindIds" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="GroupType" Type="int" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="LKLocation">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="LastCommunication" Type="datetime" />
+          <Property Name="ServerUtcDate" Type="datetime" />
+          <Property Name="DeviceUtcDate" Type="datetime" />
+          <Property Name="StopStartUtcDate" Type="datetime" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="BaiduLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="BaiduLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Speed" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Course" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="DataType" Type="int" />
+          <Property Name="DataContext" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" />
+          <Property Name="SOSTime" Type="datetime" />
+          <Property Name="ExceptionTime" Type="datetime" />
+          <Property Name="Distance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="OLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="IsStop" Type="int" />
+          <Property Name="IsOffline" Type="int" />
+          <Property Name="Exception" Type="int" />
+          <Property Name="CarStatus" Type="nvarchar" MaxLength="500" />
+          <Property Name="ToDayDistance" Type="decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="MobileAppInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="AppsID" Type="int" />
+          <Property Name="ClientID" Type="varchar" MaxLength="100" />
+          <Property Name="Token" Type="varchar" MaxLength="100" />
+          <Property Name="Model" Type="varchar" MaxLength="20" />
+          <Property Name="Vendor" Type="varchar" MaxLength="20" />
+          <Property Name="OS" Type="varchar" MaxLength="20" />
+          <Property Name="OSVersion" Type="varchar" MaxLength="20" />
+          <Property Name="IMEI" Type="varchar" MaxLength="50" />
+          <Property Name="UUID" Type="varchar" MaxLength="50" />
+          <Property Name="IMSI" Type="varchar" MaxLength="50" />
+          <Property Name="Resolution" Type="varchar" MaxLength="30" />
+          <Property Name="DPI" Type="varchar" MaxLength="30" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="LastDate" Type="datetime" />
+          <Property Name="APPVersion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="OpenID" Type="varchar" MaxLength="50" />
+          <Property Name="OrderNo" Type="varchar" MaxLength="32" />
+          <Property Name="TransactionNo" Type="varchar" MaxLength="32" />
+          <Property Name="ProductBody" Type="varchar" MaxLength="50" />
+          <Property Name="FeeType" Type="varchar" MaxLength="5" />
+          <Property Name="TotalFee" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="OrderExpire" Type="datetime" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="TradeType" Type="varchar" MaxLength="10" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="BankType" Type="varchar" MaxLength="20" />
+          <Property Name="TariffID" Type="int" />
+          <Property Name="BillCreateIP" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="POI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="lng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="userID" Type="int" />
+          <Property Name="created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SpeedReport">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="OLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="TimediffMinute" Type="float" />
+          <Property Name="SpeedLimit" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TariffPackages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TariffName" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+          <Property Name="OldPrice" Type="int" />
+          <Property Name="BuyCount" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="RenewalDate" Type="int" />
+        </EntityType>
+        <EntityType Name="TempLKL">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="LastCommunication" Type="datetime" />
+          <Property Name="ServerUtcDate" Type="datetime" />
+          <Property Name="DeviceUtcDate" Type="datetime" />
+          <Property Name="StopStartUtcDate" Type="datetime" />
+          <Property Name="Speed" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Course" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="DataType" Type="int" />
+          <Property Name="DataContext" Type="nvarchar" MaxLength="500" />
+          <Property Name="Distance" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="OLat" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="IsStop" Type="int" />
+          <Property Name="CarStatus" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="smallint" />
+          <Property Name="State" Type="smallint" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMSEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="PrimaryEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="SecondaryEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="SuperAdmin" Type="int" />
+          <Property Name="AllDeviceCount" Type="int" />
+          <Property Name="ActivationCount" Type="int" />
+          <Property Name="MoneyCount" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.Users_bak”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Users_bak">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="smallint" />
+          <Property Name="State" Type="smallint" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMSEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="PrimaryEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="SecondaryEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="SuperAdmin" Type="int" />
+          <Property Name="AllDeviceCount" Type="int" />
+          <Property Name="ActivationCount" Type="int" />
+          <Property Name="MoneyCount" Type="int" />
+        </EntityType>
+        <EntityType Name="UsersConfig">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PushMsgType" Type="varchar" MaxLength="50" />
+          <Property Name="PushAudio" Type="bit" />
+          <Property Name="PushShock" Type="bit" />
+          <Property Name="PushPeriod" Type="int" />
+          <Property Name="ShockSens" Type="int" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserWarnSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="IsWarnSMS" Type="bit" />
+          <Property Name="WarnType" Type="nvarchar" MaxLength="100" />
+          <Property Name="OfflineMinute" Type="int" />
+          <Property Name="GeofenceSet" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WebURL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="200" />
+          <Property Name="LoginPage" Type="nvarchar" MaxLength="100" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="WeChatUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="LoginName" Type="varchar" MaxLength="50" />
+          <Property Name="OpenID" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="PushMsg" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="WeixinUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="TypeID" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“YiwenGPS.dbo.ExpiredPush7”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ExpiredPush7">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="UserID" Type="int" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="HireExpireDate" Type="datetime" />
+          <Property Name="ClientID" Type="varchar" MaxLength="100" />
+          <Property Name="OS" Type="varchar" MaxLength="20" />
+          <Property Name="PackageName" Type="varchar" MaxLength="50" />
+          <Property Name="AppID" Type="varchar" MaxLength="50" />
+          <Property Name="AppKey" Type="varchar" MaxLength="50" />
+          <Property Name="AppSecret" Type="varchar" MaxLength="50" />
+          <Property Name="LastPushTime" Type="datetime" />
+        </EntityType>
+        <Function Name="ClearExceptionMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_offLineMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SendMsgToApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="input" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="DeviceID" Type="int" Mode="In" />
+          <Parameter Name="StartTime" Type="datetime" Mode="In" />
+          <Parameter Name="EndTime" Type="datetime" Mode="In" />
+          <Parameter Name="FilterWireless" Type="int" Mode="In" />
+          <Parameter Name="FilterSpeed" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetUsersDevicesDetailInfo_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+          <Parameter Name="Time" Type="nvarchar" Mode="In" />
+          <Parameter Name="startTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="endTime" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetUsersDevicesInfo_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="startTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="endTime" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetUsersList_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="YiwenGPSModelStoreContainer">
+          <EntitySet Name="AdminCount" EntityType="Self.AdminCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apps" EntityType="Self.Apps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuyRecord" EntityType="Self.BuyRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarCommandQueue" EntityType="Self.CarCommandQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DebugData" EntityType="Self.DebugData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevBond" EntityType="Self.DevBond" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicesConfig" EntityType="Self.DevicesConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicesReport" EntityType="Self.DevicesReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevTest" EntityType="Self.DevTest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExceptionMessage" EntityType="Self.ExceptionMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExceptionMessage_Demo" EntityType="Self.ExceptionMessage_Demo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeoFence" EntityType="Self.GeoFence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LKLocation" EntityType="Self.LKLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileAppInfo" EntityType="Self.MobileAppInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POI" EntityType="Self.POI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpeedReport" EntityType="Self.SpeedReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffPackages" EntityType="Self.TariffPackages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempLKL" EntityType="Self.TempLKL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersConfig" EntityType="Self.UsersConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserWarnSet" EntityType="Self.UserWarnSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebURL" EntityType="Self.WebURL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeChatUsers" EntityType="Self.WeChatUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeixinUser" EntityType="Self.WeixinUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devices_bak" EntityType="Self.Devices_bak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Devices_bak].[DeviceID] AS [DeviceID], 
+    [Devices_bak].[SerialNumber] AS [SerialNumber], 
+    [Devices_bak].[DeviceName] AS [DeviceName], 
+    [Devices_bak].[DevicePassword] AS [DevicePassword], 
+    [Devices_bak].[CarUserName] AS [CarUserName], 
+    [Devices_bak].[CarNum] AS [CarNum], 
+    [Devices_bak].[CellPhone] AS [CellPhone], 
+    [Devices_bak].[Status] AS [Status], 
+    [Devices_bak].[PhoneNum] AS [PhoneNum], 
+    [Devices_bak].[Model] AS [Model], 
+    [Devices_bak].[Description] AS [Description], 
+    [Devices_bak].[Created] AS [Created], 
+    [Devices_bak].[Deleted] AS [Deleted], 
+    [Devices_bak].[ActiveDate] AS [ActiveDate], 
+    [Devices_bak].[HireStartDate] AS [HireStartDate], 
+    [Devices_bak].[HireExpireDate] AS [HireExpireDate], 
+    [Devices_bak].[SpeedLimit] AS [SpeedLimit], 
+    [Devices_bak].[UserID] AS [UserID], 
+    [Devices_bak].[GroupID] AS [GroupID], 
+    [Devices_bak].[Icon] AS [Icon], 
+    [Devices_bak].[OILCoefficient] AS [OILCoefficient], 
+    [Devices_bak].[BSJIP] AS [BSJIP], 
+    [Devices_bak].[AddHireDay] AS [AddHireDay], 
+    [Devices_bak].[ServerID] AS [ServerID], 
+    [Devices_bak].[OilPrice] AS [OilPrice], 
+    [Devices_bak].[CreatedByUser] AS [CreatedByUser], 
+    [Devices_bak].[ExpireByUser] AS [ExpireByUser], 
+    [Devices_bak].[OilVolume] AS [OilVolume], 
+    [Devices_bak].[OilLow] AS [OilLow], 
+    [Devices_bak].[OilHigh] AS [OilHigh], 
+    [Devices_bak].[CarImg] AS [CarImg], 
+    [Devices_bak].[ServerID2] AS [ServerID2], 
+    [Devices_bak].[ByDistance] AS [ByDistance], 
+    [Devices_bak].[LastByDistance] AS [LastByDistance], 
+    [Devices_bak].[BackupTime] AS [BackupTime]
+    FROM [dbo].[Devices_bak] AS [Devices_bak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DeviceShare" EntityType="Self.DeviceShare" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DeviceShare].[DeviceID] AS [DeviceID], 
+    [DeviceShare].[SerialNumber] AS [SerialNumber], 
+    [DeviceShare].[UserID] AS [UserID], 
+    [DeviceShare].[CreateTime] AS [CreateTime]
+    FROM [dbo].[DeviceShare] AS [DeviceShare]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ExceptionMessage_bak" EntityType="Self.ExceptionMessage_bak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExceptionMessage_bak].[ExceptionID] AS [ExceptionID], 
+    [ExceptionMessage_bak].[SerialNumber] AS [SerialNumber], 
+    [ExceptionMessage_bak].[DeviceID] AS [DeviceID], 
+    [ExceptionMessage_bak].[GeoFenceID] AS [GeoFenceID], 
+    [ExceptionMessage_bak].[NotificationType] AS [NotificationType], 
+    [ExceptionMessage_bak].[Message] AS [Message], 
+    [ExceptionMessage_bak].[Created] AS [Created], 
+    [ExceptionMessage_bak].[Deleted] AS [Deleted], 
+    [ExceptionMessage_bak].[ClearDate] AS [ClearDate], 
+    [ExceptionMessage_bak].[ClearBy] AS [ClearBy], 
+    [ExceptionMessage_bak].[Note] AS [Note], 
+    [ExceptionMessage_bak].[OLat] AS [OLat], 
+    [ExceptionMessage_bak].[OLng] AS [OLng], 
+    [ExceptionMessage_bak].[Lat] AS [Lat], 
+    [ExceptionMessage_bak].[Lng] AS [Lng], 
+    [ExceptionMessage_bak].[BaiduLat] AS [BaiduLat], 
+    [ExceptionMessage_bak].[BaiduLng] AS [BaiduLng], 
+    [ExceptionMessage_bak].[Power] AS [Power], 
+    [ExceptionMessage_bak].[Address] AS [Address], 
+    [ExceptionMessage_bak].[AccON] AS [AccON], 
+    [ExceptionMessage_bak].[EngineON] AS [EngineON], 
+    [ExceptionMessage_bak].[OtherStatus] AS [OtherStatus], 
+    [ExceptionMessage_bak].[GSM] AS [GSM], 
+    [ExceptionMessage_bak].[DeviceUTCTime] AS [DeviceUTCTime]
+    FROM [dbo].[ExceptionMessage_bak] AS [ExceptionMessage_bak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ExpiredPushRecord" EntityType="Self.ExpiredPushRecord" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExpiredPushRecord].[UserID] AS [UserID], 
+    [ExpiredPushRecord].[DeviceID] AS [DeviceID], 
+    [ExpiredPushRecord].[AppLastPushTime] AS [AppLastPushTime], 
+    [ExpiredPushRecord].[WeChatLastPushTime] AS [WeChatLastPushTime], 
+    [ExpiredPushRecord].[Days] AS [Days]
+    FROM [dbo].[ExpiredPushRecord] AS [ExpiredPushRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users_bak" EntityType="Self.Users_bak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users_bak].[UserID] AS [UserID], 
+    [Users_bak].[ParentID] AS [ParentID], 
+    [Users_bak].[UserName] AS [UserName], 
+    [Users_bak].[LoginName] AS [LoginName], 
+    [Users_bak].[Password] AS [Password], 
+    [Users_bak].[UserType] AS [UserType], 
+    [Users_bak].[Gender] AS [Gender], 
+    [Users_bak].[FirstName] AS [FirstName], 
+    [Users_bak].[MiddleName] AS [MiddleName], 
+    [Users_bak].[LastName] AS [LastName], 
+    [Users_bak].[TimeZone] AS [TimeZone], 
+    [Users_bak].[Address1] AS [Address1], 
+    [Users_bak].[Address2] AS [Address2], 
+    [Users_bak].[Country] AS [Country], 
+    [Users_bak].[State] AS [State], 
+    [Users_bak].[HomePhone] AS [HomePhone], 
+    [Users_bak].[WorkPhone] AS [WorkPhone], 
+    [Users_bak].[CellPhone] AS [CellPhone], 
+    [Users_bak].[SMSEmail] AS [SMSEmail], 
+    [Users_bak].[PrimaryEmail] AS [PrimaryEmail], 
+    [Users_bak].[SecondaryEmail] AS [SecondaryEmail], 
+    [Users_bak].[Status] AS [Status], 
+    [Users_bak].[UpdateTime] AS [UpdateTime], 
+    [Users_bak].[Created] AS [Created], 
+    [Users_bak].[Deleted] AS [Deleted], 
+    [Users_bak].[SuperAdmin] AS [SuperAdmin], 
+    [Users_bak].[AllDeviceCount] AS [AllDeviceCount], 
+    [Users_bak].[ActivationCount] AS [ActivationCount], 
+    [Users_bak].[MoneyCount] AS [MoneyCount]
+    FROM [dbo].[Users_bak] AS [Users_bak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ExpiredPush7" EntityType="Self.ExpiredPush7" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExpiredPush7].[UserID] AS [UserID], 
+    [ExpiredPush7].[DeviceID] AS [DeviceID], 
+    [ExpiredPush7].[DeviceName] AS [DeviceName], 
+    [ExpiredPush7].[SerialNumber] AS [SerialNumber], 
+    [ExpiredPush7].[HireExpireDate] AS [HireExpireDate], 
+    [ExpiredPush7].[ClientID] AS [ClientID], 
+    [ExpiredPush7].[OS] AS [OS], 
+    [ExpiredPush7].[PackageName] AS [PackageName], 
+    [ExpiredPush7].[AppID] AS [AppID], 
+    [ExpiredPush7].[AppKey] AS [AppKey], 
+    [ExpiredPush7].[AppSecret] AS [AppSecret], 
+    [ExpiredPush7].[LastPushTime] AS [LastPushTime]
+    FROM [dbo].[ExpiredPush7] AS [ExpiredPush7]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YiwenGPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminCount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceCount" Type="Int32" />
+          <Property Name="OnlineCount" Type="Int32" />
+          <Property Name="DeviceUseCount" Type="Int32" />
+          <Property Name="DeviceDayCount" Type="Int32" />
+          <Property Name="AddDeviceCount" Type="Int32" />
+          <Property Name="AddUserDeviceCount" Type="Int32" />
+          <Property Name="NewDeviceDayCount" Type="Int32" />
+          <Property Name="NewDeviceDayOBDCount" Type="Int32" />
+          <Property Name="UserCount" Type="Int32" />
+          <Property Name="AddUserCount" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Apps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppSecret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MasterSecret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BuyRecord">
+          <Key>
+            <PropertyRef Name="BuyID" />
+          </Key>
+          <Property Name="BuyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="OrderNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="OpenID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BuyMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BuyDay" Type="Int32" />
+          <Property Name="PayMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OldExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="NewExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CarCommandQueue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CommandText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsSend" Type="Boolean" Nullable="false" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsResponse" Type="Boolean" />
+          <Property Name="ResponseDate" Type="DateTime" Precision="3" />
+          <Property Name="ResponseText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CommandName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsOfflineSend" Type="Boolean" />
+          <Property Name="Infos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SendCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DebugData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DevBond">
+          <Key>
+            <PropertyRef Name="wxDevID" />
+          </Key>
+          <Property Name="wxDevID" Type="Int32" Nullable="false" />
+          <Property Name="wxIMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="yxDevID" Type="Int32" />
+          <Property Name="yxIMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="yxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DevicePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CarUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CarNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PhoneNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="ActiveDate" Type="DateTime" Precision="3" />
+          <Property Name="HireStartDate" Type="DateTime" Precision="3" />
+          <Property Name="HireExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="SpeedLimit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OILCoefficient" Type="Double" />
+          <Property Name="BSJIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddHireDay" Type="Int32" />
+          <Property Name="ServerID" Type="Int32" />
+          <Property Name="OilPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="CreatedByUser" Type="DateTime" Precision="3" />
+          <Property Name="ExpireByUser" Type="DateTime" Precision="3" />
+          <Property Name="OilVolume" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="OilLow" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="OilHigh" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="CarImg" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ServerID2" Type="Int32" />
+          <Property Name="ByDistance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="LastByDistance" Type="Decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="DevicesConfig">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="ShockSens" Type="Int32" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="CmdID" Type="Int32" />
+          <Property Name="Horn" Type="Int32" />
+          <Property Name="AutoDefense" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DevicesReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="NowDistance" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AllDistance" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="WarnCount" Type="Int32" />
+          <Property Name="SpeedLimitCount" Type="Int32" />
+          <Property Name="StopCount" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DevTest">
+          <Key>
+            <PropertyRef Name="wxDevID" />
+          </Key>
+          <Property Name="wxDevID" Type="Int32" Nullable="false" />
+          <Property Name="wxIMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="yxDevID" Type="Int32" />
+          <Property Name="yxIMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="yxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="DictionaryID" />
+          </Key>
+          <Property Name="DictionaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="DataText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataValue" Type="Int32" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExceptionMessage">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="GeoFenceID" Type="Int32" />
+          <Property Name="NotificationType" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Int32" />
+          <Property Name="ClearDate" Type="DateTime" Precision="3" />
+          <Property Name="ClearBy" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="OLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccON" Type="Boolean" />
+          <Property Name="EngineON" Type="Boolean" />
+          <Property Name="OtherStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GSM" Type="Int32" />
+          <Property Name="DeviceUTCTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ExceptionMessage_Demo">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="GeoFenceID" Type="Int32" />
+          <Property Name="NotificationType" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Int32" />
+          <Property Name="ClearDate" Type="DateTime" Precision="3" />
+          <Property Name="ClearBy" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="OLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccON" Type="Boolean" />
+          <Property Name="EngineON" Type="Boolean" />
+          <Property Name="OtherStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GSM" Type="Int32" />
+          <Property Name="DeviceUTCTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GeoFence">
+          <Key>
+            <PropertyRef Name="GeofenceID" />
+          </Key>
+          <Property Name="GeofenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FenceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Entry" Type="Boolean" />
+          <Property Name="Exit" Type="Boolean" />
+          <Property Name="Radius" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IsInclusion" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="Lat1" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Lng1" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="FenceType" Type="Int32" />
+          <Property Name="Width" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SouthWestLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="SouthWestLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="NorthEastLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="NorthEastLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Bounds" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BoundBindIds" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="GroupType" Type="Int32" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LKLocation">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="LastCommunication" Type="DateTime" Precision="3" />
+          <Property Name="ServerUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="DeviceUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="StopStartUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="Latitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="BaiduLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="BaiduLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Speed" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Course" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="DataType" Type="Int32" />
+          <Property Name="DataContext" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="SOSTime" Type="DateTime" Precision="3" />
+          <Property Name="ExceptionTime" Type="DateTime" Precision="3" />
+          <Property Name="Distance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="IsStop" Type="Int32" />
+          <Property Name="IsOffline" Type="Int32" />
+          <Property Name="Exception" Type="Int32" />
+          <Property Name="CarStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ToDayDistance" Type="Decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="MobileAppInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="AppsID" Type="Int32" />
+          <Property Name="ClientID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OSVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IMEI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UUID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMSI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resolution" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DPI" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="LastDate" Type="DateTime" Precision="3" />
+          <Property Name="APPVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="OpenID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionNo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="ProductBody" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FeeType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TotalFee" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderExpire" Type="DateTime" Precision="3" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="TradeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BankType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TariffID" Type="Int32" />
+          <Property Name="BillCreateIP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="POI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="lng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SpeedReport">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="OLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Latitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="TimediffMinute" Type="Double" />
+          <Property Name="SpeedLimit" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TariffPackages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TariffName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="OldPrice" Type="Int32" />
+          <Property Name="BuyCount" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="RenewalDate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TempLKL">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="LastCommunication" Type="DateTime" Precision="3" />
+          <Property Name="ServerUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="DeviceUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="StopStartUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="Speed" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Course" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="DataType" Type="Int32" />
+          <Property Name="DataContext" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Distance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OLat" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="OLng" Type="Decimal" Precision="25" Scale="20" />
+          <Property Name="IsStop" Type="Int32" />
+          <Property Name="CarStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LoginName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="Int32" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="Int16" />
+          <Property Name="State" Type="Int16" />
+          <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMSEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="SuperAdmin" Type="Int32" />
+          <Property Name="AllDeviceCount" Type="Int32" />
+          <Property Name="ActivationCount" Type="Int32" />
+          <Property Name="MoneyCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UsersConfig">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PushMsgType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PushAudio" Type="Boolean" />
+          <Property Name="PushShock" Type="Boolean" />
+          <Property Name="PushPeriod" Type="Int32" />
+          <Property Name="ShockSens" Type="Int32" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserWarnSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="IsWarnSMS" Type="Boolean" />
+          <Property Name="WarnType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OfflineMinute" Type="Int32" />
+          <Property Name="GeofenceSet" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WebURL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LoginPage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeChatUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OpenID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="PushMsg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WeixinUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="TypeID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Devices_bak">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DevicePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CarUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CarNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PhoneNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="ActiveDate" Type="DateTime" Precision="3" />
+          <Property Name="HireStartDate" Type="DateTime" Precision="3" />
+          <Property Name="HireExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="SpeedLimit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OILCoefficient" Type="Double" />
+          <Property Name="BSJIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddHireDay" Type="Int32" />
+          <Property Name="ServerID" Type="Int32" />
+          <Property Name="OilPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="CreatedByUser" Type="DateTime" Precision="3" />
+          <Property Name="ExpireByUser" Type="DateTime" Precision="3" />
+          <Property Name="OilVolume" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="OilLow" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="OilHigh" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="CarImg" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ServerID2" Type="Int32" />
+          <Property Name="ByDistance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="LastByDistance" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="BackupTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DeviceShare">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ExceptionMessage_bak">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="GeoFenceID" Type="Int32" />
+          <Property Name="NotificationType" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Int32" />
+          <Property Name="ClearDate" Type="DateTime" Precision="3" />
+          <Property Name="ClearBy" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="OLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="OLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Lng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLat" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="BaiduLng" Type="Decimal" Precision="18" Scale="15" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccON" Type="Boolean" />
+          <Property Name="EngineON" Type="Boolean" />
+          <Property Name="OtherStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GSM" Type="Int32" />
+          <Property Name="DeviceUTCTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ExpiredPushRecord">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="AppLastPushTime" Type="DateTime" Precision="3" />
+          <Property Name="WeChatLastPushTime" Type="DateTime" Precision="3" />
+          <Property Name="Days" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Users_bak">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LoginName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="Int32" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="Int16" />
+          <Property Name="State" Type="Int16" />
+          <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMSEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="SuperAdmin" Type="Int32" />
+          <Property Name="AllDeviceCount" Type="Int32" />
+          <Property Name="ActivationCount" Type="Int32" />
+          <Property Name="MoneyCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ExpiredPush7">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HireExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="ClientID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppSecret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastPushTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="YiwenGPSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminCount" EntityType="Self.AdminCount" />
+          <EntitySet Name="Apps" EntityType="Self.Apps" />
+          <EntitySet Name="BuyRecord" EntityType="Self.BuyRecord" />
+          <EntitySet Name="CarCommandQueue" EntityType="Self.CarCommandQueue" />
+          <EntitySet Name="DebugData" EntityType="Self.DebugData" />
+          <EntitySet Name="DevBond" EntityType="Self.DevBond" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" />
+          <EntitySet Name="DevicesConfig" EntityType="Self.DevicesConfig" />
+          <EntitySet Name="DevicesReport" EntityType="Self.DevicesReport" />
+          <EntitySet Name="DevTest" EntityType="Self.DevTest" />
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" />
+          <EntitySet Name="ExceptionMessage" EntityType="Self.ExceptionMessage" />
+          <EntitySet Name="ExceptionMessage_Demo" EntityType="Self.ExceptionMessage_Demo" />
+          <EntitySet Name="GeoFence" EntityType="Self.GeoFence" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="LKLocation" EntityType="Self.LKLocation" />
+          <EntitySet Name="MobileAppInfo" EntityType="Self.MobileAppInfo" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="POI" EntityType="Self.POI" />
+          <EntitySet Name="SpeedReport" EntityType="Self.SpeedReport" />
+          <EntitySet Name="TariffPackages" EntityType="Self.TariffPackages" />
+          <EntitySet Name="TempLKL" EntityType="Self.TempLKL" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="UsersConfig" EntityType="Self.UsersConfig" />
+          <EntitySet Name="UserWarnSet" EntityType="Self.UserWarnSet" />
+          <EntitySet Name="WebURL" EntityType="Self.WebURL" />
+          <EntitySet Name="WeChatUsers" EntityType="Self.WeChatUsers" />
+          <EntitySet Name="WeixinUser" EntityType="Self.WeixinUser" />
+          <EntitySet Name="Devices_bak" EntityType="Self.Devices_bak" />
+          <EntitySet Name="DeviceShare" EntityType="Self.DeviceShare" />
+          <EntitySet Name="ExceptionMessage_bak" EntityType="Self.ExceptionMessage_bak" />
+          <EntitySet Name="ExpiredPushRecord" EntityType="Self.ExpiredPushRecord" />
+          <EntitySet Name="Users_bak" EntityType="Self.Users_bak" />
+          <EntitySet Name="ExpiredPush7" EntityType="Self.ExpiredPush7" />
+          <FunctionImport Name="ClearExceptionMessage" />
+          <FunctionImport Name="proc_offLineMessage" />
+          <FunctionImport Name="SendMsgToApplication">
+            <Parameter Name="input" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetHistory">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="DeviceID" Mode="In" Type="Int32" />
+            <Parameter Name="StartTime" Mode="In" Type="DateTime" />
+            <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+            <Parameter Name="FilterWireless" Mode="In" Type="Int32" />
+            <Parameter Name="FilterSpeed" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetUsersDevicesDetailInfo_ByUserID" ReturnType="Collection(YiwenGPSModel.SP_GetUsersDevicesDetailInfo_ByUserID_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="TypeID" Mode="In" Type="Int32" />
+            <Parameter Name="Time" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="String" />
+            <Parameter Name="endTime" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetUsersDevicesInfo_ByUserID" ReturnType="Collection(YiwenGPSModel.SP_GetUsersDevicesInfo_ByUserID_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="startTime" Mode="In" Type="String" />
+            <Parameter Name="endTime" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetUsersList_ByUserID" ReturnType="Collection(YiwenGPSModel.SP_GetUsersList_ByUserID_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_GetUsersDevicesDetailInfo_ByUserID_Result">
+          <Property Type="DateTime" Name="ServerUtcDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DataText" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DeviceName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CarNum" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNum" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CarUserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CellPhone" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ActiveDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="HireExpireDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_GetUsersDevicesInfo_ByUserID_Result">
+          <Property Type="Int32" Name="DeviceID" Nullable="false" />
+          <Property Type="DateTime" Name="HireExpireDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="DateTime" Name="ServerUtcDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_GetUsersList_ByUserID_Result">
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="ParentID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="LoginName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="UserType" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TimeZone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="Int16" Name="Country" Nullable="true" />
+          <Property Type="Int16" Name="State" Nullable="true" />
+          <Property Type="String" Name="HomePhone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WorkPhone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CellPhone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SMSEmail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PrimaryEmail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SecondaryEmail" Nullable="true" MaxLength="255" />
+          <Property Type="Int16" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="UpdateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Deleted" Nullable="true" />
+          <Property Type="Int32" Name="SuperAdmin" Nullable="true" />
+          <Property Type="Int32" Name="AllDeviceCount" Nullable="true" />
+          <Property Type="Int32" Name="ActivationCount" Nullable="true" />
+          <Property Type="Int32" Name="MoneyCount" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YiwenGPSModelStoreContainer" CdmEntityContainer="YiwenGPSEntities">
+          <EntitySetMapping Name="AdminCount">
+            <EntityTypeMapping TypeName="YiwenGPSModel.AdminCount">
+              <MappingFragment StoreEntitySet="AdminCount">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceCount" ColumnName="DeviceCount" />
+                <ScalarProperty Name="OnlineCount" ColumnName="OnlineCount" />
+                <ScalarProperty Name="DeviceUseCount" ColumnName="DeviceUseCount" />
+                <ScalarProperty Name="DeviceDayCount" ColumnName="DeviceDayCount" />
+                <ScalarProperty Name="AddDeviceCount" ColumnName="AddDeviceCount" />
+                <ScalarProperty Name="AddUserDeviceCount" ColumnName="AddUserDeviceCount" />
+                <ScalarProperty Name="NewDeviceDayCount" ColumnName="NewDeviceDayCount" />
+                <ScalarProperty Name="NewDeviceDayOBDCount" ColumnName="NewDeviceDayOBDCount" />
+                <ScalarProperty Name="UserCount" ColumnName="UserCount" />
+                <ScalarProperty Name="AddUserCount" ColumnName="AddUserCount" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateIP" ColumnName="CreateIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apps">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Apps">
+              <MappingFragment StoreEntitySet="Apps">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
+                <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+                <ScalarProperty Name="AppSecret" ColumnName="AppSecret" />
+                <ScalarProperty Name="MasterSecret" ColumnName="MasterSecret" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuyRecord">
+            <EntityTypeMapping TypeName="YiwenGPSModel.BuyRecord">
+              <MappingFragment StoreEntitySet="BuyRecord">
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="BuyMoney" ColumnName="BuyMoney" />
+                <ScalarProperty Name="BuyDay" ColumnName="BuyDay" />
+                <ScalarProperty Name="PayMethod" ColumnName="PayMethod" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OldExpireDate" ColumnName="OldExpireDate" />
+                <ScalarProperty Name="NewExpireDate" ColumnName="NewExpireDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarCommandQueue">
+            <EntityTypeMapping TypeName="YiwenGPSModel.CarCommandQueue">
+              <MappingFragment StoreEntitySet="CarCommandQueue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="CommandText" ColumnName="CommandText" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsSend" ColumnName="IsSend" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="IsResponse" ColumnName="IsResponse" />
+                <ScalarProperty Name="ResponseDate" ColumnName="ResponseDate" />
+                <ScalarProperty Name="ResponseText" ColumnName="ResponseText" />
+                <ScalarProperty Name="CommandName" ColumnName="CommandName" />
+                <ScalarProperty Name="IsOfflineSend" ColumnName="IsOfflineSend" />
+                <ScalarProperty Name="Infos" ColumnName="Infos" />
+                <ScalarProperty Name="SendCount" ColumnName="SendCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DebugData">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DebugData">
+              <MappingFragment StoreEntitySet="DebugData">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevBond">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DevBond">
+              <MappingFragment StoreEntitySet="DevBond">
+                <ScalarProperty Name="wxDevID" ColumnName="wxDevID" />
+                <ScalarProperty Name="wxIMEI" ColumnName="wxIMEI" />
+                <ScalarProperty Name="wxName" ColumnName="wxName" />
+                <ScalarProperty Name="yxDevID" ColumnName="yxDevID" />
+                <ScalarProperty Name="yxIMEI" ColumnName="yxIMEI" />
+                <ScalarProperty Name="yxName" ColumnName="yxName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Devices">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DevicePassword" ColumnName="DevicePassword" />
+                <ScalarProperty Name="CarUserName" ColumnName="CarUserName" />
+                <ScalarProperty Name="CarNum" ColumnName="CarNum" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
+                <ScalarProperty Name="HireStartDate" ColumnName="HireStartDate" />
+                <ScalarProperty Name="HireExpireDate" ColumnName="HireExpireDate" />
+                <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="OILCoefficient" ColumnName="OILCoefficient" />
+                <ScalarProperty Name="BSJIP" ColumnName="BSJIP" />
+                <ScalarProperty Name="AddHireDay" ColumnName="AddHireDay" />
+                <ScalarProperty Name="ServerID" ColumnName="ServerID" />
+                <ScalarProperty Name="OilPrice" ColumnName="OilPrice" />
+                <ScalarProperty Name="CreatedByUser" ColumnName="CreatedByUser" />
+                <ScalarProperty Name="ExpireByUser" ColumnName="ExpireByUser" />
+                <ScalarProperty Name="OilVolume" ColumnName="OilVolume" />
+                <ScalarProperty Name="OilLow" ColumnName="OilLow" />
+                <ScalarProperty Name="OilHigh" ColumnName="OilHigh" />
+                <ScalarProperty Name="CarImg" ColumnName="CarImg" />
+                <ScalarProperty Name="ServerID2" ColumnName="ServerID2" />
+                <ScalarProperty Name="ByDistance" ColumnName="ByDistance" />
+                <ScalarProperty Name="LastByDistance" ColumnName="LastByDistance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicesConfig">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DevicesConfig">
+              <MappingFragment StoreEntitySet="DevicesConfig">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="ShockSens" ColumnName="ShockSens" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CmdID" ColumnName="CmdID" />
+                <ScalarProperty Name="Horn" ColumnName="Horn" />
+                <ScalarProperty Name="AutoDefense" ColumnName="AutoDefense" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicesReport">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DevicesReport">
+              <MappingFragment StoreEntitySet="DevicesReport">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="NowDistance" ColumnName="NowDistance" />
+                <ScalarProperty Name="AllDistance" ColumnName="AllDistance" />
+                <ScalarProperty Name="WarnCount" ColumnName="WarnCount" />
+                <ScalarProperty Name="SpeedLimitCount" ColumnName="SpeedLimitCount" />
+                <ScalarProperty Name="StopCount" ColumnName="StopCount" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevTest">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DevTest">
+              <MappingFragment StoreEntitySet="DevTest">
+                <ScalarProperty Name="wxDevID" ColumnName="wxDevID" />
+                <ScalarProperty Name="wxIMEI" ColumnName="wxIMEI" />
+                <ScalarProperty Name="wxName" ColumnName="wxName" />
+                <ScalarProperty Name="yxDevID" ColumnName="yxDevID" />
+                <ScalarProperty Name="yxIMEI" ColumnName="yxIMEI" />
+                <ScalarProperty Name="yxName" ColumnName="yxName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictionary">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Dictionary">
+              <MappingFragment StoreEntitySet="Dictionary">
+                <ScalarProperty Name="DictionaryID" ColumnName="DictionaryID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="DataText" ColumnName="DataText" />
+                <ScalarProperty Name="DataValue" ColumnName="DataValue" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExceptionMessage">
+            <EntityTypeMapping TypeName="YiwenGPSModel.ExceptionMessage">
+              <MappingFragment StoreEntitySet="ExceptionMessage">
+                <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="GeoFenceID" ColumnName="GeoFenceID" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ClearDate" ColumnName="ClearDate" />
+                <ScalarProperty Name="ClearBy" ColumnName="ClearBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="BaiduLat" ColumnName="BaiduLat" />
+                <ScalarProperty Name="BaiduLng" ColumnName="BaiduLng" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AccON" ColumnName="AccON" />
+                <ScalarProperty Name="EngineON" ColumnName="EngineON" />
+                <ScalarProperty Name="OtherStatus" ColumnName="OtherStatus" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="DeviceUTCTime" ColumnName="DeviceUTCTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExceptionMessage_Demo">
+            <EntityTypeMapping TypeName="YiwenGPSModel.ExceptionMessage_Demo">
+              <MappingFragment StoreEntitySet="ExceptionMessage_Demo">
+                <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="GeoFenceID" ColumnName="GeoFenceID" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ClearDate" ColumnName="ClearDate" />
+                <ScalarProperty Name="ClearBy" ColumnName="ClearBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="BaiduLat" ColumnName="BaiduLat" />
+                <ScalarProperty Name="BaiduLng" ColumnName="BaiduLng" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AccON" ColumnName="AccON" />
+                <ScalarProperty Name="EngineON" ColumnName="EngineON" />
+                <ScalarProperty Name="OtherStatus" ColumnName="OtherStatus" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="DeviceUTCTime" ColumnName="DeviceUTCTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeoFence">
+            <EntityTypeMapping TypeName="YiwenGPSModel.GeoFence">
+              <MappingFragment StoreEntitySet="GeoFence">
+                <ScalarProperty Name="GeofenceID" ColumnName="GeofenceID" />
+                <ScalarProperty Name="FenceName" ColumnName="FenceName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Entry" ColumnName="Entry" />
+                <ScalarProperty Name="Exit" ColumnName="Exit" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="IsInclusion" ColumnName="IsInclusion" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Lat1" ColumnName="Lat1" />
+                <ScalarProperty Name="Lng1" ColumnName="Lng1" />
+                <ScalarProperty Name="FenceType" ColumnName="FenceType" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SouthWestLat" ColumnName="SouthWestLat" />
+                <ScalarProperty Name="SouthWestLng" ColumnName="SouthWestLng" />
+                <ScalarProperty Name="NorthEastLat" ColumnName="NorthEastLat" />
+                <ScalarProperty Name="NorthEastLng" ColumnName="NorthEastLng" />
+                <ScalarProperty Name="Bounds" ColumnName="Bounds" />
+                <ScalarProperty Name="BoundBindIds" ColumnName="BoundBindIds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKLocation">
+            <EntityTypeMapping TypeName="YiwenGPSModel.LKLocation">
+              <MappingFragment StoreEntitySet="LKLocation">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LastCommunication" ColumnName="LastCommunication" />
+                <ScalarProperty Name="ServerUtcDate" ColumnName="ServerUtcDate" />
+                <ScalarProperty Name="DeviceUtcDate" ColumnName="DeviceUtcDate" />
+                <ScalarProperty Name="StopStartUtcDate" ColumnName="StopStartUtcDate" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="BaiduLat" ColumnName="BaiduLat" />
+                <ScalarProperty Name="BaiduLng" ColumnName="BaiduLng" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="DataContext" ColumnName="DataContext" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SOSTime" ColumnName="SOSTime" />
+                <ScalarProperty Name="ExceptionTime" ColumnName="ExceptionTime" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="IsStop" ColumnName="IsStop" />
+                <ScalarProperty Name="IsOffline" ColumnName="IsOffline" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="CarStatus" ColumnName="CarStatus" />
+                <ScalarProperty Name="ToDayDistance" ColumnName="ToDayDistance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileAppInfo">
+            <EntityTypeMapping TypeName="YiwenGPSModel.MobileAppInfo">
+              <MappingFragment StoreEntitySet="MobileAppInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AppsID" ColumnName="AppsID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="OSVersion" ColumnName="OSVersion" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="IMSI" ColumnName="IMSI" />
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="DPI" ColumnName="DPI" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+                <ScalarProperty Name="APPVersion" ColumnName="APPVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+                <ScalarProperty Name="ProductBody" ColumnName="ProductBody" />
+                <ScalarProperty Name="FeeType" ColumnName="FeeType" />
+                <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderExpire" ColumnName="OrderExpire" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="TradeType" ColumnName="TradeType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BankType" ColumnName="BankType" />
+                <ScalarProperty Name="TariffID" ColumnName="TariffID" />
+                <ScalarProperty Name="BillCreateIP" ColumnName="BillCreateIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POI">
+            <EntityTypeMapping TypeName="YiwenGPSModel.POI">
+              <MappingFragment StoreEntitySet="POI">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lng" ColumnName="lng" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="created" ColumnName="created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpeedReport">
+            <EntityTypeMapping TypeName="YiwenGPSModel.SpeedReport">
+              <MappingFragment StoreEntitySet="SpeedReport">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TimediffMinute" ColumnName="TimediffMinute" />
+                <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TariffPackages">
+            <EntityTypeMapping TypeName="YiwenGPSModel.TariffPackages">
+              <MappingFragment StoreEntitySet="TariffPackages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TariffName" ColumnName="TariffName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RenewalDate" ColumnName="RenewalDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempLKL">
+            <EntityTypeMapping TypeName="YiwenGPSModel.TempLKL">
+              <MappingFragment StoreEntitySet="TempLKL">
+                <ScalarProperty Name="LastCommunication" ColumnName="LastCommunication" />
+                <ScalarProperty Name="ServerUtcDate" ColumnName="ServerUtcDate" />
+                <ScalarProperty Name="DeviceUtcDate" ColumnName="DeviceUtcDate" />
+                <ScalarProperty Name="StopStartUtcDate" ColumnName="StopStartUtcDate" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="DataContext" ColumnName="DataContext" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="IsStop" ColumnName="IsStop" />
+                <ScalarProperty Name="CarStatus" ColumnName="CarStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="SMSEmail" ColumnName="SMSEmail" />
+                <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
+                <ScalarProperty Name="SecondaryEmail" ColumnName="SecondaryEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="SuperAdmin" ColumnName="SuperAdmin" />
+                <ScalarProperty Name="AllDeviceCount" ColumnName="AllDeviceCount" />
+                <ScalarProperty Name="ActivationCount" ColumnName="ActivationCount" />
+                <ScalarProperty Name="MoneyCount" ColumnName="MoneyCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersConfig">
+            <EntityTypeMapping TypeName="YiwenGPSModel.UsersConfig">
+              <MappingFragment StoreEntitySet="UsersConfig">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PushMsgType" ColumnName="PushMsgType" />
+                <ScalarProperty Name="PushAudio" ColumnName="PushAudio" />
+                <ScalarProperty Name="PushShock" ColumnName="PushShock" />
+                <ScalarProperty Name="PushPeriod" ColumnName="PushPeriod" />
+                <ScalarProperty Name="ShockSens" ColumnName="ShockSens" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserWarnSet">
+            <EntityTypeMapping TypeName="YiwenGPSModel.UserWarnSet">
+              <MappingFragment StoreEntitySet="UserWarnSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsWarnSMS" ColumnName="IsWarnSMS" />
+                <ScalarProperty Name="WarnType" ColumnName="WarnType" />
+                <ScalarProperty Name="OfflineMinute" ColumnName="OfflineMinute" />
+                <ScalarProperty Name="GeofenceSet" ColumnName="GeofenceSet" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebURL">
+            <EntityTypeMapping TypeName="YiwenGPSModel.WebURL">
+              <MappingFragment StoreEntitySet="WebURL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="LoginPage" ColumnName="LoginPage" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeChatUsers">
+            <EntityTypeMapping TypeName="YiwenGPSModel.WeChatUsers">
+              <MappingFragment StoreEntitySet="WeChatUsers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="PushMsg" ColumnName="PushMsg" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeixinUser">
+            <EntityTypeMapping TypeName="YiwenGPSModel.WeixinUser">
+              <MappingFragment StoreEntitySet="WeixinUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices_bak">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Devices_bak">
+              <MappingFragment StoreEntitySet="Devices_bak">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DevicePassword" ColumnName="DevicePassword" />
+                <ScalarProperty Name="CarUserName" ColumnName="CarUserName" />
+                <ScalarProperty Name="CarNum" ColumnName="CarNum" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
+                <ScalarProperty Name="HireStartDate" ColumnName="HireStartDate" />
+                <ScalarProperty Name="HireExpireDate" ColumnName="HireExpireDate" />
+                <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="OILCoefficient" ColumnName="OILCoefficient" />
+                <ScalarProperty Name="BSJIP" ColumnName="BSJIP" />
+                <ScalarProperty Name="AddHireDay" ColumnName="AddHireDay" />
+                <ScalarProperty Name="ServerID" ColumnName="ServerID" />
+                <ScalarProperty Name="OilPrice" ColumnName="OilPrice" />
+                <ScalarProperty Name="CreatedByUser" ColumnName="CreatedByUser" />
+                <ScalarProperty Name="ExpireByUser" ColumnName="ExpireByUser" />
+                <ScalarProperty Name="OilVolume" ColumnName="OilVolume" />
+                <ScalarProperty Name="OilLow" ColumnName="OilLow" />
+                <ScalarProperty Name="OilHigh" ColumnName="OilHigh" />
+                <ScalarProperty Name="CarImg" ColumnName="CarImg" />
+                <ScalarProperty Name="ServerID2" ColumnName="ServerID2" />
+                <ScalarProperty Name="ByDistance" ColumnName="ByDistance" />
+                <ScalarProperty Name="LastByDistance" ColumnName="LastByDistance" />
+                <ScalarProperty Name="BackupTime" ColumnName="BackupTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceShare">
+            <EntityTypeMapping TypeName="YiwenGPSModel.DeviceShare">
+              <MappingFragment StoreEntitySet="DeviceShare">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExceptionMessage_bak">
+            <EntityTypeMapping TypeName="YiwenGPSModel.ExceptionMessage_bak">
+              <MappingFragment StoreEntitySet="ExceptionMessage_bak">
+                <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="GeoFenceID" ColumnName="GeoFenceID" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ClearDate" ColumnName="ClearDate" />
+                <ScalarProperty Name="ClearBy" ColumnName="ClearBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OLat" ColumnName="OLat" />
+                <ScalarProperty Name="OLng" ColumnName="OLng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="BaiduLat" ColumnName="BaiduLat" />
+                <ScalarProperty Name="BaiduLng" ColumnName="BaiduLng" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AccON" ColumnName="AccON" />
+                <ScalarProperty Name="EngineON" ColumnName="EngineON" />
+                <ScalarProperty Name="OtherStatus" ColumnName="OtherStatus" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="DeviceUTCTime" ColumnName="DeviceUTCTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpiredPushRecord">
+            <EntityTypeMapping TypeName="YiwenGPSModel.ExpiredPushRecord">
+              <MappingFragment StoreEntitySet="ExpiredPushRecord">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="AppLastPushTime" ColumnName="AppLastPushTime" />
+                <ScalarProperty Name="WeChatLastPushTime" ColumnName="WeChatLastPushTime" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_bak">
+            <EntityTypeMapping TypeName="YiwenGPSModel.Users_bak">
+              <MappingFragment StoreEntitySet="Users_bak">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="SMSEmail" ColumnName="SMSEmail" />
+                <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
+                <ScalarProperty Name="SecondaryEmail" ColumnName="SecondaryEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="SuperAdmin" ColumnName="SuperAdmin" />
+                <ScalarProperty Name="AllDeviceCount" ColumnName="AllDeviceCount" />
+                <ScalarProperty Name="ActivationCount" ColumnName="ActivationCount" />
+                <ScalarProperty Name="MoneyCount" ColumnName="MoneyCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpiredPush7">
+            <EntityTypeMapping TypeName="YiwenGPSModel.ExpiredPush7">
+              <MappingFragment StoreEntitySet="ExpiredPush7">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="HireExpireDate" ColumnName="HireExpireDate" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
+                <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+                <ScalarProperty Name="AppSecret" ColumnName="AppSecret" />
+                <ScalarProperty Name="LastPushTime" ColumnName="LastPushTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ClearExceptionMessage" FunctionName="YiwenGPSModel.Store.ClearExceptionMessage" />
+          <FunctionImportMapping FunctionImportName="proc_offLineMessage" FunctionName="YiwenGPSModel.Store.proc_offLineMessage" />
+          <FunctionImportMapping FunctionImportName="SendMsgToApplication" FunctionName="YiwenGPSModel.Store.SendMsgToApplication" />
+          <FunctionImportMapping FunctionImportName="SP_GetHistory" FunctionName="YiwenGPSModel.Store.SP_GetHistory" />
+          <FunctionImportMapping FunctionImportName="SP_GetUsersDevicesDetailInfo_ByUserID" FunctionName="YiwenGPSModel.Store.SP_GetUsersDevicesDetailInfo_ByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="YiwenGPSModel.SP_GetUsersDevicesDetailInfo_ByUserID_Result">
+                <ScalarProperty Name="ServerUtcDate" ColumnName="ServerUtcDate" />
+                <ScalarProperty Name="DataText" ColumnName="DataText" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="CarNum" ColumnName="CarNum" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="CarUserName" ColumnName="CarUserName" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
+                <ScalarProperty Name="HireExpireDate" ColumnName="HireExpireDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetUsersDevicesInfo_ByUserID" FunctionName="YiwenGPSModel.Store.SP_GetUsersDevicesInfo_ByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="YiwenGPSModel.SP_GetUsersDevicesInfo_ByUserID_Result">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="HireExpireDate" ColumnName="HireExpireDate" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ServerUtcDate" ColumnName="ServerUtcDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetUsersList_ByUserID" FunctionName="YiwenGPSModel.Store.SP_GetUsersList_ByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="YiwenGPSModel.SP_GetUsersList_ByUserID_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="SMSEmail" ColumnName="SMSEmail" />
+                <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
+                <ScalarProperty Name="SecondaryEmail" ColumnName="SecondaryEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="SuperAdmin" ColumnName="SuperAdmin" />
+                <ScalarProperty Name="AllDeviceCount" ColumnName="AllDeviceCount" />
+                <ScalarProperty Name="ActivationCount" ColumnName="ActivationCount" />
+                <ScalarProperty Name="MoneyCount" ColumnName="MoneyCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

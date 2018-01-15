@@ -141,14 +141,19 @@
     <script src="/bootstrap/js/Ajax.js"></script>
     <!--<script src="/bootstrap/js/plugin/menu/js/zepto.min.js"></script>-->
     <script type="text/javascript">
-        /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
-        var urlinfo = window.location.href; //获取当前页面的url
-        var len = urlinfo.length;//获取url的长度
-        var offset = urlinfo.indexOf("?");//设置参数字符串开始的位置
-        var info = urlinfo.substr(offset, len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
-        var ids = info.split("=");//对获得的参数字符串按照“=”进行分割
-        var deviceid = ids[1];//得到参数值
-      
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        var t = GetQueryString("type");
+        var deviceid = GetQueryString("deviceid");//得到参数值
+        if (t == 'reg') {
+            $("#divBack").on("click", function () {
+                window.location.href = 'DeviceList.html';
+            });
+        }
         $("#aHistory").attr("href", "history.html?id=" + deviceid);
         $("#aInfo").attr("href", "info.html?id=" + deviceid);
         $("#aGeoFence").attr("href","/myinfo/addgeofence.html?deviceid="+deviceid);

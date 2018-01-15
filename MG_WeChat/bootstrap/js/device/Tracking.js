@@ -196,7 +196,12 @@ function carMarker(d) {
         map: mgoo.map, mapType: mgoo.mapType, DeviceID: deviceid, lng: d.OLng, lat: d.OLat,
         line: d.Status == 1 ? "online" : "offline", course: d.Course
     });
-    marker.show({ showTitle: false, titleText: d.DeviceName, icon: "/images/map/car.png" });
+    //point-offline  point-online
+    var iconurl = '/images/map/point-online.gif';
+    if (d.Status != 1) {
+        var iconurl = '/images/map/point-offline.gif';
+    }
+    marker.show({ showTitle: false, titleText: d.DeviceName, icon: iconurl });
     markerList[0] = marker.marker;
     temp1 = [d.OLng, d.OLat];
     if (position) {
@@ -212,9 +217,20 @@ function carMarker(d) {
     }
     $("title").text(d.DeviceName);
     //$(".am-header-title a").text(d.DeviceName);
+    var status = '';
+   
+    if (d.Status == 1) {
+        status = "<font color='blue'>在线</font>";
+    } else if (d.Status == 2 ) { 
+        status = "<font color='red'>离线</font>";
+    } else if (d.Status == 3) {
+        status = "<font color='red'>未激活</font>";
+    } else {
+        status = "<font color='red'>已到期</font>";
+    }
 
     sessionStorage.setItem("DeviceName", d.DeviceName);
-    $("#showinfo").html('<span>时间:' + d.DeviceDate + '; 速度:' + d.Speed + 'km/h; 方向:' + d.CourseName + '</span><br /><span>地址:' + d.Address + '</span>');
+    $("#showinfo").html('<span>时间:' + d.DeviceDate + '; 速度:' + d.Speed + 'km/h; 方向:' + d.CourseName + ',状态:' + status + '</span><br /><span>地址:' + d.Address + '</span>');
 
     $("#mgooMap").height($(window).height() - $(".am-header").height() - $("#showinfo").height());
     $("#content").height($(window).height() - $(".am-header").height() - $("#showinfo").height());
@@ -301,8 +317,7 @@ function geoconv(data) {
     var lat = temp1[1], lng = temp1[0];
     if (position == undefined) {
         position = [data.position.getLng(), data.position.getLat()];
-    }
-      
+    } 
     //http://api.map.baidu.com/geoconv/v1/?coords=114.21892734521,29.575429778924;114.21892734521,29.575429778924&ak=SAbCayX7PG5UMsqW6d1DZ9K0&output=json
     var url = "http://api.map.baidu.com/geoconv/v1/?coords=" + position[0] + "," + position[1] + ";" + lng + "," + lat + "&ak=SAbCayX7PG5UMsqW6d1DZ9K0&output=json&from=3&callback=geoconvCallback";
    

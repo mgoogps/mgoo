@@ -30,17 +30,14 @@ namespace MG_WeChat.ajax
             {
                 string type = "Phone";
                 string result = "";
-                //string logName = "wx-" + DateTime.Now.ToString("yyyy-MM-dd HH") + ".log"; 
+   
                 if (!string.IsNullOrWhiteSpace(code))
                 {
                     WeixinOper wo = new WeixinOper();
                     result = wo.GetWeixinOpenID(code);
-                    type = "Weixin";
-                    //Utils.log("weixin result:" + result);
+                    type = "Weixin"; 
                 }
-
-               
-
+                 
                 MG_BLL.BllLogin login = new MG_BLL.BllLogin();
                 LoginUserInfo loginUser = login.SystemLogin_Bll(loginname, password, identifies, type);
 
@@ -63,8 +60,7 @@ namespace MG_WeChat.ajax
                        
                     }
                     #endregion
-
-                   // Utils.log(string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
+                     
                     Log.Info(this, string.Format("loginname:{0},identifies:{1},code:{2}", loginname, identifies, code));
 
                     LoginResult.Add("StatusCode", statusCode.Code.success);
@@ -72,11 +68,19 @@ namespace MG_WeChat.ajax
                     LoginResult.Add("Token", loginUser.ToKen);
                     LoginResult.Add("Url", "device/DeviceList.html");
                     LoginResult.Add("LoginType", (int)LoginType.User);
+                    if (identifies.ToLower().IndexOf("weixin") > 0)
+                    {
+                        var device = login.GetDeviceCount(loginUser.UserID.toInt());
+                        if (device > 0)
+                        {
+                            loginUser.DeviceID = device.ToString();
+                            LoginResult["Url"] = "device/Tracking.html?deviceid=" + loginUser.DeviceID;
+                        }
+                    }
                     if (identifies.IndexOf("OuBaoYun") >= 0)
                     {
                         LoginResult.Add("UserName",loginUser.UserName);
-                    }
-                    // LoginResult.Add("UserName", loginUser.UserName);
+                    } 
                     HttpRuntime.Cache.Insert(identifies + loginUser.UserID + loginUser.ToKen, loginUser, null, DateTime.Now.AddMinutes(20), TimeSpan.Zero);
 
                     return Utils.ToJson(LoginResult);
@@ -112,6 +116,7 @@ namespace MG_WeChat.ajax
             }
             catch (Exception ex)
             {
+                Log.Error(this,ex);
                 Utils.log(this.GetType().ToString()+ " > MgLogin Error" + ex.Message);
                 return "error";
             }
@@ -149,6 +154,60 @@ namespace MG_WeChat.ajax
             }
             ar.Result = "";
             return Utils.ToJson(ar);
+        }
+
+        [WebMethod(Description = "微信端网页注册(phone:手机号,password:密码,code:手机验证码).")]
+        public string WeixinRegister(string serialnumber, string vccode,string phone,string password, string code)
+        {
+            Register r = new Register();
+            ajaxResult ar = new ajaxResult();
+            if (code.Equals(string.Empty) || !r.VerificationCode(phone, code))
+            {
+                ar.StatusCode = statusCode.Code.failure;
+                ar.Message = "验证码输入错误.";
+                ar.Result = "";
+                return Utils.ToJson(ar);
+            }
+            if (phone.Equals(string.Empty) || r.VerificationPhone(phone))
+            {
+                ar.StatusCode = statusCode.Code.failure;
+                ar.Message = "该手机号码已被注册.";
+                ar.Result = "";
+                return Utils.ToJson(ar);
+            }
+            if (password.Equals(string.Empty))
+            {
+                ar.StatusCode = statusCode.Code.failure;
+                ar.Message = "密码不能为空.";
+            }
+            var loginUser = r.WeixinRegister(phone, password, serialnumber, vccode);
+            Dictionary<string, dynamic> LoginResult = new Dictionary<string, dynamic>(); 
+            if (loginUser != null)
+            { 
+                LoginResult.Add("StatusCode", statusCode.Code.success);
+                LoginResult.Add("UserID", loginUser.UserID);
+                LoginResult.Add("Token", loginUser.ToKen);
+                LoginResult.Add("Url", "");
+                LoginResult.Add("DeviceID", loginUser.DeviceID);
+                LoginResult.Add("DeviceName", loginUser.UserName);
+                LoginResult.Add("LoginType", (int)LoginType.User);
+                LoginResult.Add("password", Utils.GetMD5(password)); 
+                if (loginUser.Address == "failure")
+                {
+                    LoginResult["Message"] = "添加设备失败,需要重新添加.";
+                    LoginResult["Url"] = "device/DeviceList.html";
+                }
+                else
+                {
+                    LoginResult["Url"] = "device/Tracking.html?deviceid=" + loginUser.DeviceID+ "&type=reg";
+                } 
+            }else
+            {
+                LoginResult["Message"] = "注册失败,请重新注册."; 
+                LoginResult.Add("StatusCode", statusCode.Code.failure);
+            }
+            ar.Result = "";
+            return Utils.ToJson(LoginResult);
         }
 
         [WebMethod(Description = "发送验证码.")]

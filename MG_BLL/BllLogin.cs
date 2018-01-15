@@ -333,5 +333,19 @@ namespace MG_BLL
             }
            
         }
+
+        public int GetDeviceCount(int userid)
+        {
+            MG_DAL.YiwenGPSEntities dbContext = new YiwenGPSEntities();
+            var query = dbContext.Devices.Where(d => d.UserID == userid && d.Deleted == false); 
+            if (query.Count() == 1)
+            {
+                return query.FirstOrDefault().DeviceID;
+            }
+            else
+            {
+                return 0;
+            } 
+        }
     }
 }

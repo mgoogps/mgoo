@@ -32,7 +32,7 @@ namespace MG_BLL
         /// <returns></returns>
         public List<Entity.Devices> GetDevicesByUserID_Bll(String UserID, ref string msgCount)
         {
-            List<Entity.Devices> deviceList = new List<Devices>();
+            List<Entity.Devices> deviceList = new List<Entity.Devices>();
             try
             {
                 MgoogpsWebClient mwc = new MgoogpsWebClient();
@@ -50,11 +50,11 @@ namespace MG_BLL
 
                 DateTime connectTime;
                 double lat, lng;
-                Devices device;
+                Entity.Devices device;
 
                 for (int i = 0; i < list.Count; i++)
                 {
-                    device = new Devices();
+                    device = new Entity.Devices();
                     dic = list[i] as Dictionary<string, object>;
                     lat = 0; lng = 0;
                     connectTime = Convert.ToDateTime(dic["connecttime"]);
