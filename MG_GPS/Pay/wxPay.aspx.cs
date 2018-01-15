@@ -108,7 +108,7 @@ namespace MG_GPS.Pay
 
                     //下单成功后的内部订单号
                     order_no = jsApiPay.order_no;
-                    callback_url = "http://m.mgoogps.com:8070/pay/pay_success.aspx?no=" + order_no + "&deviceid=" + deviceid + "&t=" + DateTime.Now.Ticks;
+                    callback_url = "http://m.mgoogps.com:8070/pay/pay_success.aspx?no=" + order_no.ToString() + "&deviceid=" + deviceid + "&t=" + DateTime.Now.Ticks;
                     Log.Debug(this.GetType().ToString(), "wxJsApiParam : " + wxJsApiParam);
 
                     //在页面上显示订单信息

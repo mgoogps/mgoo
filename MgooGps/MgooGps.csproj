@@ -1849,48 +1849,6 @@
     <Content Include="js\playback\underscore.js" />
     <Content Include="js\runtime.js" />
     <Content Include="js\Statistic.js" />
-    <Content Include="js\test1\css\bootstrap-theme.css" />
-    <Content Include="js\test1\css\bootstrap-theme.min.css" />
-    <Content Include="js\test1\css\bootstrap.css" />
-    <Content Include="js\test1\css\bootstrap.min.css" />
-    <Content Include="js\test1\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap-theme.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap-theme.min.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap.min.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\index.htm" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\js\bootstrap.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\js\bootstrap.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\js\moderniz.2.8.1.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\send.htm" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.fa.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.fa.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.min.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\Gruntfile.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\lib\jquery-1.10.2.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\lib\jquery-1.11.1.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\lib\jquery-1.9.1.min.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\lib\jquery.cookie-1.3.1.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\LICENSE.txt" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\extensions.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\fontawesome.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\internal.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\plugin.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\public.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\index.html" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\jquery.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\qunit\qunit-1.11.0.css" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\qunit\qunit-1.11.0.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\tests-extensions.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\tests-internal.js" />
-    <Content Include="js\test1\jquery-bootgrid-master\test\tests-rendering.js" />
-    <Content Include="js\test1\js\bootstrap.js" />
-    <Content Include="js\test1\js\bootstrap.min.js" />
-    <Content Include="js\test1\js\moderniz.2.8.1.js" />
     <Content Include="js\Tracking.js" />
     <Content Include="js\ZeroClipboard\ZeroClipboard.js" />
     <Content Include="js\ZeroClipboard\ZeroClipboard.min.js" />
@@ -2693,8 +2651,6 @@
     <Content Include="js\bootgrid\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="js\bootgrid\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="js\bootgrid\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="js\bootgrid\jquery-bootgrid-master\dist\jquery.bootgrid-1.3.1.zip" />
-    <Content Include="js\bootgrid\jquery-bootgrid-master\dist\jQuery.Bootgrid.1.3.1.nupkg" />
     <Content Include="js\bootgrid\jquery-bootgrid-master\jQuery.Bootgrid.nuspec" />
     <Content Include="js\bootgrid\jquery-bootgrid-master\package.json" />
     <Content Include="js\bootgrid\jquery-bootgrid-master\README.md" />
@@ -2750,35 +2706,11 @@
     <Content Include="js\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="js\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="js\jquery-bootgrid-master\dist\jquery.bootgrid-1.3.1.zip" />
-    <Content Include="js\jquery-bootgrid-master\dist\jQuery.Bootgrid.1.3.1.nupkg" />
     <Content Include="js\jquery-bootgrid-master\jQuery.Bootgrid.nuspec" />
     <Content Include="js\jquery-bootgrid-master\package.json" />
     <Content Include="js\jquery-bootgrid-master\README.md" />
     <Content Include="js\jquery-bootgrid-master\src\jquery.bootgrid.less" />
     <Content Include="js\lib\tree.json" />
-    <Content Include="js\test1\css\bootstrap-theme.css.map" />
-    <Content Include="js\test1\css\bootstrap.css.map" />
-    <Content Include="js\test1\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="js\test1\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="js\test1\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="js\test1\jquery-bootgrid-master\.gitattributes" />
-    <Content Include="js\test1\jquery-bootgrid-master\.gitignore" />
-    <Content Include="js\test1\jquery-bootgrid-master\.npmignore" />
-    <Content Include="js\test1\jquery-bootgrid-master\.travis.yml" />
-    <Content Include="js\test1\jquery-bootgrid-master\bower.json" />
-    <Content Include="js\test1\jquery-bootgrid-master\CHANGELOG.md" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap-theme.css.map" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\css\bootstrap.css.map" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\data.json" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="js\test1\jquery-bootgrid-master\demo\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jquery.bootgrid-1.3.1.zip" />
-    <Content Include="js\test1\jquery-bootgrid-master\dist\jQuery.Bootgrid.1.3.1.nupkg" />
-    <Content Include="js\test1\jquery-bootgrid-master\jQuery.Bootgrid.nuspec" />
-    <Content Include="js\test1\jquery-bootgrid-master\package.json" />
-    <Content Include="js\test1\jquery-bootgrid-master\README.md" />
-    <Content Include="js\test1\jquery-bootgrid-master\src\jquery.bootgrid.less" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\aobo_server.pubxml" />
     <None Include="Properties\PublishProfiles\mgoogps_server.pubxml" />
@@ -2845,7 +2777,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1619</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
