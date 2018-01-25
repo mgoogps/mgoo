@@ -11,7 +11,7 @@ using MgooGps.com;
 
 namespace MgooGps
 {
-    public partial class login : MG_BLL.Common.UIPage
+    public partial class login : System.Web.UI.Page
     {
         public String language = "";
         public string welcome = "";
@@ -29,7 +29,7 @@ namespace MgooGps
                 //MgooGps.com.Utils.LoginOut();
                 SessionUtil.LoginOut();
             }
-            if (com.Utils.GetSession("UserInfo") != null)
+            if (com.Utils.GetSession(SessionUtil.KEY) != null)
             {
                 //Response.Redirect("~/main.aspx");
             } 

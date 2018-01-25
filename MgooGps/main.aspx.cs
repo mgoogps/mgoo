@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MgooGps
 {
-    public partial class main : MG_BLL.Common.UIPage
+    public partial class main : System.Web.UI.Page, IRequiresSessionState
     { 
         public string imei = "";
         public string userid = "";
-        public string searchText = "";
+        public string searchText = ""; 
         protected void Page_Load(object sender, EventArgs e)
         {
             Utils.logoutUrl = "";
@@ -29,9 +30,7 @@ namespace MgooGps
                 {
                      
                 } 
-            }
-           
-            //Utils.log("设置logoutUrl：" + Utils.logoutUrl);
+            } 
             com.Utils.isPlayAudio = com.MyTeam.GetIsPlay();
             com.Utils.LowerMsg = com.MyTeam.GetLowerMsg(); 
             if (!string.IsNullOrWhiteSpace(Request.QueryString["imei"]))

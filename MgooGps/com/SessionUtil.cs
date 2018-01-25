@@ -23,7 +23,7 @@ namespace MgooGps.com
         }
         public static object GetSession(string key)
         {
-            return HttpContext.Current.Session[key];
+            return System.Web. HttpContext.Current.Session[key];
         }
 
         public static T GetSession<T>(string key)

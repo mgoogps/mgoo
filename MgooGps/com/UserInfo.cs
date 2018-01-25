@@ -5,6 +5,7 @@ using System.Web;
 
 namespace MgooGps.com
 {
+    [Serializable]
     public class UserInfo
     {
         /// <summary>

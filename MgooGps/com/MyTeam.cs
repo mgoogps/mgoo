@@ -24,14 +24,14 @@ namespace MgooGps.com
         {
 
             String strSql = @"with subqry(UserID,UserName,ParentID,UserType) as (
-                              select UserID,UserName,ParentID,UserType from Users   where UserID =" + Utils.GetSession("UserInfo").UserID + @"
+                              select UserID,UserName,ParentID,UserType from Users   where UserID =" + Utils.GetSession().UserID + @"
                               union all
                               select Users.UserID,Users.UserName,Users.ParentID,Users.UserType from Users,subqry
                               where Users.ParentID = subqry.UserID and users.Deleted!=1 " + (UserType == null ? "" : " and Users.UserType=2 ") + @"
                               )
                               select UserID,UserName,ParentID,UserType from subqry order by username collate Chinese_PRC_CS_AS_KS_WS;";
             return com.Dao.Selects(strSql);
-            //return com.Dao.Selects("select UserID,ParentID,UserName,LoginName,UserType,FirstName,Address1,CellPhone,Status,Created,Deleted,SuperAdmin from Users where Deleted!=1 and UserID= " + ((UserInfo)Utils.GetSession("UserInfo")).UserID + " or ParentID = " + ((UserInfo)Utils.GetSession("UserInfo")).UserID);
+            //return com.Dao.Selects("select UserID,ParentID,UserName,LoginName,UserType,FirstName,Address1,CellPhone,Status,Created,Deleted,SuperAdmin from Users where Deleted!=1 and UserID= " + ((UserInfo)Utils.GetSession()).UserID + " or ParentID = " + ((UserInfo)Utils.GetSession()).UserID);
         }
         /// <summary>
         ///  根据用户ID 查询 该经销商下所有的设备包括分组信息
@@ -527,7 +527,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static String AlarmAllReadonly(String userid, String ExceptionID)
         {
-            String strSql = "update ExceptionMessage set Deleted=1,ClearDate=GETDATE(),ClearBy=" + Utils.GetSession("UserInfo").UserID + " where DeviceID in (select DeviceID from Devices where UserID=" + userid + " and Deleted=0) and Deleted=0";
+            String strSql = "update ExceptionMessage set Deleted=1,ClearDate=GETDATE(),ClearBy=" + Utils.GetSession().UserID + " where DeviceID in (select DeviceID from Devices where UserID=" + userid + " and Deleted=0) and Deleted=0";
             if (ExceptionID != null)
                 strSql += " and ExceptionID = " + ExceptionID;
 
@@ -548,13 +548,13 @@ namespace MgooGps.com
         public static DataTable GetRemainView(String SerialNumber, String startTime, String endTime)
         {
             string where = toDic(SerialNumber, "dr.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
+            if (Utils.GetSession().LoginType == "0")
             {
-                where += "  and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+                where += "  and d.UserID=" + Utils.GetSession().UserID;
             }
             else
             {
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             }
             String strSql = @"select case when d.DeviceName='' then dr.SerialNumber else d.DeviceName end DeviceName,convert(varchar(10),DATEADD(HH,8, dr.UpdateTime),120) date,sum([NowDistance]) nowDistance,sum([WarnCount])warn,sum([SpeedLimitCount])speedlimit,sum([StopCount])Stop from DevicesReport dr inner join Devices d on dr.DeviceID=d.DeviceID
                       where DATEADD(HH,8, dr.UpdateTime) >= '" + DateTime.Parse(startTime).ToString("yyyy-MM-dd 00:00:00") + "' and  DATEADD(HH,8, dr.UpdateTime) <= '" + DateTime.Parse(endTime).ToString("yyyy-MM-dd 23:59:59") + "' " + where + @"  
@@ -579,13 +579,13 @@ namespace MgooGps.com
             string where = toDic(SerialNumber, "d.");
             String strSql = "select DeviceID from Devices d where d.Deleted=0 " + where;
             string DeviceID = Dao.Select(strSql)[0].ToString();
-            if (Utils.GetSession("UserInfo").LoginType == "0")
+            if (Utils.GetSession().LoginType == "0")
             {
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             }
             else
             {
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             }
 
             strSql = @"select ROW_NUMBER() OVER (ORDER BY convert(varchar(10),DATEADD(HH,8,dr.CreateTime),120)) num,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName ,d.SerialNumber,convert(varchar(10),DATEADD(HH,8,dr.CreateTime),120) ct, 
@@ -607,13 +607,13 @@ namespace MgooGps.com
         public static DataTable GetSpeedReport(String sTime, String eTime, String dName)
         {
             string where = toDic(dName, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
+            if (Utils.GetSession().LoginType == "0")
             {
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             }
             else
             {
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             }
             String strSql = @"select ROW_NUMBER() OVER (ORDER BY  sr.startTime desc) num,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName, DATEADD(HH,8, sr.StartTime)st, DATEADD(HH,8, sr.EndTime)et,Latitude,Longitude,sr.Address,sr.TimediffMinute,sr.SerialNumber from
                        SpeedReport sr inner join Devices d on sr.DeviceID=d.DeviceID where d.Deleted=0 and StartTime>='" + DateTime.Parse(sTime).ToString("yyyy-MM-dd 00:00:00") + "' and sr.EndTime<='" + DateTime.Parse(eTime).ToString("yyyy-MM-dd 23:59:59") + "' " + where + " order by StartTime desc";
@@ -1165,10 +1165,10 @@ namespace MgooGps.com
         public static DataTable GetExceptionAll(String st, String et, String dName)
         {
             string where = toDic(dName, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+            if (Utils.GetSession().LoginType == "0")
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             else
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
 
             String strSql = @"select  d.SerialNumber,d.DeviceName,count(Message) c, NotificationType, '0' did,'0' duand,'0' zd,'0'sos 
                     	from ExceptionMessage ex inner join Devices d on d.DeviceID=ex.DeviceID where d.Deleted=0 " + where + " and NotificationType in(6,7,5) and ex.Created >='" + DateTime.Parse(st).ToString("yyyy-MM-dd 00:00:00") + "' and ex.Created<='" + DateTime.Parse(st).ToString("yyyy-MM-dd 23:59:59") + "'  group by NotificationType,d.SerialNumber,Message,d.DeviceName";
@@ -1245,10 +1245,10 @@ namespace MgooGps.com
         public static DataTable GetExceptionView(String st, String et, String dName)
         {
             string where = toDic(dName, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+            if (Utils.GetSession().LoginType == "0")
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             else
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             String strSql = @"select  d.SerialNumber,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName, convert(varchar(10), DATEADD(HH,8,ex.Created),120) date,COUNT(-1)c,ex.NotificationType , '0' did,'0' duand,'0' zd,'0'sos,'0'indzwl,'0'outdzwl,'0'wy from ExceptionMessage ex inner join Devices d on d.DeviceID=ex.DeviceID 
                         where  d.Deleted=0 " + where + " and NotificationType in(1,2,6,7,5,8) and ex.Created>='" + DateTime.Parse(st).ToString("yyyy-MM-dd 00:00:00") + "' and ex.Created <'" + DateTime.Parse(et).ToString("yyyy-MM-dd 23:59:59") + @"'
                         group by  d.SerialNumber,convert(varchar(10), DATEADD(HH,8,ex.Created),120) ,d.DeviceName,ex.NotificationType order by date";
@@ -1354,10 +1354,10 @@ namespace MgooGps.com
             if (type.Trim() != "" && Convert.ToInt32(type) > 0)
                 where = " and ex.NotificationType = " + type;
             where += toDic(dName, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+            if (Utils.GetSession().LoginType == "0")
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             else
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             String strSql = string.Format(@"select ROW_NUMBER() OVER (ORDER BY ex.Created  ) num,case when d.DeviceName='' then d.SerialNumber else d.DeviceName end DeviceName,ex.Message,d.SerialNumber, DATEADD(HH,8, ex.Created) edate,DATEADD(HH,8,ex.DeviceUTCTime) ddate,ex.BaiduLat,ex.BaiduLng ,'解析' Address from ExceptionMessage ex inner join Devices d on d.DeviceID=ex.DeviceID
                                             where d.Deleted=0 and dateadd(HH,8, ex.Created)>='{0}' and dateadd(HH,8, ex.Created)<='{1}' " + where + " order by edate", DateTime.Parse(st).ToString("yyyy-MM-dd 00:00:00"), DateTime.Parse(et).ToString("yyyy-MM-dd 23:59:59"));
             return Dao.Selects(strSql);
@@ -1397,10 +1397,10 @@ namespace MgooGps.com
         public static DataTable GetFencesView(String st, String et, String SerialNumber)
         {
             string where = toDic(SerialNumber, "d.");
-            if (Utils.GetSession("UserInfo").LoginType == "0")
-                where += " and d.UserID=" + Utils.GetSession("UserInfo").UserID;
+            if (Utils.GetSession().LoginType == "0")
+                where += " and d.UserID=" + Utils.GetSession().UserID;
             else
-                where += " and d.SerialNumber='" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                where += " and d.SerialNumber='" + Utils.GetSession().SerialNumber + "'";
             //  strSql = @"select SerialNumber,(select case when  DeviceName='' then  SerialNumber else DeviceName end DeviceName from Devices where DeviceID=ex.DeviceID) DeviceName, DATEADD(HH,8,ex.Created) st,''et,Note,NotificationType,BaiduLat,BaiduLng,'解析' Address 
             //            from ExceptionMessage ex where NotificationType in(1,2) and GeoFenceID in(select GeoFenceID from GeoFence where DeviceID in(select DeviceID from Devices d where Created>='" + st.Trim() + " 00:00:00' and Created <= '" + et.Trim() + " 23:59:59' " + where + ")) order by Note ,Created desc ";
             string strSql = "";
@@ -1474,15 +1474,15 @@ namespace MgooGps.com
             String strSql = "", strWhere = null;
             if (UserID == null)
             {
-                UserID = Utils.GetSession("UserInfo").UserID;
+                UserID = Utils.GetSession().UserID;
             }
-            if (Utils.GetSession("UserInfo").LoginType == "0")
+            if (Utils.GetSession().LoginType == "0")
             {
                 strWhere += " and d.UserID= " + UserID;
             }
             else
             {
-                strWhere += " and d.SerialNumber= '" + Utils.GetSession("UserInfo").SerialNumber + "'";
+                strWhere += " and d.SerialNumber= '" + Utils.GetSession().SerialNumber + "'";
             }
             strSql = "select distinct case DeviceName when '' then d.SerialNumber else DeviceName end DeviceName ,d.SerialNumber,d.DeviceID,d.SpeedLimit from Devices d inner join LKLocation l on l.deviceid=d.deviceid where d.Deleted = 0 " + strWhere + " order by d.SerialNumber desc";
             return Dao.Selects(strSql);
@@ -1561,7 +1561,7 @@ namespace MgooGps.com
                 }
                 if (userid == null)
                 {
-                    Hashtable ht = GetDeviceNumber(Utils.GetSession("UserInfo").UserID);
+                    Hashtable ht = GetDeviceNumber(Utils.GetSession().UserID);
                     userid = ht["userids"].ToString();
                 }
                 String strSql = string.Format(@" select d.DeviceID,d.SerialNumber,DeviceName, PhoneNum,d.CellPhone,di.DataText, d.Created,l.LastCommunication,d.HireStartDate ,case when d.ActiveDate = '1900-01-01 00:00:00.000' then '未激活' else CONVERT(varchar, d.ActiveDate,120) end ActiveDate,case when d.HireExpireDate = '1900-01-01 00:00:00.000' then '未激活' else CONVERT(varchar, d.HireExpireDate,120) end HireExpireDate,u.UserID,u.UserName,di.SortOrder as offLineMi
@@ -1627,7 +1627,7 @@ namespace MgooGps.com
         public static String UpdateUserInfo(String data)
         {
             Dictionary<String, Object> dic = Dao.ToDict(data);
-            //String strSql = "update Users set Address1='" + dic["address"] + "',FirstName='" + dic["fn"] + "',CellPhone='" + dic["phone"] + "',PrimaryEmail='" + dic["eMail"] + "' where UserID= " + Utils.GetSession("UserInfo").UserID;
+            //String strSql = "update Users set Address1='" + dic["address"] + "',FirstName='" + dic["fn"] + "',CellPhone='" + dic["phone"] + "',PrimaryEmail='" + dic["eMail"] + "' where UserID= " + Utils.GetSession().UserID;
             int status = Dao.Update(dic, "Users", "UserID");
             // int status = Dao.ExecutionSQL(strSql);
             if (status > 0)
@@ -2484,7 +2484,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static DataTable GetUsersOffLineDevicCount()
         {
-            Hashtable ht = GetDeviceNumber(Utils.GetSession("UserInfo").UserID);
+            Hashtable ht = GetDeviceNumber(Utils.GetSession().UserID);
             string strSql = string.Format(@"select  u.UserID,u.UserName+'/'+ convert(varchar(10), COUNT(*))+'台' UserName from Devices d inner join Users u on d.UserID=u.UserID inner join LKLocation l on l.DeviceID=d.DeviceID where d.Deleted=0 and d.Deleted=0 
                              and DATEDIFF(MI,l.LastCommunication,GETDATE()) > {0} and d.userid in({1}) group by u.UserID,u.UserName", Utils.offLineMinute, ht["userids"]);
             return Dao.Selects(strSql);
@@ -2986,7 +2986,7 @@ namespace MgooGps.com
                     {
                         string strSql = "";
                         var cmd = cmds[1];
-                        string UserID = Utils.GetSession("UserInfo").UserID;
+                        string UserID = Utils.GetSession().UserID;
                         if (cmd == "DZWL-ON")
                         {
                             SqlParameter[] pars = new SqlParameter[] { new SqlParameter("DeviceID", DeviceID) };
@@ -3355,7 +3355,7 @@ namespace MgooGps.com
                 }
                 DevicesSB.Remove(DevicesSB.Length - 1, DevicesSB.Length > 0 ? 1 : 0);
                 DevicesAjax.DevicesAjaxSoapClient devicesOper = new DevicesAjax.DevicesAjaxSoapClient();
-                int state = devicesOper.UpdateHireExpriDateDays(Convert.ToInt32(Utils.GetSession("UserInfo").UserID), DevicesSB.ToString(), Convert.ToInt32(day));
+                int state = devicesOper.UpdateHireExpriDateDays(Convert.ToInt32(Utils.GetSession().UserID), DevicesSB.ToString(), Convert.ToInt32(day));
                 if (state == 0)
                 {
                     return "{\"success\":true,\"Refresh\":false,\"msg\":\"共" + list.Count + "台设备," + list.Count + "台设备到期时间修改成功！\"}";
@@ -3628,7 +3628,7 @@ namespace MgooGps.com
             //List<string> sqlList = new List<string>();
             //List<SqlParameter[]> parsList = new List<SqlParameter[]>();
             string GroupName = carusername + "-" + carnum;
-            string UserID = Utils.GetSession("UserInfo").UserID;
+            string UserID = Utils.GetSession().UserID;
             strSql = "insert into groups(GroupName, UserID, Username, Description, Created, GroupType, AccountID, Deleted)values( @groupname, @userid, '', '', GETDATE(), -1, -1, 0)  select @@IDENTITY GroupID";
             Hashtable row = Dao.Select(strSql, new SqlParameter[] { new SqlParameter("groupname", GroupName), new SqlParameter("userid", UserID) });
             if (row != null)
@@ -3670,7 +3670,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static String ClearAllMessage(String UserID)
         {
-            String strSql = string.Format("update ExceptionMessage set deleted=1 ,clearby={1},clearDate = getdate() where deviceid in (select DeviceID from devices where userid={0}) ", UserID, Utils.GetSession("UserInfo").UserID);
+            String strSql = string.Format("update ExceptionMessage set deleted=1 ,clearby={1},clearDate = getdate() where deviceid in (select DeviceID from devices where userid={0}) ", UserID, Utils.GetSession().UserID);
             int count = Dao.ExecutionSQL(strSql);
             if (count > 0)
             {
@@ -3703,9 +3703,9 @@ namespace MgooGps.com
             }
             string password = "", strSql = "";
             int count = 0;
-            if (Utils.GetSession("UserInfo").LoginType == "1")
+            if (Utils.GetSession().LoginType == "1")
             {
-                string DeviceID = Utils.GetSession("UserInfo").DeviceID;
+                string DeviceID = Utils.GetSession().DeviceID;
                 strSql = string.Format("select DevicePassword from devices where deviceid = {0}", DeviceID);
                 DataRow dr = Dao.Select(strSql);
                 password = dr[0].ToString();
@@ -3717,7 +3717,7 @@ namespace MgooGps.com
             }
             else
             {
-                String UserID = Utils.GetSession("UserInfo").UserID;
+                String UserID = Utils.GetSession().UserID;
                 strSql = string.Format(" select password from users where userid= {0}", UserID);
                 DataRow dr = Dao.Select(strSql);
                 password = dr[0].ToString();
@@ -3746,7 +3746,7 @@ namespace MgooGps.com
         public static DataTable SearchDevices(String SearchText)
         {
             String strSql = string.Format(@"select ROW_NUMBER() OVER (ORDER BY d.created asc) num ,DeviceID,case when DeviceName='' then SerialNumber else DeviceName end DeviceName,SerialNumber,u.UserName,u.UserID,PhoneNum, DATEADD(HH,8,d.Created) Created,HireExpireDate,CarUserName from devices d inner join Users u on d.userid=u.userid 
-                                where d.deleted=0 and d.userid in(" + GetDeviceNumber(Utils.GetSession("UserInfo").UserID)["userids"] + ") and (serialnumber like @SearchText or devicename like @SearchText or CarNum like @SearchText or PhoneNum like @SearchText or CarUserName like @SearchText) order by d.created asc");
+                                where d.deleted=0 and d.userid in(" + GetDeviceNumber(Utils.GetSession().UserID)["userids"] + ") and (serialnumber like @SearchText or devicename like @SearchText or CarNum like @SearchText or PhoneNum like @SearchText or CarUserName like @SearchText) order by d.created asc");
             DataTable dt = Dao.Selects(strSql, new SqlParameter[] { new SqlParameter("@SearchText", "%" + SearchText + "%") });
             return dt;
         }
@@ -3764,7 +3764,7 @@ namespace MgooGps.com
                               select Users.UserID,Users.UserName,Users.LoginName,Users.ParentID,Users.FirstName,Users.CellPhone from Users,subqry
                               where Users.ParentID = subqry.UserID and users.Deleted=0
                               )
-                              select * from subqry where UserName like @SearchText or LoginName like @SearchText order by UserName collate Chinese_PRC_CS_AS_KS_WS", Utils.GetSession("UserInfo").UserID);
+                              select * from subqry where UserName like @SearchText or LoginName like @SearchText order by UserName collate Chinese_PRC_CS_AS_KS_WS", Utils.GetSession().UserID);
 
             DataTable dt = Dao.Selects(strSql, new SqlParameter[] { new SqlParameter("@SearchText", "%" + SearchText + "%") });
             return dt;
@@ -3813,7 +3813,7 @@ namespace MgooGps.com
             {
                 isPlay = "";
             }
-            String strSql = string.Format(" update users set LastName='{0}' where userid={1} ", isPlay, Utils.GetSession("UserInfo").UserID);
+            String strSql = string.Format(" update users set LastName='{0}' where userid={1} ", isPlay, Utils.GetSession().UserID);
             Dao.ExecutionSQL(strSql);
         }
 
@@ -3823,7 +3823,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static bool GetIsPlay()
         {
-            String strSql = string.Format("select LastName from users where userID={0}", Utils.GetSession("UserInfo").UserID);
+            String strSql = string.Format("select LastName from users where userID={0}", Utils.GetSession().UserID);
             DataRow dr = Dao.Select(strSql);
             if (dr["LastName"] != null && dr["LastName"].ToString().Trim() == "1")
             {
@@ -3844,7 +3844,7 @@ namespace MgooGps.com
             {
                 Lower = "";
             }
-            String strSql = string.Format(" update users set MiddleName='{0}' where userid={1} ", Lower, Utils.GetSession("UserInfo").UserID);
+            String strSql = string.Format(" update users set MiddleName='{0}' where userid={1} ", Lower, Utils.GetSession().UserID);
             Dao.ExecutionSQL(strSql);
         }
 
@@ -3854,7 +3854,7 @@ namespace MgooGps.com
         /// <returns></returns>
         public static bool GetLowerMsg()
         {
-            String strSql = string.Format("select MiddleName from users where userID={0}", Utils.GetSession("UserInfo").UserID);
+            String strSql = string.Format("select MiddleName from users where userID={0}", Utils.GetSession().UserID);
             DataRow dr = Dao.Select(strSql);
             if (dr["MiddleName"] != null && dr["MiddleName"].ToString().Trim() == "1")
             {
