@@ -19,6 +19,7 @@ using Microsoft.Office.Interop;
 using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
+using MG_BLL.Common;
 
 namespace MgooGps.com
 {
@@ -64,72 +65,56 @@ namespace MgooGps.com
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(pwd))
             {
                 return "no";
-            } 
-            SqlParameter[] list = new SqlParameter[2]{
+            }
+            try
+            {
+                SqlParameter[] list = new SqlParameter[2]{
               new SqlParameter("@LoginName",SqlDbType.VarChar),
               new SqlParameter("@Password",SqlDbType.VarChar)
             };
-            Utils.language = language.Trim() == "" ? Utils.language : language;
-            list[0].Value = name; 
-            list[1].Value = pwd;
-            string strSql = "select UserName,UserID,LoginName,UserType,SuperAdmin,PassWord,FirstName,CellPhone from users where Deleted=0 and (LoginName=@LoginName OR CellPhone=@LoginName)";
-            SqlParameter[] parameter = new SqlParameter[] { new SqlParameter("LoginName", name) };
-            Hashtable LoginTable = com.Dao.Select(strSql, parameter);
-            if (LoginTable != null && LoginTable.Count > 0)
-            {
-                string loginPwd = LoginTable["PassWord"].ToString();
-                loginPwd = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(loginPwd))).Replace("-", "").ToLower();
-                if (loginPwd == pwd)
-                {
-                    string UserID = LoginTable["UserID"].ToString();
-                    bool isSMSNotice = MG_BLL.Common.lib.Permission.IsSMSNotice(UserID);
-                    var loginUser = new UserInfo(UserID, LoginTable["UserName"].ToString(), LoginTable["LoginName"].ToString(), LoginTable["FirstName"].ToString(), LoginTable["UserType"].ToString(), LoginTable["SuperAdmin"].ToString(), DateTime.Now, isSMSNotice);
-                    loginUser.IsUpdateSonInfo = UserID == "" ? true : false;
-                    Utils.SetSession("UserInfo", loginUser);
-                    Utils.log("login : "+name +","+pwd);
-                    return "main.aspx";
-                }
-            }
-            else
-            {
-                LoginTable = com.Dao.Select(" select d.DeviceID,d.SerialNumber,d.DeviceName, UserID, d.DevicePassword from Devices d inner join  LKLocation l on l.DeviceID = d.DeviceID where d.SerialNumber = @LoginName and deleted=0 ", list);
+                Utils.language = language.Trim() == "" ? Utils.language : language;
+                list[0].Value = name;
+                list[1].Value = pwd;
+                string strSql = "select UserName,UserID,LoginName,UserType,SuperAdmin,PassWord,FirstName,CellPhone from users where Deleted=0 and (LoginName=@LoginName OR CellPhone=@LoginName)";
+                SqlParameter[] parameter = new SqlParameter[] { new SqlParameter("LoginName", name) };
+                Hashtable LoginTable = com.Dao.Select(strSql, parameter);
                 if (LoginTable != null && LoginTable.Count > 0)
                 {
-                    string dpwd = LoginTable["DevicePassword"].ToString();
-                    dpwd = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(dpwd))).Replace("-", "").ToLower();
-                    if (dpwd == pwd)
+                    string loginPwd = LoginTable["PassWord"].ToString();
+                    loginPwd = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(loginPwd))).Replace("-", "").ToLower();
+                    if (loginPwd == pwd)
                     {
-                        Utils.SetSession("UserInfo", new UserInfo(LoginTable["SerialNumber"].ToString(), LoginTable["UserID"].ToString(), LoginTable["DeviceID"].ToString(), LoginTable["DeviceName"].ToString()));
+                        string UserID = LoginTable["UserID"].ToString();
+                        bool isSMSNotice = MG_BLL.Common.lib.Permission.IsSMSNotice(UserID);
+                        var loginUser = new UserInfo(UserID, LoginTable["UserName"].ToString(), LoginTable["LoginName"].ToString(), LoginTable["FirstName"].ToString(), LoginTable["UserType"].ToString(), LoginTable["SuperAdmin"].ToString(), DateTime.Now, isSMSNotice);
+                        loginUser.IsUpdateSonInfo = UserID == "" ? true : false;
+                        Utils.SetSession("UserInfo", loginUser);
+                        Utils.log("login : " + name + "," + pwd);
                         return "main.aspx";
-                    } 
+                    }
                 }
+                else
+                {
+                    LoginTable = com.Dao.Select(" select d.DeviceID,d.SerialNumber,d.DeviceName, UserID, d.DevicePassword from Devices d inner join  LKLocation l on l.DeviceID = d.DeviceID where d.SerialNumber = @LoginName and deleted=0 ", list);
+                    if (LoginTable != null && LoginTable.Count > 0)
+                    {
+                        string dpwd = LoginTable["DevicePassword"].ToString();
+                        dpwd = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(dpwd))).Replace("-", "").ToLower();
+                        if (dpwd == pwd)
+                        {
+                            Utils.SetSession("UserInfo", new UserInfo(LoginTable["SerialNumber"].ToString(), LoginTable["UserID"].ToString(), LoginTable["DeviceID"].ToString(), LoginTable["DeviceName"].ToString()));
+                            return "main.aspx";
+                        }
+                    }
+                }
+                return "no";
             }
-            return "no";
-            //Hashtable userDr = com.Dao.Select("select UserID,UserName,LoginName,FirstName,CellPhone,SuperAdmin,UserType from Users where LoginName = @LoginName and Password=@Password and Deleted = 0", list);
-            //if (userDr != null && userDr.Count >0)
-            //{
-            //    Utils.SetSession("UserInfo", new UserInfo(userDr["UserID"].ToString(), userDr["UserName"].ToString(), userDr["LoginName"].ToString(), userDr["FirstName"].ToString(), userDr["UserType"].ToString(), userDr["SuperAdmin"].ToString(), DateTime.Now));
-            //    return "ok";
-            //}
-            //else
-            //{
-            //    userDr = com.Dao.Select(" select UserID,UserName,LoginName,FirstName,CellPhone,SuperAdmin,UserType from Users where CellPhone = @LoginName and Password= @Password and Deleted =0", list);
-            //    if (userDr != null && userDr.Count > 0)
-            //    {
-            //        Utils.SetSession("UserInfo", new UserInfo(userDr["UserID"].ToString(), userDr["UserName"].ToString(), userDr["LoginName"].ToString(), userDr["FirstName"].ToString(), userDr["UserType"].ToString(), userDr["SuperAdmin"].ToString(), DateTime.Now));
-            //        return "ok";
-            //    }
-            //    else
-            //    {
-            //        userDr = com.Dao.Select(" select d.DeviceID,d.SerialNumber,d.DeviceName, UserID from Devices d inner join  LKLocation l on l.DeviceID = d.DeviceID where d.SerialNumber = @LoginName and d.DevicePassword = @Password and deleted=0 ", list);
-            //        if (userDr != null && userDr.Count > 0)
-            //        {
-            //            Utils.SetSession("UserInfo", new UserInfo(userDr["SerialNumber"].ToString(), userDr["UserID"].ToString(), userDr["DeviceID"].ToString(), userDr["DeviceName"].ToString()));
-            //            return "ok";
-            //        }
-            //    }
-            //    return "no";
-            //}
+            catch (Exception ex)
+            {
+                Log.Error(typeof( Utils),ex);
+                return "no";
+            }
+           
         }
 
         /// <summary>
