@@ -85,7 +85,8 @@ namespace MgooGps.com
                     bool isSMSNotice = MG_BLL.Common.lib.Permission.IsSMSNotice(UserID);
                     var loginUser = new UserInfo(UserID, LoginTable["UserName"].ToString(), LoginTable["LoginName"].ToString(), LoginTable["FirstName"].ToString(), LoginTable["UserType"].ToString(), LoginTable["SuperAdmin"].ToString(), DateTime.Now, isSMSNotice);
                     loginUser.IsUpdateSonInfo = UserID == "" ? true : false;
-                    Utils.SetSession("UserInfo", loginUser);
+                    //Utils.SetSession("UserInfo", loginUser);
+                    SessionUtil.SetSession(SessionUtil.KEY,loginUser);
                     Utils.log("login : "+name +","+pwd);
                     return "main.aspx";
                 }
@@ -99,7 +100,9 @@ namespace MgooGps.com
                     dpwd = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(dpwd))).Replace("-", "").ToLower();
                     if (dpwd == pwd)
                     {
-                        Utils.SetSession("UserInfo", new UserInfo(LoginTable["SerialNumber"].ToString(), LoginTable["UserID"].ToString(), LoginTable["DeviceID"].ToString(), LoginTable["DeviceName"].ToString()));
+                        var loginUser = new UserInfo(LoginTable["SerialNumber"].ToString(), LoginTable["UserID"].ToString(), LoginTable["DeviceID"].ToString(), LoginTable["DeviceName"].ToString());
+                        //Utils.SetSession("UserInfo",);
+                        SessionUtil.SetSession(SessionUtil.KEY, loginUser);
                         return "main.aspx";
                     } 
                 }
@@ -271,9 +274,10 @@ namespace MgooGps.com
         /// <returns></returns>
         public static UserInfo GetSession(String name =null)
         {
-            if(name == null)
-                name ="UserInfo";
-            return (UserInfo)HttpContext.Current.Session[name];
+            return SessionUtil.GetSession<UserInfo>(name ?? SessionUtil.KEY);
+           //if(name == null)
+           //    name ="UserInfo";
+           //return (UserInfo)HttpContext.Current.Session[name];
         }
         /// <summary>
         /// 设置session
@@ -289,7 +293,7 @@ namespace MgooGps.com
 
         public static void LoginOut()
         { 
-            com.Utils.SetSession("UserInfo", null);
+           // com.Utils.SetSession("UserInfo", null);
         }
 
         /// <summary>
@@ -298,13 +302,13 @@ namespace MgooGps.com
         /// <returns></returns>
         public static void isLogin()
         {
-            if (HttpContext.Current.Session["UserInfo"] == null)
+            if (SessionUtil.GetSession(SessionUtil.KEY) == null)
             {
                 HttpContext.Current.Response.Redirect(Utils.logoutUrl == "" ? "/login.aspx": Utils.logoutUrl);
             }
             else
             {
-                if (((UserInfo)HttpContext.Current.Session["UserInfo"]).LoginType == "1")
+                if (SessionUtil.GetSession<UserInfo>(SessionUtil.KEY) .LoginType == "1")
                 {
                     string path = HttpContext.Current.Request.Path;
                     if (path != "/main.aspx" && path != "/numerical.aspx" && path != "/RemainView.aspx" && path != "/AlarmMessage.aspx" && path != "/Mileage.aspx" && path != "/StopDetail.aspx" && path != "/ParkingEcharts.aspx"

@@ -17,7 +17,8 @@ namespace MgooGps
                 Utils.log("退出URL：" + Utils.logoutUrl);
                 string url = Utils.logoutUrl;
                 Utils.logoutUrl = "";
-                MgooGps.com.Utils.LoginOut();
+                //MgooGps.com.Utils.LoginOut();
+                SessionUtil.LoginOut();
                 Response.Redirect(url == "" ? "login.aspx" : url);
             }
             if (!string.IsNullOrEmpty(Request.QueryString["t"]) && !string.IsNullOrEmpty(Request.QueryString["token"]))
@@ -36,7 +37,8 @@ namespace MgooGps
                             UserInfo userinfo = (UserInfo)HttpRuntime.Cache.Get(token + ticks); 
                             HttpRuntime.Cache.Remove(token + ticks);
                             Utils.log("default>自动登录成功:"+userinfo.UserID+","+userinfo.LoginName);
-                            Utils.SetSession("UserInfo", userinfo);
+                            //Utils.SetSession("UserInfo", userinfo);
+                            SessionUtil.SetSession(SessionUtil.KEY, userinfo);
                             Response.Redirect("main.aspx",false);
                             return;
                         }

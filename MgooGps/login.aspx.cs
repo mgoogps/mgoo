@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Xml;
+using MgooGps.com;
 
 namespace MgooGps
 {
@@ -25,7 +26,8 @@ namespace MgooGps
 
             if (!string.IsNullOrWhiteSpace(Request.QueryString["action"]) && Request.QueryString["action"] == "logout")
             {
-                MgooGps.com.Utils.LoginOut();
+                //MgooGps.com.Utils.LoginOut();
+                SessionUtil.LoginOut();
             }
             if (com.Utils.GetSession("UserInfo") != null)
             {

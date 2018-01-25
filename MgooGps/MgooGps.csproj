@@ -2174,6 +2174,7 @@
     <Compile Include="com\Dao.cs" />
     <Compile Include="com\EvilTransform.cs" />
     <Compile Include="com\MyTeam.cs" />
+    <Compile Include="com\SessionUtil.cs" />
     <Compile Include="com\Utils.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
