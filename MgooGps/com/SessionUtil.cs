@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MG_BLL.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,8 +35,8 @@ namespace MgooGps.com
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Log.Error(typeof(SessionUtil),ex);
+                return default(T);
             } 
         }
         public static void LoginOut()

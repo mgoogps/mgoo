@@ -8,25 +8,20 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Xml;
 using MgooGps.com;
+using System.Web.SessionState;
 
 namespace MgooGps
 {
-    public partial class login : System.Web.UI.Page
+    public partial class login : MG_BLL.Common.UIPage, IRequiresSessionState
     {
         public String language = "";
         public string welcome = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            #region 登录 
-            // string ip =  MgooGps.com.Utils.GetIP();
-            // MgooGps.com.Utils.log("访问ip:"+ip);
-
-            var pe = new {aa = new {aaa="" },bb="" };
-        
+            #region 登录  
 
             if (!string.IsNullOrWhiteSpace(Request.QueryString["action"]) && Request.QueryString["action"] == "logout")
-            {
-                //MgooGps.com.Utils.LoginOut();
+            { 
                 SessionUtil.LoginOut();
             }
             if (com.Utils.GetSession(SessionUtil.KEY) != null)

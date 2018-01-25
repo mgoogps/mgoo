@@ -178,6 +178,7 @@
     <Content Include="assets\images\user-4.png" />
     <Content Include="assets\images\user-5.png" />
     <Content Include="assets\images\www.mgoogps.com.png" />
+    <Content Include="assets\images\www.mgoogps.com_QR.png" />
     <Content Include="assets\index.html" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\ckeditor\adapters\jquery.js" />
@@ -2724,7 +2725,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="zTree_v3\.gitignore" />
-    <Content Include="zTree_v3\README.md" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

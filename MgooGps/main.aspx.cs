@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MgooGps
 {
-    public partial class main : System.Web.UI.Page, IRequiresSessionState
+    public partial class main :   MG_BLL.Common.UIPage, IRequiresSessionState
     { 
         public string imei = "";
         public string userid = "";
