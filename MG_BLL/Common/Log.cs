@@ -10,7 +10,7 @@ namespace MG_BLL.Common
 {
     public sealed class Log
     {
-        public static int LOG_LEVEL = 3;
+        public static int LOG_LEVEL  { set; get; } =3;
 
         public static string LOG_PATH { set; get; }
 

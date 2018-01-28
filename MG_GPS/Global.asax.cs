@@ -7,6 +7,7 @@ using System.Web.Security;
 using MG_GPS;
 using MG_BLL;
 using System.Configuration;
+using System.Web.Http;
 
 namespace MG_GPS
 {
@@ -14,6 +15,7 @@ namespace MG_GPS
     {
         void Application_Start(object sender, EventArgs e)
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             // 在应用程序启动时运行的代码
             // AuthConfig.RegisterOpenAuth();
             //RouteConfig.RegisterRoutes(RouteTable.Routes); 

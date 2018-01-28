@@ -110,14 +110,18 @@ namespace MG_BLL.Pay.WeixinPay.business
                     string openid = notifyData.GetValue("openid").ToString();
                     string total_fee = notifyData.GetValue("total_fee").ToString();
 
+                    if (device_name .Equals("success_notify"))
+                    {
+                        ///用户在代理商线下用微信支付 扫码支付 激活设备
+                    }
                     MgooOrders.Orders o = new MgooOrders.Orders();
 
                     bool success = o.ModifyOrderStatus(transaction_id,fee_type,time_end,bank_type,trade_type,trade_no);
                  
                     if (success)
                     {
-                        o.SendMail(trade_no); 
-                        o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no); 
+                        Task.Run(() => o.SendMail(trade_no) );
+                        Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no)); 
                     }
                 }
                 page.Response.Write(res.ToXml());

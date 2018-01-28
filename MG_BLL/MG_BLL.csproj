@@ -103,6 +103,7 @@
     <Compile Include="DeviceManager\BllDeviceManager.cs" />
     <Compile Include="DeviceManager\SendCommand.cs" />
     <Compile Include="Entity\Alarms.cs" />
+    <Compile Include="Entity\ApiResult.cs" />
     <Compile Include="Entity\Devices.cs" />
     <Compile Include="Entity\History.cs" />
     <Compile Include="Entity\SMSResult.cs" />
