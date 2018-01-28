@@ -85,7 +85,7 @@ namespace MG_WeChat.ajax
 
                     return Utils.ToJson(LoginResult);
                 }
-                else
+                else if(identifies.ToLower().IndexOf("weixin") < 0)
                 { 
                     loginUser = login.Login_Imei(loginname, password, identifies);
                     if (loginUser != null)
@@ -103,16 +103,13 @@ namespace MG_WeChat.ajax
                         } 
                         HttpRuntime.Cache.Insert(identifies + loginUser.UserID + loginUser.ToKen, loginUser, null, DateTime.Now.AddMinutes(20), TimeSpan.Zero);
                         return Utils.ToJson(LoginResult);
-                    }
-                    else
-                    {
-                        LoginResult.Add("StatusCode", statusCode.Code.failure);
-                        LoginResult.Add("UserID", "");
-                        LoginResult.Add("Token", "");
-                        LoginResult.Add("Url", "Login.aspx");
-                        return Utils.ToJson(LoginResult);
                     } 
                 }
+                LoginResult.Add("StatusCode", statusCode.Code.failure);
+                LoginResult.Add("UserID", "");
+                LoginResult.Add("Token", "");
+                LoginResult.Add("Url", "Login.aspx");
+                return Utils.ToJson(LoginResult);
             }
             catch (Exception ex)
             {
