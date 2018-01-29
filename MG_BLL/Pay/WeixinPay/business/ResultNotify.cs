@@ -110,18 +110,38 @@ namespace MG_BLL.Pay.WeixinPay.business
                     string openid = notifyData.GetValue("openid").ToString();
                     string total_fee = notifyData.GetValue("total_fee").ToString();
 
-                    if (device_name .Equals("success_notify"))
-                    {
-                        ///用户在代理商线下用微信支付 扫码支付 激活设备
-                    }
+                  
                     MgooOrders.Orders o = new MgooOrders.Orders();
-
-                    bool success = o.ModifyOrderStatus(transaction_id,fee_type,time_end,bank_type,trade_type,trade_no);
+                  
+                    bool success = o.ModifyOrderStatus(transaction_id,fee_type,time_end,bank_type,trade_type,trade_no, !device_name.StartsWith("success_notify"));
                  
                     if (success)
                     {
-                        Task.Run(() => o.SendMail(trade_no) );
-                        Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no)); 
+                        if (device_name.StartsWith("success_notify"))
+                        {
+                            Task.Run(()=> {
+                                try
+                                {
+                                    MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
+                                    //Common.Log.Info(this, device_name);
+                                    var dev = db.Devices.Find(Convert.ToInt32( device_name.Split(',')[1]));
+                                    var urserid = device_name.Split(',')[2];
+                                    ///用户在代理商线下用微信支付 扫码支付 激活设备
+                                    Weixin.Devices wd = new Weixin.Devices(new Common.AuthHeader() { UserID = urserid });
+                                    wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Common.Log.Error(this,ex);
+                                }
+                              
+                            }); 
+                        }
+                        else
+                        {
+                            Task.Run(() => o.SendMail(trade_no));
+                            Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no));
+                        } 
                     }
                 }
                 page.Response.Write(res.ToXml());

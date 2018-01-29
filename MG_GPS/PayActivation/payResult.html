@@ -35,12 +35,46 @@
         <img src="assets/success.jpg"  class="paysuccess"/>
 
         <div class="account">
-            <p>登录账号：18507480591</p>
-            <p>初始密码：123456</p>
+            <p>登录账号：<strong id="account"></strong> </p>
+            <p>初始密码：<strong id="password"></strong> </p>
         </div>
     </div>
 
    <p style="margin-top:50px; width:100%;text-align:center">识别图中二维码关注美谷公众号来监控或管理该设备</p>
     <img src="assets/logo.gif" alt="" style="margin-left:calc(50% - 170px)" />
+
+    <script src="assets/jquery-2.1.3.min.js"></script>
+    <script src="assets/amazeui-2.7.2.min.js"></script>
+    <script src="assets/layer_mobile/layer.js"></script>
+    <script src="assets/global.js"></script>
+    <script>
+        var no = global.GetQueryString("no");
+        var index = layer.open({
+            type: 2
+             , content: '确认支付结果...'
+        });
+        $(function () {
+            setTimeout(function () {
+                get(no);
+            },2000); 
+        });
+        var get = function (no) {
+            global.ajax({
+                url: '/api/user/GetInfoByOrderNo',
+                data: { no  : no},
+                type: 'get',
+                success: function (res) {
+                    if (res.code == 0) {
+                        if (res.result.Status == 2) {
+                            $("#account").text(res.result.LoginName);
+                            $("#password").text(res.result.Password);
+                        } else {
+                            layer.alert("支付失败!");
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

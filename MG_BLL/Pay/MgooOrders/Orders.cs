@@ -185,7 +185,7 @@ namespace MG_BLL.Pay.MgooOrders
         /// <summary>
         /// 修改内部订单系统的订单状态
         /// </summary>
-        public bool ModifyOrderStatus(string transaction_id, string fee_type, string time_end, string bank_type, string trade_type, string trade_no)
+        public bool ModifyOrderStatus(string transaction_id, string fee_type, string time_end, string bank_type, string trade_type, string trade_no,bool updateExpireDate=true)
         {
             try
             {
@@ -207,11 +207,15 @@ namespace MG_BLL.Pay.MgooOrders
                 {
                     try
                     {
-                        strSql = "update Devices set HireExpireDate=DATEADD(YEAR,(select RenewalDate from TariffPackages where id =(select TariffID from Orders where OrderNo=@OrderNo)),HireExpireDate) where DeviceID=(select deviceid from Orders where OrderNo=@OrderNo)";
-                        reslut = s.ExecuteSql(strSql, new SqlParameter[] { new SqlParameter("OrderNo", trade_no) });
-                        if (reslut <= 0)
+                        if (updateExpireDate)
                         {
-                            Utils.log("修改设备过期时间失败 ModifyOrderStatus Error......." + reslut);
+                            strSql = "update Devices set HireExpireDate=DATEADD(YEAR,(select RenewalDate from TariffPackages where id =(select TariffID from Orders where OrderNo=@OrderNo)),HireExpireDate) where DeviceID=(select deviceid from Orders where OrderNo=@OrderNo)";
+                            reslut = s.ExecuteSql(strSql, new SqlParameter[] { new SqlParameter("OrderNo", trade_no) });
+                            if (reslut <= 0)
+                            {
+                                Utils.log("修改设备过期时间失败 ModifyOrderStatus Error......." + reslut);
+                                return false;
+                            }
                         }
                         return true;
                     }
