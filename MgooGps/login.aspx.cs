@@ -28,7 +28,6 @@ namespace MgooGps
             {
                 //Response.Redirect("~/main.aspx");
             } 
-           // MgooGps.com.Utils.log("访问的IP地址（GetHostAddresses）：" + System.Net.Dns.GetHostAddresses(System.Net.Dns.GetHostName()).GetValue(0).ToString());
             language = "<script src=\"/js/Language/language01-zh-cn.js\" type=\"text/javascript\"></script>";
             if (!string.IsNullOrWhiteSpace(Request.QueryString["language"]))
             {
