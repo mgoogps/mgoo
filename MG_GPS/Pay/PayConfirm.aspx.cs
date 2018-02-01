@@ -62,7 +62,7 @@ namespace MG_GPS.Pay
                 //JSAPI支付预处理
                 try
                 {
-                    var userList = new List<int>() { 6,7,5959 };
+                    var userList = new List<int>() { 6, 7, 5959, 1296, 1389 };
                     // total_fee = ( type == "1" ? int.Parse(total_fee) :int.Parse( total_fee) )+"";
                     jsApiPay.user_id = userid;// (int)device.UserID;
                     //jsApiPay.openid = openid;
@@ -73,8 +73,8 @@ namespace MG_GPS.Pay
                     jsApiPay.device_name = "success_notify," + device.DeviceID + "," + userid;//attach 商家数据包，原样返回
                     if (total_fee < 200 && !userList.Contains(jsApiPay.user_id))
                     {
-                        state = "下单失败,金额错误！";
-                        return;
+                        //state = "下单失败,金额错误！";
+                       // return;
                     }
                     jsApiPay.GetOpenidAndAccessTokenFromCode(code);
 

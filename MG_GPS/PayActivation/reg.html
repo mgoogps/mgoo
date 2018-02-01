@@ -105,8 +105,8 @@
             }
             var price = $("#txtMoney").val();
             if (price <= 200) {
-                layer.alert("金额输入错误.");
-                return;
+              //  layer.alert("金额输入错误.");
+               // return;
             }
             global.ajax({
                 url: "/api/user/Reg",
