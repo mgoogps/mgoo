@@ -56,7 +56,7 @@ namespace MG_GPS.Pay
                 }
                 MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                 var device = db.Devices.Where(d => d.Deleted == false && d.SerialNumber == imei && d.DevicePassword == vc).SingleOrDefault();
-                prductName = "北斗定位防盗报警器-" + (string.IsNullOrEmpty(device.DeviceName) ? device.SerialNumber : device.DeviceName);
+                prductName = "北斗GPS流量费(2年)-" + (string.IsNullOrEmpty(device.DeviceName) ? device.SerialNumber : device.DeviceName);
 
                 JsApiPay jsApiPay = new JsApiPay(this);
                 //JSAPI支付预处理

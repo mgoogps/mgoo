@@ -119,12 +119,18 @@ namespace MG_GPS.Controller
             ApiResult ar = new ApiResult();
             try
             {
+                if (string.IsNullOrEmpty(no))
+                {
+                    return new ApiResult() {  code = ApiResult.Code.failure, message="参数错误"};
+                }
                 MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                 var query = from o in db.Orders
                             join u in db.Users
                             on o.UserID equals u.UserID
+                            join d in db.Devices
+                            on o.DeviceID equals d.DeviceID
                             where o.OrderNo == no
-                            select new { o.OrderNo, o.PayDate, o.UserID, o.DeviceID, u.LoginName, u.Password, o.Status };
+                            select new { o.OrderNo, o.PayDate, o.UserID, o.DeviceID, u.LoginName, u.Password, o.Status, HireExpireDate = d.HireExpireDate.Value.Year+"年"+d.HireExpireDate.Value.Month+"月" };
                 var first = query.FirstOrDefault();
                 ar.code = ApiResult.Code.success;
                 ar.message = "";

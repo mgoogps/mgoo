@@ -35,8 +35,9 @@
            
             <div class="am-form-group">
                 <label for="txtMoney" class="am-u-sm-4 am-form-label">金额:</label>
-                <div class="am-u-sm-8">
-                    <input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" />
+                <div class="am-u-sm-8"> 
+                    <div> ￥198元</div>
+                    <input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" style="display:none" />
                 </div>
             </div> 
             <div class="am-form-group">
@@ -103,16 +104,18 @@
                 layer.alert("IMEI格式不对");
                 return;
             }
-            var price = $("#txtMoney").val();
+            var price = 198; //$("#txtMoney").val();
             if (price <= 200) {
               //  layer.alert("金额输入错误.");
                // return;
             }
+            price = 1;
             global.ajax({
                 url: "/api/user/Reg",
                 data: { phone: phone ,code :code ,imei:imei,vc :vc}, 
                 success: function (res) {
                     if (res.code == 0) {
+                        layer.open({ type: 2 });
                         window.location.href = "../Pay/PayConfirm.aspx?imei=" + imei + "&vc=" + vc + "&p=" + price + "&userid=" + res.result.userid + "&t=" + new Date().getTime();;
                     }
                 }

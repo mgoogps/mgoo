@@ -125,6 +125,11 @@ namespace MG_BLL.Pay.WeixinPay.business
                                     MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                                     //Common.Log.Info(this, device_name);
                                     var dev = db.Devices.Find(Convert.ToInt32( device_name.Split(',')[1]));
+                                    if (dev.HireExpireDate < DateTime.Now)
+                                    {
+                                        dev.HireExpireDate = DateTime.Now.AddYears(2);
+                                        db.SaveChangesAsync();
+                                    }
                                     var urserid = device_name.Split(',')[2];
                                     ///用户在代理商线下用微信支付 扫码支付 激活设备
                                     Weixin.Devices wd = new Weixin.Devices(new Common.AuthHeader() { UserID = urserid });
