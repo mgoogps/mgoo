@@ -127,7 +127,8 @@ namespace MG_BLL.Pay.WeixinPay.business
                                     var dev = db.Devices.Find(Convert.ToInt32( device_name.Split(',')[1]));
                                     if (dev.HireExpireDate < DateTime.Now)
                                     {
-                                        dev.HireExpireDate = DateTime.Now.AddYears(2);
+                                        dev.HireExpireDate = Convert.ToDateTime(DateTime.Now.AddMonths(-1).ToString("yyyy-MM-25 00:00:00"));
+                                        dev.ActiveDate = DateTime.Now;
                                         db.SaveChangesAsync();
                                     }
                                     var urserid = device_name.Split(',')[2];
@@ -138,8 +139,7 @@ namespace MG_BLL.Pay.WeixinPay.business
                                 catch (Exception ex)
                                 {
                                     Common.Log.Error(this,ex);
-                                }
-                              
+                                } 
                             }); 
                         }
                         else

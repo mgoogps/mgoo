@@ -71,10 +71,10 @@ namespace MG_GPS.Pay
                     jsApiPay.tariff_id = 0;
                     jsApiPay.product_body = prductName;
                     jsApiPay.device_name = "success_notify," + device.DeviceID + "," + userid;//attach 商家数据包，原样返回
-                    if (total_fee < 200 && !userList.Contains(jsApiPay.user_id))
+                    if (total_fee < 195 && !userList.Contains(jsApiPay.user_id))
                     {
-                        //state = "下单失败,金额错误！";
-                       // return;
+                        state = "下单失败,金额错误！";
+                        return;
                     }
                     jsApiPay.GetOpenidAndAccessTokenFromCode(code);
 

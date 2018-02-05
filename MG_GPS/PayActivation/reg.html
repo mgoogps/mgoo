@@ -20,40 +20,40 @@
     <div class="am-container">
         <form class="am-form ">
             <div class="am-form-group">
-                <label for="txtSerialNumber" class="am-u-sm-3 am-form-label">设备码:</label>
-                <div class="am-u-sm-9">
-                    <input class="am-form-field am-input-sm" name="SerialNumber" type="text" placeholder="设备的IMEI号"  id="txtSerialNumber" />
+                <label for="txtSerialNumber" class="am-u-sm-4 am-form-label">设备码:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" name="SerialNumber" type="text" placeholder="设备的设备号"  id="txtSerialNumber" />
                 </div>
             </div>
            
             <div class="am-form-group">
-                <label for="VC" class="am-u-sm-3 am-form-label">激活码:</label>
-                <div class="am-u-sm-9">
-                    <input class="am-form-field am-input-sm" name="VC" type="text" placeholder="设备的VC码"  id="VC" oninput="if(value.length>6)value=value.slice(0,6)" />
+                <label for="VC" class="am-u-sm-4 am-form-label">激活码:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm" name="VC" type="text" placeholder="设备的激活码"  id="VC" oninput="if(value.length>6)value=value.slice(0,6)" />
                 </div>
             </div>
            
+           
             <div class="am-form-group">
-                <label for="txtMoney" class="am-u-sm-3 am-form-label">金额:</label>
-                <div class="am-u-sm-9"> 
-                    <p> ￥198元</p> 
-                    <!--<input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" style="display:none" />-->
-                </div>
-            </div>  
-            <div class="am-form-group">
-                <label for="texPhone" class="am-u-sm-3 am-form-label" style="padding-top:14px;">手机号:</label>
-                <div class="am-u-sm-9" style="padding-top:0px;">
+                <label for="texPhone" class="am-u-sm-4 am-form-label" style="">手机号:</label>
+                <div class="am-u-sm-8">
                     <input class="am-form-field am-input-sm" type="number" name="phone" placeholder="用于平台登录" id="texPhone" />
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="texCode" class="am-u-sm-3 am-form-label">验证码:</label>
-                <div class="am-u-sm-9">
-                    <input class="am-form-field am-input-sm " name="code" style="width:150px;float:left;" type="number" placeholder="6位数的验证码" id="texCode" oninput="if(value.length>6)value=value.slice(0,6)" />
+                <label for="texCode" class="am-u-sm-4 am-form-label">验证码:</label>
+                <div class="am-u-sm-8">
+                    <input class="am-form-field am-input-sm " name="code" style="width:110px;float:left;" type="number" placeholder="6位数的验证码" id="texCode" oninput="if(value.length>6)value=value.slice(0,6)" />
                     <button type="button" style="float:left;height:32px;" onclick="global.getCode('texPhone', 'register', this)">获取</button>
                 </div>
             </div>
-           
+            <div class="am-form-group">
+                <label for="txtMoney" class="am-u-sm-4 am-form-label">金额:</label>
+                <div class="am-u-sm-8">
+                    <p> ￥195元</p>
+                    <input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" style="display:none" />
+                </div>
+            </div>  
 
             <div class="am-form-group" style="padding-top:30px;">
                 <div class="am-u-sm-12">
@@ -104,7 +104,7 @@
                 layer.alert("激活码格式不对");
                 return;
             }
-            var price = 198; //$("#txtMoney").val();
+            var price = 195; //$("#txtMoney").val();
             if (price <= 200) {
               //  layer.alert("金额输入错误.");
                // return;
