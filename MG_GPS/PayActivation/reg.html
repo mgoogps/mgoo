@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>注册激活</title>
+    <title>充值激活</title>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -12,7 +12,7 @@
     <header data-am-widget="header" class="am-header am-header-default"> 
         <h1 class="am-header-title">
             <a href="javascript:;" class="">
-                注册激活
+                充值激活
             </a>
         </h1>
     </header>
@@ -20,35 +20,35 @@
     <div class="am-container">
         <form class="am-form ">
             <div class="am-form-group">
-                <label for="txtSerialNumber" class="am-u-sm-4 am-form-label">IMEI:</label>
-                <div class="am-u-sm-8">
+                <label for="txtSerialNumber" class="am-u-sm-3 am-form-label">设备码:</label>
+                <div class="am-u-sm-9">
                     <input class="am-form-field am-input-sm" name="SerialNumber" type="text" placeholder="设备的IMEI号"  id="txtSerialNumber" />
                 </div>
             </div>
            
             <div class="am-form-group">
-                <label for="VC" class="am-u-sm-4 am-form-label">VC码:</label>
-                <div class="am-u-sm-8">
+                <label for="VC" class="am-u-sm-3 am-form-label">激活码:</label>
+                <div class="am-u-sm-9">
                     <input class="am-form-field am-input-sm" name="VC" type="text" placeholder="设备的VC码"  id="VC" oninput="if(value.length>6)value=value.slice(0,6)" />
                 </div>
             </div>
            
             <div class="am-form-group">
-                <label for="txtMoney" class="am-u-sm-4 am-form-label">金额:</label>
-                <div class="am-u-sm-8"> 
-                    <div> ￥198元</div>
-                    <input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" style="display:none" />
+                <label for="txtMoney" class="am-u-sm-3 am-form-label">金额:</label>
+                <div class="am-u-sm-9"> 
+                    <p> ￥198元</p> 
+                    <!--<input class="am-form-field am-input-sm" name="money" type="number" min="200" placeholder="付款金额" id="txtMoney" style="display:none" />-->
                 </div>
-            </div> 
+            </div>  
             <div class="am-form-group">
-                <label for="texPhone" class="am-u-sm-4 am-form-label">手机号:</label>
-                <div class="am-u-sm-8">
+                <label for="texPhone" class="am-u-sm-3 am-form-label" style="padding-top:14px;">手机号:</label>
+                <div class="am-u-sm-9" style="padding-top:0px;">
                     <input class="am-form-field am-input-sm" type="number" name="phone" placeholder="用于平台登录" id="texPhone" />
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="texCode" class="am-u-sm-4 am-form-label">验证码:</label>
-                <div class="am-u-sm-8">
+                <label for="texCode" class="am-u-sm-3 am-form-label">验证码:</label>
+                <div class="am-u-sm-9">
                     <input class="am-form-field am-input-sm " name="code" style="width:150px;float:left;" type="number" placeholder="6位数的验证码" id="texCode" oninput="if(value.length>6)value=value.slice(0,6)" />
                     <button type="button" style="float:left;height:32px;" onclick="global.getCode('texPhone', 'register', this)">获取</button>
                 </div>
@@ -57,7 +57,7 @@
 
             <div class="am-form-group" style="padding-top:30px;">
                 <div class="am-u-sm-12">
-                    <button type="button" class="am-btn am-btn-primary am-btn-block" onclick="frmsubmit()">支付激活</button>
+                    <button type="button" class="am-btn am-btn-primary am-btn-block" onclick="frmsubmit()">激活</button>
                 </div>
             </div>
 
@@ -96,12 +96,12 @@
             }
             var imei = $("#txtSerialNumber").val();
             if (imei .length < 5) {
-                layer.alert("IMEI格式不对");
+                layer.alert("设备码格式不对");
                 return;
             }
             var vc = $("#VC").val();
             if (vc.length  < 4) {
-                layer.alert("IMEI格式不对");
+                layer.alert("激活码格式不对");
                 return;
             }
             var price = 198; //$("#txtMoney").val();

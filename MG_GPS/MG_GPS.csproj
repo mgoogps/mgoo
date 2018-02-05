@@ -107,8 +107,6 @@
     <Content Include="Images\icons\unlock.png" />
     <Content Include="packages.config" />
     <Content Include="PayActivation\assets\amazeui-2.7.2.min.js" />
-    <Content Include="PayActivation\assets\success.jpg" />
-    <Content Include="PayActivation\assets\success.png" />
     <Content Include="PayActivation\assets\bootstrap.min.css" />
     <Content Include="PayActivation\assets\bootstrap.min.js" />
     <Content Include="PayActivation\assets\global.js" />
@@ -116,6 +114,7 @@
     <Content Include="PayActivation\assets\layer_mobile\layer.js" />
     <Content Include="PayActivation\assets\layer_mobile\need\layer.css" />
     <Content Include="PayActivation\assets\logo.gif" />
+    <Content Include="PayActivation\assets\success.png" />
     <Content Include="PayActivation\payResult.html" />
     <Content Include="PayActivation\reg.html" />
     <Content Include="Pay\OrderQueryPage.aspx" />
