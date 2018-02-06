@@ -43,10 +43,12 @@ namespace MG_GPS.Controller
                 if (r.VerificationCode(phone, code) || phone == "18507480591")
                 {
                     var msg = "";
+                    var status = 0;
                     var res = r.VerificationPhone(phone);
                     if (res)
                     {
                         msg = "账号已存在,请付款激活设备.";
+                        status = 1;
                        // return new ApiResult() { message = "账号已存在,请付款激活设备.", code = ApiResult.Code.success };
                     }
                     else
@@ -54,14 +56,15 @@ namespace MG_GPS.Controller
                         res = r.MgRegister(phone, "123456", phone);
                         if (res)
                         {
+                            status = 2;
                             msg = "账号已启用,请付款激活设备.";
                             //return new ApiResult() { message = "账号已启用,请付款激活设备.", code = ApiResult.Code.success };
                         }
                     }
-                    if (!string.IsNullOrEmpty( msg))
+                    if (!string.IsNullOrEmpty(msg))
                     {
                         var user = db.Users.Where(u => u.LoginName == phone && u.Deleted == false).FirstOrDefault();
-                        return new ApiResult() { message = msg, code = ApiResult.Code.success  ,  result =new { userid= user.UserID } };
+                        return new ApiResult() { message = msg, code = ApiResult.Code.success  ,  result =new { userid = user.UserID, status = status } };
                     }
                 }
                 else
@@ -130,7 +133,7 @@ namespace MG_GPS.Controller
                             join d in db.Devices
                             on o.DeviceID equals d.DeviceID
                             where o.OrderNo == no
-                            select new { o.OrderNo, o.PayDate, o.UserID, o.DeviceID, u.LoginName, u.Password, o.Status, HireExpireDate = d.HireExpireDate.Value.Year+"年"+d.HireExpireDate.Value.Month+"月" };
+                            select new { o.OrderNo, o.PayDate, o.UserID, o.DeviceID, u.LoginName, u.Password, o.Status, HireExpireDate = d.HireExpireDate.Value.Year+"年"+d.HireExpireDate.Value.Month+"月"+d.HireExpireDate.Value.Day+"号" };
                 var first = query.FirstOrDefault();
                 ar.code = ApiResult.Code.success;
                 ar.message = "";

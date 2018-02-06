@@ -115,7 +115,7 @@
                 success: function (res) {
                     if (res.code == 0) {
                         layer.open({ type: 2 });
-                        window.location.href = "../Pay/PayConfirm.aspx?imei=" + imei + "&vc=" + vc + "&p=" + price + "&userid=" + res.result.userid + "&t=" + new Date().getTime();;
+                        window.location.href = "../Pay/PayConfirm.aspx?imei=" + imei + "&vc=" + vc + "&p=" + price + "&userid=" + res.result.userid + "&s=" + res.result.status + "&t=" + new Date().getTime();;
                     }
                 }
             });

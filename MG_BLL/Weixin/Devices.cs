@@ -574,7 +574,7 @@ namespace MG_BLL.Weixin
             } 
         }
 
-        public string AddDevice(string imei, string vccode, string userid, string groupid,Dictionary<string,string> parmenters = null)
+        public string AddDevice(string imei, string vccode, string userid, string groupid,Dictionary<string,string> parmenters = null,bool isAdd = true)
         {
             try
             {
@@ -661,7 +661,7 @@ namespace MG_BLL.Weixin
                         {
                             isUpdateParent = false;
                         }
-
+                        isUpdateParent = isUpdateParent && isAdd;
                         List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
                         if (isUpdateParent)
                         {

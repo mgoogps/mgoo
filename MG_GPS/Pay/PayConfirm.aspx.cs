@@ -22,25 +22,22 @@ namespace MG_GPS.Pay
         public string callback_url { get; set; }
 
         public int userid { get; set; }
+        public int status { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ( string.IsNullOrEmpty( Request.QueryString["code"]))
+            if (string.IsNullOrEmpty(Request.QueryString["code"]))
             {
                 imei = Request.QueryString["imei"];
                 string vc = Request.QueryString["vc"];
                 total_fee = Convert.ToInt32(Request.QueryString["p"]);
-                userid = Convert.ToInt32( Request.QueryString["userid"]);
-               // var redirect_url =  $"http://m.mgoogps.com/PayActivation/PayConfirm.aspx?imei={imei}&vc={vc}&p={total_fee}&userid={userid}";
-               // var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={WxPayConfig.APPID}&redirect_uri={redirect_url}&response_type=code&scope=snsapi_base&state=snsapi_base#wechat_redirect";
-
-                var ru = HttpUtility.UrlEncode($"http://m.mgoogps.com/Pay/PayConfirm.aspx?imei={imei}&vc={vc}&p={total_fee}&userid={userid}");
-
-              var  url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={WxPayConfig.APPID}&redirect_uri={ru}&response_type=code&scope=snsapi_base&state=snsapi_base#wechat_redirect";
-
-
+                userid = Convert.ToInt32(Request.QueryString["userid"]);
+                status = Convert.ToInt32(Request.QueryString["s"]);
+                var ru = HttpUtility.UrlEncode($"http://m.mgoogps.com/Pay/PayConfirm.aspx?imei={imei}&vc={vc}&p={total_fee}&userid={userid}&s={status}");
+                
+                var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={WxPayConfig.APPID}&redirect_uri={ru}&response_type=code&scope=snsapi_base&state=snsapi_base#wechat_redirect";
                 //https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxda27104d229a3608&redirect_uri=http://m.mgoogps.com/Pay/PayConfirm.aspx?imei=1&vc=12&p=1223&response_type=code&scope=snsapi_base&state=snsapi_base#wechat_redirect
                 Response.Redirect(url);
-                Response.End( );  
+                Response.End();
             }
             if (!IsPostBack)
             {
@@ -49,6 +46,7 @@ namespace MG_GPS.Pay
                 total_fee = Convert.ToInt32(Request.QueryString["p"]);
                 var code = Request.QueryString["code"];
                 userid = Convert.ToInt32(Request.QueryString["userid"]);
+                status = Convert.ToInt32(Request.QueryString["s"]);
                 if (userid == 0)
                 {
                     state = "参数错误！";
@@ -70,7 +68,7 @@ namespace MG_GPS.Pay
                     jsApiPay.device_id = device.DeviceID;
                     jsApiPay.tariff_id = 0;
                     jsApiPay.product_body = prductName;
-                    jsApiPay.device_name = "success_notify," + device.DeviceID + "," + userid;//attach 商家数据包，原样返回
+                    jsApiPay.device_name = "success_notify," + device.DeviceID + "," + userid+","+status;//attach 商家数据包，原样返回, status :1 账号已存在，2是新注册的账号
                     if (total_fee < 195 && !userList.Contains(jsApiPay.user_id))
                     {
                         state = "下单失败,金额错误！";

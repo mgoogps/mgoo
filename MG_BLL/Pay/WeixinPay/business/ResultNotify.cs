@@ -125,16 +125,17 @@ namespace MG_BLL.Pay.WeixinPay.business
                                     MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                                     //Common.Log.Info(this, device_name);
                                     var dev = db.Devices.Find(Convert.ToInt32( device_name.Split(',')[1]));
-                                    if (dev.HireExpireDate < DateTime.Now)
-                                    {
-                                        dev.HireExpireDate = Convert.ToDateTime(DateTime.Now.AddMonths(-1).ToString("yyyy-MM-25 00:00:00"));
+                                    //if (dev.HireExpireDate < DateTime.Now)
+                                    //{
+                                        dev.HireExpireDate = Convert.ToDateTime(DateTime.Now.AddYears(2).AddMonths(-1).ToString("yyyy-MM-25 00:00:00"));
                                         dev.ActiveDate = DateTime.Now;
                                         db.SaveChangesAsync();
-                                    }
+                                  //  }
                                     var urserid = device_name.Split(',')[2];
+                                    var status = device_name.Split(',')[3];
                                     ///用户在代理商线下用微信支付 扫码支付 激活设备
                                     Weixin.Devices wd = new Weixin.Devices(new Common.AuthHeader() { UserID = urserid });
-                                    wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1");
+                                    wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1" ,isAdd: status.Equals("2") );
                                 }
                                 catch (Exception ex)
                                 {
