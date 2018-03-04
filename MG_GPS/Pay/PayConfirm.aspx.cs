@@ -55,7 +55,14 @@ namespace MG_GPS.Pay
                 MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                 var device = db.Devices.Where(d => d.Deleted == false && d.SerialNumber == imei && d.DevicePassword == vc).SingleOrDefault();
                 prductName = "北斗GPS流量费(2年)-" + (string.IsNullOrEmpty(device.DeviceName) ? device.SerialNumber : device.DeviceName);
-
+                if (device.Model.Equals("80")) //MG-X21BZ
+                {
+                    total_fee = 240;
+                }
+                else
+                {
+                    total_fee = 195;
+                }
                 JsApiPay jsApiPay = new JsApiPay(this);
                 //JSAPI支付预处理
                 try
