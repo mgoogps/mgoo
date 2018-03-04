@@ -284,7 +284,7 @@
 				</ul> 
 			</nav>   
         
-           <div style=" left:0px; margin-bottom:0px; top:0px; bottom:0px;  position:absolute;width:100%; overflow:hidden;min-width:900px; " id="ifrParent"> 
+           <div style=" left:0px; margin-bottom:0px; top:0px; bottom:0px;  position:absolute;width:100%; overflow:hidden;min-width:900px;padding-bottom:50px; " id="ifrParent"> 
               <iframe width="100%" height="100%"   id="iframepage" src="<%=type %>" frameborder="no" onload="ifrmOnload()" border="0" marginwidth="0" marginheight="0"  scrolling="auto" allowtransparency="true" > 
 
               </iframe> 

@@ -17,7 +17,7 @@
     <link href="../js/bootgrid/jquery-bootgrid-master/dist/jquery.bootgrid.css" rel="stylesheet" /> 
     <script src="../js/bootgrid/js/moderniz.2.8.1.js"></script>
            <%--layer 弹出 --%>
-    <script src="js/lib/layer/layer.js"></script>
+    <script src="../js/lib/layer/layer.js"></script>
     <script src="../js/mg_public.js"></script> 
     <script src="../js/CoureName.js"></script>
    <script src="../js/fun.js"></script>

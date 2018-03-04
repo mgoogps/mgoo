@@ -574,7 +574,7 @@ namespace MG_BLL.Weixin
             } 
         }
 
-        public string AddDevice(string imei, string vccode, string userid, string groupid,Dictionary<string,string> parmenters = null,bool isAdd = true)
+        public string AddDevice(string imei, string vccode, string userid, string groupid,Dictionary<string,string> parmenters = null,bool isAdd = true, bool ifMoneyModel = true)
         {
             try
             {
@@ -591,6 +591,15 @@ namespace MG_BLL.Weixin
                 //Utils.log("AddDevice dic长度:" + dic.Count+ ",imei：" + imei);
                 if (dic.Count > 0 && !string.IsNullOrEmpty(dic["DeviceID"]))
                 {
+                    if (ifMoneyModel)
+                    {
+                        var moenyModelList = new List<int>() { 79,80 };
+                        if (moenyModelList.Contains(Convert.ToInt32(dic["Model"])))
+                        {
+                            return Utils.GetResult("添加失败，该型号需要另外付费..", statusCode.Code.failure);
+                        }
+                    }
+                   
                     string deviceid = dic["DeviceID"];
                     SQLServerOperating s = new SQLServerOperating();
                     string car_where = "";
@@ -856,7 +865,7 @@ namespace MG_BLL.Weixin
                 {
                     return new Dictionary<string, string>();
                 }
-                string strSql = "select DeviceID,DevicePassword,Created,UserID from devices where Deleted=0 and serialnumber = @SerialNumber  ";
+                string strSql = "select DeviceID,DevicePassword,Created,UserID,Model from devices where Deleted=0 and serialnumber = @SerialNumber  ";
                 SQLServerOperating s = new SQLServerOperating();
                 Dictionary<string, string> dic = s.Selects(strSql, new SqlParameter[] { new SqlParameter("SerialNumber", SerialNumber) }).toDictionary();
                 return dic;

@@ -135,7 +135,7 @@ namespace MG_BLL.Pay.WeixinPay.business
                                     var status = device_name.Split(',')[3];
                                     ///用户在代理商线下用微信支付 扫码支付 激活设备
                                     Weixin.Devices wd = new Weixin.Devices(new Common.AuthHeader() { UserID = urserid });
-                                    wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1" ,isAdd: status.Equals("2") );
+                                    wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1", isAdd: status.Equals("2"), ifMoneyModel: false);
                                 }
                                 catch (Exception ex)
                                 {

@@ -1958,7 +1958,7 @@ namespace MgooGps.com
                                   from devices d inner
                                   join users u on u.userid = d.userid inner
                                   join lklocation l  on l.deviceid = d.deviceid
-                                  where d.deleted = 0 and d.ActiveDate >= '{1}' and d.ActiveDate <= '{2}' and d.userid in (select Userid from subqry)", userid == "" ? Utils.GetSession().UserID : userid, st + " 00:00:00", et + " 23:59:59");
+                                  where d.deleted = 0 and d.HireExpireDate >= '{1}' and d.HireExpireDate <= '{2}' and d.userid in (select Userid from subqry)", userid == "" ? Utils.GetSession().UserID : userid, st + " 00:00:00", et + " 23:59:59");
                         dt = Dao.Selects(strSql);
 
                         FileName = "续费设备统计(" + DateTime.Now.ToString("yyyyMMddHHmmss") + ").xls";
@@ -4310,7 +4310,7 @@ namespace MgooGps.com
                    select count(*) from devices d inner
                                      join users u on u.userid = d.userid inner
                                      join lklocation l  on l.deviceid = d.deviceid
-                                     where d.deleted = 0 and d.ActiveDate >= '{1}' and d.ActiveDate <= '{2}' and d.userid in (select Userid from subqry) {3}", UserID, StartTime, EndTime, where);
+                                     where d.deleted = 0 and d.HireExpireDate >= '{1}' and d.HireExpireDate <= '{2}' and d.userid in (select Userid from subqry) {3}", UserID, StartTime, EndTime, where);
                return Convert.ToInt32(Dao.Select(strSql)[0].ToString());
 
            });
