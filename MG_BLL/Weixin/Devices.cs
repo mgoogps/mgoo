@@ -593,7 +593,7 @@ namespace MG_BLL.Weixin
                 {
                     if (ifMoneyModel)
                     {
-                        var moenyModelList = new List<int>() { 79,80 };
+                        var moenyModelList = new List<int>() { 204, 80 }; //MG-X21B、MG-X21BZ
                         if (moenyModelList.Contains(Convert.ToInt32(dic["Model"])))
                         {
                             return Utils.GetResult("添加失败，该型号需要另外付费..", statusCode.Code.failure);

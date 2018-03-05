@@ -55,15 +55,18 @@ namespace MG_GPS.Pay
                 MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
                 var device = db.Devices.Where(d => d.Deleted == false && d.SerialNumber == imei && d.DevicePassword == vc).SingleOrDefault();
                 prductName = "北斗GPS流量费(2年)-" + (string.IsNullOrEmpty(device.DeviceName) ? device.SerialNumber : device.DeviceName);
+                JsApiPay jsApiPay = new JsApiPay(this);
                 if (device.Model.Equals("80")) //MG-X21BZ
                 {
+                    jsApiPay.tariff_id = 8;
                     total_fee = 240;
                 }
                 else
                 {
+                    jsApiPay.tariff_id = 9;
                     total_fee = 195;
                 }
-                JsApiPay jsApiPay = new JsApiPay(this);
+              
                 //JSAPI支付预处理
                 try
                 {
@@ -73,7 +76,7 @@ namespace MG_GPS.Pay
                     //jsApiPay.openid = openid;
                     jsApiPay.total_fee = userList.Contains(jsApiPay.user_id )? new Random().Next(1, 10) : Convert.ToInt32(total_fee)*100;
                     jsApiPay.device_id = device.DeviceID;
-                    jsApiPay.tariff_id = 0;
+                  
                     jsApiPay.product_body = prductName;
                     jsApiPay.device_name = "success_notify," + device.DeviceID + "," + userid+","+status;//attach 商家数据包，原样返回, status :1 账号已存在，2是新注册的账号
                     if (total_fee < 195 && !userList.Contains(jsApiPay.user_id))
