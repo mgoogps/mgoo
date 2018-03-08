@@ -266,12 +266,13 @@ namespace MG_BLL.Pay.MgooOrders
             }
         }
 
-        public void SendMail(string OrderNo)
+        public void SendMail(string OrderNo, string mailTitle = null)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
             msg.To.Add("377108616@qq.com"); // 张飞鸿
             msg.To.Add("2996333214@qq.com"); //罗坤
             msg.To.Add("2451911874@qq.com"); //谢春丽 
+            msg.To.Add("3234326465@qq.com"); //阿成 
             try
             {
                 SQLServerOperating s = new SQLServerOperating();
@@ -282,7 +283,11 @@ namespace MG_BLL.Pay.MgooOrders
                 DataRow row = dt.Rows[0];
                 msg.From = new MailAddress("mgoo_service@163.com", "美谷充值", System.Text.Encoding.UTF8);
                 /* 上面3个参数分别是发件人地址（可以随便写），发件人姓名，编码*/
-                msg.Subject = "设备充值成功";// + row["ProductBody"].ToString();//邮件标题    
+                if (string.IsNullOrEmpty(mailTitle) )
+                {
+                    mailTitle = "设备充值成功"; 
+                }
+                msg.Subject = mailTitle;// "设备充值成功";//邮件标题    
                 msg.SubjectEncoding = System.Text.Encoding.UTF8;//邮件标题编码    
                 StringBuilder sbBody = new StringBuilder();
                 sbBody.Append("用户名称：" + row["UserName"] + " <br />");

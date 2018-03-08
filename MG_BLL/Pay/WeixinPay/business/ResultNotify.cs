@@ -117,9 +117,11 @@ namespace MG_BLL.Pay.WeixinPay.business
                  
                     if (success)
                     {
+                        string emailTitle = null;
+                        Task task = null;
                         if (device_name.StartsWith("success_notify"))
                         {
-                            Task.Run(() =>
+                            task = Task.Run(() =>
                             {
                                 try
                                 {
@@ -131,7 +133,8 @@ namespace MG_BLL.Pay.WeixinPay.business
                                     var urserid = device_name.Split(',')[2];
                                     var status = device_name.Split(',')[3];
 
-                                    this.device_name = string.IsNullOrEmpty(dev.DeviceName) ? dev.SerialNumber : dev.DeviceName;
+                                    emailTitle = "设备激活充值成功";
+                                    device_name = string.IsNullOrEmpty(dev.DeviceName) ? dev.SerialNumber : dev.DeviceName;
                                     ///用户在代理商线下用微信支付 扫码支付 激活设备
                                     Weixin.Devices wd = new Weixin.Devices(new Common.AuthHeader() { UserID = urserid });
                                     wd.AddDevice(dev.SerialNumber, dev.DevicePassword, urserid, "-1", isAdd: status.Equals("2"), ifMoneyModel: false);
@@ -142,8 +145,12 @@ namespace MG_BLL.Pay.WeixinPay.business
                                 }
                             });
                         }
-                        Task.Run(() => o.SendMail(trade_no));
                         Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no));
+                        if (task!=null)
+                        {
+                            task.Wait();
+                        }
+                        Task.Run(() => o.SendMail(trade_no, emailTitle));
                     }
                 }
                 page.Response.Write(res.ToXml());
