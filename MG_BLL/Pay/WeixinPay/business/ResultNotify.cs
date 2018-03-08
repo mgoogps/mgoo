@@ -145,12 +145,13 @@ namespace MG_BLL.Pay.WeixinPay.business
                                 }
                             });
                         }
-                        Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no));
+                       
                         if (task!=null)
                         {
                             task.Wait();
                         }
                         Task.Run(() => o.SendMail(trade_no, emailTitle));
+                        Task.Run(() => o.PaySuccessPush(openid, device_name, total_fee, time_end, o.GetBankName(bank_type), trade_no));
                     }
                 }
                 page.Response.Write(res.ToXml());
