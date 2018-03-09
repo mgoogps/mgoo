@@ -29,9 +29,9 @@ namespace MgooGps
                 case "login":
                     context.Response.Write(com.Utils.login(request.Form["loginname"], request.Form["pwd"], request.Form["language"]));
                     break;
-                case "getmyteamlist":
-                    context.Response.Write(Dao.DataTableToJSON(MyTeam.GetMyTeamList()));
-                    break;
+                //case "getmyteamlist":
+                //    context.Response.Write(Dao.DataTableToJSON(MyTeam.GetMyTeamList()));
+                //    break;
                 case "gettree":
                         context.Response.Write(Dao.DataTableToJSON(MyTeam.GetMyTeamList(request.Form["UserType"])));
                     break;

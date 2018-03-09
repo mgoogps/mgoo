@@ -21,17 +21,20 @@ namespace MgooGps.com
     public class MyTeam
     {
         public static DataTable GetMyTeamList(String UserType = null)
-        {
-
-            String strSql = @"with subqry(UserID,UserName,ParentID,UserType) as (
+        { 
+            string strSql = @"with subqry(UserID,UserName,ParentID,UserType) as (
                               select UserID,UserName,ParentID,UserType from Users   where UserID =" + Utils.GetSession().UserID + @"
                               union all
                               select Users.UserID,Users.UserName,Users.ParentID,Users.UserType from Users,subqry
                               where Users.ParentID = subqry.UserID and users.Deleted!=1 " + (UserType == null ? "" : " and Users.UserType=2 ") + @"
                               )
                               select UserID,UserName,ParentID,UserType from subqry order by username collate Chinese_PRC_CS_AS_KS_WS;";
+           // MG_DAL.YiwenGPSEntities db = new MG_DAL.YiwenGPSEntities();
+           // var list = db.SP_GetUsersList_ByUserID(Convert.ToInt32(Utils.GetSession().UserID)).ToList();
+            
+           // return MG_BLL.Utils.ToJson(list,true);
             return com.Dao.Selects(strSql);
-            //return com.Dao.Selects("select UserID,ParentID,UserName,LoginName,UserType,FirstName,Address1,CellPhone,Status,Created,Deleted,SuperAdmin from Users where Deleted!=1 and UserID= " + ((UserInfo)Utils.GetSession()).UserID + " or ParentID = " + ((UserInfo)Utils.GetSession()).UserID);
+           // return com.Dao.Selects("select UserID,ParentID,UserName,LoginName,UserType,FirstName,Address1,CellPhone,Status,Created,Deleted,SuperAdmin from Users where Deleted!=1 and UserID= " + ((UserInfo)Utils.GetSession()).UserID + " or ParentID = " + ((UserInfo)Utils.GetSession()).UserID);
         }
         /// <summary>
         ///  根据用户ID 查询 该经销商下所有的设备包括分组信息
@@ -46,7 +49,7 @@ namespace MgooGps.com
                 String strSql = "";
                 if (!string.IsNullOrEmpty(SerialNumber))
                 {
-                    strSql = string.Format(@"select d.DeviceID,d.SerialNumber,d.DeviceName,l.LastCommunication, datediff(MI,l.LastCommunication, getdate()) status,l.BaiduLat,l.BaiduLng,Speed,l.DataContext,l.Course,d.Icon
+                    strSql = string.Format(@"select d.DeviceID,d.SerialNumber,d.DeviceName,l.LastCommunication, datediff(MI,l.LastCommunication, getdate()) status,l.BaiduLat,l.BaiduLng,Speed,l.DataContext,l.Course,d.Icon,CarStatus
                                           ,DATEADD(HH,8, l.DeviceUtcDate)DeviceUtcDate,datediff(MI,StopStartUtcDate,serverutcdate) StopTime,d.CarImg,d.Model,di.DataText, DATEDIFF(mi,l.lastcommunication,getdate()) OfflineTime,l.DataType,DATEADD(HH,8 ,l.StopStartUtcDate)StopStartUtcDate,case when di.AccountID=2 then 7 else di.SortOrder end as offLineMi
                                           from Devices d left join LKLocation l on l.DeviceID = d.DeviceID left join Dictionary di on d.Model=di.DataValue
                                           where d.SerialNumber = '{0}' and d.Deleted = 0", SerialNumber);
@@ -60,7 +63,7 @@ namespace MgooGps.com
                             select Users.UserID from Users,subqry
                             where Users.ParentID = subqry.UserID and users.Deleted != 1
                             )
-                         select d.DeviceID,d.SerialNumber,d.DeviceName,ISNULL(g.GroupID, -1) GroupID, ISNULL(GroupName, '默认分组')GroupName, d.UserID, Username,l.LastCommunication,
+                         select d.DeviceID,d.SerialNumber,d.DeviceName,ISNULL(g.GroupID, -1) GroupID, ISNULL(GroupName, '默认分组')GroupName, d.UserID, Username,l.LastCommunication,CarStatus,
                          datediff(MI, l.LastCommunication, getdate()) status,Speed,l.DataContext,l.Course,d.Icon
                         ,DATEADD(HH, 8, l.DeviceUtcDate)DeviceUtcDate,datediff(MI, StopStartUtcDate, serverutcdate) StopTime,d.CarImg,d.Model,di.DataText,
                          DATEDIFF(mi, l.lastcommunication, getdate()) OfflineTime,l.DataType,DATEADD(HH, 8, l.StopStartUtcDate)StopStartUtcDate,d.HireExpireDate,l.OLat BaiduLat, l.OLng BaiduLng,case when di.AccountID=2 then 7 else di.SortOrder end as offLineMi from
@@ -3342,22 +3345,34 @@ namespace MgooGps.com
                 {
                     return "{\"success\":false,\"msg\":\"无权限！\"}";
                 }
-                StringBuilder DevicesSB = new StringBuilder();
+               // StringBuilder DevicesSB = new StringBuilder();
+                var ids = new string[list.Count]; 
                 for (int i = 0; i < list.Count; i++)
                 {
-                    Dictionary<string, object> dic = list[i];
+                    ids[i] = list[i]["DeviceID"].ToString();
+                    //Dictionary<string, object> dic = list[i];
                     //strSql = @"update devices set  AddHireDay = (case when HireExpireDate='1900-01-01 00:00:00.000' and activeDate='1900-01-01 00:00:00.000' then AddHireDay+" + day + @" else AddHireDay end),
                     //       HireExpireDate = (case when HireExpireDate!='1900-01-01 00:00:00.000' and activeDate!='1900-01-01 00:00:00.000' then dateadd(day," + day + @",HireExpireDate) else HireExpireDate  end) 
                     //       where deviceid= " + dic["DeviceID"];
-                    DevicesSB.Append(dic["DeviceID"] + ",");
+                   // DevicesSB.Append(dic["DeviceID"] + ",");
 
                     //sqlList.Add(strSql);
                 }
-                DevicesSB.Remove(DevicesSB.Length - 1, DevicesSB.Length > 0 ? 1 : 0);
-                DevicesAjax.DevicesAjaxSoapClient devicesOper = new DevicesAjax.DevicesAjaxSoapClient();
-                int state = devicesOper.UpdateHireExpriDateDays(Convert.ToInt32(Utils.GetSession().UserID), DevicesSB.ToString(), Convert.ToInt32(day));
-                if (state == 0)
+                // DevicesSB.Remove(DevicesSB.Length - 1, DevicesSB.Length > 0 ? 1 : 0);
+                // DevicesAjax.DevicesAjaxSoapClient devicesOper = new DevicesAjax.DevicesAjaxSoapClient();
+                // int state = devicesOper.UpdateHireExpriDateDays(Convert.ToInt32(Utils.GetSession().UserID), DevicesSB.ToString(), Convert.ToInt32(day));
+                // Utils.SendTcpCmd("VTR-UpdateHireExpireDate-" + DeviceID);
+
+                strSql = $"update devices set HireExpireDate = (case when HireExpireDate='1900-01-01 00:00:00.000' then dateadd(day,{day},getdate()) else  dateadd(day,{day},HireExpireDate)  end) where deviceid in ({string.Join(",", ids)}) ";
+                int state = Dao.ExecutionSQL(strSql );
+                if (state > 0)
                 {
+                    Task.Run(()=> {
+                        for (int i = 0; i < ids.Length; i++)
+                        {
+                            MG_BLL.Utils.SendTcpCmd("VTR-UpdateHireExpireDate-" + ids[i]);
+                        }
+                    });
                     return "{\"success\":true,\"Refresh\":false,\"msg\":\"共" + list.Count + "台设备," + list.Count + "台设备到期时间修改成功！\"}";
                 }
                 else
