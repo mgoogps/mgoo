@@ -70,7 +70,7 @@ namespace MG_GPS.Pay
                 //JSAPI支付预处理
                 try
                 {
-                    var userList = new List<int>() { 6, 7, 5959, 1296, 1389 };
+                    var userList = new List<int>() { 6, 7, 5959, 1296, 1389, 1331, 6093 };
                     // total_fee = ( type == "1" ? int.Parse(total_fee) :int.Parse( total_fee) )+"";
                     jsApiPay.user_id = userid;// (int)device.UserID;
                     //jsApiPay.openid = openid;

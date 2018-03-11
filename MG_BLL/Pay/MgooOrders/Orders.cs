@@ -272,7 +272,7 @@ namespace MG_BLL.Pay.MgooOrders
             msg.To.Add("377108616@qq.com"); // 张飞鸿
             msg.To.Add("2996333214@qq.com"); //罗坤
             msg.To.Add("2451911874@qq.com"); //谢春丽 
-            msg.To.Add("3234326465@qq.com"); //阿成 
+           // msg.To.Add("3234326465@qq.com"); //阿成 
             try
             {
                 SQLServerOperating s = new SQLServerOperating();
