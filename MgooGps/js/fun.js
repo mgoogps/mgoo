@@ -1095,7 +1095,7 @@ function GetDeviceInfoBySerialNumber(DeviceID) {
             $("#txtDeviceIMEI").val(d.SerialNumber);
             $("#txtDeviceHireExpireDate").val(d.HireExpireDate);
             $("#txtDeviceModel").val(d.DataText);
-            $("#txtDeviceStartDate").val(d.HireStartDate);
+            $("#txtDeviceStartDate").val(d.ActiveDate);
             $("#txtDeviceName").val(d.DeviceName);
             if (d.ServerID == "1")
                 $("#checkDeviceLBS").attr("checked", true);

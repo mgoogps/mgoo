@@ -647,9 +647,6 @@ namespace MG_BLL.Weixin
                     {
                         pars[index] = new SqlParameter(kvp.Key, kvp.Value); index++;
                     }
-                    // pars[0] = new SqlParameter("UserID", userid);
-                    // pars[1] = new SqlParameter("GroupID", groupid);
-                    //pars[2] = new SqlParameter("serialnumber", imei);
 
                     List<string> sqlList = new List<string>();
                     List<SqlParameter[]> parsList = new List<SqlParameter[]>();
@@ -657,7 +654,6 @@ namespace MG_BLL.Weixin
                     parsList.Add(pars);
                     if (!isCurrentUserID)
                     {
-
                         #region 判断当前添加的设备是否是属于 父用户或者子用户  
                         bool isUpdateParent = true;
                         List<string> useridList = new List<string>();
